@@ -1,6 +1,9 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const routes = require("./routes/api/books");
+
+const bookRoutes = require("./routes/api/books");
+const userRoutes = require("./routes/api/users");
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -15,10 +18,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // use the routes module as a middleware
-// BE SURE TO ADD /
+
+/*
+ BE SURE TO ADD EVERY API ROUTE HERE AND AT TOP OF FILE! 
+I SPENT HOURS TRYING TO SOLVE THIS ISSUE AND IT WAS JUST TWO LINES OF CODE
+GJKHLDSFLGJKHDFSGHJKLSFDGHJKLFSDHJGKSFDHGJKVSFDGHKJDSFHJGKFGKJHSFDGKJHSDF  
+*/
+
 // for the /api/books path
-//app.use("/api/books", routes);
-app.use("/api/users", routes);
+app.use("/api/books", bookRoutes);
+app.use("/api/users", userRoutes);
 
 
 // Connect Database

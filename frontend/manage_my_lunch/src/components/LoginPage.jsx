@@ -2,25 +2,37 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios"; // Import Axios for making HTTP requests
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can add login logic, such as sending a request to your backend
-    // to authenticate the user with the provided email and password
-    console.log("Logging in with:", email, password);
-    // After successful login, you can redirect the user to another page
-    // For now, redirecting to ShowBookList.jsx
-    window.location.href = "/show-book-list"; // Assuming route to ShowBookList.jsx is "/show-book-list"
+
+    try {
+      // Send a GET request to the backend API to check if email and password exist
+      const response = await axios.get(`/api/users?email=${email}&password=${password}`);
+
+      console.log("Login response:", response.data);
+
+      if (response.data.length > 0) {
+        // Redirect the user to another page upon successful login
+        window.location.href = "/dashboard";
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setError("An error occurred. Please try again later.");
+    }
   };
 
   return (
     <div className="container mt-5">
-        <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
-
+      {error && <div className="alert alert-danger">{error}</div>}
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -52,7 +64,9 @@ const LoginPage = () => {
         <button type="submit" className="btn btn-primary">
           Login
         </button>
-        <Link to="/sign-up" className="btn btn-link">Sign Up</Link>
+        <Link to="/sign-up" className="btn btn-link">
+          Sign Up
+        </Link>
       </form>
     </div>
   );

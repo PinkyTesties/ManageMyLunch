@@ -16,13 +16,16 @@ import ShowBookDetails from "./components/ShowBookDetails";
 import UpdateBookInfo from "./components/UpdateBookInfo";
 import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp"; 
+import Dashboard from "./components/Dashboard"; 
 
+//hello
 
 // Routes
 const router = createBrowserRouter([
   { path: "/show-book", element: <ShowBookList /> },
   { path: "/", element: <LoginPage /> },
   { path: "/create-book", element: <CreateBook /> },
+  { path: "/dashboard", element: <Dashboard /> },
   { path: "/show-book/:id", element: <ShowBookDetails /> },
   { path: "/edit-book/:id", element: <UpdateBookInfo /> },
   { path: "/sign-up", element: <SignUp /> },

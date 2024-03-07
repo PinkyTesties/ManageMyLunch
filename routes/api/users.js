@@ -33,10 +33,19 @@ router.get('/:id', (req, res) => {
 // @desc    Add/save users
 // @access  Public
 router.post('/', (req, res) => {
+  console.log('Request Body:', req.body); // Log the request body
+  
   User.create(req.body)
-    .then(users => res.json({ msg: 'User added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this User' }));
+    .then(users => {
+      console.log('User added successfully:', users); // Log the created user
+      res.json({ msg: 'User added successfully' });
+    })
+    .catch(err => {
+      console.error('Error adding user:', err); // Log the error
+      res.status(400).json({ error: 'Unable to add this User', details: err.message });
+    });
 });
+
 
 // @route   PUT api/users/:id
 // @desc    Update users by id
@@ -57,5 +66,7 @@ router.delete('/:id', (req, res) => {
     .then(users => res.json({ msg: 'users entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such a users' }));
 });
+
+
 
 module.exports = router;

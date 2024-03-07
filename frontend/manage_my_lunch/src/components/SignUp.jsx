@@ -34,27 +34,26 @@ const SignUp = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("On submit clicked!");
+    console.log("user object: ", user);
 
     axios
-    //Link should change to a deployed backend host
-      .post("http://localhost:8082/api/users", user)
-      .then((res) => {
-        setUser({
-          name: "",
-          email: "",
-          password: "",
-          date_added: "",
-          university: "",
-          updated_date: "",
-
-        });
-        // Push to /
-        navigate("/dashboard"); // this may be the routing to homepage
-      })
-      
-      .catch((err) => {
-        console.log("Error in CreateUser!");
+    .post("http://localhost:8082/api/users", user)
+    .then((res) => {
+      setUser({
+        name: "",
+        email: "",
+        password: "",
+        //date_added: "",
+        university: "",
+        //updated_date: "",
       });
+      navigate("/");
+    })
+    .catch((err) => {
+      console.log("Error in CreateUser:", err.response.data); // Log the error response
+    });
+  
+      
 
 
     // Here you can add sign-up logic, such as sending a request to your backend
@@ -66,20 +65,11 @@ const SignUp = (props) => {
   };
 
   return (
-<div className="CreateBook">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 m-auto">
-            <br />
-            <Link to="/" className="btn btn-outline-warning float-left">
-              Show User List
-            </Link>
-          </div>
-          <div className="col-md-10 m-auto">
-            <h1 className="display-4 text-center">Add user</h1>
-            <p className="lead text-center">Create new user</p>
+
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
+              <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
+
               <label htmlFor="name">Name:</label>
                 <input
                   type="text"
@@ -165,10 +155,7 @@ const SignUp = (props) => {
         </button>
         Already have an account? <Link to="/" className="btn btn-link">Login</Link>
       </form>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
   );
 };
