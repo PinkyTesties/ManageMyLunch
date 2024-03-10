@@ -16,6 +16,8 @@ const connectDB = async () => {
     console.log("Success! MongoDB is Connected...");
   } catch (err) {
     console.error(err.message);
+    console.log("PROBABLY AN IP ADDRESS ISSUE. ADD YOUR IP ADDRESS IN MONGODB DASHBOARD");
+
     process.exit(1);
   }
 };

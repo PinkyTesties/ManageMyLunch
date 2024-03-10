@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"; // Import Axios for making HTTP requests
+import axios from "axios";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,14 +11,14 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-      // Send a GET request to the backend API to check if email and password exist
-      const response = await axios.get(`/api/users?email=${email}&password=${password}`);
-
+      // Send a POST request to the backend API with email and password in request body
+      const response = await axios.post("http://localhost:8082/api/login", { email, password });
+  
       console.log("Login response:", response.data);
-
-      if (response.data.length > 0) {
+  
+      if (response.data.success) {
         // Redirect the user to another page upon successful login
         window.location.href = "/dashboard";
       } else {
@@ -26,9 +26,15 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      setError("An error occurred. Please try again later.");
+      if (error.response && error.response.status === 400) {
+        setError("Invalid email or password");
+      } else {
+        setError("An error occurred. Please try again later.");
+      }
     }
   };
+  
+  
 
   return (
     <div className="container mt-5">

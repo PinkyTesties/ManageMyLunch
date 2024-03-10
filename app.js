@@ -1,13 +1,35 @@
+//app.js
 const express = require("express");
 const connectDB = require("./config/db");
+const session = require("express-session"); // Import express-session
+// const MongoDBStore = require('connect-mongodb-session')(session);
+
+// const store = new MongoDBStore({
+//   uri: 'mongodb://localhost:27017/session-store',
+//   collection: 'sessions'
+// });
+
 
 const bookRoutes = require("./routes/api/books");
 const userRoutes = require("./routes/api/users");
+const loginRoutes = require("./routes/api/login");
+
+
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+
+// Set up express-session middleware
+app.use(
+    session({
+      secret: "123456", // Set a secret for session management
+      resave: false,
+      cookie: {maxAge: 30000 },
+      saveUninitialized: false // Set to true to create a session by default
+    })
+  );
 
 // use the cors middleware with the
 // origin and credentials options
@@ -25,10 +47,9 @@ I SPENT HOURS TRYING TO SOLVE THIS ISSUE AND IT WAS JUST TWO LINES OF CODE
 GJKHLDSFLGJKHDFSGHJKLSFDGHJKLFSDHJGKSFDHGJKVSFDGHKJDSFHJGKFGKJHSFDGKJHSDF  
 */
 
-// for the /api/books path
 app.use("/api/books", bookRoutes);
 app.use("/api/users", userRoutes);
-
+app.use("/api/login", loginRoutes);
 
 // Connect Database
 connectDB();
