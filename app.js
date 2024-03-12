@@ -13,7 +13,7 @@ const session = require("express-session"); // Import express-session
 const bookRoutes = require("./routes/api/books");
 const userRoutes = require("./routes/api/users");
 const loginRoutes = require("./routes/api/login");
-
+const restaurantRoutes = require("./routes/api/restaurants");
 
 
 const cors = require("cors");
@@ -50,6 +50,8 @@ GJKHLDSFLGJKHDFSGHJKLSFDGHJKLFSDHJGKSFDHGJKVSFDGHKJDSFHJGKFGKJHSFDGKJHSDF
 app.use("/api/books", bookRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api/restaurants", restaurantRoutes);
+
 
 // Connect Database
 connectDB();

@@ -40,6 +40,8 @@ const LoginPage = () => {
     <div className="container mt-5">
       {error && <div className="alert alert-danger">{error}</div>}
       <h2>Login</h2>
+      <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -72,6 +74,10 @@ const LoginPage = () => {
         </button>
         <Link to="/sign-up" className="btn btn-link">
           Sign Up
+        </Link>
+      <br></br>
+        <Link to="/UpdatePassword" className="btn btn-link">
+          I forgot my password
         </Link>
       </form>
     </div>

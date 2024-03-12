@@ -13,11 +13,15 @@ You need to run both the front and backend together.
 - Rename this terminal "Backend"
 - In the termainal go into ManageMyLunch folder
 - Type in the terminal: npm run app
+    - If you see an error about nodemon use sude npm install -g nodemon
 - The backend should now be running on port 8082, you should see a confirmation message
 - You should also see "Success! MongoDB is connected..."
     - If you dont see this confirmation message, MongoDB is not connected and is likely because you need to add your IP address in MongoDB dashboard
 - Do not close or kill this terminal
 
 Otherwise see Tyler for help
+
+
+
 
 
