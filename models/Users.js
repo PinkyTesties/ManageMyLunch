@@ -7,8 +7,9 @@ firstname, lastname, email, password, date_added, university, updated_date
 
 */
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -16,10 +17,12 @@ const UserSchema = new mongoose.Schema({
 
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
-    type: String
+    type: String,
+    required: true
   },
   date_added: {
     type: Date,
