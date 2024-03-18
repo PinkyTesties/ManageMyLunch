@@ -26,6 +26,8 @@ import DeleteAccount_User from "./components/DeleteAccount_User";
 import DeleteRestaurants from "./components/DeleteRestaurants"; 
 import ShowRestaurantDetails from "./components/ShowRestaurantDetails"; 
 import UpdateRestaurant from "./components/UpdateRestaurant"; 
+import CreateMenuItem from "./components/CreateMenuItem"; 
+
 
 
 
@@ -51,6 +53,7 @@ const router = createBrowserRouter([
   { path: "/delete-restaurant", element: <DeleteRestaurants /> },
   { path: "/ShowRestaurantDetails/:id", element: <ShowRestaurantDetails /> },
   { path: "/UpdateRestaurant/:id", element: <UpdateRestaurant /> },
+  { path: "/CreateMenuItem/", element: <CreateMenuItem /> },
 
 
 

@@ -14,6 +14,7 @@ const bookRoutes = require("./routes/api/books");
 const userRoutes = require("./routes/api/users");
 const loginRoutes = require("./routes/api/login");
 const restaurantRoutes = require("./routes/api/restaurants");
+const menuItemRoutes = require("./routes/api/menuItems");
 
 
 const cors = require("cors");
@@ -51,6 +52,8 @@ app.use("/api/books", bookRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/restaurants", restaurantRoutes);
+app.use("/api/menuItems", menuItemRoutes);
+
 
 
 // Connect Database

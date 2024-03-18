@@ -96,6 +96,14 @@ function ShowRestaurantDetails(props) {
             >
               Edit restaurant
             </Link>
+            <Link
+              //to={`/AddMenuItem/${restaurant._id}`}
+              to={`/CreateMenuItem`}
+
+              className='btn btn-outline-info btn-lg btn-block'
+            >
+              Create Menu Item
+            </Link>
           </div>
         </div>
       </div>

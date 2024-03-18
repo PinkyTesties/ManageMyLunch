@@ -14,10 +14,6 @@ const MenuItemSchema = new mongoose.Schema({
     required: true
   },
 
-  restaurant_id: {
-    type: String,
-    required: true
-  },
   cost: {
     type: String
   },
@@ -29,6 +25,11 @@ const MenuItemSchema = new mongoose.Schema({
     type: String
   },
 
+  restaurant_id: {
+    type: String,
+    required: true
+  },
+
 });
 
-module.exports = MenuItem = mongoose.model('menuItem', MenuItem);
+module.exports = MenuItem = mongoose.model('menuItem', MenuItemSchema);

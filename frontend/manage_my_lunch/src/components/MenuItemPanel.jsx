@@ -8,7 +8,7 @@ const RestaurantPanel = ({restaurant}) => {
     <div className='card-container'>
       <img
         src='https://i.kym-cdn.com/entries/icons/facebook/000/043/027/metalpipefalling.jpg'
-        alt='Resturants'
+        alt='Menu Item'
         height={200}
       />
       <div className='desc'>
