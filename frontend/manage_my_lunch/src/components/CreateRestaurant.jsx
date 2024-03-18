@@ -53,6 +53,8 @@ const CreateRestaurant = (props) => {
             <p className="lead text-center">Create new Restaurant</p>
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
+              <label htmlFor="restaurantName">Name:</label>
+
                 <input
                   type="text"
                   placeholder="Name"
@@ -64,6 +66,8 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
+              <label htmlFor="cuisine">Cuisine:</label>
+
                 <input
                   type="text"
                   placeholder="e.g: Chinese"
@@ -75,6 +79,8 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
+              <label htmlFor="rating">Star Rating:</label>
+
                 <input
                   type="text"
                   placeholder="e.g 3"
@@ -86,6 +92,8 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
+              <label htmlFor="description">Description:</label>
+
                 <input
                   type="text"
                   placeholder="Describe this restaurant"

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import logo from './componentAssets/logov1.png';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -39,6 +40,8 @@ const LoginPage = () => {
   return (
     <div className="container mt-5">
       {error && <div className="alert alert-danger">{error}</div>}
+      <img src={logo} alt='Logo' height={100} />
+
       <h2>Login</h2>
       <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
 

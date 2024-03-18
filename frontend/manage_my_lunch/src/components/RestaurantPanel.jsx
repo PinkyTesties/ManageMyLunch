@@ -5,7 +5,7 @@ import '../App.css';
 const RestaurantPanel = ({restaurant}) => {
 
   return (
-    <div className='card-container'>
+    <div className='restaurantcard-container'>
       <img
         src='https://i.kym-cdn.com/entries/icons/facebook/000/043/027/metalpipefalling.jpg'
         alt='Resturants'
@@ -17,6 +17,8 @@ const RestaurantPanel = ({restaurant}) => {
         </h2>
         <h3>{restaurant.cuisine}</h3>
         <p>{restaurant.description}</p>
+        <p>Rating: {restaurant.rating} stars</p><br></br>
+        <button><Link to={`/ShowRestaurantDetails/${restaurant._id}`} style={{ textDecoration: 'none', color: 'white' }}>View</Link></button>
       </div>
     </div>
   );

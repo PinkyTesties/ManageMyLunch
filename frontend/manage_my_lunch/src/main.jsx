@@ -27,6 +27,8 @@ import DeleteRestaurants from "./components/DeleteRestaurants";
 import ShowRestaurantDetails from "./components/ShowRestaurantDetails"; 
 import UpdateRestaurant from "./components/UpdateRestaurant"; 
 import CreateMenuItem from "./components/CreateMenuItem"; 
+import DeleteMenuItem from "./components/DeleteMenuItem"; 
+import MenuItemViewer from "./components/MenuItemViewer";
 
 
 
@@ -53,12 +55,12 @@ const router = createBrowserRouter([
   { path: "/delete-restaurant", element: <DeleteRestaurants /> },
   { path: "/ShowRestaurantDetails/:id", element: <ShowRestaurantDetails /> },
   { path: "/UpdateRestaurant/:id", element: <UpdateRestaurant /> },
-  { path: "/CreateMenuItem/", element: <CreateMenuItem /> },
+  { path: "/CreateMenuItem/:id", element: <CreateMenuItem /> },
+  { path: "/DeleteMenuItem/", element: <DeleteMenuItem /> },
+  { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
 
 
-
-
-
+  
 
 ]);
 

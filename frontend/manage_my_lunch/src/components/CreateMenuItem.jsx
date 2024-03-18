@@ -1,18 +1,32 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams} from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const CreateMenuItem = (props) => {
   const navigate = useNavigate();
+  const { id } = useParams(); // Extract id from the URL
 
   const [menuItem, setMenuItem] = useState({
     name: "",
     cost: "",
     date_added: new Date(),
     item_desc: "",
-    restaurant_id: "",
+    restaurant_id: id, // Use the id from the URL
   });
+
+  const [restaurant, setRestaurant] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8082/api/restaurants/${id}`)
+      .then((res) => {
+        setRestaurant(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [id]);
 
   const onChange = (e) => {
     setMenuItem({ ...menuItem, [e.target.name]: e.target.value });
@@ -28,7 +42,7 @@ const CreateMenuItem = (props) => {
           cost: "",
           date_added: new Date(),
           item_desc: "",
-          restaurant_id: "",
+          restaurant_id: id,
         });
         navigate("/dashboard");
       })
@@ -40,6 +54,9 @@ const CreateMenuItem = (props) => {
   return (
     <div>
       <h3>Create New Menu Item</h3>
+      <p>Restaurant ID: {id}</p>
+      <p>Restaurant Name: {restaurant.restaurantName}</p> {/* Display the restaurant name */}
+
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Name: </label>

@@ -2,24 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
-const RestaurantPanel = ({restaurant}) => {
+const MenuItemPanel = ({menuItem}) => {
 
   return (
-    <div className='card-container'>
+    <div className='menucard-container'>
       <img
         src='https://i.kym-cdn.com/entries/icons/facebook/000/043/027/metalpipefalling.jpg'
         alt='Menu Item'
-        height={200}
+        height={100}
       />
       <div className='desc'>
         <h2>
-          <Link to={`/ShowRestaurantDetails/${restaurant._id}`}>{restaurant.restaurantName}</Link>
+          <Link to={`/MenuItemViewer/${menuItem._id}`}>{menuItem.name}</Link>
         </h2>
-        <h3>{restaurant.cuisine}</h3>
-        <p>{restaurant.description}</p>
+        <button>Add to cart</button> {/* Add this line */}
+
+        <h3>${menuItem.cost}</h3>
+        <p>{menuItem.item_desc}</p>
+
+
+
+
       </div>
     </div>
   );
 };
 
-export default RestaurantPanel;
+export default MenuItemPanel;
