@@ -12,10 +12,12 @@ const CreateMenuItem = (props) => {
     cost: "",
     date_added: new Date(),
     item_desc: "",
-    restaurant_id: id, // Use the id from the URL
+    restaurant_id: id,
+    ingredients: []
   });
 
   const [restaurant, setRestaurant] = useState({});
+  const [ingredient, setIngredient] = useState("");
 
   useEffect(() => {
     axios
@@ -30,6 +32,15 @@ const CreateMenuItem = (props) => {
 
   const onChange = (e) => {
     setMenuItem({ ...menuItem, [e.target.name]: e.target.value });
+  };
+
+  const onIngredientChange = (e) => {
+    setIngredient(e.target.value);
+  };
+
+  const addIngredient = () => {
+    setMenuItem({ ...menuItem, ingredients: [...menuItem.ingredients, ingredient] });
+    setIngredient("");
   };
 
   const onSubmit = (e) => {
@@ -75,8 +86,16 @@ const CreateMenuItem = (props) => {
           <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
         </div>
         <div className="form-group">
-          <input type="submit" value="Create Menu Item" className="btn btn-primary" />
-        </div>
+      <label>Ingredients: </label>
+      {menuItem.ingredients.map((ingredient, index) => (
+        <p key={index}>{ingredient}</p>
+      ))}
+      <input type="text" className="form-control" value={ingredient} onChange={onIngredientChange} />
+      <button type="button" onClick={addIngredient}>Add Ingredient</button>
+    </div>
+    <div className="form-group">
+      <input type="submit" value="Create Menu Item" className="btn btn-primary" />
+    </div>
       </form>
     </div>
   );

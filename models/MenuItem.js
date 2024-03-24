@@ -25,6 +25,10 @@ const MenuItemSchema = new mongoose.Schema({
     type: String
   },
 
+  ingredients: {
+    type: [String]
+  },
+
   restaurant_id: {
     type: String,
     required: true

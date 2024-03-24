@@ -14,27 +14,36 @@ const MenuItemViewer = () => {
             .catch(error => console.error(error));
     }, [id]);
 
-    return (
-        <div>
-            {menuItem ? (
-                <>
-                    <button>
-                        <Link to={`/MenuItemEditor/${menuItem._id}`}>Edit this item</Link>
-                    </button>
-                        
-                    <h3>Menu item: {menuItem.name} ({menuItem._id})</h3>
-                    <div>
-                        <p>Name: {menuItem.name}</p>
-                        <p>Description: {menuItem.item_desc}</p>
-                        
-                        {/* Add more JSX to display other properties of the menu item */}
-                    </div>
-                </>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
-    );
+    // ... existing code
+
+return (
+    <div>
+      {menuItem ? (
+        <>
+          <button>
+            <Link to={`/MenuItemEditor/${menuItem._id}`}>Edit this item</Link>
+          </button>
+                
+          <h3>Menu item: {menuItem.name} ({menuItem._id})</h3>
+          <div>
+            <p>Name: {menuItem.name}</p>
+            <p>Description: {menuItem.item_desc}</p>
+            <p>Ingredients:</p>
+            <ul>
+              {menuItem.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+            {/* Add more JSX to display other properties of the menu item */}
+          </div>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+  df
+  // ... existing code
 };
 
 export default MenuItemViewer;
