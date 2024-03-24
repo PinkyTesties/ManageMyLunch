@@ -72,7 +72,7 @@ return (
 
     <button onClick={toggleDropdown}>Account</button>
     <button className='header-button-right'>Cart</button>
-    <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>Logout</Link></button>
+    <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
     <p>Logged in as: UNAVAILABLE</p>
     <Modal
       isOpen={showDropdown}

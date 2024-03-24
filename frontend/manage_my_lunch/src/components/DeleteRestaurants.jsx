@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 function DeleteRestaurants() {
   const [restaurants, setRestaurants] = useState([]);
@@ -36,6 +37,9 @@ function DeleteRestaurants() {
 
   return (
     <div>
+            <Link to="/dashboard" className="btn btn-outline-warning float-left">
+              Show Restaurant List
+            </Link>
       <form onSubmit={handleRestaurantDelete}>
         <input
           type="text"

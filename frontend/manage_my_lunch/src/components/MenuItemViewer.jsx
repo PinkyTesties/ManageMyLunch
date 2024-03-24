@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const MenuItemViewer = () => {
     const { id } = useParams();
@@ -17,13 +17,19 @@ const MenuItemViewer = () => {
     return (
         <div>
             {menuItem ? (
-                <div>
-                    <h2>{menuItem.name}</h2>
-                    <p>{menuItem.item_desc}</p>
-                    <p>{menuItem._id}</p>
-
-                    {/* Add more JSX to display other properties of the menu item */}
-                </div>
+                <>
+                    <button>
+                        <Link to={`/MenuItemEditor/${menuItem._id}`}>Edit this item</Link>
+                    </button>
+                        
+                    <h3>Menu item: {menuItem.name} ({menuItem._id})</h3>
+                    <div>
+                        <p>Name: {menuItem.name}</p>
+                        <p>Description: {menuItem.item_desc}</p>
+                        
+                        {/* Add more JSX to display other properties of the menu item */}
+                    </div>
+                </>
             ) : (
                 <p>Loading...</p>
             )}

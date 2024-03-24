@@ -18,7 +18,7 @@ const RestaurantPanel = ({restaurant}) => {
         <h3>{restaurant.cuisine}</h3>
         <p>{restaurant.description}</p>
         <p>Rating: {restaurant.rating} stars</p><br></br>
-        <button><Link to={`/ShowRestaurantDetails/${restaurant._id}`} style={{ textDecoration: 'none', color: 'white' }}>View</Link></button>
+        <button><Link to={`/ShowRestaurantDetails/${restaurant._id}`} style={{ textDecoration: 'none', color: 'Black' }}>View</Link></button>
       </div>
     </div>
   );

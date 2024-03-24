@@ -29,12 +29,7 @@ import UpdateRestaurant from "./components/UpdateRestaurant";
 import CreateMenuItem from "./components/CreateMenuItem"; 
 import DeleteMenuItem from "./components/DeleteMenuItem"; 
 import MenuItemViewer from "./components/MenuItemViewer";
-
-
-
-
-
-
+import MenuItemEditor from "./components/MenuItemEditor";
 
 
 //hello
@@ -58,7 +53,7 @@ const router = createBrowserRouter([
   { path: "/CreateMenuItem/:id", element: <CreateMenuItem /> },
   { path: "/DeleteMenuItem/", element: <DeleteMenuItem /> },
   { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
-
+  { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
 
   
 
