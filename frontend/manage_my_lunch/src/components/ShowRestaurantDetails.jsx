@@ -107,8 +107,8 @@ function ShowRestaurantDetails(props) {
       <h1>Manage My Lunch Dashboard</h1>
 
       <button className='header-button' onClick={toggleDropdown}>Account</button>
-      <button className='header-button-right'>Cart</button>
-      <button className='header-button-right'>Logout</button>
+      <Link to="/Cart" className='header-button-right'>Cart</Link>
+            <button className='header-button-right'>Logout</button>
 
       <Modal
         isOpen={showDropdown}

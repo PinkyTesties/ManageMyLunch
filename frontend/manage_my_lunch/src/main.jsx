@@ -11,12 +11,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 // Components imports
 //Basically every frontend page we create, needs to be put here and in the router function
-import CreateBook from "./components/CreateBook";
 import CreateRestaurant from "./components/CreateRestaurant";
 
-import ShowBookList from "./components/ShowBookList";
-import ShowBookDetails from "./components/ShowBookDetails";
-import UpdateBookInfo from "./components/UpdateBookInfo";
 import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp"; 
 import Dashboard from "./components/Dashboard"; 
@@ -30,19 +26,17 @@ import CreateMenuItem from "./components/CreateMenuItem";
 import DeleteMenuItem from "./components/DeleteMenuItem"; 
 import MenuItemViewer from "./components/MenuItemViewer";
 import MenuItemEditor from "./components/MenuItemEditor";
+import Cart from "./components/Cart";
+
 
 
 //hello
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/show-book", element: <ShowBookList /> },
   { path: "/", element: <LoginPage /> },
-  { path: "/create-book", element: <CreateBook /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
-  { path: "/show-book/:id", element: <ShowBookDetails /> },
-  { path: "/edit-book/:id", element: <UpdateBookInfo /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/UpdatePassword", element: <UpdatePassword /> },
   { path: "/SettingsPage", element: <SettingsPage /> },
@@ -54,6 +48,8 @@ const router = createBrowserRouter([
   { path: "/DeleteMenuItem/", element: <DeleteMenuItem /> },
   { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
   { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
+  { path: "/Cart/", element: <Cart /> },
+
 
   
 

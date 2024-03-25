@@ -22,7 +22,20 @@ router.post('/', (req, res) => {
       // Check if password matches
       if (user.password === password) {
         // Password matches, send success response
-        return res.json({ success: true, user });
+
+        req.session.name = user.name;
+        req.session.university = user.university;
+        req.session.id = user._id;
+        req.session.email = user.email;
+
+        console.log(req.session.name);
+        console.log(req.session.university);
+        console.log(req.session.id);
+        console.log(req.session.email);
+        //console.log(req.session.user);
+
+
+        return res.json({ success: true});
       } else {
         // Password doesn't match, send error response
         return res.status(400).json({ error: 'Invalid password' });
