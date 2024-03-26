@@ -67,6 +67,4 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ error: 'No such a users' }));
 });
 
-
-
 module.exports = router;

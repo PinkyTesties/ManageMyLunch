@@ -15,7 +15,6 @@ const Dashboard = ({history}) => {
   const [university, setUniversity] = useState('');
   const [userID, setUserID] = useState('');
 
-
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
