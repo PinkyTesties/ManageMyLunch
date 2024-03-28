@@ -42,16 +42,16 @@ function ShowRestaurantDetails(props) {
   //     });
   // }, [id]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8082/api/restaurants/${id}`)
-  //     .then((res) => {
-  //       setRestaurant(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log('Error from ShowRestaurantDetails');
-  //     });
-  // }, [id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8082/api/restaurants/${id}`)
+      .then((res) => {
+        setRestaurant(res.data);
+      })
+      .catch((err) => {
+        console.log('Error from ShowRestaurantDetails');
+      });
+  }, [id]);
 
   const onDeleteClick = (id) => {
     axios
