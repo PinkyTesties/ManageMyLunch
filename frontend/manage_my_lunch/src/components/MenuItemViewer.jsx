@@ -39,7 +39,7 @@ const MenuItemViewer = () => {
         // Initialize ingredient counts
         const initialCounts = {};
         data.ingredients.forEach(ingredient => {
-          initialCounts[ingredient] = 1; // set the initial count to 1
+          initialCounts[ingredient.name] = ingredient.quantity; // set the initial count to the ingredient's default quantity
         });
         setIngredientCounts(initialCounts);
       })
@@ -69,16 +69,26 @@ const MenuItemViewer = () => {
   const handleInstructionsChange = (event) => {
     setInstructions(event.target.value);
   };
+
   const addToCart = async () => {
     try {
+      // Prepare the menu item data
+      const cartItem = {
+        menuItemId: menuItem._id,
+        ingredients: menuItem.ingredients.map(ingredient => ({
+          name: ingredient.name,
+          quantity: ingredientCounts[ingredient.name]
+        })),
+        additional_information: instructions
+      };
+    
       // Send a request to add an item to the cart
       const response = await axios.post('http://localhost:8082/api/cart/add', {
         email: email,
-        menuItem: menuItem,
-        quantity: quantity,
+        menuItem: cartItem,
         restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
       });
-  
+    
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -98,13 +108,14 @@ const MenuItemViewer = () => {
             <p>Name: {menuItem.name} email: {email}</p>
             <p>Description: {menuItem.item_desc}</p>
             <p>Ingredients:</p>
-            {menuItem.ingredients.map(ingredient => (
-              <div key={ingredient} style={{ display: 'flex', alignItems: 'center' }}>
-                <p style={{ marginRight: '10px' }}>{ingredient}: {ingredientCounts[ingredient]}</p>
-                <button onClick={() => decrementIngredient(ingredient)}>-</button>
-                <button onClick={() => incrementIngredient(ingredient)}>+</button>
-              </div>
-            ))}
+            {menuItem.ingredients.map((ingredient, index) => (
+  <div key={index}>
+    <span>{ingredient.name}: </span>
+    <span>{ingredientCounts[ingredient.name]}</span>
+    <button onClick={() => incrementIngredient(ingredient.name)}>+</button>
+    <button onClick={() => decrementIngredient(ingredient.name)}>-</button>
+  </div>
+))}
             <textarea value={instructions} onChange={handleInstructionsChange} placeholder="Additional instructions..."></textarea>
           </div>
           <button onClick={addToCart}>Add to cart</button>

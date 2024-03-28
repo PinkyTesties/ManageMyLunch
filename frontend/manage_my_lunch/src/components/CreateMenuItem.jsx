@@ -1,75 +1,76 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams} from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const CreateMenuItem = (props) => {
-  const navigate = useNavigate();
-  const { id } = useParams(); // Extract id from the URL
+import axios from 'axios';
+
+const CreateMenuItem = () => {
+  const params = useParams();
 
   const [menuItem, setMenuItem] = useState({
-    name: "",
-    cost: "",
+    name: '',
+    cost: '',
     date_added: new Date(),
-    item_desc: "",
-    restaurant_id: id,
-    ingredients: []
+    item_desc: '',
+    restaurant_id: params.id,
+    ingredients: [{ name: '', quantity: 0 }],
+    additional_information: ''
   });
-
-  const [restaurant, setRestaurant] = useState({});
-  const [ingredient, setIngredient] = useState("");
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8082/api/restaurants/${id}`)
-      .then((res) => {
-        setRestaurant(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [id]);
 
   const onChange = (e) => {
     setMenuItem({ ...menuItem, [e.target.name]: e.target.value });
   };
 
-  const onIngredientChange = (e) => {
-    setIngredient(e.target.value);
+  const onIngredientChange = index => e => {
+    const newIngredients = menuItem.ingredients.map((ingredient, i) => {
+      if (i !== index) return ingredient;
+      const value = e.target.name === 'quantity' ? parseInt(e.target.value, 10) : e.target.value;
+      return { ...ingredient, [e.target.name]: value };
+    });
+  
+    setMenuItem(prevState => ({
+      ...prevState,
+      ingredients: newIngredients
+    }));
   };
 
   const addIngredient = () => {
-    setMenuItem({ ...menuItem, ingredients: [...menuItem.ingredients, ingredient] });
-    setIngredient("");
+    setMenuItem(prevState => ({
+      ...prevState,
+      ingredients: [...prevState.ingredients, { name: '', quantity: 0 }]
+    }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+  
+    const isValid = menuItem.ingredients.every(
+      ingredient => ingredient.name && ingredient.quantity
+    );
+  
+    if (!isValid) {
+      alert('Each ingredient must have a name and a quantity.');
+      return;
+    }
+  
+    const menuItemWithQuantityAsString = {
+      ...menuItem,
+      ingredients: menuItem.ingredients.map(ingredient => ({
+        ...ingredient,
+        quantity: String(ingredient.quantity)
+      }))
+    };
+  
     axios
-      .post("http://localhost:8082/api/menuItems", menuItem)
-      .then((res) => {
-        setMenuItem({
-          name: "",
-          cost: "",
-          date_added: new Date(),
-          item_desc: "",
-          restaurant_id: id,
-        });
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .post('http://localhost:8082/api/menuItems', menuItemWithQuantityAsString)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.error(err));
   };
 
   return (
     <div>
       <h3>Create New Menu Item</h3>
-      <p>Restaurant ID: {id}</p>
-      <p>Restaurant Name: {restaurant.restaurantName}</p> {/* Display the restaurant name */}
-
       <form onSubmit={onSubmit}>
-        <div className="form-group">
+      <div className="form-group">
           <label>Name: </label>
           <input type="text" required className="form-control" name="name" value={menuItem.name} onChange={onChange} />
         </div>
@@ -82,144 +83,42 @@ const CreateMenuItem = (props) => {
           <input type="text" className="form-control" name="item_desc" value={menuItem.item_desc} onChange={onChange} />
         </div>
         <div className="form-group">
-          <label>Restaurant ID: </label>
-          <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
+  <label>Restaurant ID: </label>
+  <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
+</div>   
+        
+<div className="form-group">
+  <label>Ingredients: </label>
+  {menuItem.ingredients.map((ingredient, index) => (
+    <div key={index}>
+      <input
+        type="text"
+        className="form-control"
+        name="name"
+        value={ingredient.name}
+        onChange={onIngredientChange(index)}
+      />
+<input
+  type="number"
+  className="form-control"
+  name="quantity"
+  value={ingredient.quantity}
+  onChange={onIngredientChange(index)}
+/>
+    </div>
+  ))}
+<button type="button" onClick={addIngredient}>Add Another Ingredient</button>
+</div>
+        <div className="form-group">
+          <label>Additional Information: </label>
+          <input type="text" className="form-control" name="additional_information" value={menuItem.additional_information} onChange={onChange} />
         </div>
         <div className="form-group">
-      <label>Ingredients: </label>
-      {menuItem.ingredients.map((ingredient, index) => (
-        <p key={index}>{ingredient}</p>
-      ))}
-      <input type="text" className="form-control" value={ingredient} onChange={onIngredientChange} />
-      <button type="button" onClick={addIngredient}>Add Ingredient</button>
-    </div>
-    <div className="form-group">
-      <input type="submit" value="Create Menu Item" className="btn btn-primary" />
-    </div>
+          <input type="submit" value="Create Menu Item" className="btn btn-primary" />
+        </div>
       </form>
     </div>
   );
 };
 
 export default CreateMenuItem;
-
-
-/*
-
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
-const CreateRestaurant = (props) => {
-  const navigate = useNavigate();
-
-  const [restaurant, setRestaurant] = useState({
-    restaurantName: "",
-    cuisine: "",
-    rating: "",
-    description: "",
-  });
-
-  const onChange = (e) => {
-    setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    axios
-    //Link should change to a deployed backend host
-      .post("http://localhost:8082/api/restaurants", restaurant)
-      .then((res) => {
-        setRestaurant({
-          restaurantName: "",
-          cuisine: "",
-          rating: "",
-          description: "",
-
-        });
-        // Push to /
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        console.log("Error in CreateRestaurant!");
-      });
-  };
-
-  return (
-    <div className="CreateRestaurant">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8 m-auto">
-            <br />
-            <Link to="/" className="btn btn-outline-warning float-left">
-              Show Restaurant List
-            </Link>
-          </div>
-          <div className="col-md-10 m-auto">
-            <h1 className="display-4 text-center">Menu Item</h1>
-            <p className="lead text-center">Add a new menu item</p>
-            <form noValidate onSubmit={onSubmit}>
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  name="restaurantName"
-                  className="form-control"
-                  value={restaurant.restaurantName}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="e.g: Chinese"
-                  name="cuisine"
-                  className="form-control"
-                  value={restaurant.cuisine}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="e.g 3"
-                  name="rating"
-                  className="form-control"
-                  value={restaurant.rating}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div className="form-group">
-                <input
-                  type="text"
-                  placeholder="Describe this restaurant"
-                  name="description"
-                  className="form-control"
-                  value={restaurant.description}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              
-              <button
-                type="submit"
-                className="btn btn-outline-warning btn-block mt-4 mb-4 w-100"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CreateRestaurant;
-
-
-*/

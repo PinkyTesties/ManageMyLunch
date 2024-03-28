@@ -15,7 +15,14 @@ router.get('/test', (req, res) => res.send('menuItems route testing!'));
 // @desc    Get all menuItems
 // @access  Public
 router.get('/', (req, res) => {
-  MenuItems.find()
+  const restaurantId = req.query.restaurant_id;
+  let query = {};
+
+  if (restaurantId) {
+    query.restaurant_id = restaurantId;
+  }
+
+  MenuItems.find(query)
     .then(menuItems => res.json(menuItems))
     .catch(err => res.status(404).json({ nomenuitemsfound: 'No menu items found' }));
 });

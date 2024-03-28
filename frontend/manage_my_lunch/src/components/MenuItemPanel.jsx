@@ -22,7 +22,6 @@ const MenuItemPanel = ({ menuItem }) => {
           setUniversity(res.data.university);
           setUserID(res.data._id);
 
-
         } else {
           navigate('/');
         }
@@ -30,23 +29,46 @@ const MenuItemPanel = ({ menuItem }) => {
       .catch(err => console.log(err))
   }, [])
 
-  const addToCart = async () => {
-    try {
-      // Send a request to add an item to the cart
-      const response = await axios.post('http://localhost:8082/api/cart/add', {
-        email: email,
-        menuItem: menuItem,
-        quantity: quantity,
-        restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
-      });
+  // const addToCart = async () => {
+  //   try {
+  //     // Send a request to add an item to the cart
+  //     const response = await axios.post('http://localhost:8082/api/cart/add', {
+  //       email: email,
+  //       menuItem: menuItem,
+  //       quantity: quantity,
+  //       restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
+  //     });
   
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+  
+  
+    const addToCart = async () => {
+      try {
+        // Prepare the menu item data
+        const cartItem = {
+          menuItemId: menuItem._id,
+          ingredients: [],
+          additional_information: ""
+        };
+      
+        // Send a request to add an item to the cart
+        const response = await axios.post('http://localhost:8082/api/cart/add', {
+          email: email,
+          menuItem: cartItem,
+          restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
+        });
+          console.log(response.data);
+
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
-  
-  
+
+
   return (
     <div className='menucard-container'>
       <img

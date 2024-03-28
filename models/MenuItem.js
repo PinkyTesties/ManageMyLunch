@@ -26,7 +26,22 @@ const MenuItemSchema = new mongoose.Schema({
   },
 
   ingredients: {
-    type: [String]
+    type: [
+      {
+        name: {
+          type: String,
+          required: true
+        },
+        quantity: {
+          type: Number,
+          required: true
+        }
+      }
+    ]
+  },
+
+  additional_information: {
+    type: String
   },
 
   restaurant_id: {
@@ -35,5 +50,7 @@ const MenuItemSchema = new mongoose.Schema({
   },
 
 });
+
+
 
 module.exports = MenuItem = mongoose.model('menuItem', MenuItemSchema);

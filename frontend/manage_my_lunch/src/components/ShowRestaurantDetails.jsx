@@ -32,16 +32,26 @@ function ShowRestaurantDetails(props) {
     },
   };
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8082/api/restaurants/${id}`)
-      .then((res) => {
-        setRestaurant(res.data);
-      })
-      .catch((err) => {
-        console.log('Error from ShowRestaurantDetails');
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
+  //     .then(response => {
+  //       setMenuItems(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error getting menu items:', error);
+  //     });
+  // }, [id]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8082/api/restaurants/${id}`)
+  //     .then((res) => {
+  //       setRestaurant(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log('Error from ShowRestaurantDetails');
+  //     });
+  // }, [id]);
 
   const onDeleteClick = (id) => {
     axios
@@ -55,15 +65,16 @@ function ShowRestaurantDetails(props) {
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8082/api/menuItems')
+    console.log('Fetching menu items for restaurant_id:', id);
+    
+    axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
       .then((res) => {
         setMenuItems(res.data);
       })
       .catch((err) => {
-        console.log('Error from ShowRestaurantDetails');
+        console.log('Error from ShowRestaurantDetails', err);
       });
-  }, []);
+  }, [id]);
 
   const MenuItemsList =
     menuItems.length === 0
