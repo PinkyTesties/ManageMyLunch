@@ -17,6 +17,7 @@ function OrderStatus() {
     const [orders, setOrders] = useState([]);
     const [menuItems, setMenuItems] = useState({});
     const [countdowns, setCountdowns] = useState({});
+    const [currentTime, setCurrentTime] = useState(new Date());
 
     //const uniqueMenuItemIds = [...new Set(menuItemIds)];
 
@@ -81,36 +82,14 @@ function OrderStatus() {
         }
     }, [orders]);
 
-useEffect(() => {
-    if (orders.length > 0) {
-        const now = new Date();
-        const nowUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-        const newCountdowns = orders.reduce((acc, order) => {
-            const orderTime = new Date(order.time_created);
-            const orderTimeUtc = Date.UTC(orderTime.getUTCFullYear(), orderTime.getUTCMonth(), orderTime.getUTCDate(), orderTime.getUTCHours(), orderTime.getUTCMinutes(), orderTime.getUTCSeconds());
-            const diffInMilliseconds = nowUtc - orderTimeUtc;
-            const diffInMinutes = Math.floor(diffInMilliseconds / 60000);
-            acc[order._id] = diffInMinutes < 5 ? 5 - diffInMinutes : 0;
-            return acc;
-        }, {});
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000); // Update every second
 
-        setCountdowns(newCountdowns);
-
-        const countdownInterval = setInterval(() => {
-            setCountdowns(prevCountdowns => {
-                const updatedCountdowns = { ...prevCountdowns };
-                for (let id in updatedCountdowns) {
-                    if (updatedCountdowns[id] > 0) {
-                        updatedCountdowns[id]--;
-                    }
-                }
-                return updatedCountdowns;
-            });
-        }, 1000); // decrease every second
-
-        return () => clearInterval(countdownInterval);
-    }
-}, [orders]);
+        // Cleanup function to clear the interval when the component unmounts
+        return () => clearInterval(timer);
+    }, []);
 
 
     const fetchOrders = (email) => {
@@ -128,7 +107,7 @@ useEffect(() => {
     };
 
     return (
-        <div>
+        <><div>
             <img src={logo} alt='Logo' height={100} />
             <h1>Manage My Lunch Dashboard</h1>
             <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
@@ -160,24 +139,62 @@ useEffect(() => {
             <p>{/*Your order ID is: { }*/}</p>
             <div>
                 <h3>Current orders</h3>
-                {orders.filter(order => order.orderStatus === 'Pending').map((order, index) => (
-                    <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-                        <p>Order ID: {order._id}</p>
-                        <p>Email: {order.email}</p>
-                        <p>Cost: ${order.cost.toFixed(2)}</p>
-                        <p>Date Created: {order.date_created}</p>
-                        <p>Time Created: {order.time_created}</p>
-                        <p>Time Remaining: {countdowns[order._id]} minutes</p>
-                        {countdowns[order._id] > 0 && <button>Edit Order</button>}
-                        <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
-                        <p>Restaurant ID: {order.restaurant_id}</p>
-                        <p>Restaurant Name: {order.restaurant_name}</p>
-                        <p>Additional Info: {order.additionalInfo}</p>
-                        <p>Order Status: {order.orderStatus}</p>
+                {/* Here is where you might display the orders */}
+                {orders.filter(order => order.orderStatus === 'Pending').map((order, index) => {
+                    // Get the current time in NZDT
+                    const currentTime = new Date();
 
-                    </div>
-                ))}
+                    const [time, modifier] = order.time_created.split(' ');
+                    let [hours, minutes, seconds] = time.split(':');
+                    if (modifier === 'PM' && hours !== '12') {
+                        hours = Number(hours) + 12;
+                    }
+                    const time24 = `${hours}:${minutes}:${seconds}`;
+
+                    // Get the order creation time in NZDT
+                    const orderTime = new Date(order.date_created.split('T')[0] + 'T' + time24 + '+13:00');
+
+                    // Calculate the total remaining time in seconds
+                    const totalRemainingTimeInSeconds = Math.max(0, (5 * 60) - ((currentTime - orderTime) / 1000));
+
+                    // Calculate the remaining minutes and seconds
+                    const remainingMinutes = Math.floor(totalRemainingTimeInSeconds / 60);
+                    const remainingSeconds = Math.floor(totalRemainingTimeInSeconds % 60);
+
+
+                    return (
+                        <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
+                            <p>Order ID: {order._id}</p>
+                            <p>Email: {order.email}</p>
+                            <p>Cost: ${order.cost.toFixed(2)}</p>
+                            <p>Date Created: {order.date_created}</p>
+                            <p>Time Created: {order.time_created}</p>
+                            {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
+                            <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
+                            <p>Restaurant ID: {order.restaurant_id}</p>
+                            <p>Restaurant Name: {order.restaurant_name}</p>
+                            <p>Additional Info: {order.additionalInfo}</p>
+                            <p>Status: {order.orderStatus}</p>
+
+
+
+                            {/** 
+<p>Order Time (24-hour format): {time24}</p>
+<p>Order Time (Date object): {orderTime.toString()}</p>
+<p>Current Time: {currentTime.toString()}</p>
+
+                            <p>Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds</p>
+                             */}
+                            <button disabled={totalRemainingTimeInSeconds <= 0}>Edit Order</button>   
+                              {totalRemainingTimeInSeconds > 0
+                                ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                                : " Edit Time has elapsed"}
+                        </div>
+                    );
+                })}
             </div>
+        </div>
+
             <div>
                 <h3>Order history</h3>
                 {orders.filter(order => order.orderStatus === 'Delivered' || order.orderStatus === 'Completed').map((order, index) => (
@@ -190,14 +207,15 @@ useEffect(() => {
                         <p>Restaurant ID: {order.restaurant_id}</p>
                         <p>Restaurant Name: {order.restaurant_name}</p>
                         <p>Additional Info: {order.additionalInfo}</p>
+                        <p>Status: {order.orderStatus}</p>
+
                         <button>Rate your order!</button>
 
                     </div>
                 ))}
-            </div>
+            </div></>
 
 
-        </div>
 
 
     );
