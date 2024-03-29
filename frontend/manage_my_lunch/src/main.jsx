@@ -27,6 +27,7 @@ import DeleteMenuItem from "./components/DeleteMenuItem";
 import MenuItemViewer from "./components/MenuItemViewer";
 import MenuItemEditor from "./components/MenuItemEditor";
 import Cart from "./components/Cart";
+import OrderStatus from "./components/OrderStatus";
 
 
 
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
   { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
   { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
   { path: "/Cart/", element: <Cart /> },
+  { path: "/OrderStatus/", element: <OrderStatus /> },
 
 
   

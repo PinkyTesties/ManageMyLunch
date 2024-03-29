@@ -72,9 +72,15 @@ const MenuItemViewer = () => {
 
   const addToCart = async () => {
     try {
+      // Log the values before the calculation
+      // console.log(`menuItem.cost: ${menuItem.cost}`);
+      // console.log(`quantity: ${quantity}`);
+  
       // Prepare the menu item data
       const cartItem = {
         menuItemId: menuItem._id,
+        name: menuItem.name,
+        cost: parseFloat(menuItem.cost) * quantity, // Multiply cost by quantity
         ingredients: menuItem.ingredients.map(ingredient => ({
           name: ingredient.name,
           quantity: ingredientCounts[ingredient.name]

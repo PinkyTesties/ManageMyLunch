@@ -14,9 +14,14 @@ const MenuItemSchema = new mongoose.Schema({
     required: true
   },
 
+  // cost: {
+  //   type: String
+  // },
+
   cost: {
-    type: String
+    type: Number
   },
+  
   date_added: {
     type: Date,
     default: Date.now

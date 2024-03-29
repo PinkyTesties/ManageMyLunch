@@ -109,6 +109,8 @@ return (
     >
       <a href="#">Profile</a><br></br>
       <a href="SettingsPage">Settings</a><br></br>
+      <a href="OrderStatus">Orders</a><br></br>
+
       <a href="/">Logout</a><br></br>
     </Modal>
     <div className='restaurantFilter'>

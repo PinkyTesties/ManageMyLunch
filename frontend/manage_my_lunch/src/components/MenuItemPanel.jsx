@@ -51,6 +51,9 @@ const MenuItemPanel = ({ menuItem }) => {
         // Prepare the menu item data
         const cartItem = {
           menuItemId: menuItem._id,
+          name: menuItem.name,
+          cost: parseFloat(menuItem.cost) * quantity, // Multiply cost by quantity
+
           ingredients: [],
           additional_information: ""
         };
@@ -82,7 +85,7 @@ const MenuItemPanel = ({ menuItem }) => {
         </h2>
         <button onClick={addToCart}>Add to cart</button>
 
-        <h3>${menuItem.cost}</h3>
+        <h3>${menuItem.cost.toFixed(2)}</h3>        
         <p>{menuItem.item_desc}</p>
         <p>{menuItem.restaurant_id}</p>
 
