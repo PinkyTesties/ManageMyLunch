@@ -100,9 +100,12 @@ function ShowRestaurantDetails(props) {
           <span className="value">{restaurant.cuisine}</span>
         </div>
         <div className="item">
-          <span className="label">Rating: </span>
-          <span className="value">{restaurant.rating}</span>
+            <span className="label">Google Rating: </span>
+           
+          <span className="value">{restaurant.rating} Stars </span>
         </div>
+        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
+
         <div className="item">
           <span className="label">Description: </span>
           <span className="value">{restaurant.description}</span>

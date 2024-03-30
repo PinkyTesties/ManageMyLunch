@@ -219,8 +219,9 @@ function OrderStatus() {
                         <p>Additional Info: {order.additionalInfo}</p>
                         <p>Status: {order.orderStatus}</p>
 
-                        <button>Rate your order!</button>
-
+                        <button>
+    <Link to={`/ReviewForm/${order.restaurant_id}`}>Rate this Restaurant</Link>
+</button>
                     </div>
                 ))}
             </div></>

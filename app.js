@@ -19,6 +19,8 @@ const restaurantRoutes = require("./routes/api/restaurants");
 const menuItemRoutes = require("./routes/api/menuItems");
 const cartRoutes = require("./routes/api/cart");  
 const completedCartRoutes = require('./routes/api/CompletedCarts');
+const restaurantreviews = require('./routes/api/reviewForm');
+
 const cors = require("cors");
 
 const app = express();
@@ -65,6 +67,7 @@ app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/menuItems", menuItemRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/CompletedCarts', completedCartRoutes);
+app.use('/api/reviewForm', restaurantreviews);
 
 app.get('/', (req, res) => {
   if(req.session.name) {

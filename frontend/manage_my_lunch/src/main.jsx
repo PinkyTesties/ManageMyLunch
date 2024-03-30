@@ -28,6 +28,10 @@ import MenuItemViewer from "./components/MenuItemViewer";
 import MenuItemEditor from "./components/MenuItemEditor";
 import Cart from "./components/Cart";
 import OrderStatus from "./components/OrderStatus";
+import ReviewForm from "./components/ReviewForm";
+import ViewRestaurantReviews from "./components/ViewRestaurantReviews";
+
+
 
 
 
@@ -51,6 +55,8 @@ const router = createBrowserRouter([
   { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
   { path: "/Cart/", element: <Cart /> },
   { path: "/OrderStatus/", element: <OrderStatus /> },
+  { path: "/ReviewForm/:id", element: <ReviewForm /> },
+  { path: "/ViewRestaurantReviews/:id", element: <ViewRestaurantReviews /> },
 
 
   
