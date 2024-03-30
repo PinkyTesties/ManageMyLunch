@@ -141,18 +141,24 @@ function OrderStatus() {
                 <h3>Current orders</h3>
                 {/* Here is where you might display the orders */}
                 {orders.filter(order => order.orderStatus === 'Pending').map((order, index) => {
-                    // Get the current time in NZDT
-                    const currentTime = new Date();
+                    // Parse order.date_created to get the year, month, and day
+                    const orderDate = new Date(order.date_created);
+                    const year = orderDate.getFullYear();
+                    const month = orderDate.getMonth(); // Note: months are 0-based in JavaScript Date objects
+                    const day = orderDate.getDate();
 
+                    // Convert time_created to 24-hour format
                     const [time, modifier] = order.time_created.split(' ');
                     let [hours, minutes, seconds] = time.split(':');
                     if (modifier === 'PM' && hours !== '12') {
                         hours = Number(hours) + 12;
+                    } else if (modifier === 'AM' && hours === '12') {
+                        hours = '00';
                     }
-                    const time24 = `${hours}:${minutes}:${seconds}`;
+                    const time24 = `${hours.padStart(2, '0')}:${minutes}:${seconds}`;
 
-                    // Get the order creation time in NZDT
-                    const orderTime = new Date(order.date_created.split('T')[0] + 'T' + time24 + '+13:00');
+                    // Create the orderTime Date object
+                    const orderTime = new Date(year, month, day, ...time24.split(':'));
 
                     // Calculate the total remaining time in seconds
                     const totalRemainingTimeInSeconds = Math.max(0, (5 * 60) - ((currentTime - orderTime) / 1000));
@@ -160,7 +166,6 @@ function OrderStatus() {
                     // Calculate the remaining minutes and seconds
                     const remainingMinutes = Math.floor(totalRemainingTimeInSeconds / 60);
                     const remainingSeconds = Math.floor(totalRemainingTimeInSeconds % 60);
-
 
                     return (
                         <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
@@ -177,6 +182,9 @@ function OrderStatus() {
                             <p>Status: {order.orderStatus}</p>
 
 
+                            <p>Order Time (24-hour format): {time24}</p>
+                            <p>Order Time (Date object): {orderTime.toString()}</p>
+                            <p>Current Time: {currentTime.toString()}</p>
 
                             {/** 
 <p>Order Time (24-hour format): {time24}</p>
@@ -185,10 +193,12 @@ function OrderStatus() {
 
                             <p>Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds</p>
                              */}
-                            <button disabled={totalRemainingTimeInSeconds <= 0}>Edit Order</button>   
-                              {totalRemainingTimeInSeconds > 0
-                                ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
-                                : " Edit Time has elapsed"}
+                            <p>
+                                
+                            </p>
+                            <button disabled={totalRemainingTimeInSeconds <= 0}>Edit Order</button>{totalRemainingTimeInSeconds > 0
+                                    ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                                    : " Edit Time has elapsed"}
                         </div>
                     );
                 })}
