@@ -27,14 +27,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container">
       {error && <div className="alert alert-danger">{error}</div>}
-      <img src={logo} alt='Logo' height={100} />
-
-      <h2>Login</h2>
-      <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
-
       <form onSubmit={handleSubmit}>
+        <img src={logo} alt='Logo' height={100} />
+        <h2>Login</h2>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email

@@ -92,14 +92,21 @@ const Dashboard = ({history}) => {
 
 return (
   <div>
-    <img src={logo} alt='Logo' height={100} />
-    <h1>Manage My Lunch Dashboard</h1>
-    <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+    <div className='header'>
+      <div className='MainTitle'>
+        <img src={logo} alt='Logo' height={100} />
+        <h1>Manage My Lunch Dashboard</h1>
+      </div>
 
-    <button onClick={toggleDropdown}>Account</button>
-    <Link to="/Cart" className='header-button-right'>Cart</Link>
-    <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
-    <p>Logged in as: {name}, {university}, {email}, {userID}</p>
+      <div className='MenuButtons'>
+        <button onClick={toggleDropdown}>Account</button>
+        <Link to="/Cart" className='header-button-right'>Cart</Link>
+
+        <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
+      </div>
+      
+      <p>Logged in as: {name}, {university}, {email}, {userID}</p>
+    </div>
     <Modal
       isOpen={showDropdown}
       onRequestClose={toggleDropdown}

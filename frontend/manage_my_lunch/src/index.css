@@ -24,8 +24,10 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 10px 50px;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -49,6 +51,7 @@ button {
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -65,4 +68,17 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+.MainTitle {
+  display: flex;
+}
+
+.MenuButtons {
+  display: flex;
+}
+
+.restaurant-cards-container {
+  padding-left: 30px;
 }
