@@ -56,4 +56,13 @@ router.delete('/id/:id', async (req, res) => {
   res.json({ message: 'Completed cart deleted successfully' });
 });
 
+// Get all completed carts
+router.get('/', async (req, res) => {
+  try {
+    const completedCarts = await CompletedCart.find({});
+    res.json(completedCarts);
+  } catch (err) {
+    res.status(500).json({ error: 'An error occurred while fetching completed carts' });
+  }
+});
 module.exports = router;

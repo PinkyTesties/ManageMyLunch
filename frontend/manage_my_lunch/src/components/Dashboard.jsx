@@ -99,9 +99,7 @@ return (
     <button onClick={toggleDropdown}>Account</button>
     <button><Link to={'/Drivers'}>Drivers</Link></button>
     <button><Link to={'/Users'}>Users</Link></button>
-
-
-
+    <button><Link to={'/Reports'}>Reports</Link></button>
 
 
     <Link to="/Cart" className='header-button-right'>Cart</Link>

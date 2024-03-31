@@ -34,7 +34,7 @@ import EditOrder from "./components/EditOrder";
 import AddDriver from "./components/AddDriver";
 import Drivers from "./components/Drivers";
 import Users from "./components/Users";
-
+import Reports from "./components/Reports";
 
 
 
@@ -63,8 +63,8 @@ const router = createBrowserRouter([
   { path: "/EditOrder/:id", element: <EditOrder /> },
   { path: "/AddDriver", element: <AddDriver /> },
   { path: "/Drivers", element: <Drivers />},
-  { path: "/Users", element: <Users />}
-  
+  { path: "/Users", element: <Users />},
+  { path: "/Reports", element: <Reports />}
 
 
 ]);
