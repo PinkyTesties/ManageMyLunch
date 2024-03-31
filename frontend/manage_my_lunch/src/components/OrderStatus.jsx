@@ -113,6 +113,8 @@ function OrderStatus() {
             <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
 
             <button onClick={toggleDropdown}>Account</button>
+            <button><Link to={'/Dashboard'}>Dashboard</Link></button>
+
             <Link to="/Cart" className='header-button-right'>Cart</Link>
             <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
             <p>Logged in as: {name}, {university}, {email}, {userID}</p>
@@ -136,6 +138,7 @@ function OrderStatus() {
             <p>Thank you for your order!</p>
             <p>Your order has been placed successfully and is now being processed.</p>
             <p>We will send you an email confirmation shortly.</p>
+
             <p>{/*Your order ID is: { }*/}</p>
             <div>
                 <h3>Current orders</h3>
@@ -155,6 +158,9 @@ function OrderStatus() {
                     } else if (modifier === 'AM' && hours === '12') {
                         hours = '00';
                     }
+
+                    hours = hours.toString(); // Convert hours back to a string
+
                     const time24 = `${hours.padStart(2, '0')}:${minutes}:${seconds}`;
 
                     // Create the orderTime Date object
@@ -194,11 +200,12 @@ function OrderStatus() {
                             <p>Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds</p>
                              */}
                             <p>
-                                
+
                             </p>
-                            <button disabled={totalRemainingTimeInSeconds <= 0}>Edit Order</button>{totalRemainingTimeInSeconds > 0
-                                    ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
-                                    : " Edit Time has elapsed"}
+                            <button disabled={totalRemainingTimeInSeconds <= 0}>    <Link to={`/EditOrder/${order._id}`}>Edit Order</Link>
+                            </button>{totalRemainingTimeInSeconds > 0
+                                ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                                : " Edit Time has elapsed"}
                         </div>
                     );
                 })}
@@ -220,8 +227,8 @@ function OrderStatus() {
                         <p>Status: {order.orderStatus}</p>
 
                         <button>
-    <Link to={`/ReviewForm/${order.restaurant_id}`}>Rate this Restaurant</Link>
-</button>
+                            <Link to={`/ReviewForm/${order.restaurant_id}`}>Rate this Restaurant</Link>
+                        </button>
                     </div>
                 ))}
             </div></>

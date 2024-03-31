@@ -31,4 +31,29 @@ router.put('/:email', async (req, res) => {
   res.json(updatedCart);
 });
 
+// Get a completed cart by ID
+router.get('/id/:id', async (req, res) => {
+  const completedCart = await CompletedCart.findById(req.params.id);
+  if (!completedCart) {
+    return res.status(404).json({ message: 'No completed cart found for this ID' });
+  }
+  res.json(completedCart);
+});
+
+router.put('/id/:id', async (req, res) => {
+  const updatedCart = await CompletedCart.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  if (!updatedCart) {
+    return res.status(404).json({ message: 'Completed cart not found' });
+  }
+  res.json(updatedCart);
+});
+
+router.delete('/id/:id', async (req, res) => {
+  const deletedCart = await CompletedCart.findByIdAndDelete(req.params.id);
+  if (!deletedCart) {
+    return res.status(404).json({ message: 'No completed cart found with this ID' });
+  }
+  res.json({ message: 'Completed cart deleted successfully' });
+});
+
 module.exports = router;

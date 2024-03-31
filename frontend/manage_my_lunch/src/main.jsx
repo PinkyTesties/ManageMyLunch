@@ -30,7 +30,10 @@ import Cart from "./components/Cart";
 import OrderStatus from "./components/OrderStatus";
 import ReviewForm from "./components/ReviewForm";
 import ViewRestaurantReviews from "./components/ViewRestaurantReviews";
-
+import EditOrder from "./components/EditOrder";
+import AddDriver from "./components/AddDriver";
+import Drivers from "./components/Drivers";
+import Users from "./components/Users";
 
 
 
@@ -57,9 +60,12 @@ const router = createBrowserRouter([
   { path: "/OrderStatus/", element: <OrderStatus /> },
   { path: "/ReviewForm/:id", element: <ReviewForm /> },
   { path: "/ViewRestaurantReviews/:id", element: <ViewRestaurantReviews /> },
-
-
+  { path: "/EditOrder/:id", element: <EditOrder /> },
+  { path: "/AddDriver", element: <AddDriver /> },
+  { path: "/Drivers", element: <Drivers />},
+  { path: "/Users", element: <Users />}
   
+
 
 ]);
 
