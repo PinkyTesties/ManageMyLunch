@@ -100,8 +100,7 @@ return (
 
       <div className='MenuButtons'>
         <button onClick={toggleDropdown}>Account</button>
-        <Link to="/Cart" className='header-button-right'>Cart</Link>
-
+        <button className='header-button-right'><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
       </div>
       
@@ -111,8 +110,7 @@ return (
       isOpen={showDropdown}
       onRequestClose={toggleDropdown}
       contentLabel="Account Menu"
-      style={customStyles}
-
+      className="my-modal"
     >
       <a href="#">Profile</a><br></br>
       <a href="SettingsPage">Settings</a><br></br>

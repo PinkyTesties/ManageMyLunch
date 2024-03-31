@@ -113,14 +113,14 @@ function OrderStatus() {
             <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
 
             <button onClick={toggleDropdown}>Account</button>
-            <Link to="/Cart" className='header-button-right'>Cart</Link>
+            <button className='header-button-right'><Link to={'/Cart'} style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
             <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
             <p>Logged in as: {name}, {university}, {email}, {userID}</p>
             <Modal
                 isOpen={showDropdown}
                 onRequestClose={toggleDropdown}
                 contentLabel="Account Menu"
-                style={customStyles}
+                className="my-modal"
 
             >
                 <a href="#">Profile</a><br></br>
