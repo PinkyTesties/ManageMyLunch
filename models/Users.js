@@ -1,37 +1,37 @@
+//Users.js
+
+/*
+This is the User database Model for Mongo.
+Where we store & access user account information:
+firstname, lastname, email, password, date_added, university, updated_date
+
+*/
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: true
   },
 
   email: {
     type: String,
-    required: [true, 'Email is required'],
-    unique: true,
+    required: true
   },
   password: {
-    type: String,
-    required: [true, 'Password is required'],
+    type: String
   },
-  confirmPass: {
-    type: String,
-    required: [true, 'Confirm Password is required'],
-  },
-  createdAt: {
+  date_added: {
     type: Date,
-    default: new Date(),
+    default: Date.now
   },
-});
-
-UserSchema.pre('save', async function (next) {
-  const user = this;
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8);
+  university: {
+    type: String
+  },
+  updated_date: {
+    type: Date,
+    default: Date.now
   }
-  next();
 });
 
 module.exports = User = mongoose.model('user', UserSchema);
