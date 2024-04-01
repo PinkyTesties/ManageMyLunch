@@ -3,25 +3,19 @@ const express = require("express");
 const connectDB = require("./config/db");
 const session = require("express-session"); 
 const cookieParser = require ('cookie-parser');
+const cors = require("cors");
+const app = express();
+require("dotenv").config();
+const authRoutes = require("./routes/api/auth");
+const { MONGO_URI, PORT } = process.env;
 const bodyParser = require("body-parser");
-
-// const MongoDBStore = require('connect-mongodb-session')(session);
-
-// const store = new MongoDBStore({
-//   uri: 'mongodb://localhost:27017/session-store',
-//   collection: 'sessions'
-// });
-
-
 const userRoutes = require("./routes/api/users");
 const loginRoutes = require("./routes/api/login");
 const restaurantRoutes = require("./routes/api/restaurants");
 const menuItemRoutes = require("./routes/api/menuItems");
 const cartRoutes = require("./routes/api/cart");  
 const completedCartRoutes = require('./routes/api/CompletedCarts');
-const cors = require("cors");
 
-const app = express();
 
 app.use(cors(
   {
@@ -33,6 +27,7 @@ app.use(cors(
 app.use(express.json());  
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use("/", authRoutes);
 
 app.use(session({
       secret: "secret", // Set a secret for session management
