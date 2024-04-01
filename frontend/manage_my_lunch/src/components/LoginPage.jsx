@@ -67,16 +67,9 @@ const LoginPage = () => {
       </div>
       <button type="submit">Login</button>
       <br></br>
-<<<<<<< Updated upstream
-        <Link to="/UpdatePassword" className="btn btn-link">
-          I forgot my password
-        </Link>
-      </form>
-=======
       <Link to="/UpdatePassword" className="forgot-password-link">I forgot my password</Link>
       </form>  
       </main>
->>>>>>> Stashed changes
     </div>
   );
 };
