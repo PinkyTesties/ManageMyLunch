@@ -18,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -25,16 +26,25 @@ a:hover {
 body {
   margin: 0;
   padding: 10px 50px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('././components/componentAssets/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+body.logged-in {
+  background: none;
+}
+
+.btn-btn a {
+  color: #000213;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 button {
@@ -63,6 +73,43 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.forgot-password-link {
+  color: #000213;
+  font-size: 16px;
+  text-decoration: none;
+
+}
+
+.form-label {
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+}
+
+.main-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4em;
+  padding-left: 18em;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -76,18 +123,10 @@ button:focus-visible {
   }
 }
 
-
-.MainTitle {
-  display: flex;
-  align-items: center;
-}
-
 .MenuButtons {
   display: flex;
-}
-
-.restaurant-cards-container {
-  padding-left: 30px;
+  justify-content: space-evenly;
+  padding-top: 1em;
 }
 
 .my-modal {
@@ -109,3 +148,8 @@ button:focus-visible {
   z-index: 1000;
 }
 
+.ShowBookList {
+  background-image: url('././components/componentAssets/background2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
