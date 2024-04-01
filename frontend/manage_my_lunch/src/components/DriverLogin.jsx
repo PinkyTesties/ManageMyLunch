@@ -29,11 +29,14 @@ const LoginPage = () => {
   return (
     <div className="container mt-5">
       {error && <div className="alert alert-danger">{error}</div>}
-      <img src={logo} alt='Logo' height={100} />
-
-      <h2>Login as a Driver</h2>
-      <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
-
+      <header className='driver-header'>
+        <img src={logo} alt='Logo' height={100}/> 
+        <h2>Login as a Driver</h2>
+        <div>
+          <button className='btn-btn'><Link to={'/'}>Login as customer</Link></button>
+        </div>
+      </header>
+      <main className='main-login'>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -61,15 +64,13 @@ const LoginPage = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Login
-        </button>
+        <button type="submit">Login</button>
+      <br></br>
+      <br></br>
       
-      <br></br>
-       
       </form>
-      <br></br>
-      <button><Link to={'/'}>Login as customer</Link></button>
+      </main>
+      
     </div>
   );
 };

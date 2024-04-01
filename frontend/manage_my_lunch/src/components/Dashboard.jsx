@@ -93,21 +93,19 @@ const Dashboard = ({history}) => {
 return (
   <div>
     <div className='header'>
-      <div className='MainTitle'>
+      <header className='header'>
         <img src={logo} alt='Logo' height={100} />
         <h1>Manage My Lunch Dashboard</h1>
-      </div>
-
+      </header>
       <div className='MenuButtons'>
         <button onClick={toggleDropdown}>Account</button>
         <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
 
-        <button className='header-button-right'><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
-        <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
+        <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
+        <button><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
       </div>
-      
-      <p>Logged in as: {name}, {university}, {email}, {userID}</p>
     </div>
+    <p>Logged in as: {name}, {university}, {email}, {userID}</p>
     <Modal
       isOpen={showDropdown}
       onRequestClose={toggleDropdown}

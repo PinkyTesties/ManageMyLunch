@@ -32,12 +32,12 @@ const LoginPage = () => {
     <div>
       <header className="header">
         <div className="header-center">
-        <img src={logo} alt='Logo' height={100} />
-        <h1>Manage My Lunch</h1>
+          <img src={logo} alt='Logo' height={100} />
+          <h1>Manage My Lunch</h1>
         </div>
-        <div className="header-left">
-        <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
-        <button className='btn-btn'><Link to={'/DriverLogin'}>Drivers Login</Link></button>
+        <div>
+          <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
+          <button className='btn-btn'><Link to={'/DriverLogin'}>Drivers Login</Link></button>
         </div>
       </header>
       <main className='main-login'>
@@ -67,11 +67,9 @@ const LoginPage = () => {
       </div>
       <button type="submit">Login</button>
       <br></br>
-<<<<<<< Updated upstream
-        <Link to="/UpdatePassword" className="btn btn-link">
-          I forgot my password
-        </Link>
+        <Link to="/UpdatePassword" className="btn-btn-link">I forgot my password</Link>
       </form>
+      </main>
     </div>
   );
 };

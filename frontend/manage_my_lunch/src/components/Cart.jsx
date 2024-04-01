@@ -143,9 +143,11 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
 
   return (
     <div>
+      <header className="header">
       <img src={logo} alt="Logo" height={100} />
       <h1>Your Cart</h1>
       <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+      </header>
           {/*
           //<input type="time" onChange={e => setDeliveryTime(e.target.value)} required />
   */}

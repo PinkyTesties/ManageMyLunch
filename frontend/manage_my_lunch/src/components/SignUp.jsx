@@ -66,13 +66,20 @@ const SignUp = (props) => {
   };
 
   return (
-
+            <div>
+              <header className="header">
+                <div className="header-center">
+                <img src={logo} alt='Logo' height={100} />
+                <h1>Sign Up to Manage My Lunch</h1>
+                </div>
+                <div>
+                <p>Already have an account?</p> <Link to="/" className="btn btn-link">Login</Link>
+                <button>Sign up as driver</button>
+                </div>
+              </header>
+            <main className="main-login">
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
-              <img src={logo} alt='Logo' height={100} />
-<h1>Sign Up to Manage My Lunch</h1>
-              <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
-
               <label htmlFor="name">Name:</label>
                 <input
                   type="text"
@@ -125,7 +132,6 @@ const SignUp = (props) => {
                   onChange={onChange}
                 />
               </div>
-              <br />
               <div className="form-group">
               {/* <label htmlFor="date_added">Date:</label>
 
@@ -165,14 +171,11 @@ const SignUp = (props) => {
                   onChange={onChange}
                 /> */}
               </div>
-              <button type="submit" className="btn btn-primary">
-          Sign Up
-        </button>
-        Already have an account? <Link to="/" className="btn btn-link">Login</Link>
-        <br></br><br></br>
-        <button>Sign up as driver</button>
+              <br></br>
+              <button type="submit">Sign Up</button>
       </form>
-
+      </main>
+    </div>
 
   );
 };

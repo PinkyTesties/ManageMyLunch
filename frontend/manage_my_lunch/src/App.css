@@ -72,6 +72,10 @@
   overflow: hidden;
 }
 
+.MenuButtons {
+  justify-content: space-evenly;
+}
+
 .desc {
   height: 130px;
   padding: 10px;
