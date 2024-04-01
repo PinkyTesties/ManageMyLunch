@@ -6,7 +6,7 @@ const cookieParser = require ('cookie-parser');
 const cors = require("cors");
 const app = express();
 require("dotenv").config();
-const authRoutes = require("./routes/api/auth");
+const authRoutes = require("./routes/api/AuthRoute");
 const { MONGO_URI, PORT } = process.env;
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/api/users");
