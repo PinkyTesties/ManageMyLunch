@@ -100,6 +100,8 @@ return (
 
       <div className='MenuButtons'>
         <button onClick={toggleDropdown}>Account</button>
+        <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
+
         <button className='header-button-right'><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
       </div>
