@@ -24,8 +24,10 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 10px 50px;
   display: flex;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,19 +38,26 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  color: #000213;
+  background-color: #646cff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
+
 button:hover {
-  border-color: #646cff;
+  background-color: #535bf2;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -66,3 +75,37 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.MainTitle {
+  display: flex;
+  align-items: center;
+}
+
+.MenuButtons {
+  display: flex;
+}
+
+.restaurant-cards-container {
+  padding-left: 30px;
+}
+
+.my-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
