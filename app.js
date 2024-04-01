@@ -15,6 +15,8 @@ const bodyParser = require("body-parser");
 
 const userRoutes = require("./routes/api/users");
 const loginRoutes = require("./routes/api/login");
+const DriverLoginRoutes = require("./routes/api/driverslogin");
+
 const restaurantRoutes = require("./routes/api/restaurants");
 const menuItemRoutes = require("./routes/api/menuItems");
 const cartRoutes = require("./routes/api/cart");  
@@ -70,6 +72,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/CompletedCarts', completedCartRoutes);
 app.use('/api/reviewForm', restaurantreviews);
 app.use('/api/drivers', addDriver);
+app.use('/api/driverslogin', DriverLoginRoutes);
 
 app.get('/', (req, res) => {
   if(req.session.name) {

@@ -35,8 +35,8 @@ import AddDriver from "./components/AddDriver";
 import Drivers from "./components/Drivers";
 import Users from "./components/Users";
 import Reports from "./components/Reports";
-
-
+import DriverLogin from "./components/DriverLogin";
+import DriverDashboard from "./components/DriverDashboard";
 
 //hello
 
@@ -64,7 +64,9 @@ const router = createBrowserRouter([
   { path: "/AddDriver", element: <AddDriver /> },
   { path: "/Drivers", element: <Drivers />},
   { path: "/Users", element: <Users />},
-  { path: "/Reports", element: <Reports />}
+  { path: "/Reports", element: <Reports />},
+  { path: "/DriverLogin", element: <DriverLogin />},
+  { path: "/DriverDashboard", element: <DriverDashboard />},
 
 
 ]);

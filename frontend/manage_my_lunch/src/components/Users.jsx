@@ -17,15 +17,16 @@ const Users = () => {
   };
 
   const deleteUsers = (id) => {
-    axios
-      .delete(`http://localhost:8082/api/users/${id}`)
-      .then((res) => {
-        alert("Force Deletion of user successful", res.data.msg);
-        fetchUsers(); // Refresh the users list after deletion
-      })
-      .catch((err) => alert(err.response.data.error));
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      axios
+        .delete(`http://localhost:8082/api/users/${id}`)
+        .then((res) => {
+          alert("Force Deletion of user successful", res.data.msg);
+          fetchUsers(); // Refresh the users list after deletion
+        })
+        .catch((err) => alert(err.response.data.error));
+    }
   };
-
   const boxStyle = {
     border: '1px solid black',
     padding: '10px',

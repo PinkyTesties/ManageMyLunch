@@ -72,6 +72,8 @@ const LoginPage = () => {
           I forgot my password
         </Link>
       </form>
+      <br></br>
+      <button><Link to={'/DriverLogin'}>Drivers Login</Link></button>
     </div>
   );
 };

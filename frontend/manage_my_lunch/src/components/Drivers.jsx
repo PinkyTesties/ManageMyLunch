@@ -17,14 +17,18 @@ const Drivers = () => {
   };
 
   const deleteDriver = (id) => {
-    axios
-      .delete(`http://localhost:8082/api/drivers/${id}`)
-      .then((res) => {
-        alert(res.data.msg);
-        fetchDrivers(); // Refresh the drivers list after deletion
-      })
-      .catch((err) => alert(err.response.data.error));
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      axios
+        .delete(`http://localhost:8082/api/drivers/${id}`)
+        .then((res) => {
+          alert(res.data.msg);
+          fetchDrivers(); // Refresh the drivers list after deletion
+        })
+        .catch((err) => alert(err.response.data.error));
+    }
   };
+
+
 
   const boxStyle = {
     border: '1px solid black',

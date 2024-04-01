@@ -21,7 +21,7 @@ const AddDriver = () => {
             .post('http://localhost:8082/api/drivers', driver)
             .then((res) => {
                 alert(res.data.msg);
-                navigate('/dashboard');
+                navigate('/Drivers');
             })
             .catch((err) => alert(err.response.data.error));
     };
