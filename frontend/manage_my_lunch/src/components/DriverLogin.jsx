@@ -69,7 +69,7 @@ const LoginPage = () => {
        
       </form>
       <br></br>
-      <button><Link to={'/Login Page'}>Login as customer</Link></button>
+      <button><Link to={'/'}>Login as customer</Link></button>
     </div>
   );
 };

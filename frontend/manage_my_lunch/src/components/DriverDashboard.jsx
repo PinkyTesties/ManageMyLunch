@@ -57,7 +57,7 @@ const Dashboard = ({ history }) => {
             <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
 
             <button onClick={toggleDropdown}>Account</button>
-            <button className='header-button-right'><Link to={'/DriversLogin'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
+            <button className='header-button-right'><Link to={'/DriverLogin'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
             <p>Logged in as: {name}, {email}, {userID}</p>
             <Modal
                 isOpen={showDropdown}
