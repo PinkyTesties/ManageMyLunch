@@ -14,6 +14,7 @@ const Cart = () => {
   const [menuItems, setMenuItems] = useState([]);
   const totalCost = menuItems.reduce((total, item) => total + parseFloat(item.cost), 0);
   const [deliveryTime, setDeliveryTime] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   const navigate = useNavigate();
 
@@ -76,15 +77,15 @@ const Cart = () => {
     }
   }, [cart, email]);
 
-  useEffect(() => {
-    Promise.all(cart.menuItems.map(item =>
-      axios.get(`http://localhost:8082/api/menuItems/${item._id}`)
-    ))
-      .then(response => {
-        setMenuItems(response.map(res => res.data));
-      })
-      .catch(err => console.log(err));
-  }, [cart.menuItems]);
+  // useEffect(() => {
+  //   Promise.all(cart.menuItems.map(item =>
+  //     axios.get(`http://localhost:8082/api/menuItems/${item._id}`)
+  //   ))
+  //     .then(response => {
+  //       setMenuItems(response.map(res => res.data));
+  //     })
+  //     .catch(err => console.log(err));
+  // }, [cart.menuItems]);
 
   const deleteCart = () => {
     axios
@@ -115,6 +116,7 @@ const Cart = () => {
       })
       .catch((err) => console.log(err));
   }
+
 
   function handleBuyNow() {
     // Log the cost of each menuItem
@@ -184,23 +186,22 @@ const Cart = () => {
       Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required />
 
       <p>-----------------------------------</p>
-      {menuItems.map((item, index) => (
-        <div key={index}>
-          <p><b>Item Name: {item.name}</b></p>
-          <p>Item Cost: ${parseFloat(item.cost).toFixed(2)}</p>
-          {item.ingredients.map((ingredient, i) => (
-            <div key={i}>
-              <p>Ingredient Name: {ingredient.name}</p>
-              <p>Ingredient Quantity: {ingredient.quantity}</p>
-              <p>Ingredient index: {index}</p>
-
-            </div>
-          ))}
-          <p>Additional Information: {item.additional_information}</p>
-          <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button> {/* Add this line */}
-          <p>***</p>
-        </div>
-      ))}
+      {cart.menuItems.map((item, index) => (
+  <div key={index}>
+    <p><b>Item Name: {item.name}</b></p>
+    <p>Item Cost: ${parseFloat(item.cost).toFixed(2)}</p>
+    {item.ingredients.map((ingredient, i) => (
+      <div key={i}>
+        <p>Ingredient Name: {ingredient.name}</p>
+        <p>Ingredient Quantity: {ingredient.quantity}</p> {/* Ensure that you're correctly accessing the quantity property */}
+        <p>Ingredient index: {index}</p>
+      </div>
+    ))}
+    <p>Additional Information: {item.additional_information}</p>
+    <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
+    <p>***</p>
+  </div>
+))}
       <p>Add additional information here:</p>
       <input
         type="text"
