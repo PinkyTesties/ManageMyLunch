@@ -131,9 +131,12 @@ const Cart = () => {
       return total + parseFloat(item.cost);
     }, 0);
 
+    const code = Math.floor(1000 + Math.random() * 9000);
+
     const completedCart = {
       email: email,
       cost: totalCost,
+      code: code,
       date_created: cart.date_created,
       menuItems: cart.menuItems,
       restaurant_id: cart.restaurant_id,

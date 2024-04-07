@@ -142,8 +142,7 @@ function OrderStatus() {
             <p>{/*Your order ID is: { }*/}</p>
             <div>
                 <h3>Current orders</h3>
-                {/* Here is where you might display the orders */}
-                {orders.filter(order => order.orderStatus === 'Pending').map((order, index) => {
+                {orders.filter(order => order.orderStatus === 'Delivered' || order.orderStatus === 'Pending').map((order, index) => {
                     // Parse order.date_created to get the year, month, and day
                     const orderDate = new Date(order.date_created);
                     const year = orderDate.getFullYear();
@@ -186,13 +185,14 @@ function OrderStatus() {
                             <p>Restaurant Name: {order.restaurant_name}</p>
                             <p>Additional Info: {order.additionalInfo}</p>
                             <p>Status: {order.orderStatus}</p>
+                            <p>Order code: {order.code}</p>
 
-
-                            <p>Order Time (24-hour format): {time24}</p>
                             <p>Order Time (Date object): {orderTime.toString()}</p>
-                            <p>Current Time: {currentTime.toString()}</p>
-
                             {/** 
+
+                            <p>Current Time: {currentTime.toString()}</p>
+                            <p>Order Time (24-hour format): {time24}</p>
+
 <p>Order Time (24-hour format): {time24}</p>
 <p>Order Time (Date object): {orderTime.toString()}</p>
 <p>Current Time: {currentTime.toString()}</p>
@@ -206,6 +206,13 @@ function OrderStatus() {
                             </button>{totalRemainingTimeInSeconds > 0
                                 ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
                                 : " Edit Time has elapsed"}
+                            {order.orderStatus === 'Delivered' &&
+                                <button onClick={() => navigate(`/CompleteOrder`)}>Confirm Order Pickup</button>
+
+                                //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
+
+
+                            }
                         </div>
                     );
                 })}
@@ -214,7 +221,7 @@ function OrderStatus() {
 
             <div>
                 <h3>Order history</h3>
-                {orders.filter(order => order.orderStatus === 'Delivered' || order.orderStatus === 'Completed').map((order, index) => (
+                {orders.filter(order => order.orderStatus === 'Completed').map((order, index) => (
                     <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
                         <p>Order ID: {order._id}</p>
                         <p>Email: {order.email}</p>
