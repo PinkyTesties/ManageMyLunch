@@ -22,6 +22,7 @@ const CodeReader = () => {
   const handleScan = data => {
     if (data) {
       setCode(data);
+      alert('Scanned ' + data + ' successful!');
     }
   }
 
@@ -58,16 +59,16 @@ const CodeReader = () => {
 
   return (
     <div>
-      <input type="text" value={code} onChange={handleInputChange} />
+      <input type="text" value={code} onChange={handleInputChange}/>
       <button onClick={insertCode}>Insert Code</button>
       <button onClick={checkCode}>Check Code</button>
       <QRCode value={code} />
       <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: '100%' }}
-      />
+  delay={300}
+  onError={handleError}
+  onResult={handleScan}
+  style={{ width: '50%', height: '30%', transform: 'scaleX(-1)' }}
+/>
     </div>
   );
 };
