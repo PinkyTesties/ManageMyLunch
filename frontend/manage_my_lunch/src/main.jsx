@@ -37,6 +37,7 @@ import Users from "./components/Users";
 import Reports from "./components/Reports";
 import DriverLogin from "./components/DriverLogin";
 import DriverDashboard from "./components/DriverDashboard";
+import CodeReader from "./components/CodeReader";
 
 //hello
 
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
   { path: "/Reports", element: <Reports />},
   { path: "/DriverLogin", element: <DriverLogin />},
   { path: "/DriverDashboard", element: <DriverDashboard />},
+  { path: "/CodeReader", element: <CodeReader />},
 
 
 ]);
