@@ -83,4 +83,28 @@ router.delete('/:email', async (req, res) => {
   }
   res.json(deletedCart);
 });
+
+/// Remove an item from a cart
+router.put('/remove/:email', async (req, res) => {
+  const { menuItemId, index } = req.body;
+
+  const updatedCart = await Cart.findOneAndUpdate(
+    { email: req.params.email },
+    { $unset: { [`menuItems.${index}`]: 1 } },
+    { new: true }
+  );
+
+  if (updatedCart) {
+    await Cart.findOneAndUpdate(
+      { email: req.params.email },
+      { $pull: { menuItems: null } },
+      { new: true }
+    );
+  } else {
+    return res.status(404).json({ message: 'Cart not found' });
+  }
+
+  res.json(updatedCart);
+});
+
 module.exports = router;

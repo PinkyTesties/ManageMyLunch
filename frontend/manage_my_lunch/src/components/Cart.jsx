@@ -17,15 +17,15 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-// Get tomorrow's date
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
+  // Get tomorrow's date
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
-// Format the date as a string in the format YYYY-MM-DD
-const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+  // Format the date as a string in the format YYYY-MM-DD
+  const formattedTomorrow = tomorrow.toISOString().split('T')[0];
 
-// Initialize the deliveryDate state variable to tomorrow's date
-const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
+  // Initialize the deliveryDate state variable to tomorrow's date
+  const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
 
 
   const [cart, setCart] = useState({ menuItems: [] }); // New state variable for the cart
@@ -45,7 +45,7 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
       .catch((err) => console.log(err));
   }, []);
   const [userID, setUserID] = useState("");
-  
+
   // New useEffect hook to fetch the cart data when the email changes
   useEffect(() => {
     if (email) {
@@ -103,12 +103,25 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
     setCart({ ...cart, menuItems: newMenuItems }); // Update the state
   }
 
+  function handleRemove(itemId, index) {
+    axios
+      .put(`http://localhost:8082/api/cart/remove/${email}`, { menuItemId: itemId, index: index })
+      .then((res) => {
+        console.log(res.data);
+        // Filter out null values from the menuItems array
+        const validMenuItems = res.data.menuItems.filter(item => item !== null);
+        // Update the cart state
+        setCart({ ...res.data, menuItems: validMenuItems });
+      })
+      .catch((err) => console.log(err));
+  }
+
   function handleBuyNow() {
     // Log the cost of each menuItem
     cart.menuItems.forEach(item => {
       console.log(`Cost of item ${item._id}: ${item.cost}`);
 
-      
+
     });
 
     const totalCost = cart.menuItems.reduce((total, item) => {
@@ -127,16 +140,16 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
       delivery_date: new Date(deliveryDate),
       //delivery_time: new Date(`${deliveryDate}T${deliveryTime}`), // Combine date and time
     };
-    
+
     console.log(completedCart); // Log the completedCart object
 
     axios
-    .post("http://localhost:8082/api/completedCarts", completedCart)
-    .then((res) => {
-      console.log(res.data);
-      navigate('/OrderStatus', { state: { completedCartId: res.data._id } }); // Redirect to the Order Confirmation page
-    })
-    .catch((err) => console.log(err));
+      .post("http://localhost:8082/api/completedCarts", completedCart)
+      .then((res) => {
+        console.log(res.data);
+        navigate('/OrderStatus', { state: { completedCartId: res.data._id } }); // Redirect to the Order Confirmation page
+      })
+      .catch((err) => console.log(err));
 
     deleteCart();
   }
@@ -144,15 +157,15 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
   return (
     <div>
       <header className="header">
-      <img src={logo} alt="Logo" height={100} />
-      <h1>Your Cart</h1>
-      <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+        <img src={logo} alt="Logo" height={100} />
+        <h1>Your Cart</h1>
+        <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
       </header>
-          {/*
+      {/*
           //<input type="time" onChange={e => setDeliveryTime(e.target.value)} required />
   */}
-      
-          <button className="header-button-right">
+
+      <button className="header-button-right">
         <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
           Logout
         </Link>
@@ -179,10 +192,12 @@ const [deliveryDate, setDeliveryDate] = useState(formattedTomorrow);
             <div key={i}>
               <p>Ingredient Name: {ingredient.name}</p>
               <p>Ingredient Quantity: {ingredient.quantity}</p>
+              <p>Ingredient index: {index}</p>
+
             </div>
           ))}
           <p>Additional Information: {item.additional_information}</p>
-          <button onClick={() => handleRemoveItem(index)}>Remove from cart</button> {/* Add this line */}
+          <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button> {/* Add this line */}
           <p>***</p>
         </div>
       ))}
