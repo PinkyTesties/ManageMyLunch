@@ -1,10 +1,22 @@
 // routes/api/MenuItems.js
 
 const express = require('express');
+const multer = require('multer');
+
 const router = express.Router();
 
 // Load MenuItem model
 const MenuItems = require('../../models/MenuItem');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './menuItem_assets');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 // @route   GET api/menuItems/test
 // @desc    Tests menuItems route
@@ -15,7 +27,14 @@ router.get('/test', (req, res) => res.send('menuItems route testing!'));
 // @desc    Get all menuItems
 // @access  Public
 router.get('/', (req, res) => {
-  MenuItems.find()
+  const restaurantId = req.query.restaurant_id;
+  let query = {};
+
+  if (restaurantId) {
+    query.restaurant_id = restaurantId;
+  }
+
+  MenuItems.find(query)
     .then(menuItems => res.json(menuItems))
     .catch(err => res.status(404).json({ nomenuitemsfound: 'No menu items found' }));
 });
@@ -32,14 +51,31 @@ router.get('/:id', (req, res) => {
 // @route   POST api/menuItems
 // @desc    Add/save menuItem
 // @access  Public
-router.post('/', (req, res) => {
-  MenuItems.create(req.body)
-    .then(menuItem => res.json({ msg: 'MenuItem added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this menuItem' }));
+// router.post('/', (req, res) => {
+//   MenuItems.create(req.body)
+//     .then(menuItem => res.json({ msg: 'MenuItem added successfully' }))
+//     .catch(err => res.status(400).json({ error: 'Unable to add this menuItem' }));
+// });
+
+
+// @route   POST api/menuItems
+// @desc    Add/save menuItems
+// @access  Public
+router.post('/', upload.single('image'), (req, res) => {
+  console.log(req.body); // log the body
+  console.log(req.file); // log the file
+
+  const newMenuItem = new MenuItems({
+    ...req.body,
+    ingredients: JSON.parse(req.body.ingredients),
+    menuItemImage: req.file ? req.file.filename : ''
+  });
+
+  newMenuItem
+    .save()
+    .then(menuItem => res.json({ msg: 'Menu item added successfully' }))
+    .catch(err => res.status(400).json({ error: 'Unable to add this menu item' }));
 });
-
-
-
 // @route   PUT api/menuItems/:id
 // @desc    Update menuItems by id
 // @access  Public

@@ -14,9 +14,14 @@ const MenuItemSchema = new mongoose.Schema({
     required: true
   },
 
+  // cost: {
+  //   type: String
+  // },
+
   cost: {
-    type: String
+    type: Number
   },
+  
   date_added: {
     type: Date,
     default: Date.now
@@ -25,8 +30,29 @@ const MenuItemSchema = new mongoose.Schema({
     type: String
   },
 
+  menuItemImage: {
+    type: String,
+    required: true
+  },
+
+
   ingredients: {
-    type: [String]
+    type: [
+      {
+        name: {
+          type: String,
+          required: true
+        },
+        quantity: {
+          type: Number,
+          required: true
+        }
+      }
+    ]
+  },
+
+  additional_information: {
+    type: String
   },
 
   restaurant_id: {
@@ -35,5 +61,7 @@ const MenuItemSchema = new mongoose.Schema({
   },
 
 });
+
+
 
 module.exports = MenuItem = mongoose.model('menuItem', MenuItemSchema);

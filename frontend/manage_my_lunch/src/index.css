@@ -18,16 +18,77 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 10px 50px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: url('././components/componentAssets/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
+
+body.logged-in {
+  background: none;
+}
+
+.btn-btn a {
+  color: #000213;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.btn-btn-link{
+  color: #000213;
+  text-decoration: none;
+}
+
+button {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #000213;
+  background-color: #646cff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #535bf2;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.forgot-password-link {
+  color: #000213;
+  font-size: 16px;
+  text-decoration: none;
+
+}
+
+.form-label {
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 h1 {
@@ -35,23 +96,33 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.driver-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 30em;
+
 }
-button:hover {
-  border-color: #646cff;
+
+
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.header-center {
+  display: flex;
+  align-items: center;
+}
+
+.main-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4em;
+  padding-left: 18em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -65,4 +136,35 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.MenuButtons {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 1em;
+}
+
+.my-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.ShowBookList {
+  background-image: url('././components/componentAssets/background2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }

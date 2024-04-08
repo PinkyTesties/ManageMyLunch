@@ -5,37 +5,45 @@ import { useNavigate } from "react-router-dom";
 
 const CreateRestaurant = (props) => {
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
 
   const [restaurant, setRestaurant] = useState({
     restaurantName: "",
     cuisine: "",
+    address: "",
     rating: "",
     description: "",
+    restaurantImage: "",
   });
 
   const onChange = (e) => {
-    setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
+    if (e.target.name === 'image') {
+      setImage(e.target.files[0]);
+    } else {
+      setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
+    }
   };
+
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-    //Link should change to a deployed backend host
-      .post("http://localhost:8082/api/restaurants", restaurant)
-      .then((res) => {
-        setRestaurant({
-          restaurantName: "",
-          cuisine: "",
-          rating: "",
-          description: "",
+    const formData = new FormData();
+Object.keys(restaurant).forEach((key) => formData.append(key, restaurant[key]));
+formData.append('image', image);
 
-        });
-        // Push to /
-        navigate("/dashboard");
-      })
-      .catch((err) => {
-        console.log("Error in CreateRestaurant!");
-      });
+axios
+  .post("http://localhost:8082/api/restaurants", formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then((res) => {
+    // handle success
+    alert("Restaurant added successfully!");
+  })
+  .catch((err) => {
+    console.log("Error in CreateRestaurant!");
+  });
   };
 
   return (
@@ -53,7 +61,7 @@ const CreateRestaurant = (props) => {
             <p className="lead text-center">Create new Restaurant</p>
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
-              <label htmlFor="restaurantName">Name:</label>
+                <label htmlFor="restaurantName">Name:</label>
 
                 <input
                   type="text"
@@ -66,7 +74,7 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
-              <label htmlFor="cuisine">Cuisine:</label>
+                <label htmlFor="cuisine">Cuisine:</label>
 
                 <input
                   type="text"
@@ -79,7 +87,20 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
-              <label htmlFor="rating">Star Rating:</label>
+                <label htmlFor="cuisine">Address:</label>
+
+                <input
+                  type="text"
+                  placeholder="e.g: 123 Fake St."
+                  name="address"
+                  className="form-control"
+                  value={restaurant.address}
+                  onChange={onChange}
+                />
+              </div>
+              <br></br>
+              <div className="form-group">
+                <label htmlFor="rating">Star Rating:</label>
 
                 <input
                   type="text"
@@ -92,7 +113,7 @@ const CreateRestaurant = (props) => {
               </div>
               <br />
               <div className="form-group">
-              <label htmlFor="description">Description:</label>
+                <label htmlFor="description">Description:</label>
 
                 <input
                   type="text"
@@ -104,7 +125,16 @@ const CreateRestaurant = (props) => {
                 />
               </div>
               <br />
-              
+              <div className="form-group">
+                <label htmlFor="image">Image:</label>
+                <input
+                  type="file"
+                  name="image"
+                  className="form-control"
+                  onChange={onChange}
+                />
+              </div>
+
               <button
                 type="submit"
                 className="btn btn-outline-warning btn-block mt-4 mb-4 w-100"

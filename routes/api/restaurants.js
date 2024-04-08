@@ -1,10 +1,22 @@
 // routes/api/restaurants.js
 
 const express = require('express');
+const multer = require('multer');
+
 const router = express.Router();
 
 // Load restaurants model
 const Restaurant = require('../../models/Restaurants');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './restaurant_assets');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
 
 // @route   GET api/restaurants/test
 // @desc    Tests restaurants route
@@ -32,9 +44,18 @@ router.get('/:id', (req, res) => {
 // @route   POST api/restaurants
 // @desc    Add/save restaurants
 // @access  Public
-router.post('/', (req, res) => {
-  Restaurant.create(req.body)
-    .then(restaurants => res.json({ msg: 'restaurants added successfully' }))
+router.post('/', upload.single('image'), (req, res) => {
+  console.log(req.body); // log the body
+  console.log(req.file); // log the file
+
+  const newRestaurant = new Restaurant({
+    ...req.body,
+    RestaurantImage: req.file ? req.file.filename : ''
+  });
+
+  newRestaurant
+    .save()
+    .then(restaurant => res.json({ msg: 'Restaurant added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this restaurant' }));
 });
 
@@ -57,7 +78,5 @@ router.delete('/:id', (req, res) => {
     .then(restaurants => res.json({ mgs: 'Restaurants entry deleted successfully' }))
     .catch(err => res.status(404).json({ error: 'No such a restaurants' }));
 });
-
-
 
 module.exports = router;

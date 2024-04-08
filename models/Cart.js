@@ -23,9 +23,42 @@ const CartSchema = new mongoose.Schema({
   },
 
   menuItems: {
-    type: [String]
-  },
+    type: [
+      {
+        _id: {
+          type: String,
+          required: true,
+          alias: 'menuItemId'
+        },
 
+        cost: {
+          type: Number
+        },
+  
+        name: {
+          type: String,
+          required: true
+        },
+        
+        ingredients: [
+          {
+            name: {
+              type: String,
+              required: true
+            },
+            quantity: {
+              type: Number,
+              required: true
+            }
+          }
+        ],
+        additional_information: {
+          type: String
+        }
+      }
+    ]
+  },
+  
   restaurant_id: {
     type: String,
     required: true

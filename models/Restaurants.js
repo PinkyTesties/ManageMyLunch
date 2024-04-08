@@ -11,6 +11,12 @@ const RestaurantSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
+  address: {
+    type: String,
+    required: true
+  },
+
   rating: {
     type: String,
     required: true
@@ -19,6 +25,12 @@ const RestaurantSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+
+  RestaurantImage: {
+    type: String,
+    required: true
+  }
+
 });
 
 module.exports = Restaurant = mongoose.model('restaurant', RestaurantSchema);

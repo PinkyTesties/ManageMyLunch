@@ -7,8 +7,8 @@ const RestaurantPanel = ({restaurant}) => {
   return (
     <div className='restaurantcard-container'>
       <img
-        src='https://i.kym-cdn.com/entries/icons/facebook/000/043/027/metalpipefalling.jpg'
-        alt='Resturants'
+  src={`http://localhost:8082/restaurant_assets/${restaurant.RestaurantImage}`}
+  alt='Resturants'
         height={200}
       />
       <div className='desc'>
@@ -18,6 +18,7 @@ const RestaurantPanel = ({restaurant}) => {
         <h3>{restaurant.cuisine}</h3>
         <p>{restaurant.description}</p>
         <p>Rating: {restaurant.rating} stars</p><br></br>
+        <p>restaurantImage: {restaurant.RestaurantImage}</p>
         <button><Link to={`/ShowRestaurantDetails/${restaurant._id}`} style={{ textDecoration: 'none', color: 'Black' }}>View</Link></button>
       </div>
     </div>

@@ -15,7 +15,6 @@ const Dashboard = ({history}) => {
   const [university, setUniversity] = useState('');
   const [userID, setUserID] = useState('');
 
-
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
@@ -93,23 +92,34 @@ const Dashboard = ({history}) => {
 
 return (
   <div>
-    <img src={logo} alt='Logo' height={100} />
-    <h1>Manage My Lunch Dashboard</h1>
-    <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+    <div className='header'>
+      <header className='header'>
+        <img src={logo} alt='Logo' height={100} />
+        <h1>Manage My Lunch Dashboard</h1>
+      </header>
+      <div className='MenuButtons'>
+        <button onClick={toggleDropdown}>Account</button>
+        
+        <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
 
-    <button onClick={toggleDropdown}>Account</button>
-    <Link to="/Cart" className='header-button-right'>Cart</Link>
-    <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
+        <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
+
+
+        <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
+        <button><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
+      </div>
+    </div>
     <p>Logged in as: {name}, {university}, {email}, {userID}</p>
     <Modal
       isOpen={showDropdown}
       onRequestClose={toggleDropdown}
       contentLabel="Account Menu"
-      style={customStyles}
-
+      className="my-modal"
     >
       <a href="#">Profile</a><br></br>
       <a href="SettingsPage">Settings</a><br></br>
+      <a href="OrderStatus">Orders</a><br></br>
+
       <a href="/">Logout</a><br></br>
     </Modal>
     <div className='restaurantFilter'>

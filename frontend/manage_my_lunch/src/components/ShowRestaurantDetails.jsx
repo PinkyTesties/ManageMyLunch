@@ -32,6 +32,16 @@ function ShowRestaurantDetails(props) {
     },
   };
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
+  //     .then(response => {
+  //       setMenuItems(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Error getting menu items:', error);
+  //     });
+  // }, [id]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8082/api/restaurants/${id}`)
@@ -55,15 +65,16 @@ function ShowRestaurantDetails(props) {
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8082/api/menuItems')
+    console.log('Fetching menu items for restaurant_id:', id);
+    
+    axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
       .then((res) => {
         setMenuItems(res.data);
       })
       .catch((err) => {
-        console.log('Error from ShowRestaurantDetails');
+        console.log('Error from ShowRestaurantDetails', err);
       });
-  }, []);
+  }, [id]);
 
   const MenuItemsList =
     menuItems.length === 0
@@ -89,9 +100,12 @@ function ShowRestaurantDetails(props) {
           <span className="value">{restaurant.cuisine}</span>
         </div>
         <div className="item">
-          <span className="label">Rating: </span>
-          <span className="value">{restaurant.rating}</span>
+            <span className="label">Google Rating: </span>
+           
+          <span className="value">{restaurant.rating} Stars </span>
         </div>
+        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
+
         <div className="item">
           <span className="label">Description: </span>
           <span className="value">{restaurant.description}</span>

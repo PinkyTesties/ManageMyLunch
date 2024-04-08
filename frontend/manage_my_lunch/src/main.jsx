@@ -27,8 +27,18 @@ import DeleteMenuItem from "./components/DeleteMenuItem";
 import MenuItemViewer from "./components/MenuItemViewer";
 import MenuItemEditor from "./components/MenuItemEditor";
 import Cart from "./components/Cart";
-
-
+import OrderStatus from "./components/OrderStatus";
+import ReviewForm from "./components/ReviewForm";
+import ViewRestaurantReviews from "./components/ViewRestaurantReviews";
+import EditOrder from "./components/EditOrder";
+import AddDriver from "./components/AddDriver";
+import Drivers from "./components/Drivers";
+import Users from "./components/Users";
+import Reports from "./components/Reports";
+import DriverLogin from "./components/DriverLogin";
+import DriverDashboard from "./components/DriverDashboard";
+import CodeReader from "./components/CodeReader";
+import CompleteOrder from "./components/CompleteOrder";
 
 //hello
 
@@ -49,9 +59,18 @@ const router = createBrowserRouter([
   { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
   { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
   { path: "/Cart/", element: <Cart /> },
-
-
-  
+  { path: "/OrderStatus/", element: <OrderStatus /> },
+  { path: "/ReviewForm/:id", element: <ReviewForm /> },
+  { path: "/ViewRestaurantReviews/:id", element: <ViewRestaurantReviews /> },
+  { path: "/EditOrder/:id", element: <EditOrder /> },
+  { path: "/AddDriver", element: <AddDriver /> },
+  { path: "/Drivers", element: <Drivers />},
+  { path: "/Users", element: <Users />},
+  { path: "/Reports", element: <Reports />},
+  { path: "/DriverLogin", element: <DriverLogin />},
+  { path: "/DriverDashboard", element: <DriverDashboard />},
+  { path: "/CodeReader", element: <CodeReader />},
+  { path: "/CompleteOrder", element: <CompleteOrder />},
 
 ]);
 
