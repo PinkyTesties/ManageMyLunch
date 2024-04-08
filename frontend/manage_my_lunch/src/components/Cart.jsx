@@ -12,10 +12,10 @@ const Cart = () => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [items, setItems] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
-  const totalCost = menuItems.reduce((total, item) => total + parseFloat(item.cost), 0);
+  //const totalCost = menuItems.reduce((total, item) => total + parseFloat(item.cost), 0);
   const [deliveryTime, setDeliveryTime] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-
+  const [totalCost, setTotalCost] = useState(0);
   const navigate = useNavigate();
 
   // Get tomorrow's date
@@ -76,7 +76,13 @@ const Cart = () => {
         .catch((err) => console.log(err));
     }
   }, [cart, email]);
-
+  useEffect(() => {
+    let cost = 0;
+    cart.menuItems.forEach(item => {
+      cost += parseFloat(item.cost);
+    });
+    setTotalCost(cost);
+  }, [cart.menuItems]);
   // useEffect(() => {
   //   Promise.all(cart.menuItems.map(item =>
   //     axios.get(`http://localhost:8082/api/menuItems/${item._id}`)
