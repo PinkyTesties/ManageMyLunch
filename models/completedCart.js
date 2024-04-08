@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const CompletedCartSchema = new mongoose.Schema({
   email: { type: String, required: true },
   cost: { type: Number },
+  code: { type: Number, required: true },
   date_created: { type: Date, default: Date.now },
   time_created: { type: String, default: () => new Date().toLocaleTimeString() },
 

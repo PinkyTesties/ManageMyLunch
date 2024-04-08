@@ -99,7 +99,11 @@ return (
       </header>
       <div className='MenuButtons'>
         <button onClick={toggleDropdown}>Account</button>
+        
         <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
+
+        <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
+
 
         <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         <button><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>

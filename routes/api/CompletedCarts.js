@@ -65,4 +65,23 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching completed carts' });
   }
 });
+
+// Get a completed cart by code and status
+router.get('/code/:code', async (req, res) => {
+  const code = parseInt(req.params.code, 10);
+  const completedCart = await CompletedCart.findOne({ code: code, orderStatus: "Delivered" });
+  if (!completedCart) {
+    return res.status(404).json({ message: 'No completed cart found for this code' });
+  }
+  res.json(completedCart);
+});
+
+router.put('/complete/:id', async (req, res) => {
+  const updatedCart = await CompletedCart.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  if (!updatedCart) {
+    return res.status(404).json({ message: 'Completed cart not found' });
+  }
+  res.json(updatedCart);
+});
+
 module.exports = router;
