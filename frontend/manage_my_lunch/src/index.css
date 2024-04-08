@@ -104,8 +104,6 @@ h1 {
 
 }
 
-
-
 .header {
   display: flex;
   justify-content: space-around;
@@ -167,4 +165,15 @@ h1 {
   background-image: url('././components/componentAssets/background2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.restaurant-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.restaurant-item {
+  display: flex;
+  justify-content: space-between;
 }

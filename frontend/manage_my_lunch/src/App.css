@@ -10,6 +10,12 @@
   color: white;
 }
 
+.ShowBookDetails img {
+  width: 100%;
+  object-fit: fill;
+  border: 2px solid rgba(0,0,.125);
+}
+
 .UpdateBookInfo {
   background-color: #2c3e50;
   min-height: 100vh;
@@ -62,11 +68,18 @@
   border: 2px solid rgba(0,0,.125);
 }
 
+.restaurant-view-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2em;
+}
+
 
 .menucard-container {
   width: 250px;
-  height: 300px;
-  border: 1px solid rgba(0,0,.125);
+  height: 400px;
+  padding: 1em;
+
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
