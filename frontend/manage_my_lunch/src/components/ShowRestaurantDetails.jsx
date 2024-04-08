@@ -87,7 +87,6 @@ function ShowRestaurantDetails(props) {
   //   borderRadius: '5px',
   //   // add more styles here
   // };
-
   const RestaurantItem = (
     <div>
       <div className="restaurant-item">
@@ -106,12 +105,10 @@ function ShowRestaurantDetails(props) {
             <span className="value">{restaurant.rating} Stars </span>
           </div>
         </div>
-        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
-
         <div className="item">
-          <span className="label">Description: </span>
           <span className="value">{restaurant.description}</span>
         </div>
+        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
       </div>
     </div>
   );
@@ -123,7 +120,7 @@ function ShowRestaurantDetails(props) {
         <h1>Manage My Lunch Dashboard</h1>
       </header>
       <button className='header-button' onClick={toggleDropdown}>Account</button>
-      <Link to="/Cart" className='header-button-right'>Cart</Link>
+      <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
       <button className='header-button-right'>Logout</button>
 
       <Modal
@@ -164,18 +161,17 @@ function ShowRestaurantDetails(props) {
         </div >
         <div className='restaurant-footer'>
           <Link
-            to={`/UpdateRestaurant/${restaurant._id}`}
-            className='btn btn-outline-info btn-lg btn-block'
-          >
-            Edit restaurant
-          </Link>
-
-          <Link
             to={`/CreateMenuItem/${restaurant._id}`}
             className='btn btn-outline-info btn-lg btn-block'
           //style={buttonStyles}
           >
             Create Menu Item
+          </Link>
+          <Link
+            to={`/UpdateRestaurant/${restaurant._id}`}
+            className='btn btn-outline-info btn-lg btn-block'
+          >
+            Edit restaurant
           </Link>
           <Link
             to={`/DeleteMenuItem/`}
