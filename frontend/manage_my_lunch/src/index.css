@@ -89,7 +89,7 @@ button:focus-visible {
   padding-bottom: 3em;
 }
 
-.cart-middle {
+.cart-middle, .order-history {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -103,6 +103,7 @@ button:focus-visible {
   align-items: center; 
   padding-right: 3em;
 }
+
 
 .forgot-password-link {
   color: #000213;

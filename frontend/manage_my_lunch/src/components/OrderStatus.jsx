@@ -109,9 +109,9 @@ function OrderStatus() {
     return (
         <><div>
             <header className="header">
-            <img src={logo} alt='Logo' height={100} />
-            <h1>Manage My Lunch Dashboard</h1>
-            <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+                <img src={logo} alt='Logo' height={100} />
+                <h1>Manage My Lunch Dashboard</h1>
+                <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
             </header>
             <button onClick={toggleDropdown}>Account</button>
             <button><Link to={'/Dashboard'} style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
@@ -174,16 +174,17 @@ function OrderStatus() {
                     const remainingSeconds = Math.floor(totalRemainingTimeInSeconds % 60);
 
                     return (
-                        <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-                            <h2>{order.restaurant_name}</h2>
-                            <h3>Cost: ${order.cost.toFixed(2)}</h3>
-                            <p>{order.email}</p>
-                            {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
-                            <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
-                            <p>Additional Info: {order.additionalInfo}</p>
-                            <p>Status: {order.orderStatus}</p>
-                            <p>Order code: {order.code}</p>
-                            {/** 
+                            <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px' }}>
+                                <h2>{order.restaurant_name}</h2>
+                                <h3>Cost: ${order.cost.toFixed(2)}</h3>
+                                <p>{order.email}</p>
+                                {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
+                                <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
+                                <p>Additional Info: {order.additionalInfo}</p>
+                                <p>Status: {order.orderStatus}</p>
+                                <p>Order code: {order.code}</p>
+                                {
+                            /** 
 
                             <p>Current Time: {currentTime.toString()}</p>
                             <p>Order Time (24-hour format): {time24}</p>
@@ -194,21 +195,21 @@ function OrderStatus() {
 
                             <p>Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds</p>
                              */}
-                            <p>
+                                <p>
 
-                            </p>
-                            <button disabled={totalRemainingTimeInSeconds <= 0}>    <Link to={`/EditOrder/${order._id}`}>Edit Order</Link>
-                            </button>{totalRemainingTimeInSeconds > 0
-                                ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
-                                : " Edit Time has elapsed"}
-                            {order.orderStatus === 'Delivered' &&
-                                <button onClick={() => navigate(`/CompleteOrder`)}>Confirm Order Pickup</button>
+                                </p>
+                                <button disabled={totalRemainingTimeInSeconds <= 0}>    <Link to={`/EditOrder/${order._id}`}>Edit Order</Link>
+                                </button>{totalRemainingTimeInSeconds > 0
+                                    ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                                    : " Edit Time has elapsed"}
+                                {order.orderStatus === 'Delivered' &&
+                                    <button onClick={() => navigate(`/CompleteOrder`)}>Confirm Order Pickup</button>
 
-                                //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
+                                    //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
 
 
-                            }
-                        </div>
+                                }
+                            </div>
                     );
                 })}
             </div>
@@ -217,14 +218,13 @@ function OrderStatus() {
             <div>
                 <h3>Order history</h3>
                 {orders.filter(order => order.orderStatus === 'Completed').map((order, index) => (
-                    <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
+                    <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px' }}>
                         <h2>Restaurant Name: {order.restaurant_name}</h2>
                         <h2>Cost: ${order.cost.toFixed(2)}</h2>
                         <p>Email: {order.email}</p>
                         <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
                         <p>Additional Info: {order.additionalInfo}</p>
                         <p>Status: {order.orderStatus}</p>
-                        <p>Date Created: {order.date_created}</p>
                         <button>
                             <Link to={`/ReviewForm/${order.restaurant_id}`}>Rate this Restaurant</Link>
                         </button>
