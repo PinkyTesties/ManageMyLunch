@@ -15,6 +15,9 @@ const SettingsPage = () => {
             <Link to="/Dashboard">
                 <button>Return to dashboard</button>
             </Link>
+            <Link to="/AddDriver">
+                <button>Add a Driver</button>
+            </Link>
         </div>
     );
 }
