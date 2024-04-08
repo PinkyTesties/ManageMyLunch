@@ -46,6 +46,14 @@ router.post('/', (req, res) => {
     });
 });
 
+// @route   GET api/users/email/:email
+// @desc    Get single user by email
+// @access  Public
+router.get('/email/:email', (req, res) => {
+  User.findOne({ email: req.params.email })
+    .then(user => res.json(user))
+    .catch(err => res.status(404).json({ nouserfound: 'No User found' }));
+});
 
 // @route   PUT api/users/:id
 // @desc    Update users by id
