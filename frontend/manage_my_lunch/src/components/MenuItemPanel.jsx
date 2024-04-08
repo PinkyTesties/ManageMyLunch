@@ -85,10 +85,8 @@ const MenuItemPanel = ({ menuItem }) => {
           <Link to={`/MenuItemViewer/${menuItem._id}`}>{menuItem.name}</Link>
         </h2>
         <button onClick={addToCart}>Add to cart</button>
-        <p>File: {menuItem.menuItemImage}</p>
         <h3>${menuItem.cost.toFixed(2)}</h3>        
         <p>{menuItem.item_desc}</p>
-        <p>{menuItem.restaurant_id}</p>
 
 
         <p></p>

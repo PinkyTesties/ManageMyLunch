@@ -9,9 +9,7 @@ const CompleteOrder = () => {
     const [message, setMessage] = useState(''); // Add this line
     const [cart, setCart] = useState(null);
 
-
     const navigate = useNavigate();
-
 
   const handleInputChange = (event) => {
     const value = event.target.value;
