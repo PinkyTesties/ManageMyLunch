@@ -89,7 +89,7 @@ const LoginPage = () => {
         </div>
       </header>
       <main className='main-login'>
-        {error && <div className="alert alert-danger">{error}</div>}
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email</label>
