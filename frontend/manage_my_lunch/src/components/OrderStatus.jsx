@@ -142,7 +142,7 @@ function OrderStatus() {
             <p>{/*Your order ID is: { }*/}</p>
             <div>
                 <h3>Current orders</h3>
-                {orders.filter(order => order.orderStatus === 'Delivered' || order.orderStatus === 'Pending').map((order, index) => {
+                {orders.filter(order => order.orderStatus === 'Delivered' || order.orderStatus == 'Accepted By Driver'|| order.orderStatus === 'Pending').map((order, index) => {
                     // Parse order.date_created to get the year, month, and day
                     const orderDate = new Date(order.date_created);
                     const year = orderDate.getFullYear();
