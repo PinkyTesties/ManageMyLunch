@@ -8,6 +8,13 @@
   background-color: #5c5b5b;
   min-height: 100vh;
   color: white;
+  overflow: hidden;
+}
+
+.ShowBookDetails img {
+  width: 100%;
+  object-fit: fill;
+  border: 2px solid rgba(0,0,.125);
 }
 
 .UpdateBookInfo {
@@ -50,35 +57,50 @@
 
 .restaurantcard-container {
   width: 300px;
-  height: 450px;
-  padding-left: 6em;  
-  margin-right: 20px; 
-  margin-top: 20px; 
-  overflow: hidden;
+  height: 470px;
+  border: 2px solid rgb(255, 0, 0);
 }
-.restaurantcard-container img {
+
+.restaurantcard-container img, .menucard-container img {
   width: 100%;
   object-fit: fill;
-  border: 2px solid rgba(0,0,.125);
+  border: 2px solid rgb(253, 0, 0);
+  border-top: none;
+}
+
+.restaurant-view-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2em;
+}
+
+.row {
+  margin-left: 1em;
 }
 
 
 .menucard-container {
   width: 250px;
-  height: 300px;
-  border: 1px solid rgba(0,0,.125);
+  height: 400px;
+  padding: 1em;
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
+  border: 2px solid rgb(253, 0, 0);
+
 }
+
+
 
 .MenuButtons {
   justify-content: space-evenly;
 }
 
 .desc {
+  display: flex;
   height: 130px;
   padding: 10px;
+  justify-content: space-between;
 }
 
 .desc h2 {
@@ -86,16 +108,14 @@
   font-weight: 400;
 }
 
-.desc h3, p {
-  font-weight: 300;
+.desc h3 {
+  font-weight: 400;
 }
 
 .desc h3 {
-  color: #6c757d;
+  color: #ff00dd;
   font-size: 1em;
-  padding: 10px 0 10px 0;
 }
-
 
 .header-button {
   margin-right: 50px; 

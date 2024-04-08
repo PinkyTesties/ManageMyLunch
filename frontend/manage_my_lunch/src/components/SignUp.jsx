@@ -73,7 +73,7 @@ const SignUp = (props) => {
                 <h1>Sign Up to Manage My Lunch</h1>
                 </div>
                 <div>
-                <p>Already have an account?</p> <Link to="/" className="btn btn-link">Login</Link>
+                <p>Already have an account?</p > <Link to="/" className="btn btn-link">Login</Link>
                 <button>Sign up as driver</button>
                 </div>
               </header>

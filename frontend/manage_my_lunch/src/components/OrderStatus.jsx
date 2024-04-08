@@ -108,14 +108,15 @@ function OrderStatus() {
 
     return (
         <><div>
+            <header className="header">
             <img src={logo} alt='Logo' height={100} />
             <h1>Manage My Lunch Dashboard</h1>
             <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
-
+            </header>
             <button onClick={toggleDropdown}>Account</button>
-            <button><Link to={'/Dashboard'}>Dashboard</Link></button>
+            <button><Link to={'/Dashboard'} style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
 
-            <Link to="/Cart" className='header-button-right'>Cart</Link>
+            <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
             <button className='header-button-right'><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
             <p>Logged in as: {name}, {university}, {email}, {userID}</p>
             <Modal
@@ -174,20 +175,14 @@ function OrderStatus() {
 
                     return (
                         <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-                            <p>Order ID: {order._id}</p>
-                            <p>Email: {order.email}</p>
-                            <p>Cost: ${order.cost.toFixed(2)}</p>
-                            <p>Date Created: {order.date_created}</p>
-                            <p>Time Created: {order.time_created}</p>
+                            <h2>{order.restaurant_name}</h2>
+                            <h3>Cost: ${order.cost.toFixed(2)}</h3>
+                            <p>{order.email}</p>
                             {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
                             <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
-                            <p>Restaurant ID: {order.restaurant_id}</p>
-                            <p>Restaurant Name: {order.restaurant_name}</p>
                             <p>Additional Info: {order.additionalInfo}</p>
                             <p>Status: {order.orderStatus}</p>
                             <p>Order code: {order.code}</p>
-
-                            <p>Order Time (Date object): {orderTime.toString()}</p>
                             {/** 
 
                             <p>Current Time: {currentTime.toString()}</p>
@@ -223,16 +218,13 @@ function OrderStatus() {
                 <h3>Order history</h3>
                 {orders.filter(order => order.orderStatus === 'Completed').map((order, index) => (
                     <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-                        <p>Order ID: {order._id}</p>
+                        <h2>Restaurant Name: {order.restaurant_name}</h2>
+                        <h2>Cost: ${order.cost.toFixed(2)}</h2>
                         <p>Email: {order.email}</p>
-                        <p>Cost: ${order.cost.toFixed(2)}</p>
-                        <p>Date Created: {order.date_created}</p>
                         <p>Menu Items: {order.menuItems.map(id => menuItems[id] || id).join(', ')}</p>
-                        <p>Restaurant ID: {order.restaurant_id}</p>
-                        <p>Restaurant Name: {order.restaurant_name}</p>
                         <p>Additional Info: {order.additionalInfo}</p>
                         <p>Status: {order.orderStatus}</p>
-
+                        <p>Date Created: {order.date_created}</p>
                         <button>
                             <Link to={`/ReviewForm/${order.restaurant_id}`}>Rate this Restaurant</Link>
                         </button>

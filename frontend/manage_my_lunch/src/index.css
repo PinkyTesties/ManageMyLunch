@@ -26,6 +26,10 @@ a:hover {
 body {
   margin: 0;
   padding: 10px 50px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
   /* display: flex; */
   align-items: center;
   justify-content: center;
@@ -78,11 +82,32 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.cart-top {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 3em;
+}
+
+.cart-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 3em;
+}
+
+.cart-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding-right: 3em;
+}
+
 .forgot-password-link {
   color: #000213;
   font-size: 16px;
   text-decoration: none;
-
 }
 
 .form-label {
@@ -104,12 +129,11 @@ h1 {
 
 }
 
-
-
 .header {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 2em;
 }
 
 .header-center {
@@ -163,8 +187,20 @@ h1 {
   z-index: 1000;
 }
 
-.ShowBookList {
+.ShowBookList, .ShowBookDetails {
   background-image: url('././components/componentAssets/background2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.restaurant-footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  padding-top: 3em;
+}
+
+.restaurant-item {
+  display: flex;
+  justify-content: space-between;
 }

@@ -166,7 +166,7 @@ const Cart = () => {
   }
 
   return (
-    <div>
+    <div className>
       <header className="header">
         <img src={logo} alt="Logo" height={100} />
         <h1>Your Cart</h1>
@@ -175,53 +175,60 @@ const Cart = () => {
       {/*
           //<input type="time" onChange={e => setDeliveryTime(e.target.value)} required />
   */}
-
       <button className="header-button-right">
         <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
           Logout
         </Link>
       </button>
-      <p>Logged in as: {email}</p>
       <div>
-        <h3>Total Cost: ${totalCost.toFixed(2)}</h3>
-        <h2>
-          Date Created: {new Date(cart.date_created).toLocaleDateString()}
-        </h2>
-        <h2>Restaurant ID: {cart.restaurant_id}</h2>
-        <h2>Restaurant Name: {restaurantName}</h2>
+        <div className="cart-top">
+          <div>
+            <h2>{restaurantName}</h2>
+          </div>
+          <div>
+            <h2>Total Cost: ${totalCost.toFixed(2)}</h2>
+          </div>
+          <div>
+            <h2>
+              Date Created: {new Date(cart.date_created).toLocaleDateString()}
+            </h2>
+          </div>
+        </div>
+        <div className="cart-middle">
+        Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required />
         <p>-----------------------------------</p>
-
+        {cart.menuItems.map((item, index) => (
+          <div key={index}>
+            <p><b>Item Name: {item.name}</b></p>
+            <p>Item Cost: ${parseFloat(item.cost).toFixed(2)}</p>
+            {item.ingredients.map((ingredient, i) => (
+              <div key={i}>
+                <p>Ingredient Name: {ingredient.name}</p>
+                <p>Ingredient Quantity: {ingredient.quantity}</p> {/* Ensure that you're correctly accessing the quantity property */}
+                <p>Ingredient index: {index}</p>
+              </div>
+            ))}
+            <p>Additional Information: {item.additional_information}</p>
+            <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
+            <p>***</p>
+            <p>Add additional information here:</p>
+        <input
+          type="text"
+          value={additionalInfo}
+          onChange={(e) => setAdditionalInfo(e.target.value)}
+          placeholder=""
+        />
+          </div>
+        ))}
+        </div>
+        <div className="cart-bottom">
+        <br></br>
+        <br></br>
+        <br></br>
+        <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0}>Buy Now</button>
+        </div>
+        
       </div>
-      Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required />
-
-      <p>-----------------------------------</p>
-      {cart.menuItems.map((item, index) => (
-  <div key={index}>
-    <p><b>Item Name: {item.name}</b></p>
-    <p>Item Cost: ${parseFloat(item.cost).toFixed(2)}</p>
-    {item.ingredients.map((ingredient, i) => (
-      <div key={i}>
-        <p>Ingredient Name: {ingredient.name}</p>
-        <p>Ingredient Quantity: {ingredient.quantity}</p> {/* Ensure that you're correctly accessing the quantity property */}
-        <p>Ingredient index: {index}</p>
-      </div>
-    ))}
-    <p>Additional Information: {item.additional_information}</p>
-    <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
-    <p>***</p>
-  </div>
-))}
-      <p>Add additional information here:</p>
-      <input
-        type="text"
-        value={additionalInfo}
-        onChange={(e) => setAdditionalInfo(e.target.value)}
-        placeholder=""
-      />
-      <br></br>
-      <br></br>
-      <br></br>
-      <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0}>Buy Now</button>
     </div>
   );
 };
