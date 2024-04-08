@@ -76,6 +76,11 @@ app.use('/api/drivers', addDriver);
 app.use('/api/driverslogin', DriverLoginRoutes);
 app.use('/api/code', code);
 
+// Serve static files from the "restaurant_assets" directory
+app.use('/restaurant_assets', express.static('restaurant_assets'));
+app.use('/menuItem_assets', express.static('menuItem_assets'));
+
+
 app.get('/', (req, res) => {
   if(req.session.name) {
     return res.json({valid:true, name: req.session.name, email: req.session.email, university: req.session.university, _id: req.session.id});

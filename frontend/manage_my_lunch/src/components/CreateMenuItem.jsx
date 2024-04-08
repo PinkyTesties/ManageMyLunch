@@ -5,19 +5,27 @@ import axios from 'axios';
 
 const CreateMenuItem = () => {
   const params = useParams();
+  const [image, setImage] = useState(null);
 
   const [menuItem, setMenuItem] = useState({
     name: '',
     cost: '',
     date_added: new Date(),
     item_desc: '',
+    menuItemImage: '',
     restaurant_id: params.id,
     ingredients: [{ name: '', quantity: 0 }],
     additional_information: ''
   });
 
+
   const onChange = (e) => {
-    setMenuItem({ ...menuItem, [e.target.name]: e.target.value });
+    if (e.target.name === 'image') {
+      setImage(e.target.files[0]);
+      setMenuItem({ ...menuItem, menuItemImage: e.target.files[0].name });
+    } else {
+      setMenuItem({ ...menuItem, [e.target.name]: e.target.value });
+    }
   };
 
   const onIngredientChange = index => e => {
@@ -40,31 +48,59 @@ const CreateMenuItem = () => {
     }));
   };
 
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  
+  //   const isValid = menuItem.ingredients.every(
+  //     ingredient => ingredient.name && ingredient.quantity
+  //   );
+  
+  //   if (!isValid) {
+  //     alert('Each ingredient must have a name and a quantity.');
+  //     return;
+  //   }
+  
+  //   const menuItemWithQuantityAsString = {
+  //     ...menuItem,
+  //     ingredients: menuItem.ingredients.map(ingredient => ({
+  //       ...ingredient,
+  //       quantity: String(ingredient.quantity)
+  //     }))
+  //   };
+  
+  //   axios
+  //     .post('http://localhost:8082/api/menuItems', menuItemWithQuantityAsString)
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.error(err));
+  // };
+
   const onSubmit = (e) => {
     e.preventDefault();
-  
-    const isValid = menuItem.ingredients.every(
-      ingredient => ingredient.name && ingredient.quantity
-    );
-  
-    if (!isValid) {
-      alert('Each ingredient must have a name and a quantity.');
-      return;
-    }
-  
-    const menuItemWithQuantityAsString = {
-      ...menuItem,
-      ingredients: menuItem.ingredients.map(ingredient => ({
-        ...ingredient,
-        quantity: String(ingredient.quantity)
-      }))
-    };
+    const formData = new FormData();
+    formData.append('name', menuItem.name);
+    formData.append('cost', menuItem.cost);
+    formData.append('date_added', menuItem.date_added);
+    formData.append('item_desc', menuItem.item_desc);
+    formData.append('restaurant_id', menuItem.restaurant_id);
+    formData.append('ingredients', JSON.stringify(menuItem.ingredients)); // Convert array to JSON string
+    formData.append('additional_information', menuItem.additional_information);
+    formData.append('image', image);
   
     axios
-      .post('http://localhost:8082/api/menuItems', menuItemWithQuantityAsString)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
+      .post("http://localhost:8082/api/menuItems", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((res) => {
+        // handle success
+        alert("Menu item added successfully!");
+      })
+      .catch((err) => {
+        console.log("Error in CreateMenuItem!");
+      });
   };
+
 
   return (
     <div>
@@ -113,6 +149,18 @@ const CreateMenuItem = () => {
           <label>Additional Information: </label>
           <input type="text" className="form-control" name="additional_information" value={menuItem.additional_information} onChange={onChange} />
         </div>
+        <br></br>
+        <div className="form-group">
+      <label htmlFor="image">Image:</label>
+      <input
+        type="file"
+        name="image"
+        className="form-control"
+        onChange={onChange}
+      />
+    </div>
+        
+        <br></br>
         <div className="form-group">
           <input type="submit" value="Create Menu Item" className="btn btn-primary" />
         </div>

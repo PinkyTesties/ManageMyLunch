@@ -30,6 +30,12 @@ const MenuItemSchema = new mongoose.Schema({
     type: String
   },
 
+  menuItemImage: {
+    type: String,
+    required: true
+  },
+
+
   ingredients: {
     type: [
       {
