@@ -25,6 +25,17 @@ const Dashboard = ({ history }) => {
     setShowDropdown(!showDropdown);
   };
 
+  const customStyles = {
+    content: {
+      top: "0%",
+      right: "0%",
+      bottom: "auto",
+      left: "auto",
+      width: "20%",
+      height: "50%",
+    },
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8082/api/restaurants")
@@ -51,16 +62,7 @@ const Dashboard = ({ history }) => {
     setPage("selectedOrders");
   };
 
-  const customStyles = {
-    content: {
-      top: "0%",
-      right: "0%",
-      bottom: "auto",
-      left: "auto",
-      width: "20%",
-      height: "50%",
-    },
-  };
+ 
 
   useEffect(() => {
     axios
@@ -157,6 +159,7 @@ const Dashboard = ({ history }) => {
       <h1>Driver Dashboard</h1>
       <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
       </header>
+      <div className='MenuButtons'>
       <button onClick={toggleDropdown}>Account</button>
       <button className="header-button-right">
         <Link
@@ -166,6 +169,7 @@ const Dashboard = ({ history }) => {
           Logout
         </Link>
       </button>
+      </div>
       <p>
         Logged in as: {name}, {email}, {userID}
       </p>
@@ -187,9 +191,7 @@ const Dashboard = ({ history }) => {
           <div className="row">
             <div className="col-md-12">
               <br />
-              <h2 className="display-4 text-center">
-                Orders available to assign
-              </h2>
+              <h2 className="display-4 text-center">Orders available to assign</h2>
               </div>
                <div className='col-md-11'>
               <button onClick={handleAllOrdersClick}>All Orders</button>
@@ -217,10 +219,12 @@ const Dashboard = ({ history }) => {
               )}
 
               {page === "batch-orders" && (
-                <div className="order-cards-container">
-                  <h2>Select Batch Orders</h2>
+                <div>
+                <div><h2>Select Batch Orders</h2></div>
+                <div>
                   {/* Display selected orders here */}
-                  <div> {RestaurantList}</div>
+                  <div className="order-cards-container"> {RestaurantList}</div>
+                </div>
                 </div>
               )}
 

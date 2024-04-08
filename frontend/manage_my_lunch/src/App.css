@@ -56,17 +56,9 @@
 }
 
 .restaurantcard-container {
-  width: 300px;
+  width: 350px;
   height: 470px;
   border: 2px solid rgb(255, 0, 0);
-}
-
-.order-cards-container {
-  width: 300px;
-  height: 470px;
-  border: 2px solid rgb(255, 0, 0);
-  display: flex;
-  flex-direction: row;
 }
 
 .restaurantcard-container img, .menucard-container img {
@@ -86,6 +78,10 @@
   margin-left: 1em;
 }
 
+.order-cards-container {
+  display: flex;
+  flex-direction: row;
+}
 
 .menucard-container {
   width: 250px;

@@ -35,13 +35,13 @@ const RestaurantPanel_Driver = ({ restaurant }) => {
 
 
   return (
-    <div className="restaurantcard-container">
+    <div className="restaurantcard-container-driver">
       <img
         src={`http://localhost:8082/restaurant_assets/${restaurant.RestaurantImage}`}
         alt="Resturants"
         height={200}
       />
-      <div className="desc">
+      <div className="desc-driver">
         <h2>{restaurant.restaurantName}</h2>
         <h3>{restaurant.address}</h3>
         <p>Orders Available: {completedCarts.length}</p><br></br>
