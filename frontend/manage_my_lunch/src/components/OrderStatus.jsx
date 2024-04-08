@@ -174,7 +174,7 @@ function OrderStatus() {
                     const remainingSeconds = Math.floor(totalRemainingTimeInSeconds % 60);
 
                     return (
-                            <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px' }}>
+                            <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px', background: '#fff' }}>
                                 <h2>{order.restaurant_name}</h2>
                                 <h3>Cost: ${order.cost.toFixed(2)}</h3>
                                 <p>{order.email}</p>
@@ -218,7 +218,7 @@ function OrderStatus() {
             <div>
                 <h3>Order history</h3>
                 {orders.filter(order => order.orderStatus === 'Completed').map((order, index) => (
-                    <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px' }}>
+                    <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px', width: '300px', background: '#fff' }}>
                         <h2>Restaurant Name: {order.restaurant_name}</h2>
                         <h2>Cost: ${order.cost.toFixed(2)}</h2>
                         <p>Email: {order.email}</p>

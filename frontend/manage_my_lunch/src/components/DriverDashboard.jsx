@@ -152,10 +152,11 @@ const Dashboard = ({ history }) => {
 
   return (
     <div>
+      <header className='header'>
       <img src={logo} alt="Logo" height={100} />
       <h1>Driver Dashboard</h1>
       <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
-
+      </header>
       <button onClick={toggleDropdown}>Account</button>
       <button className="header-button-right">
         <Link
@@ -189,6 +190,8 @@ const Dashboard = ({ history }) => {
               <h2 className="display-4 text-center">
                 Orders available to assign
               </h2>
+              </div>
+               <div className='col-md-11'>
               <button onClick={handleAllOrdersClick}>All Orders</button>
               <button onClick={handleFilterByRestaurantClick}>
                 Select By Restaurant
@@ -197,8 +200,7 @@ const Dashboard = ({ history }) => {
               <button onClick={handleSelectedOrdersClick}>
                 Selected Orders
               </button>
-              <br></br>
-              <br></br>
+              </div>
 
               {page === "all-orders" && (
                 <div className="ShowBookList">
@@ -248,7 +250,6 @@ const Dashboard = ({ history }) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
