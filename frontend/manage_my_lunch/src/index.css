@@ -104,6 +104,10 @@ button:focus-visible {
   padding-right: 3em;
 }
 
+.complete-order {
+  background-color: #ffffff;
+  width: 300px;
+}
 
 .forgot-password-link {
   color: #000213;
