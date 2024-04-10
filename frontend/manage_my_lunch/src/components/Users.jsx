@@ -1,55 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../../controller/useAuth'
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+const DeleteAccount = () => {
+  const { token } = useAuth(); // Get the token from your auth context
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = () => {
+  const deleteUser = () => {
     axios
-      .get('http://localhost:8082/api/users')
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.log(err));
-  };
-
-  const deleteUsers = (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      axios
-        .delete(`http://localhost:8082/api/users/${id}`)
-        .then((res) => {
-          alert("Force Deletion of user successful", res.data.msg);
-          fetchUsers(); // Refresh the users list after deletion
-        })
-        .catch((err) => alert(err.response.data.error));
-    }
-  };
-  const boxStyle = {
-    border: '1px solid black',
-    padding: '10px',
-    margin: '10px',
-    borderRadius: '5px',
+      .delete(`http://localhost:8082/api/users/delete`, {
+        headers: {
+          'Authorization': `Bearer ${token}` // Send the token in the Authorization header
+        }
+      })
+      .then(response => {
+        if (response.data.msg) {
+          alert(response.data.msg);
+        } else if (response.data.error) {
+          alert(response.data.error);
+        }
+      })
+      .catch(error => alert('Error:', error));
   };
 
   return (
     <div>
-      <h1>Users</h1>
-      <button><Link to={'/Dashboard'}>Dashboard</Link></button>
-
-      {users.map((user) => (
-        <div key={user._id} style={boxStyle}>
-          <h2>{user.name}</h2>
-          <p>Email: {user.email}</p>
-          <p>Date Added: {new Date(user.date_added).toLocaleDateString()}</p>
-          <button onClick={() => deleteUsers(user._id)}>Force Delete User</button>
-
-        </div>
-      ))}
+      <h1>Delete Account</h1>
+      <button onClick={deleteUser}>Delete Account</button>
     </div>
   );
-};
+}
 
-export default Users;
+export default DeleteAccount;
