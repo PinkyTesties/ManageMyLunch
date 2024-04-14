@@ -17,3 +17,9 @@ exports.mailTransport = () => nodemailer.createTransport({
           pass: process.env.MAILTRAP_PASSWORD
         }
       });
+exports.generateEmailTemplate = code => {
+    return `
+        <h1>OTP for account verification</h1>
+        <p>Your OTP is ${code}</p>
+    `;
+    }

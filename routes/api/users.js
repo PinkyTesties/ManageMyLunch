@@ -4,7 +4,8 @@ const router = express.Router();
 // Load User model
 const User = require('../../models/Users');
 const VerificationToken = require('../../models/VerificationTokens');
-const { generateOTP, mailTransport } = require('../../util/mail');
+const { generateOTP, mailTransport, generateEmailTemplate } = require('../../util/mail');
+const { isValidObjectId } = require('mongoose');
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -62,7 +63,7 @@ router.post('/', async (req, res) => {
       from: 'ManageMyLunch@gmail.com',
       to: newUser.email,
       subject: 'Manage My Lunch - Verify Your Email',
-      html: `<h1>${OTP}</h1>`,
+      html: generateEmailTemplate(OTP),
     });
 
     res.json({ msg: 'User added successfully' }).end();
@@ -124,5 +125,40 @@ router.post('/delete', async (req, res) => {
     res.status(500).json({ error: 'Error deleting user' });
   }
 });
+// @route   POST api/users/verify-email
+exports.verifyEmail = async (req, res) => {
+  const { userId, otp } = req.body
+  if (!userId || !otp) {
+    return res.status(400).json({ error: 'Error' });
+
+  }
+
+  if(!isValidObjectId(userId)) {
+    return res.status(400).json({ error: 'Invalid user id' });
+  }
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(400).json({ error: 'Sorry user not found!!!' });
+  }
+
+  if (user.verified) {
+    return res.status(400).json({ error: 'User already verified' });
+  }
+
+  const token = await VerificationToken.findOne({ owner: userId })
+  if (!token) {
+    return res.status(400).json({ error: 'Sorry user not found' });
+  }
+
+  const isMatched = await token.compareToken(otp);
+  if (!isMatched) {
+    return res.status(400).json({ error: 'Please provide a vaild token' });
+  }
+
+  user.verified = true;
+  await VerificationToken.findOneAndDelete(token._id);
+  await user.save();
+}
+
 
 module.exports = router;
