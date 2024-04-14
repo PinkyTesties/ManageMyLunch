@@ -22,6 +22,8 @@ const DeleteAccount = () => {
       .catch(error => alert('Error:', error));
   };
 
+  
+
   return (
     <div>
       <h1>Delete Account</h1>

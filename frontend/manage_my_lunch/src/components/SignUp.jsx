@@ -10,19 +10,18 @@ const SignUp = () => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "", // Changed field name to match backend
+    confirmPassword: "",
     university: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [confirmation, setConfirmation] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true); // State to track if passwords match
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
 
-    // Check if passwords match in real-time
     if (e.target.name === "confirmPassword") {
       setPasswordMatch(e.target.value === user.password);
     }
@@ -31,7 +30,6 @@ const SignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // Form validation
     if (!user.name || !user.email || !user.password || !user.confirmPassword || !user.university) {
       setError("Please fill in all fields");
       return;
@@ -58,26 +56,20 @@ const SignUp = () => {
     } catch (error) {
       console.log(error);
       if (error.response && error.response.data && error.response.data.message) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         if (error.response.status === 409 && error.response.data.message === "User already exists") {
-          setError("User already exists");
+          setError("User already exists with that email");
         } else {
           setError(error.response.data.message);
         }
       } else if (error.request) {
-        // The request was made but no response was received
         setError("The request was made but no response was received");
       } else {
-        // Something happened in setting up the request that triggered an Error
         setError("An error occurred while setting up the request");
       }
     } finally {
       setLoading(false);
     }
   };
-
-
 
   return (
     <div className="container mt-5">
@@ -154,4 +146,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

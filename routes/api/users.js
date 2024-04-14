@@ -3,6 +3,8 @@ const router = express.Router();
 
 // Load User model
 const User = require('../../models/Users');
+const VerificationToken = require('../../models/VerificationTokens');
+const { generateOTP, mailTransport } = require('../../util/mail');
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -30,12 +32,43 @@ router.get('/:id', (req, res) => {
 // @route   POST api/users
 // @desc    Add/save users
 // @access  Public
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+  const { email } = req.body;
+
+  // Check if a user with the provided email already exists
+  const existingUser = await User.findOne({ email });
+
+  if (existingUser) {
+    return res.status(409).json({ error: 'User already exists' }).end();
+  }
+
+  // If no existing user, proceed with creating a new user
   const newUser = new User(req.body);
 
-  newUser.save()
-    .then(user => res.json({ msg: 'User added successfully' }))
-    .catch(err => res.status(400).json({ error: 'Unable to add this user' }));
+  try {
+    await newUser.save();
+
+    // Create a verification token for the new user
+    const OTP = generateOTP();
+    const verificationToken = new VerificationToken({
+      owner: newUser._id,
+      token: OTP
+    });
+
+    // Save the verification token
+    await verificationToken.save();
+
+    mailTransport().sendMail({
+      from: 'ManageMyLunch@gmail.com',
+      to: newUser.email,
+      subject: 'Manage My Lunch - Verify Your Email',
+      html: `<h1>${OTP}</h1>`,
+    });
+
+    res.json({ msg: 'User added successfully' }).end();
+  } catch (err) {
+    res.status(400).json({ error: 'Unable to add this user' }).end();
+  }
 });
 
 // @route   PUT api/users/:id
