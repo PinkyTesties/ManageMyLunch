@@ -66,7 +66,7 @@ function ShowRestaurantDetails(props) {
 
   useEffect(() => {
     console.log('Fetching menu items for restaurant_id:', id);
-    
+
     axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
       .then((res) => {
         setMenuItems(res.data);
@@ -87,42 +87,41 @@ function ShowRestaurantDetails(props) {
   //   borderRadius: '5px',
   //   // add more styles here
   // };
-
   const RestaurantItem = (
     <div>
       <div className="restaurant-item">
-        <div className="item">
-          <span className="label">Name: </span>
-          <span className="value">{restaurant.restaurantName}</span>
-        </div>
-        <div className="item">
-          <span className="label">Cuisine: </span>
-          <span className="value">{restaurant.cuisine}</span>
-        </div>
-        <div className="item">
+        <div className='restaurant-name-food'>
+          <div className="item">
+            <span className="label">Name: </span>
+            <span className="value">{restaurant.restaurantName}</span>
+          </div>
+          <div className="item">
+            <span className="label">Cuisine: </span>
+            <span className="value">{restaurant.cuisine}</span>
+          </div>
+          <div className="item">
             <span className="label">Google Rating: </span>
-           
-          <span className="value">{restaurant.rating} Stars </span>
-        </div>
-        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
 
+            <span className="value">{restaurant.rating} Stars </span>
+          </div>
+        </div>
         <div className="item">
-          <span className="label">Description: </span>
           <span className="value">{restaurant.description}</span>
         </div>
+        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
       </div>
     </div>
   );
 
   return (
     <div>
-      <img src={logo} alt='Logo' height={100} />
-
-      <h1>Manage My Lunch Dashboard</h1>
-
+      <header className='header'>
+        <img src={logo} alt='Logo' height={100} />
+        <h1>Manage My Lunch Dashboard</h1>
+      </header>
       <button className='header-button' onClick={toggleDropdown}>Account</button>
-      <Link to="/Cart" className='header-button-right'>Cart</Link>
-            <button className='header-button-right'>Logout</button>
+      <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
+      <button className='header-button-right'>Logout</button>
 
       <Modal
         isOpen={showDropdown}
@@ -148,45 +147,47 @@ function ShowRestaurantDetails(props) {
             <div className='col-md-8 m-auto'>
               <h1 className='display-4 text-center'>{restaurant.restaurantName}</h1>
               <p className='lead text-center'>*******CSS NOT DONE. DO NOT SUBMIT!</p>
-              <hr /> <br />
+              <br /> <br />
             </div>
             <div className='col-md-10 m-auto'>{RestaurantItem}</div>
-            <div className='col-md-6 m-auto'>
-              <button
-                type='button'
-                className='btn btn-outline-danger btn-lg btn-block'
-                onClick={() => {
-                  onDeleteClick(restaurant._id);
-                }}
-              >
-                Delete Restaurant
-              </button>
-            </div>
-            <div className='col-md-6 m-auto'>
-              <Link
-                to={`/UpdateRestaurant/${restaurant._id}`}
-                className='btn btn-outline-info btn-lg btn-block'
-              >
-                Edit restaurant
-              </Link>
-
-              <Link
-                to={`/CreateMenuItem/${restaurant._id}`}
-                className='btn btn-outline-info btn-lg btn-block'
-              //style={buttonStyles}
-              >
-                Create Menu Item
-              </Link>
-
-              <Link
-                to={`/DeleteMenuItem/`}
-                className='btn btn-outline-info btn-lg btn-block'
-              >
-                Delete Menu Item
-              </Link>
+            <div className="restaurant-view-buttons">
+              <div className='col-md-6 m-auto'>
+              </div>
+              <div className='col-md-6 m-auto'>
+              </div>
             </div>
             {MenuItemsList}
           </div>
+        </div >
+        <div className='restaurant-footer'>
+          <Link
+            to={`/CreateMenuItem/${restaurant._id}`}
+            className='btn btn-outline-info btn-lg btn-block'
+          //style={buttonStyles}
+          >
+            Create Menu Item
+          </Link>
+          <Link
+            to={`/UpdateRestaurant/${restaurant._id}`}
+            className='btn btn-outline-info btn-lg btn-block'
+          >
+            Edit restaurant
+          </Link>
+          <Link
+            to={`/DeleteMenuItem/`}
+            className='btn btn-outline-info btn-lg btn-block'
+          >
+            Delete Menu Item
+          </Link>
+          <button
+            type='button'
+            className='btn btn-outline-danger btn-lg btn-block'
+            onClick={() => {
+              onDeleteClick(restaurant._id);
+            }}
+          >
+            Delete Restaurant
+          </button>
         </div>
       </div>
     </div>

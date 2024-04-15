@@ -72,12 +72,33 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <img src={logo} alt='Logo' height={100} />
-          <h1>Sign Up to Manage My Lunch</h1>
-          <p>***THIS PAGE STILL REQUIRES CSS. DO NOT SUBMIT AS IS***</p>
+            <div>
+              <header className="header">
+                <div className="header-center">
+                <img src={logo} alt='Logo' height={100} />
+                <h1>Sign Up to Manage My Lunch</h1>
+                </div>
+                <div>
+                <p>Already have an account?</p > <Link to="/" className="btn btn-link">Login</Link>
+                <button>Sign up as driver</button>
+                </div>
+              </header>
+            <main className="main-login">
+            <form noValidate onSubmit={onSubmit}>
+              <div className="form-group">
+              <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="form-control"
+                  value={user.name}
+                  onChange={onChange}
+                />
+              </div>
+              <br />
+              <div className="form-group">
+              <label htmlFor="email">Email:</label>
 
           <label htmlFor="name">Name:</label>
           <input

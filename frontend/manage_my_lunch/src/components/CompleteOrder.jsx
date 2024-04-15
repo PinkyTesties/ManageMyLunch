@@ -9,9 +9,7 @@ const CompleteOrder = () => {
     const [message, setMessage] = useState(''); // Add this line
     const [cart, setCart] = useState(null);
 
-
     const navigate = useNavigate();
-
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -95,7 +93,7 @@ const CompleteOrder = () => {
         <p>****** DISPLAY CONTENT HERE *******</p>
         <p>{message}</p>
         {cart && (
-      <div>
+      <div className='complete-order'>
         <h3>Order Details:</h3>
         <p>Email: {cart.email}</p>
         <p>Restaurant: {cart.restaurant_name}</p>
