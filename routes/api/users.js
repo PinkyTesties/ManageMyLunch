@@ -4,7 +4,7 @@ const router = express.Router();
 // Load User model
 const User = require('../../models/Users');
 const VerificationToken = require('../../models/VerificationTokens');
-const { generateOTP, mailTransport, generateEmailTemplate } = require('../../util/mail');
+const { generateOTP, mailTransport, generateEmailTemplate, plainEmailTemplate } = require('../../util/mail');
 const { isValidObjectId } = require('mongoose');
 
 // @route   GET api/users/test
@@ -125,8 +125,9 @@ router.post('/delete', async (req, res) => {
     res.status(500).json({ error: 'Error deleting user' });
   }
 });
+
 // @route   POST api/users/verify-email
-exports.verifyEmail = async (req, res) => {
+const verifyEmail = async (req, res) => {
   const { userId, otp } = req.body
   if (!userId || !otp) {
     return res.status(400).json({ error: 'Error' });
@@ -158,7 +159,16 @@ exports.verifyEmail = async (req, res) => {
   user.verified = true;
   await VerificationToken.findOneAndDelete(token._id);
   await user.save();
+
+  mailTransport().sendMail({
+    from: 'ManageMyLunch@gmail.com',
+    to: user.email,
+    subject: 'Manage My Lunch - Verify Your Email',
+    html: plainEmailTemplate('Email Verified successfully', 'Thank you for verifying your email. You can now login to your account.'),
+  });
+  res.json({ msg: 'Email verified successfully' });
 }
 
+router.post("/verify-email", verifyEmail);
 
 module.exports = router;
