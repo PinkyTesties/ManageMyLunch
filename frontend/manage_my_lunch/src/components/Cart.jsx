@@ -211,13 +211,7 @@ const Cart = () => {
             <p>Additional Information: {item.additional_information}</p>
             <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
             <p>***</p>
-            <p>Add additional information here:</p>
-        <input
-          type="text"
-          value={additionalInfo}
-          onChange={(e) => setAdditionalInfo(e.target.value)}
-          placeholder=""
-        />
+   
           </div>
         ))}
         </div>
@@ -225,6 +219,14 @@ const Cart = () => {
         <br></br>
         <br></br>
         <br></br>
+        <p>Add additional information here: </p>
+<br></br>
+        <input
+          type="text"
+          value={additionalInfo}
+          onChange={(e) => setAdditionalInfo(e.target.value)}
+          placeholder=""
+        /> <br></br>
         <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0}>Buy Now</button>
         </div>
         
