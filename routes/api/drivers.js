@@ -27,6 +27,21 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(404).json({ nodriverfound: 'No Driver found' }));
 });
 
+// @route   GET api/drivers/email/:email
+// @desc    Get single driver by email
+// @access  Public
+router.get('/email/:email', (req, res) => {
+  Driver.findOne({ email: req.params.email })
+    .then(driver => {
+      if (!driver) {
+        return res.status(404).json({ nodriverfound: 'No Driver found' });
+      }
+      res.json(driver);
+    })
+    .catch(err => res.status(500).json({ error: 'Error fetching driver by email' }));
+});
+
+
 // @route   POST api/drivers
 // @desc    Add/save driver
 // @access  Public

@@ -39,7 +39,8 @@ import DriverLogin from "./components/DriverLogin";
 import DriverDashboard from "./components/DriverDashboard";
 import CodeReader from "./components/CodeReader";
 import CompleteOrder from "./components/CompleteOrder";
-
+import DriverReviewForm from "./components/DriverReviewForm";
+import ViewDriverReviews from "./components/ViewDriverReviews";
 //hello
 
 // Routes
@@ -71,6 +72,8 @@ const router = createBrowserRouter([
   { path: "/DriverDashboard", element: <DriverDashboard />},
   { path: "/CodeReader", element: <CodeReader />},
   { path: "/CompleteOrder", element: <CompleteOrder />},
+  { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
+  { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
 
 ]);
 

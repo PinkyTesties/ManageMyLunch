@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
-import './EditButtonFix.css';
+import "./EditButtonFix.css";
 import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
@@ -262,6 +262,7 @@ function OrderStatus() {
                   <p>Additional Info: {order.additionalInfo}</p>
                   <p>Status: {order.orderStatus}</p>
                   <p>Order code: {order.code}</p>
+                  <p>Driver contact: {order.driver_email}</p>
                   {/** 
 
                             <p>Current Time: {currentTime.toString()}</p>
@@ -279,7 +280,9 @@ function OrderStatus() {
                       <button className="edit-button">Edit Order</button>
                     </Link>
                   ) : (
-                    <button disabled className="edit-button disabled">Edit Order</button>
+                    <button disabled className="edit-button disabled">
+                      Edit Order
+                    </button>
                   )}
                   {totalRemainingTimeInSeconds > 0
                     ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
@@ -328,6 +331,12 @@ function OrderStatus() {
                   Rate this Restaurant
                 </Link>
               </button>
+              <button>
+              <Link to={`/DriverReviewForm/${order.driver_email}`}>
+                Rate your Driver
+                </Link>
+
+                </button>
             </div>
           ))}
       </div>

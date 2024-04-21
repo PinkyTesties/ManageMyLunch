@@ -48,17 +48,14 @@ const Dashboard = ({ history }) => {
   }, []);
 
   const handleAllOrdersClick = () => {
-    // ... existing code ...
     setPage("all-orders");
   };
 
   const handleFilterByRestaurantClick = () => {
-    // ... existing code ...
     setPage("batch-orders");
   };
 
   const handleSelectedOrdersClick = () => {
-    // ... existing code ...
     setPage("selectedOrders");
   };
 
@@ -128,8 +125,7 @@ const Dashboard = ({ history }) => {
     (
       order,
       k // Map over orders to create Driver_OrderPanel components
-    ) => <Driver_OrderPanel order={order} key={k} />
-  );
+    ) => <Driver_OrderPanel order={order} email={email} key={k} />  );
 
   const RestaurantList = restaurants.map(
     (

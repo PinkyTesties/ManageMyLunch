@@ -37,7 +37,10 @@ router.put('/:email', async (req, res) => {
 router.put('/status/:id', async (req, res) => {
   const updatedCart = await CompletedCart.findByIdAndUpdate(
     req.params.id,
-    { orderStatus: req.body.orderStatus },
+    { 
+      orderStatus: req.body.orderStatus,
+      driver_email: req.body.driver_email // Add this line
+    },
     { new: true }
   );
 

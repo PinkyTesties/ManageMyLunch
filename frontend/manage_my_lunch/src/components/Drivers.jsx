@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDrivers();
@@ -28,7 +29,9 @@ const Drivers = () => {
     }
   };
 
-
+  const viewDriverReview = (email) => {
+    navigate(`/ViewDriverReviews/${email}`);
+  };
 
   const boxStyle = {
     border: '1px solid black',
@@ -50,6 +53,8 @@ const Drivers = () => {
           <p>Date Added: {new Date(driver.date_added).toLocaleDateString()}</p>
           <p>Last Updated: {new Date(driver.updated_date).toLocaleDateString()}</p>
           <button onClick={() => deleteDriver(driver._id)}>Delete Driver</button>
+          <button onClick={() => viewDriverReview(driver.email)}>View Reviews</button>
+
           <button onClick={console.log("This is where the driver tracker is ")/*   () => deleteDriver(driver._id)*/}>
             Track Driver</button>
 

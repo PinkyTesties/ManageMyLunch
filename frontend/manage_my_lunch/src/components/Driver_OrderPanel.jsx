@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
-const Driver_OrderPanel = ({ order }) => {
+const Driver_OrderPanel = ({ order, email }) => {
   const [restaurantAddress, setRestaurantAddress] = useState(''); // Initialize state variable
   const [university, setUniversity] = useState(''); // Initialize university state variable
 
@@ -29,7 +29,7 @@ const Driver_OrderPanel = ({ order }) => {
 
   const acceptOrder = () => {
     axios
-      .put(`http://localhost:8082/api/completedCarts/status/${order._id}`, { orderStatus: 'Accepted By Driver' })
+    .put(`http://localhost:8082/api/completedCarts/status/${order._id}`, { orderStatus: 'Accepted By Driver', driver_email: email })
       .then((res) => {
         console.log('Order accepted');
       })
@@ -50,6 +50,7 @@ const Driver_OrderPanel = ({ order }) => {
       <h3>Customer details:</h3>
       <p>Contact: {order.email}</p>
       <p>Delivery location: {university}</p>
+      <p>Driver email: {email}</p>
       <br></br>
       <button onClick={acceptOrder}>
     Select Order
