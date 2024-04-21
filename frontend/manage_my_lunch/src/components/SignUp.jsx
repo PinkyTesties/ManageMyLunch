@@ -1,68 +1,74 @@
-// SignUp.jsx
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import logo from './componentAssets/logov1.png';
 
-/*
-Name
-Email
-Password
-Confirm password
+const SignUp = () => {
+  const navigate = useNavigate();
 
-This page follows similar format to CreateBook.jsx from CISE week 3 lab
-*/
-const SignUp = (props) => {
-    const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    university: "",
+  });
 
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-        date_added: "",
-        university: "",
-        updated_date: "",
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [confirmation, setConfirmation] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
+  const onChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
 
-      });
+    if (e.target.name === "confirmPassword") {
+      setPasswordMatch(e.target.value === user.password);
+    }
+  };
 
-      const onChange = (e) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
-      };
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("On submit clicked!");
-    console.log("user object: ", user);
 
-    axios
-    .post("http://localhost:8082/api/users", user)
-    .then((res) => {
+    if (!user.name || !user.email || !user.password || !user.confirmPassword || !user.university) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:8082/api/users", user);
       setUser({
         name: "",
         email: "",
         password: "",
-        //date_added: "",
+        confirmPassword: "",
         university: "",
-        //updated_date: "",
       });
+      setConfirmation("User signed up successfully!");
       navigate("/");
-    })
-    .catch((err) => {
-      console.log("Error in CreateUser:", err.response.data); // Log the error response
-    });
-  
-      
-
-
-    // Here you can add sign-up logic, such as sending a request to your backend
-    // to create a new user with the provided email and password
-   // console.log("Signing up with:", email, password);
-    // After successful sign-up, you can redirect the user to another page
-    // For now, redirecting back to the login page
-   // window.location.href = "/login"; // Assuming route to LoginPage.jsx is "/login"
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.message) {
+        if (error.response.status === 409 && error.response.data.message === "User already exists") {
+          setError("User already exists with that email");
+        } else {
+          setError(error.response.data.message);
+        }
+      } else if (error.request) {
+        setError("The request was made but no response was received");
+      } else {
+        setError("An error occurred while setting up the request");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -94,89 +100,69 @@ const SignUp = (props) => {
               <div className="form-group">
               <label htmlFor="email">Email:</label>
 
-                <input
-                  type="text"
-                  id="email"
-                  placeholder="email"
-                  name="email"
-                  className="form-control"
-                  value={user.email}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div className="form-group">
-              <label htmlFor="password">Password:</label>
-
-                <input
-                  type="password"
-                  id="password"
-                  //placeholder=""
-                  name="password"
-                  className="form-control"
-                  value={user.password}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              <div className="form-group">
-              <label htmlFor="confirmpassword">Confirm Password:</label>
-
-                <input
-                  type="password"
-                  id="password"
-                  //placeholder=""
-                  name="confirmpassword"
-                  className="form-control"
-                  //value={user.password}
-                  onChange={onChange}
-                />
-              </div>
-              <div className="form-group">
-              {/* <label htmlFor="date_added">Date:</label>
-
-                <input
-                  type="date"
-                  id="date"
-                  placeholder=""
-                  name="date_added"
-                  className="form-control"
-                  value={user.date_added}
-                  onChange={onChange}
-                /> */}
-              </div>
-              <br />
-              <div className="form-group">
-              <label htmlFor="university">University:</label>
-
-                <input
-                  type="text"
-                  id="University"
-                  placeholder="University"
-                  name="university"
-                  className="form-control"
-                  value={user.university}
-                  onChange={onChange}
-                />
-              </div>
-              <div className="form-group">
-              {/* <label htmlFor="updated_date">Updated Date:</label>
-                <input
-                  type="date"
-                  id="updated_date"
-                  placeholder=""
-                  name="updated_date"
-                  className="form-control"
-                  value={user.updated_date}
-                  onChange={onChange}
-                /> */}
-              </div>
-              <br></br>
-              <button type="submit">Sign Up</button>
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            value={user.name}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            className="form-control"
+            value={user.email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            value={user.password}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            className="form-control"
+            value={user.confirmPassword}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="university">University:</label>
+          <input
+            type="text"
+            name="university"
+            className="form-control"
+            value={user.university}
+            onChange={onChange}
+          />
+        </div>
+        {error && <div className="text-danger">{error}</div>}
+        {confirmation && <div className="text-success">{confirmation}</div>}
+        {!passwordMatch && <div className="text-danger">Passwords do not match</div>}
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? "Loading..." : "Sign Up"}
+        </button>
+        <div>
+          Already have an account? <Link to="/" className="btn btn-link">Login</Link>
+        </div>
+        <div>
+          <button>Sign up as driver</button>
+        </div>
       </form>
-      </main>
     </div>
-
   );
 };
 

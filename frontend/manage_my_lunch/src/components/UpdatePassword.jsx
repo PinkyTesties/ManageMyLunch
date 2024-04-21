@@ -4,6 +4,8 @@ function UpdatePassword() {
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   useEffect(() => {
     fetch('http://localhost:8082/api/users')
@@ -15,9 +17,14 @@ function UpdatePassword() {
   const handlePasswordUpdate = (event) => {
     event.preventDefault();
 
-    const user = users.find(user => user.email === username);
+    const user = users.find(user => user.email === username || user.name === username);
 
     if (user) {
+      if (user.password === newPassword) {
+        setErrorMessage("Can't use the old password"); // Display error message if the new password is the same as the old password
+        return;
+      }
+
       fetch(`http://localhost:8082/api/users/${user._id}`, {
         method: 'PUT',
         headers: {
@@ -32,22 +39,30 @@ function UpdatePassword() {
         setUsers(users.map(user => user._id === data._id ? data : user));
         setUsername('');
         setNewPassword('');
+        setSuccessMessage('Password updated successfully');
+        setErrorMessage(''); 
       })
-      .catch(error => console.error('Error updating password:', error));
+      .catch(error => {
+        console.error('Error updating password:', error);
+        setSuccessMessage(''); 
+        setErrorMessage('Error updating password'); 
+      });
     } else {
-      alert('Email not found');
+      setErrorMessage('Incorrect email or username'); // Display error message if the user is not found
     }
   };
 
   return (
     <div>
       <h1>Reset your password</h1>
+      {successMessage && <p>{successMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>} {/* Display error message if there is any */}
       <form onSubmit={handlePasswordUpdate}>
         <input
           type="text"
           value={username}
           onChange={e => setUsername(e.target.value)}
-          placeholder="Username"
+          placeholder="Username or Email"
           required
         />
         <input

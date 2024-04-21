@@ -4,6 +4,9 @@ const connectDB = require("./config/db");
 const session = require("express-session"); 
 const cookieParser = require ('cookie-parser');
 const bodyParser = require("body-parser");
+require("dotenv").config();
+const authRoute = require("./routes/api/AuthRoute");
+const { MONGODB_URI } = process.env;
 
 // const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -39,6 +42,7 @@ app.use(cors(
 app.use(express.json());  
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use("/", authRoute);
 
 app.use(session({
       secret: "secret", // Set a secret for session management
