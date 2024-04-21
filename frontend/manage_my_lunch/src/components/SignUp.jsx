@@ -162,6 +162,7 @@ const SignUp = () => {
           <button>Sign up as driver</button>
         </div>
       </form>
+      </main>
     </div>
   );
 };
