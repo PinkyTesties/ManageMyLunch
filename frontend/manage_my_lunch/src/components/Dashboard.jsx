@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RestaurantPanel from './RestaurantPanel';
-import UserDashboard from './UserDashboard'; // Import UserDashboard
+import UserDashboard from './UserDashboard'; // Import UserDashboard (header) 
 
 const Dashboard = () => {
   const [restaurants, setRestaurants] = useState([]);

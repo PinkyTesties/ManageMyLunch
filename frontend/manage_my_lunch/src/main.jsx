@@ -41,6 +41,7 @@ import CodeReader from "./components/CodeReader";
 import CompleteOrder from "./components/CompleteOrder";
 import DriverReviewForm from "./components/DriverReviewForm";
 import ViewDriverReviews from "./components/ViewDriverReviews";
+import EmailTests from "./components/EmailTests";
 //hello
 
 // Routes
@@ -74,6 +75,7 @@ const router = createBrowserRouter([
   { path: "/CompleteOrder", element: <CompleteOrder />},
   { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
+  { path: "/EmailTests", element: <EmailTests />},
 
 ]);
 
