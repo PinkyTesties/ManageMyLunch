@@ -5,6 +5,8 @@ import axios from 'axios';
 import MenuItemPanel from './MenuItemPanel';
 import Modal from 'react-modal';
 import logo from './componentAssets/logov1.png';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
+
 
 Modal.setAppElement('#root');
 
@@ -89,6 +91,7 @@ function ShowRestaurantDetails(props) {
   // };
   const RestaurantItem = (
     <div>
+
       <div className="restaurant-item">
         <div className='restaurant-name-food'>
           <div className="item">
@@ -115,6 +118,13 @@ function ShowRestaurantDetails(props) {
 
   return (
     <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
+
+      <br></br>
+      <p>*****</p>
+      <br></br>
+
       <header className='header'>
         <img src={logo} alt='Logo' height={100} />
         <h1>Manage My Lunch Dashboard</h1>
