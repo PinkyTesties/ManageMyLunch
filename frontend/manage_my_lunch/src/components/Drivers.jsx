@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from './componentAssets/logov1.png';
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -39,12 +40,18 @@ const Drivers = () => {
 
   return (
     <div>
+      <header>
+      <img src={logo} alt='Logo' height={100} />
       <h1>Drivers</h1>
+      <p></p>
+      </header>
+      <div className='MenuButtons'>
       <button><Link to={'/AddDriver'}>Add Drivers</Link></button>
       <button><Link to={'/Dashboard'}>Dashboard</Link></button>
-
+      </div>
+      <div className='driver-item'>
       {drivers.map((driver) => (
-        <div key={driver._id} style={boxStyle}>
+        <div className='drivers' key={driver._id} style={boxStyle}>
           <h2>{driver.name}</h2>
           <p>Email: {driver.email}</p>
           <p>Date Added: {new Date(driver.date_added).toLocaleDateString()}</p>
@@ -52,9 +59,9 @@ const Drivers = () => {
           <button onClick={() => deleteDriver(driver._id)}>Delete Driver</button>
           <button onClick={console.log("This is where the driver tracker is ")/*   () => deleteDriver(driver._id)*/}>
             Track Driver</button>
-
-        </div>
+        </div> 
       ))}
+      </div>
     </div>
   );
 };

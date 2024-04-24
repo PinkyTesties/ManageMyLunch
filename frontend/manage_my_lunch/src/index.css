@@ -123,6 +123,19 @@ button:focus, button:focus-visible {
   text-align: center;
 }
 
+.delete-user input {
+  margin: 1em;
+}
+
+.drivers {
+  width: 300px;
+}
+
+.driver-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .forgot-password-link {
   color: #000213;
   font-size: 16px;

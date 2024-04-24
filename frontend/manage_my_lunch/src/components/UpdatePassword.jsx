@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logo from './componentAssets/logov1.png';
 
 function UpdatePassword() {
   const [users, setUsers] = useState([]);
@@ -41,7 +42,12 @@ function UpdatePassword() {
 
   return (
     <div>
+      <header>
+      <img src={logo} alt='Logo' height={100} />
       <h1>Reset your password</h1>
+      <p></p>
+      </header>
+      <div className='delete-user'>
       <form onSubmit={handlePasswordUpdate}>
         <input
           type="text"
@@ -70,6 +76,8 @@ function UpdatePassword() {
           </li>
         ))}
       </ul>
+      </div>
+      
     </div>
   );
 }

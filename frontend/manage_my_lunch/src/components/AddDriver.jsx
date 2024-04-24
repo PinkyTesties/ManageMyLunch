@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import logo from './componentAssets/logov1.png';
 
 const AddDriver = () => {
     const navigate = useNavigate();
@@ -29,26 +30,36 @@ const AddDriver = () => {
     return (
         <div>
             <div>
-                <h1>Add a driver</h1>
-      <button><Link to={'/Dashboard'}>Dashboard</Link></button>
-      <button><Link to={'/Drivers'}>View Drivers</Link></button>
+                <header>
+                    <img src={logo} alt='Logo' height={100} />
+                    <h1>Add a driver</h1>
+                    <p></p>
+                </header>
+                <hr />
+                <div className='MenuButtons'>
+                    <button><Link to={'/Dashboard'}>Dashboard</Link></button>
+                    <button><Link to={'/Drivers'}>View Drivers</Link></button>
+                </div>
+            </div>
+            <div className='delete-user'>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Name:
+                        <input type="text" name="name" onChange={handleChange} />
+                    </label>
+                    <label>
+                        Email:
+                        <input type="email" name="email" onChange={handleChange} />
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" name="password" onChange={handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
 
             </div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" name="name" onChange={handleChange} />
-                </label>
-                <label>
-                    Email:
-                    <input type="email" name="email" onChange={handleChange} />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" name="password" onChange={handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+
         </div>
     );
 };
