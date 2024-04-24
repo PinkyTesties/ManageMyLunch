@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 
 const CreateRestaurant = (props) => {
@@ -48,17 +49,22 @@ axios
 
   return (
     <div className="CreateRestaurant">
+      <header>
+            <img src={logo} alt="Logo" height={100} />
+            <h1>Add Restaurant</h1>
+            <Link to="/dashboard" className="btn btn-outline-warning float-left">
+              Show Restaurant List
+            </Link>
+            </header>
+            <hr />
       <div className="container">
         <div className="row">
           <div className="col-md-8 m-auto">
             <br />
-            <Link to="/dashboard" className="btn btn-outline-warning float-left">
-              Show Restaurant List
-            </Link>
+            <p className="lead text-center">Create new Restaurant</p>
           </div>
           <div className="col-md-10 m-auto">
-            <h1 className="display-4 text-center">Add Restaurant</h1>
-            <p className="lead text-center">Create new Restaurant</p>
+            
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
                 <label htmlFor="restaurantName">Name:</label>

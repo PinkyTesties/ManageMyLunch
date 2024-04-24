@@ -67,7 +67,6 @@ const CodeReader = () => {
   delay={300}
   onError={handleError}
   onResult={handleScan}
-  style={{ width: '50%', height: '30%', transform: 'scaleX(-1)' }}
 />
     </div>
   );

@@ -137,31 +137,28 @@ function OrderStatus() {
         <header className="header">
           <img src={logo} alt="Logo" height={100} />
           <h1>Manage My Lunch Dashboard</h1>
-          <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+          <p></p>
         </header>
-        <button onClick={toggleDropdown}>Account</button>
-        <button>
-          <Link
-            to={"/Dashboard"}
-            style={{ textDecoration: "none", color: "Black" }}
-          >
-            Dashboard
-          </Link>
-        </button>
-
-        <button>
-          <Link to="/Cart" style={{ textDecoration: "none", color: "Black" }}>
-            Cart
-          </Link>
-        </button>
-        <button className="header-button-right">
-          <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
-            Logout
-          </Link>
-        </button>
+        <hr />
         <p>
-          Logged in as: {name}, {university}, {email}, {userID}
+          Logged in as: {name}, {university}
         </p>
+        <div className="MenuButtons">
+          <button onClick={toggleDropdown}>Account</button>
+          <button>
+            <Link
+              to={"/Dashboard"}
+              style={{ textDecoration: "none", color: "Black" }}
+            >
+              Dashboard
+            </Link>
+          </button>
+          <button>
+            <Link to="/Cart" style={{ textDecoration: "none", color: "Black" }}>
+              Cart
+            </Link>
+          </button>
+        </div>
         <Modal
           isOpen={showDropdown}
           onRequestClose={toggleDropdown}
@@ -187,8 +184,8 @@ function OrderStatus() {
         <p>We will send you an email confirmation shortly.</p>
 
         <p>{/*Your order ID is: { }*/}</p>
-        <div>
-          <h3>Current orders</h3>
+        <h3>Current orders</h3>
+        <div className="current-orders">
           {orders
             .filter(
               (order) =>
@@ -247,6 +244,7 @@ function OrderStatus() {
                     margin: "10px",
                     width: "300px",
                     background: "#fff",
+
                   }}
                 >
                   <h2>{order.restaurant_name}</h2>
@@ -295,7 +293,7 @@ function OrderStatus() {
                   }
                 </div>
               );
-            })}
+            })}   
         </div>
       </div>
 

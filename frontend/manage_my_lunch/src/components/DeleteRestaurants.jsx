@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logo from "./componentAssets/logov1.png";
 import { Link } from "react-router-dom";
 
 function DeleteRestaurants() {
@@ -37,19 +38,28 @@ function DeleteRestaurants() {
 
   return (
     <div>
+            <header>
+            <img src={logo} alt="Logo" height={100} />
+            <h1 className="display-4 text-center">Delete Restaurant</h1>
             <Link to="/dashboard" className="btn btn-outline-warning float-left">
               Show Restaurant List
             </Link>
+            </header>
+            <hr />
+            <div className='delete-user'>
       <form onSubmit={handleRestaurantDelete}>
+        <label>Please enter the Restaurant name: </label>
         <input
           type="text"
-          placeholder="Type a restaurant name"
           value={restaurantName}
           onChange={e => setRestaurantName(e.target.value)}
         />
         <button type="submit">Delete</button>
       </form>
+      </div>
+      <div className='delete-container'>
       {restaurants.map(restaurant => (
+        <div className='delete-item'>
         <div key={restaurant._id}>
           <h2>{restaurant.restaurantName}</h2>
           <p>{restaurant.description}</p>
@@ -57,7 +67,11 @@ function DeleteRestaurants() {
           <p>{restaurant.rating}</p>
           <p>{restaurant._id}</p>
         </div>
+        </div>
       ))}
+      </div>
+     
+      
     </div>
   );
 }

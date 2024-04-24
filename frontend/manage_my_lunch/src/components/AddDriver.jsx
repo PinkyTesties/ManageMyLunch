@@ -37,8 +37,8 @@ const AddDriver = () => {
                 </header>
                 <hr />
                 <div className='MenuButtons'>
-                    <button><Link to={'/Dashboard'}>Dashboard</Link></button>
-                    <button><Link to={'/Drivers'}>View Drivers</Link></button>
+                    <button><Link to={'/Dashboard'} style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
+                    <button><Link to={'/Drivers'} style={{ textDecoration: 'none', color: 'Black' }}>View Drivers</Link></button>
                 </div>
             </div>
             <div className='delete-user'>

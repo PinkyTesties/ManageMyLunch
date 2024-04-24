@@ -192,14 +192,14 @@ function Reports() {
     }, [page, selectedDate]);
 
     return (
-        <div className='report'>
-            <div>
-                <header><img src={logo} alt='Logo' height={100} />
+        <div>
+        <header><img src={logo} alt='Logo' height={100} />
                 <h2>Admin report generation</h2>
                 <p></p>
                 </header>
-                
                 <hr />
+        <div className='report'>
+            <div>
                 <div className='MenuButtons'>
                     <button onClick={() => { setPage('item'); fetchPopularMenuItem(); }}>Popular Menu Items</button>
                     <button onClick={() => { setPage('restaurant'); fetchPopularRestaurant(); }}>Popular Restaurants</button>
@@ -269,7 +269,7 @@ function Reports() {
                     <h5>Receipts for selected date: {dailyReceipts}</h5>
                     <div>
                         {receipts.map((receipt, index) => (
-                            <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
+                            <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px', width: '300px'}}>
                                 <p>Cart ID: {receipt._id}</p>
                                 <p>Restaurant ID: {receipt.restaurant_id}</p>
                                 <p>Menu Items: {Array.isArray(receipt.menuItems) && receipt.menuItems.length > 0 ? receipt.menuItems.join(', ') : 'No menu items'}</p>
@@ -303,6 +303,7 @@ function Reports() {
 
                 </>
             )}
+        </div>
         </div>
     );
 }

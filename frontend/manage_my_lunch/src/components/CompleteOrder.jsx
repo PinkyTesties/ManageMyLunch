@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { useNavigate } from 'react-router-dom';
+import logo from './componentAssets/logov1.png';
 
 
 const CompleteOrder = () => {
@@ -84,17 +85,25 @@ const CompleteOrder = () => {
   }
   return (
     <div className='complete_order'>
-        <h2>Complete your order</h2>
+      <header>
+      <img src={logo} alt='Logo' height={100} />
+      <h1>Complete your order</h1>
+      <p></p>
+      </header>
         <hr />
-        <p>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</p>
-      <input type="text" onChange={handleInputChange} />
+        <h6>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</h6>
+        <div className='delete-user'>
+        <input type="text" onChange={handleInputChange} />
       <button onClick={handleManualSearch}>Search</button>
       <div><h4>{code}</h4></div>
+        </div>
+      
       <div>
-        <p>****** DISPLAY CONTENT HERE *******</p>
         <p>{message}</p>
         {cart && (
+      
       <div className='complete-order'>
+        <br />
         <h3>Order Details:</h3>
         <p>Email: {cart.email}</p>
         <p>Restaurant: {cart.restaurant_name}</p>
@@ -106,15 +115,10 @@ const CompleteOrder = () => {
         <button onClick={markComplete}>Mark Complete</button>
               </div>
     )}
-      </div>
-
-      
-      <QrReader 
+    <QrReader className='qrcode'
       onResult={handleScan} 
       onError={handleError} />
-    
-
-
+      </div>
     </div>
   );
 };

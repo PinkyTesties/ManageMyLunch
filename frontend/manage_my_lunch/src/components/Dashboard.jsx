@@ -119,7 +119,6 @@ const Dashboard = ({ history }) => {
 
         <a href="/">Logout</a><br></br>
       </Modal>
-      <hr />
       <div className='ShowBookList'>
 
         <div className='container'>

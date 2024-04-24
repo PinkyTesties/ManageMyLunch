@@ -186,7 +186,7 @@ const Dashboard = ({ history }) => {
               <h2 className="display-4 text-center">Orders Available</h2>
               <br />
               </div>
-               <div className='col-md-11'>
+               <div className='MenuButtons'>
               <button onClick={handleAllOrdersClick}>All Orders</button>
               <button onClick={handleFilterByRestaurantClick}>
                 Select By Restaurant
@@ -196,6 +196,7 @@ const Dashboard = ({ history }) => {
                 Selected Orders
               </button>
               </div>
+              
               
               {page === "all-orders" && (
                 <div className="ShowBookList">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from './componentAssets/logov1.png';
 
 const DeleteMenuItem = () => {
     const [id, setId] = useState('');
@@ -27,11 +28,19 @@ const DeleteMenuItem = () => {
 
     return (
         <div>
-            <h1>Delete Menu Item</h1>
-            <form onSubmit={(e) => { e.preventDefault(); deleteMenuItem(); }}>
-                <input type="text" value={id} onChange={(e) => setId(e.target.value)} required />
+            <header>
+          <img src={logo} alt='Logo' height={100} />
+          <h1>Delete Menu Item</h1>
+          <p></p>
+        </header>
+        <hr />
+        <div className='delete-user'>
+        <form onSubmit={(e) => { e.preventDefault(); deleteMenuItem(); }}>
+                <input type="text" placeholder='Enter name of menu item' value={id} onChange={(e) => setId(e.target.value)} required />
                 <button type="submit">Delete Menu Item</button>
             </form>
+        </div>
+            
         </div>
     );
 }
