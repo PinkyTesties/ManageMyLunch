@@ -118,7 +118,9 @@ function ShowRestaurantDetails(props) {
       <header className='header'>
         <img src={logo} alt='Logo' height={100} />
         <h1>Manage My Lunch Dashboard</h1>
+        <p></p>
       </header>
+      <hr/>
       <button className='header-button' onClick={toggleDropdown}>Account</button>
       <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
       <button className='header-button-right'>Logout</button>
@@ -146,7 +148,6 @@ function ShowRestaurantDetails(props) {
             <br />
             <div className='col-md-8 m-auto'>
               <h1 className='display-4 text-center'>{restaurant.restaurantName}</h1>
-              <p className='lead text-center'>*******CSS NOT DONE. DO NOT SUBMIT!</p>
               <br /> <br />
             </div>
             <div className='col-md-10 m-auto'>{RestaurantItem}</div>

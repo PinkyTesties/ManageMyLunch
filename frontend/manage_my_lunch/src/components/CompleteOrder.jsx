@@ -83,8 +83,9 @@ const CompleteOrder = () => {
     }
   }
   return (
-    <div>
+    <div className='complete_order'>
         <h2>Complete your order</h2>
+        <hr />
         <p>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</p>
       <input type="text" onChange={handleInputChange} />
       <button onClick={handleManualSearch}>Search</button>

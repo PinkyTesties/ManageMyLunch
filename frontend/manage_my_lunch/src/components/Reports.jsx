@@ -191,9 +191,10 @@ function Reports() {
     }, [page, selectedDate]);
 
     return (
-        <div>
+        <div className='report'>
             <div>
                 <h2>Admin report generation</h2>
+                <hr />
                 <div>
                     <button onClick={() => { setPage('item'); fetchPopularMenuItem(); }}>Popular Menu Items</button>
                     <button onClick={() => { setPage('restaurant'); fetchPopularRestaurant(); }}>Popular Restaurants</button>
@@ -202,6 +203,7 @@ function Reports() {
                     <button onClick={() => { setPage('Reciepts'); }}>Reciepts</button>
                     <button onClick={() => { setPage('NewUsers'); }}>New Users</button>
                 </div>
+                <br></br>
             </div>
             {page === 'item' && popularItemDetails && (
                 <>
@@ -222,7 +224,6 @@ function Reports() {
                     <p>Restaurant ID: {popularRestaurant._id}</p>
                     <p>Rating: {popularRestaurant.rating} stars</p>
                     <p>Description: {popularRestaurant.description}</p>
-
                     <p>Appears in completed orders: {popularRestaurantCount} times</p>
 
                 </>

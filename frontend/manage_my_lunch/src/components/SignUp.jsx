@@ -67,16 +67,14 @@ const SignUp = (props) => {
 
   return (
             <div>
-              <header className="header">
-                <div className="header-center">
-                <img src={logo} alt='Logo' height={100} />
-                <h1>Sign Up to Manage My Lunch</h1>
-                </div>
+              <header>
+                <img src={logo} alt='Logo'/>
+                <Link to="/" className="btn-btn-link"><h1>Sign up to Manage My Lunch</h1></Link>
                 <div>
-                <p>Already have an account?</p > <Link to="/" className="btn btn-link">Login</Link>
-                <button>Sign up as driver</button>
+                <button className="btn-btn">Sign up as driver</button>
                 </div>
               </header>
+              <hr></hr>
             <main className="main-login">
             <form noValidate onSubmit={onSubmit}>
               <div className="form-group">
@@ -172,7 +170,7 @@ const SignUp = (props) => {
                 /> */}
               </div>
               <br></br>
-              <button type="submit">Sign Up</button>
+              <button className='btn-btn' type="submit">Sign Up</button>
       </form>
       </main>
     </div>

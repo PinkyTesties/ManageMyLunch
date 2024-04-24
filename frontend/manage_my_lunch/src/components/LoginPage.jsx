@@ -30,16 +30,16 @@ const LoginPage = () => {
 
   return (
     <div>
-      <header className="header">
-        <div className="header-center">
-          <img src={logo} alt='Logo' height={100} />
+      <header>
+          <img src={logo} alt='Logo'/>
           <h1>Manage My Lunch</h1>
-        </div>
-        <div>
-          <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
+        <div className='header-buttons'>
           <button className='btn-btn'><Link to={'/DriverLogin'}>Drivers Login</Link></button>
+          <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
+          
         </div>
       </header>
+      <hr />
       <main className='main-login'>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ const LoginPage = () => {
           required
         />
       </div>
-      <button type="submit">Login</button>
+      <button className='btn-btn' type="submit">Login</button>
       <br></br>
         <Link to="/UpdatePassword" className="btn-btn-link">I forgot my password</Link>
       </form>

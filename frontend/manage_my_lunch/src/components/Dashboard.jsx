@@ -96,15 +96,13 @@ return (
       <header className='header'>
         <img src={logo} alt='Logo' height={100} />
         <h1>Manage My Lunch Dashboard</h1>
+        <p></p>
       </header>
+      <hr />
       <div className='MenuButtons'>
         <button onClick={toggleDropdown}>Account</button>
-        
         <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
-
         <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
-
-
         <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         <button><Link to={'/'} style={{ textDecoration: 'none', color: 'Black' }}>Logout</Link></button>
       </div>
@@ -142,7 +140,8 @@ return (
         <div className='row'>
           <div className='col-md-12'>
             <br />
-            <h2 className='display-4 text-center'>Restaurants</h2>
+            <hr />
+            <hr />
           </div>
 
           <div className='col-md-11'>
@@ -160,7 +159,6 @@ return (
             </Link>
             <br />
             <br />
-            <hr />
           </div>
 
 
@@ -171,6 +169,7 @@ return (
 
       </div>
       <div className='restaurant-cards-container'>
+        <div className='rewards'><h2>Rewards</h2></div>
 {RestaurantList.length === 0 ? (
       <div className='alert alert-warning' role='alert'>
         No restaurants found.

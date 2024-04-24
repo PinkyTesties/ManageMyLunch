@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
+import beefImage from './beef.jpg';
 
 const Cart = () => {
   const [email, setEmail] = useState("");
@@ -166,20 +167,16 @@ const Cart = () => {
   }
 
   return (
-    <div className>
-      <header className="header">
-        <img src={logo} alt="Logo" height={100} />
+    <div>
+      <header>
+        <img src={logo} alt="Logo"/>
         <h1>Your Cart</h1>
-        <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+        <p></p>
       </header>
       {/*
           //<input type="time" onChange={e => setDeliveryTime(e.target.value)} required />
   */}
-      <button className="header-button-right">
-        <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
-          Logout
-        </Link>
-      </button>
+      <hr />
       <div>
         <div className="cart-top">
           <div>
@@ -188,19 +185,25 @@ const Cart = () => {
           <div>
             <h2>Total Cost: ${totalCost.toFixed(2)}</h2>
           </div>
-          <div>
+          {/* {<div>
             <h2>
               Date Created: {new Date(cart.date_created).toLocaleDateString()}
             </h2>
-          </div>
-        </div>
-        <div className="cart-middle">
+          </div>} */} 
+        </div>  
+        <div className='delivery'>
         Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required />
-        <p>-----------------------------------</p>
+        </div>
+        <hr />
+        <div className="cart-middle">
         {cart.menuItems.map((item, index) => (
-          <div key={index}>
-            <p><b>Item Name: {item.name}</b></p>
-            <p>Item Cost: ${parseFloat(item.cost).toFixed(2)}</p>
+          <div className='cart-items' key={index}>
+            <div className='remove-cart'>
+            <img src={beefImage}/>
+            </div>
+            <h4><b>{item.name}</b></h4>
+            <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
+            <p><b>${parseFloat(item.cost).toFixed(2)}</b></p>
             {item.ingredients.map((ingredient, i) => (
               <div key={i}>
                 <p>Ingredient Name: {ingredient.name}</p>
@@ -209,9 +212,7 @@ const Cart = () => {
               </div>
             ))}
             <p>Additional Information: {item.additional_information}</p>
-            <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
-            <p>***</p>
-   
+            <hr/>
           </div>
         ))}
         </div>
@@ -219,15 +220,19 @@ const Cart = () => {
         <br></br>
         <br></br>
         <br></br>
-        <p>Add additional information here: </p>
-<br></br>
+        <p> </p>
+        <br></br>
+        <div>
         <input
           type="text"
           value={additionalInfo}
           onChange={(e) => setAdditionalInfo(e.target.value)}
-          placeholder=""
-        /> <br></br>
+          placeholder="Add additional info here"
+        />
+        </div>
+        <div>
         <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0}>Buy Now</button>
+        </div>
         </div>
         
       </div>
