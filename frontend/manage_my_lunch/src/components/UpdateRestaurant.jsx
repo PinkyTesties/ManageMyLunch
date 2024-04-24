@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import logo from "./componentAssets/logov1.png";
 import axios from 'axios';
 import '../App.css';
 
@@ -59,21 +60,25 @@ function UpdateRestaurant(props) {
 
   return (
     <div className='UpdateBookInfo'>
+      <header>
+            <img src={logo} alt="Logo" height={100} />
+            <h1>Add Restaurant</h1>
+            <Link to="/dashboard" className="btn btn-outline-warning float-left">
+              Show Restaurant List
+            </Link>
+            </header>
+            <hr />
       <div className='container'>
         <div className='row'>
           <div className='col-md-8 m-auto'>
-            <br />
-            <Link to='/dashboard' className='btn btn-outline-warning float-left'>
-              Show restaurant List
-            </Link>
+
           </div>
         </div>
 
         <div className='row'>
           <div className='col-md-8 m-auto'>
-            <h1 className='display-4 text-center'>Edit restaurant</h1>
-            <p className='lead text-center'>Update restaurant's Info</p>
-
+            <p className='lead text-center'>Update <b>{restaurant.restaurantName}</b> info</p>
+            <div className='delete-user'>
             <form noValidate onSubmit={onSubmit}>
               <div className='form-group'>
                 <label htmlFor='title'>Name</label>
@@ -86,6 +91,7 @@ function UpdateRestaurant(props) {
                   onChange={onChange}
                 />
               </div>
+              
               <br />
               {/* Add other form fields similarly */}
               <button
@@ -95,6 +101,7 @@ function UpdateRestaurant(props) {
                 Update restaurant
               </button>
             </form>
+            </div>
           </div>
         </div>
       </div>

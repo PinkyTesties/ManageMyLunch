@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import logo from './componentAssets/logov1.png';
 
 
 const ReviewForm = () => {
@@ -57,31 +58,60 @@ const ReviewForm = () => {
 
   return (
     <div>
-      <h2>Review Form</h2>
-      <p>Restaurant Name: {restaurant ? restaurant.restaurantName : 'Loading...'}</p>
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" name="name" value={review.name} onChange={handleChange} required />
-      </label>
-      <label>
-        Stars:
-        <input type="text" name="stars" value={review.stars} onChange={handleChange} required />
-      </label>
-      <label>
-        Title:
-        <input type="text" name="title" value={review.title} onChange={handleChange} required/>
-      </label>
-      <label>
-        Textarea:
-        <input type="text" name="textarea" value={review.textarea} onChange={handleChange} required/>
-      </label>
-      {/* <label>
+      <header>
+        <img src={logo} alt='Logo' height={100} />
+        <h1>Review Form</h1>
+        <p></p>
+      </header>
+      <hr />
+      <p className="lead text-center"><b>Restaurant Name:</b> {restaurant ? restaurant.restaurantName : 'Loading...'}</p>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8 m-auto">
+            <br />
+            <p className="lead text-center">Your Personal Review</p>
+          </div>
+          <div className="col-md-10 m-auto">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>
+                  Name:
+                  </label>
+                  <input type="text" name="name" className="form-control" value={review.name} onChange={handleChange} required />
+              </div>
+              <br />
+              <div className="form-group">
+                <label>
+                  Stars:
+                  </label>
+                  <input type="text" name="stars" className="form-control" value={review.stars} onChange={handleChange} required />
+                
+              </div>
+              <br />
+              <div className="form-group">
+                <label>
+                  Title:
+                  </label>
+                  <input type="text" name="title" className="form-control" value={review.title} onChange={handleChange} required />
+              </div>
+              <br />
+              <div className="form-group">
+                <label>
+                  What did you think?
+                  </label>
+                  <textarea type="text" name="textarea" className="form-control"  value={review.textarea} onChange={handleChange} required />
+
+              </div>
+              <br />
+              {/* <label>
         Restaurant ID:
         <input type="text" name="restaurantID" value={review.restaurantID} onChange={handleChange} />
       </label> */}
-      <button type="submit">Submit Review</button>
-    </form>
+              <button type="submit">Submit Review</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
   );

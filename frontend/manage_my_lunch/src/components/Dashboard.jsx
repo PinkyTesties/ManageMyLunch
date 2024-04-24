@@ -130,7 +130,8 @@ const Dashboard = ({ history }) => {
 
             <div className='col-md-11'>
               <div className='restaurantFilter'>
-                <h4>Filter by cuisine:</h4><select value={selectedCuisine} onChange={handleCuisineChange}>
+                <h5>Filter by cuisine: </h5>
+                <select value={selectedCuisine} onChange={handleCuisineChange}>
                   <option value="">All</option>
                   <option value="BBQ">BBQ</option>
                   <option value="Healthy">Healthy</option>
@@ -142,6 +143,7 @@ const Dashboard = ({ history }) => {
                   <option value="Italian">Italian</option>
                   {/* Add more options as needed */}
                 </select>
+                
               </div>
             </div>
 

@@ -46,8 +46,8 @@ const Drivers = () => {
       <p></p>
       </header>
       <div className='MenuButtons'>
-      <button><Link to={'/AddDriver'}>Add Drivers</Link></button>
-      <button><Link to={'/Dashboard'}>Dashboard</Link></button>
+      <button><Link to={'/AddDriver'} style={{ textDecoration: 'none', color: 'Black' }}>Add Drivers</Link></button>
+      <button><Link to={'/Dashboard'} style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
       </div>
       <div className='driver-item'>
       {drivers.map((driver) => (
