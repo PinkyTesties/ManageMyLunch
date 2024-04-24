@@ -163,17 +163,12 @@ function OrderStatus() {
           isOpen={showDropdown}
           onRequestClose={toggleDropdown}
           contentLabel="Account Menu"
-          style={customStyles}
+          className="my-modal"
         >
-          <a href="#">Profile</a>
-          <br></br>
-          <a href="SettingsPage">Settings</a>
-          <br></br>
-          <a href="OrderStatus">Orders</a>
-          <br></br>
-
-          <a href="/">Logout</a>
-          <br></br>
+          <a href="#">Profile</a><br></br>
+          <a href="SettingsPage">Settings</a><br></br>
+          <a href="OrderStatus">Orders</a><br></br>
+          <a href="/">Logout</a><br></br>
         </Modal>
 
         <h1>Order Confirmation</h1>

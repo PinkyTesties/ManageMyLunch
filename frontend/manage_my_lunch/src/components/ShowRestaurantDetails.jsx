@@ -129,7 +129,7 @@ function ShowRestaurantDetails(props) {
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
         contentLabel="Account Menu"
-        style={customStyles}
+        className="my-modal"
       >
         <a href="#">Profile</a><br></br>
         <a href="SettingsPage">Settings</a><br></br>

@@ -170,7 +170,7 @@ const Dashboard = ({ history }) => {
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
         contentLabel="Account Menu"
-        style={customStyles}
+        className="my-modal"
       >
         <a href="#">Profile</a>
         <br></br>
