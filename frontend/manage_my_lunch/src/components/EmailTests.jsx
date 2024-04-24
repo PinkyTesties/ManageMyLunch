@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import { pushNotification } from './jsFiles/pushNotifications';
 
 const EmailTest = () => {
     const [email, setEmail] = useState('');
@@ -10,14 +11,14 @@ const EmailTest = () => {
     };
 
     const handleMessageChange = (e) => {
-        setPassword(e.target.value);
+        setMessage(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Add your sign-up logic here
         console.log('Email:', email);
-        console.log('Password:', password);
+        console.log('Message:', message);
     };
 
     const sendEmail = (e) => {
@@ -39,20 +40,26 @@ const EmailTest = () => {
         console.log('Message:', message);
     };
 
+    const title = "Manage My Lunch";
+    const content = "Fuck off wanker";
+
     return (
-        <form onSubmit={sendEmail}>
-            <label>
-                Email:
-                <input type="email" name="email_from" value={email} onChange={handleEmailChange} />
-            </label>
-            <br />
-            <label>
-                Message:
-<input type="text" name="message" value={message} onChange={e => setMessage(e.target.value)} />
-            </label>
-            <br />
-            <button type="submit">Sign Up</button>
-        </form>
+        <div>
+            <form onSubmit={sendEmail}>
+                <label>
+                    Email:
+                    <input type="email" name="email_from" value={email} onChange={handleEmailChange} />
+                </label>
+                <br />
+                <label>
+                    Message:
+                    <input type="text" name="message" value={message} onChange={handleMessageChange} />
+                </label>
+                <br />
+                <button type="submit">Send email</button>
+            </form>
+            <button onClick={(e) => pushNotification(e, title, content)}>Send a notification</button>
+        </div>
     );
 };
 

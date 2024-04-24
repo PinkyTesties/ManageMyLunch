@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import "./EditButtonFix.css";
 import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
+import { pushNotification } from './jsFiles/pushNotifications';
+
+import { differenceInSeconds } from 'date-fns'; // Import this function
+
+
 Modal.setAppElement("#root");
 
 function OrderStatus() {
@@ -18,6 +23,7 @@ function OrderStatus() {
   const [countdowns, setCountdowns] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [totalRemainingTimeInSeconds, setTotalRemainingTimeInSeconds] = useState(0);
 
   //const uniqueMenuItemIds = [...new Set(menuItemIds)];
 
@@ -26,6 +32,18 @@ function OrderStatus() {
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
+  const prevTotalRemainingTimeInSeconds = useRef();
+
+  useEffect(() => {
+    prevTotalRemainingTimeInSeconds.current = totalRemainingTimeInSeconds;
+  }, [totalRemainingTimeInSeconds]);
+  
+  useEffect(() => {
+    if (totalRemainingTimeInSeconds === 0 && prevTotalRemainingTimeInSeconds.current > 0) {
+      console.log('Edit time has elapsed.');
+    }
+  }, [totalRemainingTimeInSeconds]);
 
   const customStyles = {
     content: {
@@ -263,23 +281,14 @@ function OrderStatus() {
                   <p>Status: {order.orderStatus}</p>
                   <p>Order code: {order.code}</p>
                   <p>Driver contact: {order.driver_email}</p>
-                  {/** 
 
-                            <p>Current Time: {currentTime.toString()}</p>
-                            <p>Order Time (24-hour format): {time24}</p>
-
-<p>Order Time (24-hour format): {time24}</p>
-<p>Order Time (Date object): {orderTime.toString()}</p>
-<p>Current Time: {currentTime.toString()}</p>
-
-                            <p>Time Remaining: {remainingMinutes} minutes {remainingSeconds} seconds</p>
-                             */}
                   <p></p>
                   {totalRemainingTimeInSeconds > 0 ? (
                     <Link to={`/EditOrder/${order._id}`}>
                       <button className="edit-button">Edit Order</button>
                     </Link>
                   ) : (
+                    
                     <button disabled className="edit-button disabled">
                       Edit Order
                     </button>
