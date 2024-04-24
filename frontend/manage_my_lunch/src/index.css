@@ -225,6 +225,10 @@ header img {
   margin: 3em;
 }
 
+.review {
+  width: 350px;
+}
+
 .restaurant-footer {
   display: flex;
   justify-content: space-evenly;

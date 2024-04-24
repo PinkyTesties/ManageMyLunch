@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import logo from './componentAssets/logov1.png';
 
 const ViewRestaurantReviews = () => {
     const { id } = useParams();
@@ -34,19 +35,23 @@ const ViewRestaurantReviews = () => {
         <div>
             {restaurant ? (
                 <div>
-                    <h1>Restaurant reviews</h1>
+                    <header>
+                        <img src={logo} alt='Logo' height={100} />
+                        <h1>Restaurant reviews</h1>
+                        <p></p>
+                    </header>
+                    <hr />
                     <h2>{restaurant.restaurantName}</h2>
-                    <p>ID: {restaurant._id}</p>
-                    <p>Cuisine: {restaurant.cuisine}</p>
-                    <p>Rating: {restaurant.rating}</p>
-                    <p>Description: {restaurant.description}</p>
-
+                    <h6>Cuisine: {restaurant.cuisine}</h6>
+                    <h6>Rating: {restaurant.rating}</h6>
+                    <h6>Description: {restaurant.description}</h6>
+                    <br />
                 </div>
             ) : (
                 <p>Loading...</p>
             )}
 
-            <div>
+            <div className='review'>
                 <h2>Reviews</h2>
                 {Array.isArray(reviews) && reviews.length === 0 ? (
                     <p>No reviews found</p>
