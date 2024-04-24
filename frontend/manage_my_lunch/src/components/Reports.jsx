@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import logo from './componentAssets/logov1.png';
 
 function Reports() {
     const [popularItem, setPopularItem] = useState(null);
@@ -193,7 +194,11 @@ function Reports() {
     return (
         <div className='report'>
             <div>
+                <header><img src={logo} alt='Logo' height={100} />
                 <h2>Admin report generation</h2>
+                <p></p>
+                </header>
+                
                 <hr />
                 <div className='MenuButtons'>
                     <button onClick={() => { setPage('item'); fetchPopularMenuItem(); }}>Popular Menu Items</button>

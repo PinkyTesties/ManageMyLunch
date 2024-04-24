@@ -92,8 +92,8 @@ const Dashboard = ({ history }) => {
 
   return (
     <div>
-      <div className='header'>
-        <header className='header'>
+      <div>
+        <header>
           <img src={logo} alt='Logo' height={100} />
           <h1>Manage My Lunch Dashboard</h1>
           <p></p>
