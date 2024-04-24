@@ -14,7 +14,7 @@ const RestaurantPanel = ({ restaurant }) => {
         height={200}
       />
       </Link>
-      <span><p>{restaurant.restaurantName}</p></span>
+      <b>{restaurant.restaurantName}</b>
       <hr></hr>
       </div>
       <p>{restaurant.description}</p>

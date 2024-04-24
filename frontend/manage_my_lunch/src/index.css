@@ -76,8 +76,7 @@ button:hover {
   background-color: #535bf2;
 }
 
-button:focus,
-button:focus-visible {
+button:focus, button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -107,11 +106,8 @@ button:focus-visible {
 .remove-cart {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  
+  text-align:  center;
 }
-
-
 
 .cart-top {
   display: flex;
@@ -124,10 +120,6 @@ button:focus-visible {
 }
 
 .complete_order {
-  text-align: center;
-}
-
-.delivery {
   text-align: center;
 }
 
@@ -205,8 +197,8 @@ header img {
 
 .MenuButtons {
   display: flex;
-  justify-content: space-evenly;
-  padding-top: 1em;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .my-modal {
@@ -229,7 +221,8 @@ header img {
 }
 
 .report {
-  text-align: center;
+  text-align: left;
+  margin: 3em;
 }
 
 .restaurant-footer {
@@ -242,4 +235,11 @@ header img {
 .restaurant-item {
   display: flex;
   justify-content: space-between;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 1em;
 }

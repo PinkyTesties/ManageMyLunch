@@ -157,22 +157,15 @@ const Dashboard = ({ history }) => {
       <header className='header'>
       <img src={logo} alt="Logo" height={100} />
       <h1>Driver Dashboard</h1>
-      <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
-      </header>
-      <div className='MenuButtons'>
       <button onClick={toggleDropdown}>Account</button>
-      <button className="header-button-right">
-        <Link
-          to={"/DriverLogin"}
-          style={{ textDecoration: "none", color: "Black" }}
-        >
-          Logout
-        </Link>
-      </button>
-      </div>
+      </header>
+      <hr />
       <p>
-        Logged in as: {name}, {email}, {userID}
+        Logged in as: {name}  
       </p>
+
+      
+      
       <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
@@ -190,8 +183,8 @@ const Dashboard = ({ history }) => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
+              <h2 className="display-4 text-center">Orders Available</h2>
               <br />
-              <h2 className="display-4 text-center">Orders available to assign</h2>
               </div>
                <div className='col-md-11'>
               <button onClick={handleAllOrdersClick}>All Orders</button>
@@ -203,7 +196,7 @@ const Dashboard = ({ history }) => {
                 Selected Orders
               </button>
               </div>
-
+              
               {page === "all-orders" && (
                 <div className="ShowBookList">
                   <div className="order-cards-container">
@@ -237,7 +230,8 @@ const Dashboard = ({ history }) => {
                       style={{
                         border: "1px solid black",
                         padding: "10px",
-                        margin: "10px",
+                        marginBottom: "10px",
+                        width: "250px"
                       }}
                     >
                       <p>Order ID: {order._id}</p>

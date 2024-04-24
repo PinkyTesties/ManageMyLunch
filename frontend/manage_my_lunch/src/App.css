@@ -57,13 +57,17 @@
   margin: 1em;
 }
 
-.restaurant-cards-container {
+.order-container {
+  text-align: left;
+}
+
+.restaurant-cards-container, .order-cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
 
-.restaurantcard-container, .menucard-container {
+.restaurantcard-container, .restaurantcard-container-driver, .menucard-container {
   width: 250px;
   height: 470px;
   padding: 2em;
@@ -71,7 +75,7 @@
   text-align: left;
 }
 
-.restaurantcard-container img, .menucard-container img {
+.restaurantcard-container img, .restaurantcard-container-driver img, .menucard-container img {
   width: 250px;
   object-fit: fill;
   border-radius: 10%;
@@ -91,18 +95,6 @@
 .rewards h2 {
   padding: 1em;
 }
-
-
-.row {
-  margin-left: 1em;
-}
-
-.order-cards-container {
-  display: flex;
-  flex-direction: row;
-}
-
-
 .MenuButtons {
   justify-content: space-evenly;
 }
@@ -140,5 +132,5 @@
 .restaurantFilter {
   display: flex;
   align-items: center;
-  gap: 10px;
+  padding-left: 6em;
 }

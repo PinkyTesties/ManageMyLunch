@@ -178,31 +178,27 @@ const Cart = () => {
   */}
       <hr />
       <div>
-        <div className="cart-top">
-          <div>
+
+        <div className="cart-top"> 
+        <span>Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required /></span>
             <h2>{restaurantName}</h2>
-          </div>
-          <div>
             <h2>Total Cost: ${totalCost.toFixed(2)}</h2>
-          </div>
           {/* {<div>
             <h2>
               Date Created: {new Date(cart.date_created).toLocaleDateString()}
             </h2>
           </div>} */} 
         </div>  
-        <div className='delivery'>
-        Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required />
-        </div>
-        <hr />
         <div className="cart-middle">
         {cart.menuItems.map((item, index) => (
           <div className='cart-items' key={index}>
             <div className='remove-cart'>
             <img src={beefImage}/>
             </div>
+            <div className="remove-cart">
             <h4><b>{item.name}</b></h4>
             <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
+            </div>
             <p><b>${parseFloat(item.cost).toFixed(2)}</b></p>
             {item.ingredients.map((ingredient, i) => (
               <div key={i}>
