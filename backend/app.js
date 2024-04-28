@@ -2,11 +2,14 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const session = require("express-session"); 
+const MongoStore = require('connect-mongo');
+
 const cookieParser = require ('cookie-parser');
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const authRoute = require("./routes/api/AuthRoute");
 const port = process.env.PORT;
+const mongoUrl = process.env.MONGO_URI;
 
 // const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -45,15 +48,11 @@ app.use(bodyParser.json());
 app.use("/", authRoute);
 
 app.use(session({
-      secret: "secret", // Set a secret for session management
-      resave: false,
-      saveUninitialized: false, 
-      cookie: {
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24 // 1 week
-      }
-    }));
-
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: mongoUrl })
+}));
 // use the cors middleware with the
 // origin and credentials options
 //app.use(cors({ origin: true, credentials: true }));
