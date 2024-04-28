@@ -100,4 +100,4 @@ connectDB();
 
 app.get("/", (req, res) => res.send("Yo my guy this is the wrong tab, this is the backend host"));
 //const port = process.env.PORT || 8082;
-app.listen(port, () => console.log(`Server running on port ${port}, ass`));
+app.listen(port, () => console.log(`Server running on port ${port}, ass1`));
