@@ -3,12 +3,9 @@
 
 
 const mongoose = require("mongoose");
-const db =
-  
-  
- "mongodb+srv://btj0392:yNgwDBoS5mouG4wC@cluster0.31u7ub6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-/* Replace <password> with your database password */
+require('dotenv').config();
+const db = process.env.MONGO_URI; /* Replace <username> with your database username */
 
 mongoose.set("strictQuery", true, "useNewUrlParser", true);
 
@@ -18,7 +15,8 @@ const connectDB = async () => {
     console.log("Success! MongoDB is Connected...");
   } catch (err) {
     console.error(err.message);
-    console.log("PROBABLY AN IP ADDRESS ISSUE. ADD YOUR IP ADDRESS IN MONGODB DASHBOARD");
+    console.log("Tyler says: Either an IP issue or old db.js file.");
+    console.log("Add your ip address in MongoDB, or check discord chat for latest db.js file");
 
     process.exit(1);
   }

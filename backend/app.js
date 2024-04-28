@@ -6,7 +6,7 @@ const cookieParser = require ('cookie-parser');
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const authRoute = require("./routes/api/AuthRoute");
-const { MONGODB_URI } = process.env;
+const port = process.env.PORT;
 
 // const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -100,5 +100,5 @@ connectDB();
 
 
 app.get("/", (req, res) => res.send("Yo my guy this is the wrong tab, this is the backend host"));
-const port = process.env.PORT || 8082;
+//const port = process.env.PORT || 8082;
 app.listen(port, () => console.log(`Server running on port ${port}`));
