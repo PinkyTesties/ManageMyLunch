@@ -86,11 +86,13 @@ app.use('/menuItem_assets', express.static('menuItem_assets'));
 
 
 app.get('/', (req, res) => {
+  console.log('Session data:', req.session);
+
   if(req.session.name) {
-    return res.json({valid:true, name: req.session.name, email: req.session.email, university: req.session.university, _id: req.session.user_Id});
+    return res.json({valid:true, name: req.session.name, email: req.session.email, university: req.session.university, _id: req.session.userId});
   } else {
     return res.json({valid:false});
-    }
+  }
 });
 
 // Connect Database

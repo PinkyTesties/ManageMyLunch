@@ -37,7 +37,7 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     axios.get(`${backendURL}`, { withCredentials: true })
           .then((res) => {
-        console.log('Session cookie:', document.cookie);
+            console.log('Server response:', res);
   
         if (res.data.valid) {
           setName(res.data.name);
@@ -45,10 +45,8 @@ const Dashboard = ({ history }) => {
           setUniversity(res.data.university);
           setUserID(res.data._id);
         } else {
-          console.log('Session cookie:', document.cookie);
   
           navigate('/');
-          console.log('Response data:', res.data);
 
         }
       })
