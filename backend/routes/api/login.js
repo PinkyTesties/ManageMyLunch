@@ -28,6 +28,12 @@ router.post('/', (req, res) => {
         req.session.userId = user._id;
                 req.session.email = user.email;
 
+                req.session.save(err => {
+                  if (err) {
+                    console.error('Error saving session:', err);
+                    return res.status(500).json({ error: 'Internal server error' });
+                  }
+
         console.log(req.session.name);
         console.log(req.session.university);
         console.log(req.session.userId);
