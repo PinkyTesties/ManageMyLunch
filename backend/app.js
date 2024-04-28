@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const session = require("express-session"); 
 const MongoStore = require('connect-mongo');
 
+
 const cookieParser = require ('cookie-parser');
 const bodyParser = require("body-parser");
 require("dotenv").config();
@@ -47,11 +48,13 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use("/", authRoute);
 
+
 app.use(session({
   secret: 'your secret',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // set to true if you're using https
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: { secure: true } // set to true if you're using https
 }));
 // use the cors middleware with the
 // origin and credentials options
@@ -100,6 +103,6 @@ connectDB();
 
 
 
-app.get("/", (req, res) => res.send("Yo my guy this is the wrong tab, this is the backend host"));
+//app.get("/", (req, res) => res.send("Yo my guy this is the wrong tab, this is the backend host"));
 //const port = process.env.PORT || 8082;
 app.listen(port, () => console.log(`Server running on port ${port}, ass2`));
