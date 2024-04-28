@@ -33,6 +33,15 @@ app.use(session({
   cookie: { secure: false, sameSite: 'lax', httpOnly: true } // set to true if you're using https
 }));
 
+
+app.get('/', (req, res) => {
+  if (req.session && req.session.user) {
+    res.json({ success: true, user: req.session.user });
+  } else {
+    res.json({ success: false });
+  }
+});
+
 // Connect Database
 connectDB();
 
@@ -68,11 +77,4 @@ app.use('/api/DriverReviewForm', driverReviews);
 app.use('/restaurant_assets', express.static('restaurant_assets'));
 app.use('/menuItem_assets', express.static('menuItem_assets'));
 
-app.get('/', (req, res) => {
-  if (req.session && req.session.user) {
-    res.json({ success: true, user: req.session.user });
-  } else {
-    res.json({ success: false });
-  }
-});
 app.listen(port, () => console.log(`Server running on port ${port}`));
