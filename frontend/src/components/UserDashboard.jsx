@@ -31,7 +31,7 @@ const UserDashboard = ({ history }) => {
     setShowDropdown(!showDropdown);
   };
   useEffect(() => {
-    axios.get(`${backendURL}`, { withCredentials: true })
+    axios.get(`${backendURL}/`, { withCredentials: true })
       .then((res) => {
         console.log('Server response:', res);
     
@@ -66,7 +66,7 @@ const UserDashboard = ({ history }) => {
       </div>
       <p>Logged in as: {userDetails.name}, {userDetails.university}, {userDetails.email}, {userDetails.userID}</p>
             {console.log(userDetails.name, userDetails.university, userDetails.email, userDetails.userID)}
-            
+
         <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}

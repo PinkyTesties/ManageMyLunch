@@ -43,7 +43,7 @@ const Dashboard = ({ history }) => {
   };
 
   useEffect(() => {
-    axios.get(`${backendURL}`, { withCredentials: true })
+    axios.get(`${backendURL}/`, { withCredentials: true })
           .then((res) => {
             console.log('Server response:', res);
             if (res.data.success) {
