@@ -35,8 +35,8 @@ const Dashboard = ({ history }) => {
   };
 
   useEffect(() => {
-    axios.get(`${backendURL}`)
-      .then((res) => {
+    axios.get(`${backendURL}`, { withCredentials: true })
+          .then((res) => {
         console.log('Session cookie:', document.cookie);
   
         if (res.data.valid) {

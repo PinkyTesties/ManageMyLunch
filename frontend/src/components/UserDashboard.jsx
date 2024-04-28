@@ -32,8 +32,8 @@ const UserDashboard = ({ history }) => {
   };
 
   useEffect(() => {
-    axios.get(`${backendURL}`)
-      .then((res) => {
+    axios.get(`${backendURL}`, { withCredentials: true })
+          .then((res) => {
         if (res.data.valid) {
           setUserDetails({
             name: res.data.name,

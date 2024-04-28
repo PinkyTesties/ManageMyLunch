@@ -48,13 +48,10 @@ app.use(bodyParser.json());
 app.use("/", authRoute);
 
 app.use(session({
-  secret: 'secret',
+  secret: 'your secret',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: mongoUrl }),
-  cookie: {
-    name: 'my.session.cookiass' // replace with your desired cookie name
-  }
+  cookie: { secure: false } // set to true if you're using https
 }));
 // use the cors middleware with the
 // origin and credentials options
@@ -103,4 +100,4 @@ connectDB();
 
 app.get("/", (req, res) => res.send("Yo my guy this is the wrong tab, this is the backend host"));
 //const port = process.env.PORT || 8082;
-app.listen(port, () => console.log(`Server running on port ${port}, ass1`));
+app.listen(port, () => console.log(`Server running on port ${port}, ass2`));
