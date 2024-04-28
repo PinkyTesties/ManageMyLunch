@@ -13,7 +13,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 //Basically every frontend page we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
 
-import LoginPage from "./components/LoginPage"; 
+import HomePage from "./components/HomePage"; 
 import SignUp from "./components/SignUp"; 
 import Dashboard from "./components/Dashboard"; 
 import UpdatePassword from "./components/UpdatePassword"; 
@@ -39,14 +39,14 @@ import DriverLogin from "./components/DriverLogin";
 import DriverDashboard from "./components/DriverDashboard";
 import CodeReader from "./components/CodeReader";
 import CompleteOrder from "./components/CompleteOrder";
-
-//hello
+import Login from "./components/Login";
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/", element: <LoginPage /> },
+  { path: "/", element: <HomePage /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
+  { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/UpdatePassword", element: <UpdatePassword /> },
   { path: "/SettingsPage", element: <SettingsPage /> },
