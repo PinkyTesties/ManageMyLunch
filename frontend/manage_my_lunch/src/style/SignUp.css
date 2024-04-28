@@ -1,127 +1,148 @@
+/* Container for the signup form */
 .signup-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
-
-.signup-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.signup-header img {
-  width: 100px;
-  height: auto;
-}
-
-.signup-header h1 {
-  font-size: 24px;
-  color: #000;
-  margin-top: 10px;
-}
-
-.signup-main {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-}
-
-.signup-form-group {
-  margin-bottom: 15px;
-}
-
-.signup-input-field {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.signup-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.signup-btn:hover {
-  background-color: #333;
-}
-
-.signup-btn-google, .signup-btn-apple {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.signup-btn-google {
-  background-color: #4285F4;
-  color: #fff;
-}
-
-.signup-btn-google:before {
-  content: url('');
-  display: inline-block;
-  height: 18px;
-  margin-right: 8px;
-}
-
-.signup-btn-google:hover {
-  background-color: #2B7DE9;
-}
-
-.signup-btn-apple {
-  background-color: #000;
-  color: #fff;
-}
-
-.signup-btn-apple:before {
-  content: url('');
-  display: inline-block;
-  height: 18px;
-  margin-right: 8px;
-}
-
-.signup-btn-apple:hover {
-  background-color: #333;
-}
-
-.signup-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.signup-footer p {
-  color: #888;
-  font-size: 14px;
-}
-
-.signup-btn-link {
-  color: #000;
-  text-decoration: none;
-}
-
-.signup-error, .signup-success {
-  color: #ff0000;
-  margin-bottom: 10px;
-}
-
-.signup-success {
-  color: #008000;
-}
+    width: 100%;
+    max-width: 400px; /* Maximum width */
+    margin: 0 auto; /* Centering */
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Header of the signup form */
+  .signup-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Image in the header */
+  .signup-header img {
+    width: 100px;
+    height: auto;
+  }
+  
+  /* Title in the header */
+  .signup-header h1 {
+    font-size: 24px;
+    color: #000;
+    margin-top: 10px;
+  }
+  
+  /* Main part of the signup form */
+  .signup-main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Shadow effect */
+  }
+  
+  /* Group of form fields */
+  .signup-form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Input fields in the form */
+  .signup-input-field {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Signup button */
+  .signup-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* Hover effect for the signup button */
+  .signup-btn:hover {
+    background-color: #333;
+  }
+  
+  /* Google and Apple signup buttons */
+  .signup-btn-google, .signup-btn-apple {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  /* Google signup button */
+  .signup-btn-google {
+    background-color: #4285F4;
+    color: #fff;
+  }
+  
+  /* Icon for the Google signup button */
+  .signup-btn-google:before {
+    content: url('');
+    display: inline-block;
+    height: 18px;
+    margin-right: 8px;
+  }
+  
+  /* Hover effect for the Google signup button */
+  .signup-btn-google:hover {
+    background-color: #2B7DE9;
+  }
+  
+  /* Apple signup button */
+  .signup-btn-apple {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  /* Icon for the Apple signup button */
+  .signup-btn-apple:before {
+    content: url('');
+    display: inline-block;
+    height: 18px;
+    margin-right: 8px;
+  }
+  
+  /* Hover effect for the Apple signup button */
+  .signup-btn-apple:hover {
+    background-color: #333;
+  }
+  
+  /* Footer of the signup form */
+  .signup-footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Text in the footer */
+  .signup-footer p {
+    color: #888;
+    font-size: 14px;
+  }
+  
+  /* Link in the footer */
+  .signup-btn-link {
+    color: #000;
+    text-decoration: none;
+  }
+  
+  /* Error and success messages */
+  .signup-error, .signup-success {
+    color: #ff0000;
+    margin-bottom: 10px;
+  }
+  
+  /* Success message */
+  .signup-success {
+    color: #008000;
+  }

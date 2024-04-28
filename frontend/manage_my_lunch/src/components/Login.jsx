@@ -64,7 +64,7 @@ const Login = () => {
                         <button type="submit" className="btn solid">Login</button>
                         <p className="social-text">Or Sign in with social platforms</p>
                         <div className="social-media">
-                            {/* Add your social media links here */}
+                            {/* social media links here */}
                         </div>
                     </form>
                 </div>
