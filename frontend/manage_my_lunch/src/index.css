@@ -35,14 +35,13 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url('././components/componentAssets/background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
 }
 
-body.logged-in {
-  background: none;
+
+.btn-btn {
+  background-color: #808080;
+  margin: 5px;
+  border-radius: 12px;
 }
 
 .btn-btn a {
@@ -77,36 +76,51 @@ button:hover {
   background-color: #535bf2;
 }
 
-button:focus,
-button:focus-visible {
+button:focus, button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-.cart-top {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding-bottom: 3em;
-}
-
-.cart-middle, .order-history {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  padding-bottom: 3em;
 }
 
 .cart-bottom {
   display: flex;
   justify-content: center;
   align-items: center; 
-  padding-right: 3em;
+}
+
+.cart-bottom button {
+  margin: 1em;
+}
+
+.cart-items {
+  width: 1000px;
+  padding: 1em;
+  margin: 1em;
+}
+
+.cart-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: left;
+  padding-bottom: 3em;  
+}
+.remove-cart {
+  display: flex;
+  justify-content: flex-start;
+  text-align:  center;
+}
+
+.cart-top {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .complete-order {
   background-color: #ffffff;
   width: 300px;
+}
+
+.complete_order {
+  text-align: center;
 }
 
 .forgot-password-link {
@@ -126,32 +140,46 @@ h1 {
   line-height: 1.1;
 }
 
-.driver-header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-left: 30em;
-
-}
-
-.header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-bottom: 2em;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-}
-
-.main-login {
+.header-driver {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4em;
-  padding-left: 18em;
+
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+
+header img {
+  height: 65px; 
+}
+
+.header-buttons {
+  display: block;
+  margin: 5px;
+
+}
+
+.item {
+  text-align: center;
+}
+
+.item hr {
+  width: 250px;
+
+}
+
+.main-login  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4em;
+  padding-right: 8em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -169,8 +197,8 @@ h1 {
 
 .MenuButtons {
   display: flex;
-  justify-content: space-evenly;
-  padding-top: 1em;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .my-modal {
@@ -192,10 +220,13 @@ h1 {
   z-index: 1000;
 }
 
-.ShowBookList, .ShowBookDetails {
-  background-image: url('././components/componentAssets/background2.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+.report {
+  text-align: left;
+  margin: 3em;
+}
+
+.review {
+  width: 350px;
 }
 
 .restaurant-footer {
@@ -208,4 +239,11 @@ h1 {
 .restaurant-item {
   display: flex;
   justify-content: space-between;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 1em;
 }

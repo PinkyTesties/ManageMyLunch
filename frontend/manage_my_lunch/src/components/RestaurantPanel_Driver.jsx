@@ -42,10 +42,10 @@ const RestaurantPanel_Driver = ({ restaurant }) => {
         height={200}
       />
       <div className="desc-driver">
-        <h2>{restaurant.restaurantName}</h2>
-        <h3>{restaurant.address}</h3>
+        <b>{restaurant.restaurantName}</b>
+        <hr />
+        <p>{restaurant.address}</p>
         <p>Orders Available: {completedCarts.length}</p><br></br>
-        <br></br>
         <button onClick={handleSelectAll}>Select All</button>
       </div>
     </div>

@@ -168,21 +168,21 @@ function Reports() {
 
     const fetchUsersForDate = async (date) => {
         try {
-          const response = await axios.get('http://localhost:8082/api/users');
-          const allUsers = response.data;
-      
-          const usersForDate = allUsers.filter(user => {
-            const userDate = new Date(user.date_added);
-            return userDate.getDate() === date.getDate() &&
-              userDate.getMonth() === date.getMonth() &&
-              userDate.getFullYear() === date.getFullYear();
-          });
-      
-          setUsers(usersForDate);
+            const response = await axios.get('http://localhost:8082/api/users');
+            const allUsers = response.data;
+
+            const usersForDate = allUsers.filter(user => {
+                const userDate = new Date(user.date_added);
+                return userDate.getDate() === date.getDate() &&
+                    userDate.getMonth() === date.getMonth() &&
+                    userDate.getFullYear() === date.getFullYear();
+            });
+
+            setUsers(usersForDate);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
 
     useEffect(() => {
         if (page === 'NewUsers') {
@@ -191,21 +191,24 @@ function Reports() {
     }, [page, selectedDate]);
 
     return (
-        <div>
+        <div className='report'>
             <div>
                 <h2>Admin report generation</h2>
-                <div>
+                <hr />
+                <div className='MenuButtons'>
                     <button onClick={() => { setPage('item'); fetchPopularMenuItem(); }}>Popular Menu Items</button>
                     <button onClick={() => { setPage('restaurant'); fetchPopularRestaurant(); }}>Popular Restaurants</button>
                     <button onClick={() => { setPage('QR'); }}>Successful QR Pickup</button>
                     <button onClick={() => { setPage('DailyOrderCount'); }}>Daily order count</button>
-                    <button onClick={() => { setPage('Reciepts'); }}>Reciepts</button>
+                    <button onClick={() => { setPage('Receipts'); }}>Receipts</button>
                     <button onClick={() => { setPage('NewUsers'); }}>New Users</button>
                 </div>
+                <br></br>
             </div>
             {page === 'item' && popularItemDetails && (
                 <>
-                    <p>Most popular item: {popularItemDetails.name}</p>
+                    <h5>Most popular item:</h5>
+                    <p>{popularItemDetails.name}</p>
                     <p>ID: {popularItemDetails._id}</p>
                     <p>Price: ${popularItemDetails.cost}</p>
                     <p>Description: {popularItemDetails.item_desc}</p>
@@ -218,11 +221,11 @@ function Reports() {
             )}
             {page === 'restaurant' && popularRestaurant && (
                 <>
-                    <p>Most popular restaurant: {popularRestaurant.restaurantName}</p>
+                    <h5>Most popular restaurant:</h5>
+                    <p>{popularRestaurant.restaurantName}</p>
                     <p>Restaurant ID: {popularRestaurant._id}</p>
                     <p>Rating: {popularRestaurant.rating} stars</p>
                     <p>Description: {popularRestaurant.description}</p>
-
                     <p>Appears in completed orders: {popularRestaurantCount} times</p>
 
                 </>
@@ -235,23 +238,30 @@ function Reports() {
             )}
             {page === 'DailyOrderCount' && (
                 <>
-                    <p>Daily Order count info goes here</p>
+                    <h4>Daily Order Count</h4>
+                    <br />
                     <div>
                         <label>Select a date:</label>
                         <DatePicker selected={selectedDate} onChange={handleDateChange} />
                     </div>
-                    <p>Total orders for selected date: {orderCount}</p>
+                    <br />
+                    <br />
+                    <h5>Total orders for selected date: {orderCount}</h5>
 
 
                 </>
             )}
-            {page === 'Reciepts' && (
+            {page === 'Receipts' && (
                 <>
-                    <p>Total receipts: {totalReceipts}</p>
-                    <label>Select a date:</label>
-                    <DatePicker selected={selectedDate} onChange={handleDateChange} />
-                    <p>Receipts for selected date: {dailyReceipts}</p>
-
+                    <h4>Total receipts: {totalReceipts}</h4>
+                    <br />
+                    <div>
+                        <label>Select a date:</label>
+                        <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                    </div>
+                    <br />
+                    <br />
+                    <h5>Receipts for selected date: {dailyReceipts}</h5>
                     <div>
                         {receipts.map((receipt, index) => (
                             <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
@@ -266,9 +276,15 @@ function Reports() {
             )}
             {page === 'NewUsers' && (
                 <>
-                 <label>Select a date:</label>
-                    <DatePicker selected={selectedDate} onChange={handleDateChange} />
-                    <p>Users signed up on selected date: {users.length}</p>
+                    <h4>Total New Users</h4>
+                    <br />
+                    <div>
+                        <label>Select a date:</label>
+                        <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                    </div>
+                    <br />
+                    <br />
+                    <h5>Users signed up on selected date: {users.length}</h5>
                     <div>
                         {users.map((user, index) => (
                             <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
@@ -279,9 +295,9 @@ function Reports() {
                             </div>
                         ))}
                     </div>
-                  
+
                 </>
-)}
+            )}
         </div>
     );
 }

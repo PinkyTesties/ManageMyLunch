@@ -108,25 +108,28 @@ const MenuItemViewer = () => {
     <div>
       {menuItem ? (
         <>
+        <header>
+        <h3>{menuItem.name}</h3>
           <button>
             <Link to={`/MenuItemEditor/${menuItem._id}`}>Edit this item</Link>
           </button>
-
-          <h3>Menu item: {menuItem.name} ({menuItem._id})</h3>
-          <div>
-            <p>Name: {menuItem.name} email: {email}</p>
+          </header>
+          <hr/>
+          <div>   
             <p>Description: {menuItem.item_desc}</p>
             <p>Ingredients:</p>
             {menuItem.ingredients.map((ingredient, index) => (
-              <div key={index}>
+              <div className='menu-item' key={index}>
                 <span>{ingredient.name}: </span>
                 <span>{ingredientCounts[ingredient.name]}</span>
                 <button onClick={() => incrementIngredient(ingredient.name)}>+</button>
                 <button onClick={() => decrementIngredient(ingredient.name)}>-</button>
               </div>
             ))}
+            <br></br>
             <textarea value={instructions} onChange={handleInstructionsChange} placeholder="Additional instructions..."></textarea>
           </div>
+          <br></br>
           <button onClick={addToCart}>Add to cart</button>
 
         </>

@@ -63,7 +63,7 @@ function UpdateRestaurant(props) {
         <div className='row'>
           <div className='col-md-8 m-auto'>
             <br />
-            <Link to='dashboard' className='btn btn-outline-warning float-left'>
+            <Link to='/dashboard' className='btn btn-outline-warning float-left'>
               Show restaurant List
             </Link>
           </div>

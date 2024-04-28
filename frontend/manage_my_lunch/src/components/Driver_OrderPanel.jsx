@@ -43,7 +43,6 @@ const Driver_OrderPanel = ({ order, email }) => {
     <div className='order-container'>
       <h2>Order From {order.restaurant_name}</h2>
       <p>Order id: {order._id}</p>
-      <p>Restaurant ID: {order.restaurant_id}</p>
       <p>Restaurant Location: {restaurantAddress}</p>
       <p>Number of items: {order.menuItems.length}</p>
       <br></br>
@@ -55,6 +54,7 @@ const Driver_OrderPanel = ({ order, email }) => {
       <button onClick={acceptOrder}>
     Select Order
   </button>
+  <hr />
     </div>
   );
 };

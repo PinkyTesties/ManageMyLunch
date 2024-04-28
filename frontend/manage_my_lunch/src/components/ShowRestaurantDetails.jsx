@@ -95,21 +95,22 @@ function ShowRestaurantDetails(props) {
       <div className="restaurant-item">
         <div className='restaurant-name-food'>
           <div className="item">
-            <span className="label">Name: </span>
-            <span className="value">{restaurant.restaurantName}</span>
+          <Link to='/dashboard' className='btn btn-outline-warning float-left'>
+            Back to Restaurants
+          </Link>
           </div>
           <div className="item">
-            <span className="label">Cuisine: </span>
-            <span className="value">{restaurant.cuisine}</span>
           </div>
           <div className="item">
-            <span className="label">Google Rating: </span>
-
-            <span className="value">{restaurant.rating} Stars </span>
+            
           </div>
         </div>
         <div className="item">
-          <span className="value">{restaurant.description}</span>
+        <h5>Google Rating: </h5>
+            <span className="value">{restaurant.rating} Stars </span>
+            <br />
+            <br />
+            <b>{restaurant.description}</b>
         </div>
         <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
       </div>
@@ -128,10 +129,11 @@ function ShowRestaurantDetails(props) {
       <header className='header'>
         <img src={logo} alt='Logo' height={100} />
         <h1>Manage My Lunch Dashboard</h1>
+        <p></p>
       </header>
+      <hr />
       <button className='header-button' onClick={toggleDropdown}>Account</button>
       <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
-      <button className='header-button-right'>Logout</button>
 
       <Modal
         isOpen={showDropdown}
@@ -148,15 +150,10 @@ function ShowRestaurantDetails(props) {
         <div className='container'>
           <div className='row'>
             <div className='col-md-10 m-auto'>
-              <br /> <br />
-              <Link to='/dashboard' className='btn btn-outline-warning float-left'>
-                Back to Restaurants
-              </Link>
             </div>
             <br />
             <div className='col-md-8 m-auto'>
               <h1 className='display-4 text-center'>{restaurant.restaurantName}</h1>
-              <p className='lead text-center'>*******CSS NOT DONE. DO NOT SUBMIT!</p>
               <br /> <br />
             </div>
             <div className='col-md-10 m-auto'>{RestaurantItem}</div>
@@ -169,6 +166,7 @@ function ShowRestaurantDetails(props) {
             {MenuItemsList}
           </div>
         </div >
+
         <div className='restaurant-footer'>
           <Link
             to={`/CreateMenuItem/${restaurant._id}`}

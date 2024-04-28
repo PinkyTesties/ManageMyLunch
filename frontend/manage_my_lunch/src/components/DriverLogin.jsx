@@ -29,13 +29,12 @@ const LoginPage = () => {
   return (
     <div className="container mt-5">
       {error && <div className="alert alert-danger">{error}</div>}
-      <header className='driver-header'>
-        <img src={logo} alt='Logo' height={100}/> 
-        <h2>Login as a Driver</h2>
-        <div>
-          <button className='btn-btn'><Link to={'/'}>Login as customer</Link></button>
-        </div>
+      <header>
+        <img src={logo} alt='Logo'/>
+        <Link to="/" className="btn-btn-link"><h2>Login as a Driver</h2></Link>
+        <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
       </header>
+      <hr />
       <main className='main-login'>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -64,7 +63,7 @@ const LoginPage = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className='btn-btn' type="submit">Login</button>
       <br></br>
       <br></br>
       

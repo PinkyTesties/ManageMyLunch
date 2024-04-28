@@ -74,22 +74,23 @@ const MenuItemPanel = ({ menuItem }) => {
 
   return (
     <div className='menucard-container'>
+      <div className='item'>
+      <Link to={`/MenuItemViewer/${menuItem._id}`}>
       <img
         src={`http://localhost:8082/menuItem_assets/${menuItem.menuItemImage}`}
 
         alt='Menu Item'
-        height={100}
+        height={200}
       />
-      <div className='desc'>
-        <div>
-          <h2>
-            <Link to={`/MenuItemViewer/${menuItem._id}`}>{menuItem.name}</Link>
-          </h2>
-          <h3>${menuItem.cost.toFixed(2)}</h3>
-        </div>
+      </Link>
+      <span><p>{menuItem.name}</p></span>
+      <hr></hr>
+      </div>
+      <div className='add-cart'>
+        <p>${menuItem.cost.toFixed(2)}</p>
+        <button onClick={addToCart}>Add</button>
       </div>
       <p>{menuItem.item_desc}</p>
-      <button onClick={addToCart}>Add to cart</button>
     </div>
   );
 };
