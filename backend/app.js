@@ -54,7 +54,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { secure: true, sameSite: 'none', httpOnly: true } // set to true if you're using https
+  cookie: { secure: false, sameSite: 'lax', httpOnly: true } // set to true if you're using https
 }));
 // use the cors middleware with the
 // origin and credentials options
@@ -92,9 +92,17 @@ app.get('/', (req, res) => {
   console.log('Session data:', req.session);
 
   if(req.session.name) {
-    return res.json({valid:true, name: req.session.name, email: req.session.email, university: req.session.university, _id: req.session.userId});
+    return res.json({
+      success: true,
+      user: {
+        name: req.session.name,
+        email: req.session.email,
+        university: req.session.university,
+        userId: req.session.userId
+      }
+    });
   } else {
-    return res.json({valid:false});
+    return res.json({success: false});
   }
 });
 

@@ -30,12 +30,11 @@ const UserDashboard = ({ history }) => {
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
   useEffect(() => {
     axios.get(`${backendURL}`, { withCredentials: true })
       .then((res) => {
         console.log('Server response:', res);
-  
+    
         if (res.data.success) {
           setUserDetails({
             name: res.data.user.name,
@@ -66,7 +65,9 @@ const UserDashboard = ({ history }) => {
         </div>
       </div>
       <p>Logged in as: {userDetails.name}, {userDetails.university}, {userDetails.email}, {userDetails.userID}</p>
-      <Modal
+            {console.log(userDetails.name, userDetails.university, userDetails.email, userDetails.userID)}
+            
+        <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
         contentLabel="Account Menu"

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import RestaurantPanel from './RestaurantPanel';
 import logo from './componentAssets/logov1.png';
 import { backendURL } from './../urls'; // import backendURL from urls.js
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 Modal.setAppElement('#root');
 
@@ -23,6 +24,13 @@ const Dashboard = ({ history }) => {
     setShowDropdown(!showDropdown);
   };
 
+  const [userDetails, setUserDetails] = useState({
+    name: '',
+    email: '',
+    university: '',
+    userID: '',
+  });
+
   const customStyles = {
     content: {
       top: '0%',
@@ -38,7 +46,6 @@ const Dashboard = ({ history }) => {
     axios.get(`${backendURL}`, { withCredentials: true })
           .then((res) => {
             console.log('Server response:', res);
-  
             if (res.data.success) {
               setUserDetails({
                 name: res.data.user.name,
@@ -94,22 +101,23 @@ const Dashboard = ({ history }) => {
 
   return (
     <div>
-      <div className='header'>
+            <UserDashboard /> {/* Use UserDashboard */}
+
+      {/* <div className='header'>
         <header className='header'>
           <img src={logo} alt='Logo' height={100} />
           <h1>Manage My Lunch Dashboard</h1>
           <p></p>
         </header>
         <hr />
-        <p>Logged in as: {name}, {university}</p>
         <div className='MenuButtons'>
           <button onClick={toggleDropdown}>Account</button>
           <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
           <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
           <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         </div>
-      </div>
-      <Modal
+      </div> */}
+      {/* <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
         contentLabel="Account Menu"
@@ -121,7 +129,7 @@ const Dashboard = ({ history }) => {
 
         <a href="/">Logout</a><br></br>
       </Modal>
-      <hr />
+      <hr /> */}
       <div className='ShowBookList'>
 
         <div className='container'>

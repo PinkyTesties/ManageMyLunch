@@ -34,13 +34,7 @@ if (user.password === password) {
       console.error('Error saving session:', err);
       return res.status(500).json({ error: 'Internal server error' });
     }
-  
-    console.log(req.session.name);
-    console.log(req.session.university);
-    console.log(req.session.userId);
-    console.log(req.session.email);
-    console.log('Session data:', req.session);
-  
+
     return res.json({ 
       success: true,
       user: {
