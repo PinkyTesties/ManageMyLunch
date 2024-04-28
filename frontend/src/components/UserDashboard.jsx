@@ -36,12 +36,12 @@ const UserDashboard = ({ history }) => {
       .then((res) => {
         console.log('Server response:', res);
   
-        if (res.data.valid) {
+        if (res.data.success) {
           setUserDetails({
-            name: res.data.Session.name,
-            email: res.data.Session.email,
-            university: res.data.Session.university,
-            userID: res.data.Session.userId,
+            name: res.data.user.name,
+            email: res.data.user.email,
+            university: res.data.user.university,
+            userID: res.data.user.userId,
           });
         } else {
           navigate('/');

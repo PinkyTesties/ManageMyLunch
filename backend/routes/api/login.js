@@ -34,14 +34,22 @@ if (user.password === password) {
       console.error('Error saving session:', err);
       return res.status(500).json({ error: 'Internal server error' });
     }
-
+  
     console.log(req.session.name);
     console.log(req.session.university);
     console.log(req.session.userId);
     console.log(req.session.email);
     console.log('Session data:', req.session);
-
-    return res.json({ success: true });
+  
+    return res.json({ 
+      success: true,
+      user: {
+        name: req.session.name,
+        university: req.session.university,
+        userId: req.session.userId,
+        email: req.session.email
+      }
+    });
   });
 } else {
   // Password doesn't match, send error response

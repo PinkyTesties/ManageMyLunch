@@ -39,16 +39,16 @@ const Dashboard = ({ history }) => {
           .then((res) => {
             console.log('Server response:', res);
   
-        if (res.data.valid) {
-          setName(res.data.name);
-          setEmail(res.data.email);
-          setUniversity(res.data.university);
-          setUserID(res.data._id);
-        } else {
-  
-          navigate('/');
-
-        }
+            if (res.data.success) {
+              setUserDetails({
+                name: res.data.user.name,
+                email: res.data.user.email,
+                university: res.data.user.university,
+                userID: res.data.user.userId,
+              });
+            } else {
+              navigate('/');
+            }
       })
       .catch(err => console.log(err))
   }, [])
