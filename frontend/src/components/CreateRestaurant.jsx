@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const CreateRestaurant = (props) => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ Object.keys(restaurant).forEach((key) => formData.append(key, restaurant[key]));
 formData.append('image', image);
 
 axios
-  .post("http://localhost:8082/api/restaurants", formData, {
+  .post(`${backendURL}/api/restaurants`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }

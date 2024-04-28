@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './componentAssets/logov1.png';
 
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 axios.defaults.withCredentials = true;
 
@@ -14,7 +15,7 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:8082/api/driverslogin", { email, password })
+    axios.post(`${backendURL}/api/driverslogin`, { email, password })
       .then(res => {
         console.log(res);
         navigate('/DriverDashboard');

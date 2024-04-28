@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const DeleteAccount_User = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const DeleteAccount_User = () => {
             return;
         }
 
-        fetch(`http://localhost:8082/api/users/delete`, {
+        fetch(`${backendURL}/api/users/delete`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

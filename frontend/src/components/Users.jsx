@@ -1,13 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 //import { useAuth } from '../../../../../backend/controller/useAuth'
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const DeleteAccount = () => {
   const { token } = useAuth(); // Get the token from your auth context
 
   const deleteUser = () => {
     axios
-      .delete(`http://localhost:8082/api/users/delete`, {
+      .delete(`${backendURL}/api/users/delete`, {
         headers: {
           'Authorization': `Bearer ${token}` // Send the token in the Authorization header
         }

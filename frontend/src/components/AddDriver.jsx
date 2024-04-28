@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const AddDriver = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const AddDriver = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post('http://localhost:8082/api/drivers', driver)
+            .post(`${backendURL}/api/drivers`, driver)
             .then((res) => {
                 alert(res.data.msg);
                 navigate('/Drivers');

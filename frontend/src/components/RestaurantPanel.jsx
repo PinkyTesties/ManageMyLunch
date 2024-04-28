@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const RestaurantPanel = ({ restaurant }) => {
 
@@ -9,7 +10,7 @@ const RestaurantPanel = ({ restaurant }) => {
       <div className='item'>
       <Link to={`/ShowRestaurantDetails/${restaurant._id}`}>
       <img
-        src={`http://localhost:8082/restaurant_assets/${restaurant.RestaurantImage}`}
+        src={`${backendURL}/restaurant_assets/${restaurant.RestaurantImage}`}
         alt='Restaurants'
         height={200}
       />

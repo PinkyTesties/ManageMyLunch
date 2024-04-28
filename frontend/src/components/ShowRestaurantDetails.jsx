@@ -6,6 +6,7 @@ import MenuItemPanel from './MenuItemPanel';
 import Modal from 'react-modal';
 import logo from './componentAssets/logov1.png';
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 
 Modal.setAppElement('#root');
@@ -46,7 +47,7 @@ function ShowRestaurantDetails(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/api/restaurants/${id}`)
+      .get(`${backendURL}/api/restaurants/${id}`)
       .then((res) => {
         setRestaurant(res.data);
       })
@@ -57,7 +58,7 @@ function ShowRestaurantDetails(props) {
 
   const onDeleteClick = (id) => {
     axios
-      .delete(`http://localhost:8082/api/restaurants/${id}`)
+      .delete(`${backendURL}/api/restaurants/${id}`)
       .then((res) => {
         navigate('/');
       })
@@ -69,7 +70,7 @@ function ShowRestaurantDetails(props) {
   useEffect(() => {
     console.log('Fetching menu items for restaurant_id:', id);
 
-    axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
+    axios.get(`${backendURL}/api/menuItems?restaurant_id=${id}`)
       .then((res) => {
         setMenuItems(res.data);
       })

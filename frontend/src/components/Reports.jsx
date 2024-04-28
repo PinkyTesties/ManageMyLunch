@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 function Reports() {
     const [popularItem, setPopularItem] = useState(null);
@@ -20,7 +21,7 @@ function Reports() {
 
     const fetchPopularMenuItem = async () => {
         try {
-            const response = await axios.get('http://localhost:8082/api/completedCarts');
+            const response = await axios.get(`${backendURL}/api/completedCarts`);
             const completedCarts = response.data;
 
             setOrderCount(completedCarts.length);
@@ -52,11 +53,11 @@ function Reports() {
             setPopularItemCount(count);
 
 
-            const menuItemResponse = await axios.get(`http://localhost:8082/api/menuItems/${popularMenuItem}`);
+            const menuItemResponse = await axios.get(`${backendURL}/api/menuItems/${popularMenuItem}`);
             setPopularItemDetails(menuItemResponse.data);
 
             try {
-                const restaurantResponse = await axios.get(`http://localhost:8082/api/restaurants/${menuItemResponse.data.restaurant_id}`);
+                const restaurantResponse = await axios.get(`${backendURL}/api/restaurants/${menuItemResponse.data.restaurant_id}`);
                 setRestaurantDetails(restaurantResponse.data);
             } catch (error) {
                 console.error('Failed to fetch restaurant details:', error);
@@ -68,7 +69,7 @@ function Reports() {
 
     const fetchPopularRestaurant = async () => {
         try {
-            const response = await axios.get('http://localhost:8082/api/completedCarts');
+            const response = await axios.get(`${backendURL}/api/completedCarts`);
             const completedCarts = response.data;
 
             let allRestaurants = [];
@@ -88,7 +89,7 @@ function Reports() {
 
             setPopularRestaurantCount(counts[popularRestaurantId]);
 
-            const restaurantResponse = await axios.get(`http://localhost:8082/api/restaurants/${popularRestaurantId}`);
+            const restaurantResponse = await axios.get(`${backendURL}/api/restaurants/${popularRestaurantId}`);
             setPopularRestaurant(restaurantResponse.data);
         } catch (error) {
             console.error('Failed to fetch restaurant details:', error.response);
@@ -97,7 +98,7 @@ function Reports() {
 
     const fetchOrdersForDate = async (date) => {
         try {
-            const response = await axios.get('http://localhost:8082/api/completedCarts');
+            const response = await axios.get(`${backendURL}/api/completedCarts`);
             const completedCarts = response.data;
 
             const cartsForDate = completedCarts.filter(cart => {
@@ -128,7 +129,7 @@ function Reports() {
 
     useEffect(() => {
         const fetchAllReceipts = async () => {
-            const response = await axios.get('http://localhost:8082/api/completedCarts');
+            const response = await axios.get(`${backendURL}/api/completedCarts`);
             setTotalReceipts(response.data.length);
         };
 
@@ -141,7 +142,7 @@ function Reports() {
 
     const fetchReceiptsForDate = async (date) => {
         try {
-            const response = await axios.get('http://localhost:8082/api/completedCarts');
+            const response = await axios.get(`${backendURL}/api/completedCarts`);
             const completedCarts = response.data;
 
             const cartsForDate = completedCarts.filter(cart => {
@@ -153,7 +154,7 @@ function Reports() {
 
             for (let cart of cartsForDate) {
                 const menuItems = await Promise.all(cart.menuItems.map(async (itemId) => {
-                    const response = await axios.get(`http://localhost:8082/api/menuItems/${itemId}`);
+                    const response = await axios.get(`${backendURL}/api/menuItems/${itemId}`);
                     return response.data.name;
                 }));
                 cart.menuItems = menuItems;
@@ -168,7 +169,7 @@ function Reports() {
 
     const fetchUsersForDate = async (date) => {
         try {
-            const response = await axios.get('http://localhost:8082/api/users');
+            const response = await axios.get(`${backendURL}/api/users`);
             const allUsers = response.data;
 
             const usersForDate = allUsers.filter(user => {

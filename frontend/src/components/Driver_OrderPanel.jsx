@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 
 const Driver_OrderPanel = ({ order, email }) => {
@@ -9,7 +10,7 @@ const Driver_OrderPanel = ({ order, email }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/api/restaurants/${order.restaurant_id}`)
+      .get(`${backendURL}/api/restaurants/${order.restaurant_id}`)
       .then((res) => {
         setRestaurantAddress(res.data.address);
       })
@@ -18,7 +19,7 @@ const Driver_OrderPanel = ({ order, email }) => {
       });
 
     axios
-      .get(`http://localhost:8082/api/users/email/${order.email}`) // Fetch user by email
+      .get(`${backendURL}/api/users/email/${order.email}`) // Fetch user by email
       .then((res) => {
         setUniversity(res.data.university); // Set university state variable
       })
@@ -29,7 +30,7 @@ const Driver_OrderPanel = ({ order, email }) => {
 
   const acceptOrder = () => {
     axios
-    .put(`http://localhost:8082/api/completedCarts/status/${order._id}`, { orderStatus: 'Accepted By Driver', driver_email: email })
+    .put(`${backendURL}/api/completedCarts/status/${order._id}`, { orderStatus: 'Accepted By Driver', driver_email: email })
       .then((res) => {
         console.log('Order accepted');
       })

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -12,7 +13,7 @@ const Drivers = () => {
 
   const fetchDrivers = () => {
     axios
-      .get('http://localhost:8082/api/drivers')
+      .get(`${backendURL}/api/drivers`)
       .then((res) => setDrivers(res.data))
       .catch((err) => console.log(err));
   };
@@ -20,7 +21,7 @@ const Drivers = () => {
   const deleteDriver = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       axios
-        .delete(`http://localhost:8082/api/drivers/${id}`)
+        .delete(`${backendURL}/api/drivers/${id}`)
         .then((res) => {
           alert(res.data.msg);
           fetchDrivers(); // Refresh the drivers list after deletion

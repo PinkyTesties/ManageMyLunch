@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 function DeleteRestaurants() {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8082/api/restaurants')
+    fetch(`${backendURL}/api/restaurants`)
       .then(response => response.json())
       .then(data => setRestaurants(data))
       .catch(error => console.error('Error fetching restaurants:', error));
@@ -18,7 +19,7 @@ function DeleteRestaurants() {
     const restaurant = restaurants.find(restaurant => restaurant.restaurantName === restaurantName);
 
     if (restaurant) {
-      fetch(`http://localhost:8082/api/restaurants/${restaurant._id}`, {
+      fetch(`${backendURL}/api/restaurants/${restaurant._id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

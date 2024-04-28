@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 function UpdateRestaurant(props) {
   const [restaurant, setRestaurant] = useState({
@@ -17,7 +18,7 @@ function UpdateRestaurant(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/api/restaurants/${id}`)
+      .get(`${backendURL}/api/restaurants/${id}`)
       .then((res) => {
         setRestaurant({
           restaurantName: res.data.restaurantName,
@@ -48,7 +49,7 @@ function UpdateRestaurant(props) {
     };
 
     axios
-      .put(`http://localhost:8082/api/restaurants/${id}`, data)
+      .put(`${backendURL}/api/restaurants/${id}`, data)
       .then((res) => {
         navigate(`/ShowRestaurantDetails/${id}`);
       })

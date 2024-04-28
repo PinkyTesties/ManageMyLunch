@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { backendURL } from '../urls';
 
 const DeleteMenuItem = () => {
     const [id, setId] = useState('');
 
     const deleteMenuItem = () => {
-        fetch(`http://localhost:8082/api/menuItems/${id}`, {
+        fetch(`${backendURL}/api/menuItems/${id}`, {
             method: 'DELETE',
         })
         .then(response => {

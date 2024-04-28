@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 function UpdatePassword() {
   const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ function UpdatePassword() {
   const [errorMessage, setErrorMessage] = useState(''); 
 
   useEffect(() => {
-    fetch('http://localhost:8082/api/users')
+    fetch(`${backendURL}/api/users`)
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => console.error('Error fetching users:', error));
@@ -25,7 +26,7 @@ function UpdatePassword() {
         return;
       }
 
-      fetch(`http://localhost:8082/api/users/${user._id}`, {
+      fetch(`${backendURL}/api/users/${user._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

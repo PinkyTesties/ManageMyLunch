@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const EditOrder = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const EditOrder = () => {
 
   useEffect(() => {
     // Fetch the order when the component mounts
-    axios.get(`http://localhost:8082/api/completedCarts/id/${id}`)
+    axios.get(`${backendURL}/api/completedCarts/id/${id}`)
       .then(response => {
         setOrder(response.data);
         console.log(response.data); // Add this line
@@ -21,7 +22,7 @@ const EditOrder = () => {
   useEffect(() => {
     if (order && order.menuItems) {
       Promise.all(order.menuItems.map(itemId =>
-        axios.get(`http://localhost:8082/api/menuItems/${itemId}`)
+        axios.get(`${backendURL}/api/menuItems/${itemId}`)
       )).then(responses => {
         const fetchedMenuItems = responses.map(res => res.data);
         setMenuItems(fetchedMenuItems);
@@ -30,7 +31,7 @@ const EditOrder = () => {
   }, [order]);
 
   const cancelOrder = () => {
-    axios.delete(`http://localhost:8082/api/completedCarts/id/${id}`)
+    axios.delete(`${backendURL}/api/completedCarts/id/${id}`)
       .then(() => {
         alert('Order cancelled successfully');
         navigate('/OrderStatus');
@@ -51,7 +52,7 @@ const EditOrder = () => {
   };
 
   const submitChanges = () => {
-    axios.put(`http://localhost:8082/api/completedCarts/id/${id}`, order)
+    axios.put(`${backendURL}/api/completedCarts/id/${id}`, order)
       .then(() => {
         alert('Order updated successfully');
         navigate('/OrderStatus');

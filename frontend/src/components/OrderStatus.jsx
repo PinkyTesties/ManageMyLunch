@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import { pushNotification } from './jsFiles/pushNotifications';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 import { differenceInSeconds } from 'date-fns'; // Import this function
 
@@ -58,7 +59,7 @@ function OrderStatus() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${backendURL}`)
       .then((res) => {
         if (res.data.valid) {
           setName(res.data.name);
@@ -85,7 +86,7 @@ function OrderStatus() {
         const fetchedMenuItems = await Promise.all(
           uniqueMenuItemIds.map((id) =>
             axios
-              .get(`http://localhost:8082/api/menuItems/${id}`)
+              .get(`${backendURL}/api/menuItems/${id}`)
               .then((res) => res.data)
               .catch((err) => {
                 console.error(err);
@@ -129,7 +130,7 @@ function OrderStatus() {
 
   const fetchOrders = (email) => {
     axios
-      .get(`http://localhost:8082/api/completedCarts/${email}`)
+      .get(`${backendURL}/api/completedCarts/${email}`)
       .then((res) => {
         if (Array.isArray(res.data)) {
           setOrders(res.data);

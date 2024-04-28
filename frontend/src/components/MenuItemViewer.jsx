@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const MenuItemViewer = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ const MenuItemViewer = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${backendURL}`)
       .then((res) => {
         if (res.data.valid) {
           setName(res.data.name);
@@ -32,7 +33,7 @@ const MenuItemViewer = () => {
   useEffect(() => {
     // Fetch the menu item data using the ID from the URL
     // Replace the API_URL with your actual API endpoint
-    fetch(`http://localhost:8082/api/menuItems/${id}`)
+    fetch(`${backendURL}/api/menuItems/${id}`)
       .then(response => response.json())
       .then(data => {
         setMenuItem(data);
@@ -92,7 +93,7 @@ const MenuItemViewer = () => {
       };
 
       // Send a request to add an item to the cart
-      const response = await axios.post('http://localhost:8082/api/cart/add', {
+      const response = await axios.post(`${backendURL}/api/cart/add`, {
         email: email,
         menuItem: cartItem,
         restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object

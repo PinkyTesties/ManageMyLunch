@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const DriverReviewForm = () => {
   const { email } = useParams(); // Get the driver email from the URL
@@ -19,7 +20,7 @@ const DriverReviewForm = () => {
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await axios.get(`http://localhost:8082/api/drivers/email/${email}`);
+        const response = await axios.get(`${backendURL}/api/drivers/email/${email}`);
         setRestaurant(response.data);
       } catch (err) {
         console.error(err);
@@ -39,7 +40,7 @@ const DriverReviewForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8082/api/DriverReviewForm', review);
+      await axios.post(`${backendURL}/api/DriverReviewForm`, review);
       alert('Review submitted successfully');
       navigate('/OrderStatus');
       setReview({

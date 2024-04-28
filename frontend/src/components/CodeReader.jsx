@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import QRCode from 'qrcode.react';
 import { QrReader } from 'react-qr-reader';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const CodeReader = () => {
   const [code, setCode] = useState('');
@@ -37,7 +38,7 @@ const CodeReader = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:8082/api/code', {
+      const response = await fetch(`${backendURL}/api/code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code }),
@@ -51,7 +52,7 @@ const CodeReader = () => {
 
   const checkCode = async () => {
     try {
-      const response = await fetch(`http://localhost:8082/api/code/number/${code}`);
+      const response = await fetch(`${backendURL}/api/code/number/${code}`);
     } catch (error) {
       setError('Failed to check code');
     }

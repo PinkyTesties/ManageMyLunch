@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const ViewDriverReviews = () => {
     const { email } = useParams();
@@ -9,7 +10,7 @@ const ViewDriverReviews = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get(`http://localhost:8082/api/DriverReviewForm/${email}`);
+                const response = await axios.get(`${backendURL}/api/DriverReviewForm/${email}`);
                                 setReviews(response.data);
             } catch (error) {
                 console.error('Failed to fetch reviews:', error);

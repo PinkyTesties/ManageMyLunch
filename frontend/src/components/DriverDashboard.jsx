@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Driver_OrderPanel from "./Driver_OrderPanel";
 import logo from "./componentAssets/logov1.png";
 import RestaurantPanel_Driver from "./RestaurantPanel_Driver";
+import { backendURL } from './../urls'; // import backendURL from urls.js
+
 Modal.setAppElement("#root");
 
 const Dashboard = ({ history }) => {
@@ -38,7 +40,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8082/api/restaurants")
+      .get(`${backendURL}/api/restaurants`)
       .then((res) => {
         setRestaurants(res.data);
       })
@@ -63,7 +65,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${backendURL}`)
       .then((res) => {
         if (res.data.valid) {
           setName(res.data.name);
@@ -79,7 +81,7 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     const fetchOrders = () => {
       axios
-        .get("http://localhost:8082/api/completedCarts") // Fetch completed carts
+        .get(`${backendURL}/api/completedCarts`) // Fetch completed carts
         .then((res) => {
           const pendingCarts = res.data.filter(
             (cart) => cart.orderStatus === "Pending"
@@ -103,7 +105,7 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     if (page === "selectedOrders") {
       axios
-        .get("http://localhost:8082/api/completedCarts/status/Accepted%20By%20Driver")
+        .get(`${backendURL}/api/completedCarts/status/Accepted%20By%20Driver`)
         .then((response) => {
           // Check if the response data is an array before setting the state
           if (Array.isArray(response.data)) {
@@ -135,7 +137,7 @@ const Dashboard = ({ history }) => {
   );
 
   const handleDelivered = (orderId) => {
-    axios.put(`http://localhost:8082/api/completedCarts/status/${orderId}`, { orderStatus: 'Delivered' })
+    axios.put(`${backendURL}/api/completedCarts/status/${orderId}`, { orderStatus: 'Delivered' })
       .then(response => {
         // Update the local state if necessary
         setSelectedOrders(selectedOrders.map(order => 

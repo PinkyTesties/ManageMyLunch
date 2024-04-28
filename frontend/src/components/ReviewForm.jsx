@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 
 const ReviewForm = () => {
@@ -20,7 +21,7 @@ const ReviewForm = () => {
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await axios.get(`http://localhost:8082/api/restaurants/${id}`);
+        const response = await axios.get(`${backendURL}/api/restaurants/${id}`);
         setRestaurant(response.data);
       } catch (err) {
         console.error(err);
@@ -40,7 +41,7 @@ const ReviewForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8082/api/reviewForm', review);
+      await axios.post(`${backendURL}/api/reviewForm`, review);
       alert('Review submitted successfully');
       navigate('/OrderStatus');
       setReview({

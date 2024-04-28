@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import RestaurantPanel from './RestaurantPanel';
 import logo from './componentAssets/logov1.png';
+import { backendURL } from './../urls'; // import backendURL from urls.js
+
 Modal.setAppElement('#root');
 
 const Dashboard = ({ history }) => {
@@ -33,7 +35,7 @@ const Dashboard = ({ history }) => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8082')
+    axios.get(`${backendURL}`)
       .then((res) => {
 
 
@@ -54,7 +56,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8082/api/restaurants')
+      .get(`${backendURL}/api/restaurants`)
       .then((res) => {
         setRestaurants(res.data);
       })

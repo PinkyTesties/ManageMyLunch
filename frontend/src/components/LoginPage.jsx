@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './componentAssets/logov1.png';
 import background from './componentAssets/background.jpg';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 // Set axios default configuration
 axios.defaults.withCredentials = true;
@@ -51,7 +52,7 @@ const LoginPage = () => {
 
     try {
       // Send login request
-      const { data } = await axios.post("http://localhost:8082/api/login", { email, password });
+      const { data } = await axios.post(`${backendURL}/api/login`, { email, password });
       const { success, message, userExists } = data;
       if (success) {
         handleSuccess(message);
@@ -88,6 +89,7 @@ const LoginPage = () => {
         </div>
       </header>
       <hr />
+      <p>ass</p>
       <main className='main-login'>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <form onSubmit={handleSubmit}>

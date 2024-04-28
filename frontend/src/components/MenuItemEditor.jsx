@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 function MenuItemEditor() {
     const { id } = useParams();
@@ -8,7 +9,7 @@ function MenuItemEditor() {
 
     useEffect(() => {
         // Fetch the menu item when the component mounts
-        axios.get(`http://localhost:8082/api/menuItems/${id}`)
+        axios.get(`${backendURL}/api/menuItems/${id}`)
             .then(response => {
                 setMenuItem(response.data);
             })

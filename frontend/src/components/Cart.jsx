@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import beefImage from './beef.jpg';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const Cart = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ const Cart = () => {
   const [cart, setCart] = useState({ menuItems: [] }); // New state variable for the cart
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${backendURL}`)
       .then((res) => {
         if (res.data.valid) {
           setName(res.data.name);
@@ -52,7 +53,7 @@ const Cart = () => {
   useEffect(() => {
     if (email) {
       axios
-        .get(`http://localhost:8082/api/cart/${email}`)
+        .get(`${backendURL}/api/cart/${email}`)
         .then((res) => {
           // Check if the email from the response matches the email state
           if (res.data.email === email) {
@@ -68,7 +69,7 @@ const Cart = () => {
   useEffect(() => {
     if (cart.restaurant_id) {
       axios
-        .get(`http://localhost:8082/api/restaurants/${cart.restaurant_id}`)
+        .get(`${backendURL}/api/restaurants/${cart.restaurant_id}`)
         .then((res) => {
           // Set the restaurant name state with the name from the response
           console.log(res.data);
@@ -96,7 +97,7 @@ const Cart = () => {
 
   const deleteCart = () => {
     axios
-      .delete(`http://localhost:8082/api/cart/${cart._id}`)
+      .delete(`${backendURL}/api/cart/${cart._id}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -113,7 +114,7 @@ const Cart = () => {
 
   function handleRemove(itemId, index) {
     axios
-      .put(`http://localhost:8082/api/cart/remove/${email}`, { menuItemId: itemId, index: index })
+      .put(`${backendURL}/api/cart/remove/${email}`, { menuItemId: itemId, index: index })
       .then((res) => {
         console.log(res.data);
         // Filter out null values from the menuItems array
@@ -156,7 +157,7 @@ const Cart = () => {
     console.log(completedCart); // Log the completedCart object
 
     axios
-      .post("http://localhost:8082/api/completedCarts", completedCart)
+      .post(`${backendURL}/api/completedCarts`, completedCart)
       .then((res) => {
         console.log(res.data);
         navigate('/OrderStatus', { state: { completedCartId: res.data._id } }); // Redirect to the Order Confirmation page

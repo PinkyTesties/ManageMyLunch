@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import logo from './componentAssets/logov1.png';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 const ViewRestaurantReviews = () => {
     const { id } = useParams();
@@ -11,7 +12,7 @@ const ViewRestaurantReviews = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get(`http://localhost:8082/api/reviewForm/${id}`);
+                const response = await axios.get(`${backendURL}/api/reviewForm/${id}`);
                 setReviews(response.data);
             } catch (err) {
                 console.error(err);
@@ -20,7 +21,7 @@ const ViewRestaurantReviews = () => {
 
         const fetchRestaurant = async () => {
             try {
-                const response = await axios.get(`http://localhost:8082/api/restaurants/${id}`);
+                const response = await axios.get(`${backendURL}/api/restaurants/${id}`);
                 setRestaurant(response.data);
             } catch (err) {
                 console.error(err);

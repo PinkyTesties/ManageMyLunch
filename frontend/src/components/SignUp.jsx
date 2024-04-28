@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from './componentAssets/logov1.png';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 /*
 Name
@@ -38,7 +39,7 @@ const SignUp = (props) => {
     console.log("user object: ", user);
 
     axios
-    .post("http://localhost:8082/api/users", user)
+    .post(`${backendURL}/api/users`, user)
     .then((res) => {
       setUser({
         name: "",

@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from './componentAssets/logov1.png';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 Modal.setAppElement('#root');
 
@@ -30,7 +31,7 @@ const UserDashboard = ({ history }) => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8082')
+    axios.get(`${backendURL}`)
       .then((res) => {
         if (res.data.valid) {
           setUserDetails({

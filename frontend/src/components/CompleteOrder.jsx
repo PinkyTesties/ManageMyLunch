@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { useNavigate } from 'react-router-dom';
+import { backendURL } from './../urls'; // import backendURL from urls.js
 
 
 const CompleteOrder = () => {
@@ -30,7 +31,7 @@ const CompleteOrder = () => {
 
   const markComplete = async () => {
     try {
-      const response = await fetch(`http://localhost:8082/api/completedCarts/complete/${cart._id}`, {
+      const response = await fetch(`${backendURL}/api/completedCarts/complete/${cart._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ const CompleteOrder = () => {
     }
   
     try {
-      const response = await fetch(`http://localhost:8082/api/completedCarts/code/${codeToInsert}`);
+      const response = await fetch(`${backendURL}/api/completedCarts/code/${codeToInsert}`);
       const fetchedCart = await response.json();
       if (fetchedCart && fetchedCart._id) {
         setMessage(`Found cart with code ${codeToInsert}`);
