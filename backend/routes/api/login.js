@@ -20,33 +20,33 @@ router.post('/', (req, res) => {
       }
 
       // Check if password matches
-      if (user.password === password) {
-        // Password matches, send success response
+// Check if password matches
+if (user.password === password) {
+  // Password matches, send success response
 
-        req.session.name = user.name;
-        req.session.university = user.university;
-        req.session.userId = user._id;
-                req.session.email = user.email;
+  req.session.name = user.name;
+  req.session.university = user.university;
+  req.session.userId = user._id;
+  req.session.email = user.email;
 
-                req.session.save(err => {
-                  if (err) {
-                    console.error('Error saving session:', err);
-                    return res.status(500).json({ error: 'Internal server error' });
-                  }
+  req.session.save(err => {
+    if (err) {
+      console.error('Error saving session:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
 
-        console.log(req.session.name);
-        console.log(req.session.university);
-        console.log(req.session.userId);
-        console.log(req.session.email);
-        //console.log(req.session.user);
-        console.log('Session data:', req.session);
+    console.log(req.session.name);
+    console.log(req.session.university);
+    console.log(req.session.userId);
+    console.log(req.session.email);
+    console.log('Session data:', req.session);
 
-
-        return res.json({ success: true});
-      } else {
-        // Password doesn't match, send error response
-        return res.status(400).json({ error: 'Invalid password' });
-      }
+    return res.json({ success: true });
+  });
+} else {
+  // Password doesn't match, send error response
+  return res.status(400).json({ error: 'Invalid password' });
+}
     })
     .catch(err => {
       console.error('Error logging in:', err);

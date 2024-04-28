@@ -33,15 +33,15 @@ const UserDashboard = ({ history }) => {
 
   useEffect(() => {
     axios.get(`${backendURL}`, { withCredentials: true })
-          .then((res) => {
-            console.log('Server response:', res);
-
+      .then((res) => {
+        console.log('Server response:', res);
+  
         if (res.data.valid) {
           setUserDetails({
-            name: res.data.name,
-            email: res.data.email,
-            university: res.data.university,
-            userID: res.data._id,
+            name: res.data.Session.name,
+            email: res.data.Session.email,
+            university: res.data.Session.university,
+            userID: res.data.Session.userId,
           });
         } else {
           navigate('/');
