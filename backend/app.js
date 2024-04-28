@@ -54,7 +54,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { secure: true, sameSite: none, httpOnly: true } // set to true if you're using https
+  cookie: { secure: true, sameSite: 'none', httpOnly: true } // set to true if you're using https
 }));
 // use the cors middleware with the
 // origin and credentials options
