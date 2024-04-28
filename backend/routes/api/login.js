@@ -25,12 +25,12 @@ router.post('/', (req, res) => {
 
         req.session.name = user.name;
         req.session.university = user.university;
-        req.session.id = user._id;
-        req.session.email = user.email;
+        req.session.userId = user._id;
+                req.session.email = user.email;
 
         console.log(req.session.name);
         console.log(req.session.university);
-        console.log(req.session.id);
+        console.log(req.session.userId);
         console.log(req.session.email);
         //console.log(req.session.user);
         console.log('Session data:', req.session);
