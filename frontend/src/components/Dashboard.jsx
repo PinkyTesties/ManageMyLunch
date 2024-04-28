@@ -42,24 +42,26 @@ const Dashboard = ({ history }) => {
     },
   };
 
-  // useEffect(() => {
-  //   axios.get(`${backendURL}/`, { withCredentials: true })
-  //         .then((res) => {
-  //           console.log('Server response:', res);
-  //           if (res.data.success) {
-  //             setUserDetails({
-  //               name: res.data.user.name,
-  //               email: res.data.user.email,
-  //               university: res.data.user.university,
-  //               userID: res.data.user.userId,
-  //             });
-  //           } else {
-  //             navigate('/');
-  //           }
-  //     })
-  //     .catch(err => console.log(err))
-  // }, [])
-
+  useEffect(() => {
+    axios.get(`${backendURL}/`, { withCredentials: true })
+      .then((res) => {
+        console.log('Server response:', res);
+        if (res.data.success && res.data.user) {
+          setUserDetails({
+            name: res.data.user.name,
+            email: res.data.user.email,
+            university: res.data.user.university,
+            userID: res.data.user.userId,
+          });
+        } else {
+          navigate('/');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        navigate('/');
+      });
+  }, []);
 
   useEffect(() => {
     axios
