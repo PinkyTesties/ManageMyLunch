@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Load User model
 const User = require('../../models/Users');
-
+ 
 // @route   POST api/login
 // @desc    Login user
 // @access  Public
@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
         console.log(req.session.id);
         console.log(req.session.email);
         //console.log(req.session.user);
+        console.log('Session data:', req.session);
 
 
         return res.json({ success: true});

@@ -51,7 +51,10 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: mongoUrl })
+  store: MongoStore.create({ mongoUrl: mongoUrl }),
+  cookie: {
+    name: 'my.session.cookiass' // replace with your desired cookie name
+  }
 }));
 // use the cors middleware with the
 // origin and credentials options

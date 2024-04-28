@@ -37,17 +37,19 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     axios.get(`${backendURL}`)
       .then((res) => {
-
-
+        console.log('Session cookie:', document.cookie);
+  
         if (res.data.valid) {
           setName(res.data.name);
           setEmail(res.data.email);
           setUniversity(res.data.university);
           setUserID(res.data._id);
-
-
         } else {
+          console.log('Session cookie:', document.cookie);
+  
           navigate('/');
+          console.log('Response data:', res.data);
+
         }
       })
       .catch(err => console.log(err))
