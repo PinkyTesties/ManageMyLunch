@@ -24,11 +24,13 @@ router.post('/', (req, res) => {
 if (user.password === password) {
   // Password matches, send success response
 
-  req.session.name = user.name;
-  req.session.university = user.university;
-  req.session.userId = user._id;
-  req.session.email = user.email;
-
+  req.session.user = {
+    name: user.name,
+    university: user.university,
+    userId: user._id,
+    email: user.email
+  };
+  
   req.session.save(err => {
     if (err) {
       console.error('Error saving session:', err);

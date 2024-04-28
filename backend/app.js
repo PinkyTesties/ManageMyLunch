@@ -24,15 +24,16 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+const store = MongoStore.create({ mongoUrl });
+
 // Use the session middleware
 app.use(session({
   secret: 'your secret',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl }),
-  cookie: { secure: false, sameSite: 'lax', httpOnly: true } // set to true if you're using https
+  store: store, // Use the store created
+  cookie: { secure: true, sameSite: 'lax' }
 }));
-
 
 app.get('/', (req, res) => {
   if (req.session && req.session.user) {
