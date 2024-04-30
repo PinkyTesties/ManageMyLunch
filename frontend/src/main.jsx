@@ -13,8 +13,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 //Basically every frontend page we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
 
-import HomePage from "./components/HomePage"; 
-import SignUp from "./components/SignUp"; 
+import LoginPage from "./components/LoginPage"; 
+import SignUp from "./components/SignUp_NEW"; 
 import Dashboard from "./components/Dashboard"; 
 import UpdatePassword from "./components/UpdatePassword"; 
 import SettingsPage from "./components/SettingsPage"; 
@@ -39,27 +39,22 @@ import DriverLogin from "./components/DriverLogin";
 import DriverDashboard from "./components/DriverDashboard";
 import CodeReader from "./components/CodeReader";
 import CompleteOrder from "./components/CompleteOrder";
-<<<<<<< HEAD:frontend/manage_my_lunch/src/main.jsx
-import Login from "./components/Login";
-=======
 import DriverReviewForm from "./components/DriverReviewForm";
 import ViewDriverReviews from "./components/ViewDriverReviews";
 import EmailTests from "./components/EmailTests";
 
 //These are vidhu imports for testing
 import HomePage from "./components/HomePage";
-import SignUp2 from "./components/SignUp2";
+import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 
 //hello
->>>>>>> HomePageCss:frontend/src/main.jsx
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
+  { path: "/", element: <LoginPage /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
-  { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/UpdatePassword", element: <UpdatePassword /> },
   { path: "/SettingsPage", element: <SettingsPage /> },
@@ -90,7 +85,7 @@ const router = createBrowserRouter([
   
   //These are vidhu imports for testing
   { path: "/HomePage", element: <HomePage /> },
-  { path: "/SignUp2", element: <SignUp2 /> },
+ // { path: "/SignUp2", element: <SignUp2 /> },
   { path: "/Login", element: <Login /> },
 
 ]);
