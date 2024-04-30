@@ -12,7 +12,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 // Components imports
 //Basically every frontend page we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
-
+//test
 import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp"; 
 import Dashboard from "./components/Dashboard"; 
