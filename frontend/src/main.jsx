@@ -14,7 +14,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import CreateRestaurant from "./components/CreateRestaurant";
 
 import LoginPage from "./components/LoginPage"; 
-import SignUp from "./components/SignUp"; 
+import SignUp from "./components/SignUp_NEW"; 
 import Dashboard from "./components/Dashboard"; 
 import UpdatePassword from "./components/UpdatePassword"; 
 import SettingsPage from "./components/SettingsPage"; 
@@ -45,7 +45,7 @@ import EmailTests from "./components/EmailTests";
 
 //These are vidhu imports for testing
 import HomePage from "./components/HomePage";
-import SignUp2 from "./components/SignUp2";
+import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 
 //hello
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
   
   //These are vidhu imports for testing
   { path: "/HomePage", element: <HomePage /> },
-  { path: "/SignUp2", element: <SignUp2 /> },
+ // { path: "/SignUp2", element: <SignUp2 /> },
   { path: "/Login", element: <Login /> },
 
 ]);
