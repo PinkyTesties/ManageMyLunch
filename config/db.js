@@ -4,6 +4,10 @@
 
 const mongoose = require("mongoose");
 const db =
+<<<<<<< HEAD
+=======
+"mongodb+srv://btj0392:yNgwDBoS5mouG4wC@cluster0.31u7ub6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+>>>>>>> HomePageCss
   
   
  "mongodb+srv://btj0392:yNgwDBoS5mouG4wC@cluster0.31u7ub6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
