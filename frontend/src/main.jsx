@@ -42,12 +42,15 @@ import CompleteOrder from "./components/CompleteOrder";
 import DriverReviewForm from "./components/DriverReviewForm";
 import ViewDriverReviews from "./components/ViewDriverReviews";
 import EmailTests from "./components/EmailTests";
+<<<<<<< HEAD
 
 //These are vidhu imports for testing
 import HomePage from "./components/HomePage";
 import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 
+=======
+>>>>>>> parent of 9502d6c (Included vidhu pages)
 //hello
 
 // Routes
@@ -82,11 +85,14 @@ const router = createBrowserRouter([
   { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
   { path: "/EmailTests", element: <EmailTests />},
+<<<<<<< HEAD
   
   //These are vidhu imports for testing
   { path: "/HomePage", element: <HomePage /> },
  // { path: "/SignUp2", element: <SignUp2 /> },
   { path: "/Login", element: <Login /> },
+=======
+>>>>>>> parent of 9502d6c (Included vidhu pages)
 
 ]);
 
