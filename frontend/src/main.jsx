@@ -42,6 +42,12 @@ import CompleteOrder from "./components/CompleteOrder";
 import DriverReviewForm from "./components/DriverReviewForm";
 import ViewDriverReviews from "./components/ViewDriverReviews";
 import EmailTests from "./components/EmailTests";
+
+//These are vidhu imports for testing
+import HomePage from "./components/HomePage";
+import SignUp2 from "./components/SignUp2";
+import Login from "./components/Login";
+
 //hello
 
 // Routes
@@ -76,6 +82,11 @@ const router = createBrowserRouter([
   { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
   { path: "/EmailTests", element: <EmailTests />},
+  
+  //These are vidhu imports for testing
+  { path: "/HomePage", element: <HomePage /> },
+  { path: "/SignUp2", element: <SignUp2 /> },
+  { path: "/Login", element: <Login /> },
 
 ]);
 
