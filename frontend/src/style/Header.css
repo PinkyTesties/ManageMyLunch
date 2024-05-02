@@ -44,13 +44,13 @@
 }
 
 .search-bar:focus {
-    border-color: #333333; /* Change border color on focus */
+    border-color: #333333; 
 }
 
 .auth-buttons {
     display: flex;
     align-items: center;
-    gap: 10px; /* Add gap to create space between buttons */
+    gap: 10px; 
 }
 
 .login,
@@ -63,11 +63,22 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform to transition for a smooth effect */
+    transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .login:hover,
 .signup:hover {
     background-color: #ffc107;
     transform: scale(1.05); /* Increase size on hover */
+}
+.auth-button {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }

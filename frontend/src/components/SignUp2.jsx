@@ -138,8 +138,6 @@ const SignUp = () => {
           <button type="submit" className="signup-btn" disabled={loading}>
             {loading ? "Loading..." : "Sign Up"}
           </button>
-          <button className="signup-btn signup-btn-google">Sign up with Google</button>
-          <button className="signup-btn signup-btn-apple">Sign up with Apple</button>
         </form>
       </main>
       <footer className="signup-footer">

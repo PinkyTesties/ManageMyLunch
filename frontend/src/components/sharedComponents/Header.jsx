@@ -1,20 +1,8 @@
 import { Link } from 'react-router-dom';
-import HamburgerMenu from '../sharedComponents/HamburgerMenu'; 
-import '../../style/Header.css'; 
+import HamburgerMenu from '../sharedComponents/HamburgerMenu';
+import '../../style/Header.css';
 
 const Header = () => {
-  const buttonStyle = {
-    textDecoration: 'none',
-    padding: '10px 20px',
-    borderRadius: '25px',
-    backgroundColor: '#007bff',
-    color: '#ffffff',
-    fontSize: '16px',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  };
-
   return (
     <header className="header">
       <div className="container">
@@ -27,8 +15,8 @@ const Header = () => {
             <input type="text" className="search-bar" placeholder="Search Menu" />
           </div>
           <div className="auth-buttons">
-            <Link to="/login" style={buttonStyle}>Login</Link>
-            <Link to="/sign-up" style={buttonStyle}>Sign Up</Link>
+            <Link to="/login" className="auth-button">Login</Link>
+            <Link to="/sign-up" className="auth-button">Sign Up</Link>
           </div>
         </div>
       </div>
@@ -37,4 +25,3 @@ const Header = () => {
 };
 
 export default Header;
-

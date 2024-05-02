@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "./sharedComponents/Header";
 import RestaurantPanel from './RestaurantPanel';
+import Footer from './sharedComponents/Footer';
 import '../style/HomePage.css';
 
 const HomePage = () => {
@@ -24,6 +25,7 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+      <Footer /> {/* Include Footer */}
     </div>
   );
 };
