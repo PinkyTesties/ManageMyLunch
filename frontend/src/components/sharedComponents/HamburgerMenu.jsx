@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../../style/HamburgerMenu.css'; 
+import '../../style/HamburgerMenu.css';
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,13 +26,17 @@ const HamburgerMenu = () => {
 
   return (
     <div>
-      <button onClick={toggleMenu}>☰</button>
+      <button onClick={toggleMenu} aria-label="Toggle Navigation Menu">☰</button>
       <nav className={`menu-left ${isOpen ? 'open' : ''}`}>
+        <div className="auth-buttons">
+          <button className='login primary'><Link to="/Login">Login</Link></button>
+          <button className='signup secondary'><Link to={'/sign-up'}>SignUp</Link></button>
+        </div>
         <ul>
-          <li><Link to="/path1">Menu Item 1</Link></li>
-          <li><Link to="/path2">Menu Item 2</Link></li>
-          <li><Link to="/path3">Menu Item 3</Link></li>
-          // Add more menu items here...
+          <li><Link to="/path1">Create Bussiness Account</Link></li>
+          <li><Link to="/path2">Create Driver Account</Link></li>
+          <li><Link to="/path3">About</Link></li>
+          <li><Link to="/path4">Contact Us</Link></li>
         </ul>
       </nav>
     </div>
