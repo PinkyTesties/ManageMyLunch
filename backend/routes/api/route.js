@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const googleMapsClient = require('@google/maps').createClient({
-    key: "AIzaSyCitl6yX_uVB95MJzBdlACmT5sy5j0vcZc", // 请替换为你的 Google 地图 API 密钥
+    key: "AIzaSyCitl6yX_uVB95MJzBdlACmT5sy5j0vcZc", 
     Promise: Promise
 });
 
 router.post('/', (req, res) => {
     const { origin, destination } = req.body;
-    // 添加日志输出，帮助调试
+   
     console.log(`Requesting directions from ${origin} to ${destination}`);
 
     googleMapsClient.directions({
@@ -21,13 +21,13 @@ router.post('/', (req, res) => {
             console.error('Google Maps API error:', response.json.status);
             return res.status(500).json({ error: 'Google Maps API error', details: response.json.status });
         }
-        // 提取路线数据
+        
         const routes = response.json.routes;
         if (!Array.isArray(routes) || routes.length === 0) {
             console.error('Routes data is not valid or empty');
             return res.status(500).json({ error: 'Routes data is not valid or empty' });
         }
-        // 返回路线信息
+        
         res.json(routes);
     })
     .catch(error => {

@@ -40,7 +40,7 @@ const MapWithControls = () => {
     };
 
     const planRoute = () => {
-      // 检查并解析经纬度字符串为对象
+      
       const parseCoordinates = (coord) => {
           if (coord.includes(',')) {
               const [lat, lng] = coord.split(',').map(Number);
@@ -60,8 +60,8 @@ const MapWithControls = () => {
   
           const directionsService = new window.google.maps.DirectionsService();
           directionsService.route({
-              origin, // 使用解析后的 origin
-              destination, // 使用解析后的 destination
+              origin, 
+              destination, 
               travelMode: 'DRIVING'
           }, (result, status) => {
               if (status === 'OK') {
