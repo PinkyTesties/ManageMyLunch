@@ -14,6 +14,7 @@ const Dashboard = ({ history }) => {
   const [email, setEmail] = useState('');
   const [university, setUniversity] = useState('');
   const [userID, setUserID] = useState('');
+  const [userRewardPoints, setUserRewardPoints] = useState(0);
 
   const navigate = useNavigate();
 
@@ -40,9 +41,10 @@ const Dashboard = ({ history }) => {
         if (res.data.valid) {
           setName(res.data.name);
           setEmail(res.data.email);
+          console.log('Email:', res.data.email);
           setUniversity(res.data.university);
-          setUserID(res.data._id);
-
+          //setUserID(res.data.userId);
+          //req.session.userId
 
         } else {
           navigate('/');
@@ -51,6 +53,38 @@ const Dashboard = ({ history }) => {
       .catch(err => console.log(err))
   }, [])
 
+  const [activeRewards, setActiveRewards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8082/api/rewards/active')
+      .then(response => response.json())
+      .then(data => {
+        const rewardsData = data.map(reward => ({ id: reward._id, code: reward.code, points: reward.points, message: reward.message, title: reward.title }));
+        setActiveRewards(rewardsData);
+        console.log('Active rewards:', rewardsData); // log active rewards to console
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  useEffect(() => {
+    if (email) { // Only make the request if email is defined
+      axios.get(`http://localhost:8082/api/users/email/${email}`)
+        .then(response => {
+          setUserID(response.data._id);
+          console.log('User ID:', response.data._id);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  }, [email]); // Run this effect when the email state changes
+
+  useEffect(() => {
+    axios.get(`http://localhost:8082/api/users/${userID}`)
+      .then(response => {
+        setUserRewardPoints(response.data.rewardsPoints);
+        console.log('User reward points:', response.data.rewardsPoints);
+      })
+      .catch(error => console.error('Error:', error));
+  }, [userID]);
 
   useEffect(() => {
     axios
@@ -62,6 +96,17 @@ const Dashboard = ({ history }) => {
         console.log('Error from Dashboard');
       });
   }, []);
+
+
+  const [eligibleRewards, setEligibleRewards] = useState([]);
+
+  useEffect(() => {
+    const filteredRewards = activeRewards.filter(
+      (reward) => reward.points <= userRewardPoints
+    );
+    console.log('Eligible rewards:', filteredRewards);
+    setEligibleRewards(filteredRewards);
+  }, [activeRewards, userRewardPoints]);
 
   const handleCuisineChange = (event) => {
     setSelectedCuisine(event.target.value);
@@ -92,6 +137,9 @@ const Dashboard = ({ history }) => {
 
   return (
     <div>
+      {
+
+      }
       <div className='header'>
         <header className='header'>
           <img src={logo} alt='Logo' height={100} />
@@ -154,7 +202,20 @@ const Dashboard = ({ history }) => {
 
         </div>
         <div className='restaurant-cards-container'>
-          <div className='rewards'><h2>Rewards</h2></div>
+          <div className='rewards'><h2>Rewards</h2>
+
+            {eligibleRewards.map((reward, index) => (
+              <div key={index}>
+                <div className='reward-box'>
+                  <h4>{reward.title}</h4>
+                  <p>{reward.message}</p>
+                  <p className="reward-code"><b>Use code <i>{reward.code}</i> at checkout</b></p>
+
+                </div>
+              </div>
+            ))}
+
+          </div>
           {RestaurantList.length === 0 ? (
             <div className='alert alert-warning' role='alert'>
               No restaurants found.

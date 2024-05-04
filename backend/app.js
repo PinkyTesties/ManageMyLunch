@@ -28,6 +28,7 @@ const restaurantreviews = require('./routes/api/reviewForm');
 const addDriver = require('./routes/api/drivers');
 const code = require('./routes/api/code');
 const driverReviews = require('./routes/api/DriverReviewForm');
+rewards = require('./routes/api/rewards');
 const cors = require("cors");
 
 const app = express();
@@ -80,6 +81,7 @@ app.use('/api/drivers', addDriver);
 app.use('/api/driverslogin', DriverLoginRoutes);
 app.use('/api/code', code);
 app.use('/api/DriverReviewForm', driverReviews);
+app.use('/api/rewards', rewards);
 
 // Serve static files from the "restaurant_assets" directory
 app.use('/restaurant_assets', express.static('restaurant_assets'));

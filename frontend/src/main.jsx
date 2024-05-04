@@ -47,7 +47,7 @@ import EmailTests from "./components/EmailTests";
 import HomePage from "./components/HomePage";
 import SignUp2 from "./components/SignUp2";
 import Login from "./components/Login";
-
+import Rewards from "./components/Rewards";
 //hello
 
 // Routes
@@ -82,7 +82,8 @@ const router = createBrowserRouter([
   { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
   { path: "/EmailTests", element: <EmailTests />},
-  
+  { path: "/Rewards", element: <Rewards />},
+
   //These are vidhu imports for testing
   { path: "/HomePage", element: <HomePage /> },
   { path: "/SignUp2", element: <SignUp2 /> },

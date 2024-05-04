@@ -36,7 +36,12 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
     required: true,
-  }
+  },
+  rewardsPoints: {
+    type: Number,
+    default: 0
+  },
+
 });
 
 module.exports = User = mongoose.model('user', UserSchema);
