@@ -1,0 +1,29 @@
+To run this app locally: 
+You need to run both the front and backend together.
+
+1. Open one terminal in VS code.
+- Rename this terminal "Frontend"
+- Using ls/cd commands go into:  ManageMyLunch -> frontend 
+- Type in the terminal: npm run dev
+- The frontend should now be running on http://localhost:5173/
+- You may be asked to install missing packages, do so.
+- Do not close or kill this terminal
+
+2. Open another terminal in VS code
+- Rename this terminal "Backend"
+- Using ls/cd commands go into:  ManageMyLunch -> backend
+- Type in the terminal: npm run app
+    - If you see an error about nodemon use sude npm install -g nodemon or npm install --legacy-peer-deps
+- The backend should now be running on port 8082, you should see a confirmation message
+- You should also see "Success! MongoDB is connected..."
+    - If you dont see this confirmation message, MongoDB is not connected and is likely because you need to add your IP address in MongoDB dashboard.
+    OR 
+    - If you dont see a confirmation message, its possible you are using an outdated db.js file. Check team discord for the latest.
+- Do not close or kill this terminal
+
+Otherwise see Tyler for help
+
+
+
+
+
