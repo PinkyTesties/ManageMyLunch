@@ -88,6 +88,13 @@ function Rewards() {
         setMessage('');
         setCode('');
         setRewardStatus('');
+        setPoints('');
+        setTitle('');
+        setDollarValue('');
+        setRewardType('');
+        
+
+
     }
 
     return (
