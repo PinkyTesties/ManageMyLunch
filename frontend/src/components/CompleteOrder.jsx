@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 
 const CompleteOrder = () => {
-    const [code, setCode] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState(''); // Add this line
-    const [cart, setCart] = useState(null);
+  const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState(''); // Add this line
+  const [cart, setCart] = useState(null);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -39,10 +39,30 @@ const CompleteOrder = () => {
       });
       const updatedCart = await response.json();
       setCart(updatedCart);
+      // Add points to user profile
+      const amountPoints = cart.cost;
+      console.log("The points to add are: ", amountPoints);
+
+      // Fetch the user by email
+      const userResponse = await fetch(`http://localhost:8082/api/users/email/${cart.email}`);
+      const user = await userResponse.json();
+
+      // Calculate the new reward points
+      const newRewardPoints = (user.rewardsPoints || 0) + amountPoints;
+
+      // Update the user's reward points
+      await fetch(`http://localhost:8082/api/users/${user._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rewardsPoints: newRewardPoints }),
+      });
+
       alert('Order marked as complete');
 
-        // Navigate to the OrderStatus page
-    navigate('/OrderStatus');
+      // Navigate to the OrderStatus page
+      navigate('/OrderStatus');
 
     } catch (err) {
       setError(err.message);
@@ -56,7 +76,7 @@ const CompleteOrder = () => {
       await insertCode(data.text);
     }
   }
-  
+
   const handleManualSearch = async () => {
     await insertCode(code);
   }
@@ -66,7 +86,7 @@ const CompleteOrder = () => {
       setError('Code should be a four-digit number');
       return;
     }
-  
+
     try {
       const response = await fetch(`http://localhost:8082/api/completedCarts/code/${codeToInsert}`);
       const fetchedCart = await response.json();
@@ -84,9 +104,9 @@ const CompleteOrder = () => {
   }
   return (
     <div className='complete_order'>
-        <h2>Complete your order</h2>
-        <hr />
-        <p>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</p>
+      <h2>Complete your order</h2>
+      <hr />
+      <p>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</p>
       <input type="text" onChange={handleInputChange} />
       <button onClick={handleManualSearch}>Search</button>
       <div><h4>{code}</h4></div>
@@ -94,25 +114,25 @@ const CompleteOrder = () => {
         <p>****** DISPLAY CONTENT HERE *******</p>
         <p>{message}</p>
         {cart && (
-      <div className='complete-order'>
-        <h3>Order Details:</h3>
-        <p>Email: {cart.email}</p>
-        <p>Restaurant: {cart.restaurant_name}</p>
-        <p>Cost: ${cart.cost}</p>
-        <p>Code: {cart.code}</p>
-        {/* Add more fields as needed */}
-        <br></br>
-        <br></br>
-        <button onClick={markComplete}>Mark Complete</button>
-              </div>
-    )}
+          <div className='complete-order'>
+            <h3>Order Details:</h3>
+            <p>Email: {cart.email}</p>
+            <p>Restaurant: {cart.restaurant_name}</p>
+            <p>Cost: ${cart.cost}</p>
+            <p>Code: {cart.code}</p>
+            {/* Add more fields as needed */}
+            <br></br>
+            <br></br>
+            <button onClick={markComplete}>Mark Complete</button>
+          </div>
+        )}
       </div>
 
-      
-      <QrReader 
-      onResult={handleScan} 
-      onError={handleError} />
-    
+
+      <QrReader
+        onResult={handleScan}
+        onError={handleError} />
+
 
 
     </div>
