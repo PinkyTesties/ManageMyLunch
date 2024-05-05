@@ -1,7 +1,38 @@
-
+//Settings page
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Assuming you're using axios for HTTP requests
+
 
 const SettingsPage = () => {
+
+    const [deliveryFee, setDeliveryFee] = useState(0);
+
+    useEffect(() => {
+        const fetchDeliveryFee = async () => {
+            try {
+                const response = await axios.get('http://localhost:8082/api/systemAdmin/getDeliveryFee');
+                setDeliveryFee(response.data.fee);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchDeliveryFee();
+    }, []);
+    const handleDeliveryFeeChange = (event) => {
+        setDeliveryFee(event.target.value);
+    }
+
+    const updateDeliveryFee = async () => {
+        try {
+            await axios.post('http://localhost:8082/api/systemAdmin/updateDeliveryFee', { fee: deliveryFee });
+            console.log('Delivery fee updated');
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div>
             <h1>Settings Page</h1>
@@ -18,6 +49,11 @@ const SettingsPage = () => {
             <Link to="/AddDriver">
                 <button>Add a Driver</button>
             </Link>
+            <div>
+                <label>Delivery Fee: $</label>
+                <input type="number" placeholder={deliveryFee} onChange={handleDeliveryFeeChange} />
+                <button onClick={updateDeliveryFee}>Update Delivery Fee</button>
+            </div>
         </div>
     );
 }

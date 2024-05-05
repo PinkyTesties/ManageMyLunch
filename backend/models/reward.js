@@ -11,8 +11,7 @@ const rewardSchema = new mongoose.Schema({
         required: true
     },
     dollarValue: {
-        type: Number,
-        required: true
+        type: Number
     },
     message: {
         type: String,
