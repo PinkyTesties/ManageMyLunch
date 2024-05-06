@@ -14,7 +14,7 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
   //const totalCost = menuItems.reduce((total, item) => total + parseFloat(item.cost), 0);
-  const [deliveryTime, setDeliveryTime] = useState(null);
+  //const [deliveryDate, setDeliveryDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [appliedDiscountCode, setAppliedDiscountCode] = useState('None'); // New state variable for the applied discount code
@@ -36,13 +36,18 @@ const Cart = () => {
   const [discountCode, setDiscountCode] = useState('');
 
   const [deliveryFee, setDeliveryFee] = useState(0);
+  const [serviceFee, setServiceFee] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:8082/api/systemAdmin/getDeliveryFee')
       .then(response => setDeliveryFee(response.data.fee))
       .catch(error => console.error(error));
   }, []);
-
+  useEffect(() => {
+    axios.get('http://localhost:8082/api/systemAdmin/getServiceFee')
+      .then(response => setServiceFee(response.data.fee))
+      .catch(error => console.error(error));
+  }, []);
   // const handleApplyDiscount = () => {
   //   //This is where we handle the discount code redemption
 
@@ -196,7 +201,7 @@ const Cart = () => {
   
     const code = Math.floor(1000 + Math.random() * 9000);
   
-    let finalCost = totalCost - subtractDiscountAmount;
+    let finalCost = totalCost - subtractDiscountAmount + serviceFee;
     finalCost = finalCost < 0 ? deliveryFee : finalCost + deliveryFee;
   
     const completedCart = {
@@ -205,11 +210,14 @@ const Cart = () => {
       code: code,
       date_created: cart.date_created,
       delivery_fee: deliveryFee,
+      service_fee: serviceFee,
       menuItems: cart.menuItems,
       restaurant_id: cart.restaurant_id,
       restaurant_name: restaurantName,
       additionalInfo: additionalInfo,
       delivery_date: new Date(deliveryDate),
+      customerName: name,
+      delivery_location: university,
       //delivery_time: new Date(`${deliveryDate}T${deliveryTime}`), // Combine date and time
     };
 
@@ -278,6 +286,7 @@ const Cart = () => {
 
             <br></br>
             <p>Cart cost: ${totalCost.toFixed(2)}</p>
+            <p>Service Fee: ${serviceFee}</p>
             <p>Delivery Fee: ${deliveryFee}</p>
             <br></br>
             <p>Discount code applied: {appliedDiscountCode}</p>{/* Display the discounts applied to the cart, none by default */}
@@ -306,7 +315,7 @@ const Cart = () => {
                 placeholder="Add additional info here"
               />
             </div>
-            <h2>Total Cost: ${(totalCost + deliveryFee).toFixed(2)}</h2>
+            <h2>Total Cost: ${(totalCost + deliveryFee + serviceFee).toFixed(2)}</h2>
 
             <div>
               <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0}>Buy Now</button>

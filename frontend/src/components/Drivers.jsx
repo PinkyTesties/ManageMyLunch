@@ -52,6 +52,7 @@ const Drivers = () => {
           <p>Email: {driver.email}</p>
           <p>Date Added: {new Date(driver.date_added).toLocaleDateString()}</p>
           <p>Last Updated: {new Date(driver.updated_date).toLocaleDateString()}</p>
+          <p>Current wallet balance: ${driver.wallet_balance}</p>
           <button onClick={() => deleteDriver(driver._id)}>Delete Driver</button>
           <button onClick={() => viewDriverReview(driver.email)}>View Reviews</button>
 

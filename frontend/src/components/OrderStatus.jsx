@@ -38,7 +38,7 @@ function OrderStatus() {
   useEffect(() => {
     prevTotalRemainingTimeInSeconds.current = totalRemainingTimeInSeconds;
   }, [totalRemainingTimeInSeconds]);
-  
+
   useEffect(() => {
     if (totalRemainingTimeInSeconds === 0 && prevTotalRemainingTimeInSeconds.current > 0) {
       console.log('Edit time has elapsed.');
@@ -269,18 +269,33 @@ function OrderStatus() {
                 >
                   <h2>{order.restaurant_name}</h2>
                   <h3>Cost: ${order.cost.toFixed(2)}</h3>
-                  <p>{order.email}</p>
-                  {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
+
+                  {order.delivery_date.split("T")[0] !== new Date().toISOString().split("T")[0] &&
+                    <p>Delivery Date: {order.delivery_date.split("T")[0]}
+                      <br /> <i><b>This order will be fulfilled on the selected date.</b></i>
+                    </p>
+
+                  }
+                  {order.delivery_date.split("T")[0] === new Date().toISOString().split("T")[0] &&
+                    <p>Delivery Date: {order.delivery_date.split("T")[0]} (Today)</p>
+                  }
+
                   <p>
-                    Menu Items:{" "}
+                    Order Contents:{" "}
                     {order.menuItems
                       .map((id) => menuItems[id] || id)
                       .join(", ")}
                   </p>
-                  <p>Additional Info: {order.additionalInfo}</p>
+
+                  {order.additionalInfo !== "" ? (
+                    <p>Additional Info: {order.additionalInfo}</p>
+                  ) : (
+                    <p>No additional information</p>
+                  )}
                   <p>Status: {order.orderStatus}</p>
-                  <p>Order code: {order.code}</p>
-                  <p>Driver contact: {order.driver_email}</p>
+
+
+                  {/*<p>Driver contact: {order.driver_email}</p>*/}
 
                   <p></p>
                   {totalRemainingTimeInSeconds > 0 ? (
@@ -288,7 +303,6 @@ function OrderStatus() {
                       <button className="edit-button">Edit Order</button>
                     </Link>
                   ) : (
-                    
                     <button disabled className="edit-button disabled">
                       Edit Order
                     </button>
@@ -296,15 +310,11 @@ function OrderStatus() {
                   {totalRemainingTimeInSeconds > 0
                     ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
                     : " Edit Time has elapsed"}
-                  {
-                    order.orderStatus === "Delivered" && (
-                      <button onClick={() => navigate(`/CompleteOrder`)}>
-                        Confirm Order Pickup
-                      </button>
-                    )
-
-                    //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
-                  }
+                  {order.orderStatus === "Delivered" && (
+                    <button onClick={() => navigate(`/CompleteOrder`)}>
+                      Confirm Order Pickup
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -341,11 +351,11 @@ function OrderStatus() {
                 </Link>
               </button>
               <button>
-              <Link to={`/DriverReviewForm/${order.driver_email}`}>
-                Rate your Driver
+                <Link to={`/DriverReviewForm/${order.driver_email}`}>
+                  Rate your Driver
                 </Link>
 
-                </button>
+              </button>
             </div>
           ))}
       </div>

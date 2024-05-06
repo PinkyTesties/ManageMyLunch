@@ -1,3 +1,4 @@
+//drivers.js
 const express = require('express');
 const router = express.Router();
 
@@ -71,4 +72,19 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ error: 'No such a driver' }));
 });
 
+// @route   PUT api/drivers/email/:email
+// @desc    Update driver by email
+// @access  Public
+router.put('/email/:email', (req, res) => {
+  Driver.findOneAndUpdate({ email: req.params.email }, req.body, { new: true })
+    .then(driver => {
+      if (!driver) {
+        return res.status(404).json({ nodriverfound: 'No Driver found' });
+      }
+      res.json({ msg: 'Updated successfully', driver });
+    })
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
 module.exports = router;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Make sure to install axios with `npm install axios` if you haven't done so
 
-
 function Rewards() {
     const [title, setTitle] = useState('');
     const [points, setPoints] = useState('');
@@ -85,6 +84,7 @@ function Rewards() {
             console.log('Error creating reward');
             alert('Reward creation failed. Please check that your inputs are valid.');
         }
+        // Clear the form when the reward is created
         setMessage('');
         setCode('');
         setRewardStatus('');
@@ -93,8 +93,6 @@ function Rewards() {
         setDollarValue('');
         setRewardType('');
         
-
-
     }
 
     return (

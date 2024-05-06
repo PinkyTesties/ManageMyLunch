@@ -48,7 +48,7 @@ const Driver_OrderPanel = ({ order, email }) => {
       <br></br>
       <h3>Customer details:</h3>
       <p>Contact: {order.email}</p>
-      <p>Delivery location: {university}</p>
+      <p>Delivery location: {order.delivery_location}</p>
       <p>Driver email: {email}</p>
       <br></br>
       <button onClick={acceptOrder}>

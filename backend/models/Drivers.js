@@ -29,6 +29,11 @@ const DriverSchema = new mongoose.Schema({
   updated_date: {
     type: Date,
     default: Date.now
+  },
+
+  wallet_balance: {
+    type: Number,
+    default: 0
   }
 });
 

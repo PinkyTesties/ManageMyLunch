@@ -9,11 +9,16 @@ const RestaurantPanel_Driver = ({ restaurant }) => {
 
   useEffect(() => {
     const fetchCarts = () => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+
       axios.get('http://localhost:8082/api/completedCarts')
         .then(res => {
-          const carts = res.data.filter(cart => 
-            cart.restaurant_id === restaurant._id && cart.orderStatus === "Pending"
-          );
+          const carts = res.data.filter(cart => {
+            const cartDate = new Date(cart.delivery_date);
+            cartDate.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+            return cart.restaurant_id === restaurant._id && cart.orderStatus === "Pending" && cartDate.getTime() === today.getTime();
+          });
           setCompletedCarts(carts);
         })
         .catch(err => console.log(err));
@@ -31,8 +36,6 @@ const RestaurantPanel_Driver = ({ restaurant }) => {
         .catch(err => console.log(err));
     });
   };
-
-
 
   return (
     <div className="restaurantcard-container-driver">
