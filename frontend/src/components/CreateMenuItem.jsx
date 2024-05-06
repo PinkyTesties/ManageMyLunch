@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import axios from 'axios';
 
 const CreateMenuItem = () => {
   const params = useParams();
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const [menuItem, setMenuItem] = useState({
     name: '',
@@ -95,6 +97,7 @@ const CreateMenuItem = () => {
       .then((res) => {
         // handle success
         alert("Menu item added successfully!");
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log("Error in CreateMenuItem!");

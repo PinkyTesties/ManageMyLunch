@@ -11,6 +11,8 @@ const CreateRestaurant = (props) => {
     restaurantName: "",
     cuisine: "",
     address: "",
+    latitude: "",
+    longitude: "",
     rating: "",
     description: "",
     restaurantImage: "",
@@ -40,6 +42,7 @@ axios
   .then((res) => {
     // handle success
     alert("Restaurant added successfully!");
+    navigate("/dashboard");
   })
   .catch((err) => {
     console.log("Error in CreateRestaurant!");
@@ -97,6 +100,21 @@ axios
                   value={restaurant.address}
                   onChange={onChange}
                 />
+                <input
+                  type="text"
+                  placeholder="Latitude"
+                  name="latitude"
+                  className="form-control"
+                  value={restaurant.latitude}
+                  onChange={onChange}
+                /><input
+                type="text"
+                placeholder="Longitude"
+                name="longitude"
+                className="form-control"
+                value={restaurant.longitude}
+                onChange={onChange}
+              />
               </div>
               <br></br>
               <div className="form-group">

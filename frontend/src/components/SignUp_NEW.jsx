@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from './componentAssets/logov1.png';
 import '../style/SignUp.css';
 
-const SignUp = () => {
+const SignUp_NEW = () => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -19,6 +19,20 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [confirmation, setConfirmation] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [universities, setUniversities] = useState([]);
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        const response = await axios.get('http://localhost:8082/api/universities');
+        setUniversities(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUniversities();
+  }, []);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -123,14 +137,15 @@ const SignUp = () => {
             />
           </div>
           <div className="signup-form-group">
-            <input
-              type="text"
-              name="university"
-              className="signup-input-field"
-              placeholder="University"
-              value={user.university}
-              onChange={onChange}
-            />
+            <select name="university" value={user.university} onChange={onChange} className="signup-input-field"
+            >
+              <option value="">Select a university</option>
+              {universities.map((university) => (
+                <option key={university._id} value={university.name}>
+                  {university.name}
+                </option>
+              ))}
+            </select>
           </div>
           {error && <div className="signup-error">{error}</div>}
           {confirmation && <div className="signup-success">{confirmation}</div>}
@@ -148,4 +163,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUp_NEW;

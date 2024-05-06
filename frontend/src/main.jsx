@@ -42,6 +42,8 @@ import CompleteOrder from "./components/CompleteOrder";
 import DriverReviewForm from "./components/DriverReviewForm";
 import ViewDriverReviews from "./components/ViewDriverReviews";
 import EmailTests from "./components/EmailTests";
+import MapWithControls from "./components/MapWithControls";
+import DeliverOrder from "./components/DeliverOrder";
 
 //These are vidhu imports for testing
 import HomePage from "./components/HomePage";
@@ -83,6 +85,8 @@ const router = createBrowserRouter([
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
   { path: "/EmailTests", element: <EmailTests />},
   { path: "/Rewards", element: <Rewards />},
+  { path: "/Map", element: <MapWithControls />},
+  { path: "/DeliverOrder/:id", element: <DeliverOrder />},
 
   //These are vidhu imports for testing
   { path: "/HomePage", element: <HomePage /> },

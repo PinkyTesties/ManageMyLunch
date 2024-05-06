@@ -7,7 +7,7 @@ import logo from "./componentAssets/logov1.png";
 import RestaurantPanel_Driver from "./RestaurantPanel_Driver";
 Modal.setAppElement("#root");
 
-const Dashboard = ({ history }) => {
+const Dashboard = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedCuisine, setSelectedCuisine] = useState("");
@@ -19,7 +19,7 @@ const Dashboard = ({ history }) => {
   const [page, setPage] = useState("orders");
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [walletBalance, setWalletBalance] = useState(0);
-  
+
   const [deliveryFee, setDeliveryFee] = useState(0); // State variable for delivery fee
   const navigate = useNavigate();
 
@@ -27,6 +27,15 @@ const Dashboard = ({ history }) => {
     setShowDropdown(!showDropdown);
   };
 
+  const [showDeliverButton, setShowDeliverButton] = useState(false);
+
+  const handleCollectedClick = () => {
+    setShowDeliverButton(true);
+  };
+
+  const handleDeliverNowClick = (orderId) => {
+    navigate(`/DeliverOrder/${orderId}`);
+  };
   const customStyles = {
     content: {
       top: "0%",
@@ -157,48 +166,48 @@ const Dashboard = ({ history }) => {
     ) => <RestaurantPanel_Driver restaurant={restaurant} key={k} />
   );
 
-  const handleDelivered = (orderId, email) => {
-    let deliveryFee = 0; // Define deliveryFee in the outer scope
-  
-    axios.put(`http://localhost:8082/api/completedCarts/status/${orderId}`, { orderStatus: 'Delivered' })
-      .then(response => {
-        // After updating the order status, fetch the order to get the delivery fee
-        return axios.get(`http://localhost:8082/api/completedCarts/id/${orderId}`);
-      })
-      .then(response => {
-        if (response.data) {
-          deliveryFee = response.data.delivery_fee; // Update deliveryFee
-          console.log(`Amount of: ${deliveryFee} added to driver wallet`);
-          // Fetch the driver's current wallet balance
-          return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
-        }
-      })
-      .then(response => {
-        if (response.data) {
-          // Calculate the new balance
-          const newBalance = response.data.wallet_balance + deliveryFee;
-          // Update the driver's wallet balance
-          return axios.put(`http://localhost:8082/api/drivers/${response.data._id}`, { wallet_balance: newBalance });
-        }
-      })
-      .then(response => {
-        // Fetch the updated wallet balance
-        return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
-      })
-      .then(response => {
-        if (response.data) {
-          // Update the local walletBalance state variable
-          setWalletBalance(response.data.wallet_balance);
-        }
-        // Update the local state if necessary
-        setSelectedOrders(selectedOrders.map(order =>
-          order._id === orderId ? { ...order, orderStatus: 'Delivered' } : order
-        ));
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
-  };
+  // const handleDelivered = (orderId, email) => {
+  //   let deliveryFee = 0; // Define deliveryFee in the outer scope
+
+  //   axios.put(`http://localhost:8082/api/completedCarts/status/${orderId}`, { orderStatus: 'Delivered' })
+  //     .then(response => {
+  //       // After updating the order status, fetch the order to get the delivery fee
+  //       return axios.get(`http://localhost:8082/api/completedCarts/id/${orderId}`);
+  //     })
+  //     .then(response => {
+  //       if (response.data) {
+  //         deliveryFee = response.data.delivery_fee; // Update deliveryFee
+  //         console.log(`Amount of: ${deliveryFee} added to driver wallet`);
+  //         // Fetch the driver's current wallet balance
+  //         return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
+  //       }
+  //     })
+  //     .then(response => {
+  //       if (response.data) {
+  //         // Calculate the new balance
+  //         const newBalance = response.data.wallet_balance + deliveryFee;
+  //         // Update the driver's wallet balance
+  //         return axios.put(`http://localhost:8082/api/drivers/${response.data._id}`, { wallet_balance: newBalance });
+  //       }
+  //     })
+  //     .then(response => {
+  //       // Fetch the updated wallet balance
+  //       return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
+  //     })
+  //     .then(response => {
+  //       if (response.data) {
+  //         // Update the local walletBalance state variable
+  //         setWalletBalance(response.data.wallet_balance);
+  //       }
+  //       // Update the local state if necessary
+  //       setSelectedOrders(selectedOrders.map(order =>
+  //         order._id === orderId ? { ...order, orderStatus: 'Delivered' } : order
+  //       ));
+  //     })
+  //     .catch(error => {
+  //       console.error('There was an error!', error);
+  //     });
+  // };
 
   return (
     <div>
@@ -292,9 +301,14 @@ const Dashboard = ({ history }) => {
                     <p>Restaurant Name: {order.restaurant_name}</p>
                     <p>Customer: {order.customerName}</p>
                     <p>Delivery Location: {order.delivery_location}</p>
+                    {/***
                     <button onClick={() => handleDelivered(order._id, email)}>
                       Mark as Delivered
-                    </button>
+                    </button> */}
+                    <div>
+                      {!showDeliverButton && <button onClick={handleCollectedClick}>Collected</button>}
+                      {showDeliverButton && <button onClick={() => handleDeliverNowClick(order._id)}>Deliver Now</button>}
+                    </div>
                   </div>
                 ))}
               </div>
