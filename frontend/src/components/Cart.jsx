@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import beefImage from './beef.jpg';
+import emailjs from 'emailjs-com';
+
 
 const Cart = () => {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState(''); //this is the email message
   const [name, setName] = useState("");
   const [university, setUniversity] = useState("");
   const [restaurantName, setRestaurantName] = useState("");
@@ -38,11 +41,23 @@ const Cart = () => {
   const [deliveryFee, setDeliveryFee] = useState(0);
   const [serviceFee, setServiceFee] = useState(0);
 
+
+  
+  useEffect(() => {
+    Promise.all(cart.menuItems.map(item => 
+      fetch(`http://localhost:8082/api/menuItems/${item._id}`)
+        .then(response => response.json())
+    )).then(data => setMenuItems(data));
+  }, [cart.menuItems]);
+
   useEffect(() => {
     axios.get('http://localhost:8082/api/systemAdmin/getDeliveryFee')
       .then(response => setDeliveryFee(response.data.fee))
       .catch(error => console.error(error));
   }, []);
+
+
+  
   useEffect(() => {
     axios.get('http://localhost:8082/api/systemAdmin/getServiceFee')
       .then(response => setServiceFee(response.data.fee))
@@ -187,9 +202,42 @@ const Cart = () => {
       .catch((err) => console.log(err));
   }
 
+  //Email controller
+  const sendEmail = () => {
+    let cartItemsString = cart.menuItems.map(item => {
+      if (item.price) {
+        return item.name + " - $" + item.price.toFixed(2);
+      } else {
+        console.error(`Item ${item.name} does not have a price`);
+        return item.name;
+      }
+    }).join("\n");
+  
 
-  function handleBuyNow() {
-    // Log the cost of each menuItem
+    const emailParams = {
+        email_from: email,
+        message: 
+        "Thank you "+ name+ " for your order! \n"+
+        "Your order will be delivered to " + university + " on " + deliveryDate + ". \n\n" +
+        "Your order details: \n\n" +
+        
+        "Your order total is $" + (totalCost + deliveryFee + serviceFee).toFixed(2) + ". Your order will be delivered lunch time of " + deliveryDate + ". \n\n" +
+        "Your cart items: \n" + cartItemsString
+        };
+
+    emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
+        .then((response) => {
+           console.log('SUCCESS!', response.status, response.text);
+        }, (err) => {
+           console.log('FAILED...', err);
+        });
+
+    console.log('Email:', email);
+    console.log('Message:', message);
+};
+
+const handleBuyNow = (e) => {
+  // Log the cost of each menuItem
     cart.menuItems.forEach(item => {
       console.log(`Cost of item ${item._id}: ${item.cost}`);
     });
@@ -231,6 +279,8 @@ const Cart = () => {
       })
       .catch((err) => console.log(err));
 
+      sendEmail(e);
+
     deleteCart();
   }
 
@@ -261,13 +311,23 @@ const Cart = () => {
             {cart.menuItems.map((item, index) => (
               <div className='cart-items' key={index}>
                 <div className='remove-cart'>
-                  <img src={beefImage} />
+
+                {//** Use item._id to fetch the correct menuItemImage string*/
+                }
+                  <img 
+                  src={`http://localhost:8082/menuItem_Assets/${item.menuItemImage}`}
+                  height={200}
+                  width={300}
+                  ></img>
+
+
                 </div>
                 <div className="remove-cart">
                   <h4><b>{item.name}</b></h4>
                   <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
                 </div>
                 <p><b>${parseFloat(item.cost).toFixed(2)}</b></p>
+                
                 {item.ingredients.map((ingredient, i) => (
                   <div key={i}>
                     <p>Ingredient Name: {ingredient.name}</p>

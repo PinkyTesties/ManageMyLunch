@@ -1,36 +1,7 @@
 
-
-// function DeliverOrder() {
-//   const { id } = useParams();
-//   const [completedCart, setCompletedCart] = useState(null);
-
-//   useEffect(() => {
-//     const fetchCompletedCart = async () => {
-//       try {
-//         const response = await axios.get(`http://localhost:8082/api/completedCarts/id/${id}`);
-//         setCompletedCart(response.data);
-//       } catch (error) {
-//         console.error('Error fetching completed cart:', error);
-//       }
-//     };
-
-//     fetchCompletedCart();
-//   }, [id]);
-
-//   if (!completedCart) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// }
-
-// export default DeliverOrder;import React, { useState, useEffect } from 'react';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 import axios from 'axios';
 
@@ -53,79 +24,47 @@ const DeliverOrder = () => {
     const navigate = useNavigate();
 
     const { id } = useParams();
-
-
-
     useEffect(() => {
-        loadGoogleMaps();
-    }, []);
-
+        if (window.google && !map) {
+            const mapContainer = document.getElementById('map');
+            if (mapContainer) {
+                const initialMap = new window.google.maps.Map(mapContainer, {
+                    zoom: 15,
+                    center: { lat: -36.8485, lng: 174.7633 } // Auckland CBD
+                });
+                setMap(initialMap);
+            }
+        }
+    }, [map]);
     const loadGoogleMaps = () => {
         const existingScript = document.querySelector('script[src*="googleapis"]');
         if (!existingScript) {
-            const script = document.createElement('script');
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCitl6yX_uVB95MJzBdlACmT5sy5j0vcZc&callback=initMap';
-            script.async = true;
-    
             window.initMap = () => {
                 const mapContainer = document.getElementById('map');
                 if (mapContainer && !map) {
-                  if (window.google) {
-                    const initialMap = new window.google.maps.Map(mapContainer, {
-                      zoom: 15,
-                      center: { lat: -36.8485, lng: 174.7633 } // Auckland CBD
-                    });
-                    setMap(initialMap);
-                  } else {
-                    // If window.google is not defined, delay map creation
-                    setTimeout(window.initMap, 100);
-                  }
+                    if (window.google) {
+                        const initialMap = new window.google.maps.Map(mapContainer, {
+                            zoom: 15,
+                            center: { lat: -36.8485, lng: 174.7633 } // Auckland CBD
+                        });
+                        setMap(initialMap);
+                    }
                 }
-              };
-    
-            script.onload = () => {
-                if (window.initMap) initMap();
             };
     
-            script.onerror = () => {
-                console.error('Google Maps script failed to load.');
-            };
-    
+            const script = document.createElement('script');
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCitl6yX_uVB95MJzBdlACmT5sy5j0vcZc&callback=initMap';
+            script.async = true;
+            script.defer = true;
+            script.addEventListener('load', window.initMap);
             document.body.appendChild(script);
-        } else {
-            if (window.initMap) initMap();
         }
     };
-
-    // useEffect(() => {
-    //     window.initMap = () => {
-    //         const mapContainer = document.getElementById('map');
-    //         if (mapContainer && !map) {
-    //             const initialMap = new window.google.maps.Map(mapContainer, {
-    //                 zoom: 15,
-    //                 center: { lat: -36.8485, lng: 174.7633 } // Auckland CBD
-    //             });
-    //             setMap(initialMap);
-    //         }
-    //     };
-
-    //     // Call the function
-    //     window.initMap();
-
-    // }, [map]); // Add other dependencies if needed
-    // useEffect(() => {
-    //     window.initMap = () => {
-    //       const mapContainer = document.getElementById('map');
-    //       if (mapContainer && !map) {
-    //         const initialMap = new window.google.maps.Map(mapContainer, {
-    //           zoom: 15,
-    //           center: { lat: -36.8485, lng: 174.7633 } // Auckland CBD
-    //         });
-    //         setMap(initialMap);
-    //       }
-    //     };
-    //   }, [map]); // Add other dependencies if needed
-
+    
+    useEffect(() => {
+        loadGoogleMaps();
+    }, []);
+    
     const planRoute = () => {
 
         const parseCoordinates = (coord) => {
@@ -135,16 +74,16 @@ const DeliverOrder = () => {
             }
             return coord.trim();
         };
-
+    
         const origin = parseCoordinates(restaurantLat + ',' + restaurantLong);
         const destination = parseCoordinates(uniLat + ',' + uniLong);
-
+    
         console.log('Planning route from:', origin, 'to', destination); // Debugging line
-
+    
         axios.post('http://localhost:8082/api/route', { origin, destination })
             .then(response => {
                 console.log('Received route data:', response.data); // Debugging line
-
+    
                 const directionsService = new window.google.maps.DirectionsService();
                 directionsService.route({
                     origin,
@@ -162,7 +101,6 @@ const DeliverOrder = () => {
             })
             .catch(error => {
                 console.error('Error planning route:', error);
-                CBD
             });
     };
 
@@ -259,6 +197,8 @@ const DeliverOrder = () => {
             .catch(error => {
                 console.error('There was an error!', error);
             });
+
+            sendEmail();
         navigate('/DriverDashboard');
 
     };
@@ -300,7 +240,27 @@ const DeliverOrder = () => {
     // if (!completedCart) {
     //     return <div>Loading...</div>;
     // }
-
+    const sendEmail = () => {
+        // Iterate over orders
+          // Send email to customer
+          const emailParams = {
+            email_from: completedCart.email,
+            message: 
+            "Hey there "+ completedCart.customerName + ", "+
+            "Your order from " + completedCart.restaurant_name +" has been delivered to, " + completedCart.delivery_location + "!\n\n" +
+            "Once youve collected your order, log in to Manage My Lunch to confirm youve picked up your order. \n\n" +
+            "Confirm you've collected your order by scanning the QR code with your order, or using this unique code: " + completedCart.code+". \n\n" +
+            "Log in to Manage My Lunch here: http://localhost:5173/CompleteOrder at any time to confirm your order pickup. \n\n"
+          };
+        
+          emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
+            .then((response) => {
+              console.log('SUCCESS!', response.status, response.text);
+            }, (err) => {
+              console.log('FAILED...', err);
+            });
+        
+      };
 
 
 

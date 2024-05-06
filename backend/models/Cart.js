@@ -54,7 +54,13 @@ const CartSchema = new mongoose.Schema({
         ],
         additional_information: {
           type: String
-        }
+        },
+
+        menuItemImage: {
+          type: String,
+          required: true
+        },
+
       }
     ]
   },

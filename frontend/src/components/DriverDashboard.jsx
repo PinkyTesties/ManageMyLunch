@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Driver_OrderPanel from "./Driver_OrderPanel";
 import logo from "./componentAssets/logov1.png";
 import RestaurantPanel_Driver from "./RestaurantPanel_Driver";
+import emailjs from 'emailjs-com';
+
 Modal.setAppElement("#root");
 
 const Dashboard = () => {
@@ -34,6 +36,7 @@ const Dashboard = () => {
   };
 
   const handleDeliverNowClick = (orderId) => {
+    sendEmail();
     navigate(`/DeliverOrder/${orderId}`);
   };
   const customStyles = {
@@ -46,6 +49,9 @@ const Dashboard = () => {
       height: "50%",
     },
   };
+
+
+
 
   useEffect(() => {
     axios
@@ -166,6 +172,27 @@ const Dashboard = () => {
     ) => <RestaurantPanel_Driver restaurant={restaurant} key={k} />
   );
 
+  const sendEmail = () => {
+    // Iterate over orders
+    orders.forEach(order => {
+      // Send email to customer
+      const emailParams = {
+        email_from: order.email,
+        message: 
+        "Hey there "+ order.customerName + ", "+
+        "Your order from " + order.restaurant_name +" has been collected and is with our driver, " + name + "!\n\n" +
+        "Your order will be delivered by "+ name +" to "+ order.delivery_location + " shorty, we will let you know once its been delivered. \n\n" +
+        "Log in to Manage My Lunch at any time to view your order. \n\n"
+      };
+    
+      emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
+        .then((response) => {
+          console.log('SUCCESS!', response.status, response.text);
+        }, (err) => {
+          console.log('FAILED...', err);
+        });
+    });
+  };
   // const handleDelivered = (orderId, email) => {
   //   let deliveryFee = 0; // Define deliveryFee in the outer scope
 

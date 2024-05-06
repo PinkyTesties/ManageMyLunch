@@ -88,7 +88,9 @@ const MenuItemViewer = () => {
           name: ingredient.name,
           quantity: ingredientCounts[ingredient.name] || ingredient.quantity // Use the updated quantity if available
         })),
-        additional_information: instructions || menuItem.additional_information // Use the updated instructions if available
+        additional_information: instructions || menuItem.additional_information, // Use the updated instructions if available
+        menuItemImage: menuItem.menuItemImage
+
       };
 
       // Send a request to add an item to the cart
@@ -99,6 +101,8 @@ const MenuItemViewer = () => {
       });
 
       console.log(response.data);
+      alert("Added to cart");
+      navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }

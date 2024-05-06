@@ -56,6 +56,15 @@ function OrderStatus() {
     },
   };
 
+  const handleCurrentOrdersClick = () => {
+    setPage("current-orders");
+  };
+
+  const handlePastOrdersClick = () => {
+    setPage("past-orders");
+  };
+
+
   useEffect(() => {
     axios
       .get("http://localhost:8082")
@@ -204,9 +213,17 @@ function OrderStatus() {
         </p>
         <p>We will send you an email confirmation shortly.</p>
 
+
+        <div className='col-md-11'>
+              <button onClick={handleCurrentOrdersClick}>All Current Orders</button>
+              <button onClick={handlePastOrdersClick}>Order History</button>
+            </div>
+
         <p>{/*Your order ID is: { }*/}</p>
         <div>
+          
           <h3>Current orders</h3>
+
           {orders
             .filter(
               (order) =>
@@ -257,13 +274,17 @@ function OrderStatus() {
               );
 
               return (
+                
                 <div
+                
+
+
                   key={index}
                   style={{
                     border: "1px solid black",
                     padding: "10px",
                     margin: "10px",
-                    width: "300px",
+                    width: "1000px",
                     background: "#fff",
                   }}
                 >
@@ -332,7 +353,7 @@ function OrderStatus() {
                 border: "1px solid black",
                 padding: "10px",
                 margin: "10px",
-                width: "300px",
+                width: "1000px",
                 background: "#fff",
               }}
             >

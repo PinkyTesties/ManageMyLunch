@@ -55,7 +55,9 @@ const MenuItemPanel = ({ menuItem }) => {
         cost: parseFloat(menuItem.cost) * quantity, // Multiply cost by quantity
 
         ingredients: [],
-        additional_information: ""
+        additional_information: "",
+        menuItemImage: menuItem.menuItemImage
+
       };
 
       // Send a request to add an item to the cart

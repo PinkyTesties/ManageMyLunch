@@ -193,11 +193,6 @@ const Dashboard = ({ history }) => {
                 </select>
               </div>
             </div>
-
-
-
-
-
           </div>
 
         </div>

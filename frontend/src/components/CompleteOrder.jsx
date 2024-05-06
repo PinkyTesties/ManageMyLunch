@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { useNavigate } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 
 const CompleteOrder = () => {
@@ -59,6 +60,7 @@ const CompleteOrder = () => {
         body: JSON.stringify({ rewardsPoints: newRewardPoints }),
       });
 
+      sendEmail();
       alert('Order marked as complete');
 
       // Navigate to the OrderStatus page
@@ -102,6 +104,30 @@ const CompleteOrder = () => {
       setError(err.message);
     }
   }
+
+  const sendEmail = () => {
+    // Iterate over orders
+      // Send email to customer
+      const emailParams = {
+        email_from: cart.email,
+        message: 
+        "Hey there "+ cart.customerName + ", "+
+        "Your order from " + cart.restaurant_name +" has been completed! \n\n" +
+        "Thank you for ordering with Manage My Lunch! Please take the time to review your driver here: http://localhost:5173/OrderStatus.\n\n" +
+        "We hope you enjoy your meal! \n\n" 
+        
+      };
+    
+      emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
+        .then((response) => {
+          console.log('SUCCESS!', response.status, response.text);
+        }, (err) => {
+          console.log('FAILED...', err);
+        });
+    
+  };
+
+
   return (
     <div className='complete_order'>
       <h2>Complete your order</h2>
@@ -118,7 +144,7 @@ const CompleteOrder = () => {
             <h3>Order Details:</h3>
             <p>Email: {cart.email}</p>
             <p>Restaurant: {cart.restaurant_name}</p>
-            <p>Cost: ${cart.cost}</p>
+            <p>Cost: ${cart.cost.toFixed(2)}</p>
             <p>Code: {cart.code}</p>
             {/* Add more fields as needed */}
             <br></br>
