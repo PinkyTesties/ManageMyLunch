@@ -125,7 +125,6 @@ const Cart = () => {
     <div className="cart-container">
       <header className="cart-header">
         <h1>Your Cart</h1>
-        <img src={logo} alt="Logo" className="cart-logo" />
       </header>
       <div className="cart-details">
         <span>Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required /></span>

@@ -1,0 +1,101 @@
+/* UserDashboard container */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.user-dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Header */
+.user-dashboard-header {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+/* Title */
+.user-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* User info */
+.user-info {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Menu buttons */
+.user-menu-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Account button */
+.user-account-button,
+.user-reports-button,
+.user-order-button,
+.user-cart-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+}
+
+.user-account-button:hover,
+.user-reports-button:hover,
+.user-order-button:hover,
+.user-cart-button:hover {
+  background-color: #666;
+}
+
+/* Button focus effect */
+.user-account-button:focus,
+.user-reports-button:focus,
+.user-order-button:focus,
+.user-cart-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Account modal */
+.user-account-modal {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 9999;
+}
+
+.user-account-modal a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.user-account-modal a:hover {
+  background-color: #f0f0f0;
+}
