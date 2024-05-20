@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
+import UserDashboard from './UserDashboard';
 const AddDriver = () => {
     const navigate = useNavigate();
 
@@ -28,9 +28,10 @@ const AddDriver = () => {
 
     return (
         <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
             <div>
                 <h1>Add a driver</h1>
-      <button><Link to={'/Dashboard'}>Dashboard</Link></button>
       <button><Link to={'/Drivers'}>View Drivers</Link></button>
 
             </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import logo from './componentAssets/logov1.png';
-
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 const ViewRestaurantReviews = () => {
     const { id } = useParams();
     const [reviews, setReviews] = useState([]);
@@ -33,10 +33,11 @@ const ViewRestaurantReviews = () => {
 
     return (
         <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
             {restaurant ? (
                 <div>
                     <header>
-                        <img src={logo} alt='Logo' height={100} />
                         <h1>Restaurant reviews</h1>
                         <p></p>
                     </header>

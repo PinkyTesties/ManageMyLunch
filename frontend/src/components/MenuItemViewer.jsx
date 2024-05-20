@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 const MenuItemViewer = () => {
   const { id } = useParams();
@@ -110,6 +111,10 @@ const MenuItemViewer = () => {
 
   return (
     <div>
+      <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
+      </div>
       {menuItem ? (
         <>
         <header>

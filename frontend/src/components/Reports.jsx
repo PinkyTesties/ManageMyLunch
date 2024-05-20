@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 function Reports() {
     const [popularItem, setPopularItem] = useState(null);
@@ -191,6 +192,11 @@ function Reports() {
     }, [page, selectedDate]);
 
     return (
+        <div>
+<div>
+<UserDashboard /> {/* Use UserDashboad */}
+
+        </div>
         <div className='report'>
             <div>
                 <h2>Admin report generation</h2>
@@ -298,6 +304,7 @@ function Reports() {
 
                 </>
             )}
+        </div>
         </div>
     );
 }

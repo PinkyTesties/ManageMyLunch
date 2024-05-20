@@ -66,6 +66,7 @@ const MenuItemPanel = ({ menuItem }) => {
         menuItem: cartItem,
         restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
       });
+      alert("Added to cart");
       console.log(response.data);
 
     } catch (error) {

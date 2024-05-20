@@ -122,18 +122,11 @@ function ShowRestaurantDetails(props) {
       <UserDashboard /> {/* Use UserDashboard */}
 
 
-      <br></br>
-      <p>*****</p>
-      <br></br>
-
       <header className='header'>
-        <img src={logo} alt='Logo' height={100} />
-        <h1>Manage My Lunch Dashboard</h1>
         <p></p>
       </header>
       <hr />
-      <button className='header-button' onClick={toggleDropdown}>Account</button>
-      <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
+
 
       <Modal
         isOpen={showDropdown}

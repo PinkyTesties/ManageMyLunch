@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 function UpdatePassword() {
   const [users, setUsers] = useState([]);
@@ -54,6 +55,8 @@ function UpdatePassword() {
 
   return (
     <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
       <h1>Reset your password</h1>
       {successMessage && <p>{successMessage}</p>}
       {errorMessage && <p>{errorMessage}</p>} {/* Display error message if there is any */}

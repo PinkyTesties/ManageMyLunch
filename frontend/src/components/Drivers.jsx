@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import UserDashboard from './UserDashboard';
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -42,9 +43,10 @@ const Drivers = () => {
 
   return (
     <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
       <h1>Drivers</h1>
       <button><Link to={'/AddDriver'}>Add Drivers</Link></button>
-      <button><Link to={'/Dashboard'}>Dashboard</Link></button>
 
       {drivers.map((driver) => (
         <div key={driver._id} style={boxStyle}>

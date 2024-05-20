@@ -5,7 +5,7 @@ import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import beefImage from './beef.jpg';
 import emailjs from 'emailjs-com';
-
+import UserDashboard from './UserDashboard';
 
 const Cart = () => {
   const [email, setEmail] = useState("");
@@ -286,8 +286,9 @@ const handleBuyNow = (e) => {
 
   return (
     <div >
+      <UserDashboard /> {/* Use UserDashboard */}
+
       <header>
-        <img src={logo} alt="Logo" />
         <h1>Your Cart</h1>
         <p></p>
       </header>

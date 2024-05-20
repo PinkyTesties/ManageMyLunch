@@ -16,6 +16,10 @@ const ButtonLink = ({ to, children }) => (
 
 const UserDashboard = ({ history }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [university, setUniversity] = useState('');
+const [userID, setUserID] = useState('');
   const [userDetails, setUserDetails] = useState({
     name: '',
     email: '',
@@ -48,20 +52,28 @@ const UserDashboard = ({ history }) => {
 
   return (
     <div>
-      <div className='header'>
+            <div className='header'>
         <header className='header'>
           <img src={logo} alt='Logo' height={100} />
           <h1>Manage My Lunch Dashboard</h1>
+          <p></p>
+
         </header>
+
+        <hr />
+        <p>Logged in as: {userDetails.name}, {userDetails.university}</p>
+        <p>*** CSS NOT DONE - DO NOT SUBMIT ***</p>
+
         <div className='MenuButtons'>
           <button onClick={toggleDropdown}>Account</button>
-          <ButtonLink to="/Reports">Reports</ButtonLink>
-          <ButtonLink to="/CompleteOrder">Pick Up Order</ButtonLink>
-          <ButtonLink to="/Cart">Cart</ButtonLink>
-          <ButtonLink to="/">Logout</ButtonLink>
+          <button><Link to="/Dashboard" style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
+          <button><Link to="/OrderStatus" style={{ textDecoration: 'none', color: 'Black' }}>Orders</Link></button>
+
+          <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
+          <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
+          <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
         </div>
       </div>
-      <p>Logged in as: {userDetails.name}, {userDetails.university}, {userDetails.email}, {userDetails.userID}</p>
       <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
@@ -71,8 +83,10 @@ const UserDashboard = ({ history }) => {
         <a href="#">Profile</a><br></br>
         <a href="SettingsPage">Settings</a><br></br>
         <a href="OrderStatus">Orders</a><br></br>
+
         <a href="/">Logout</a><br></br>
       </Modal>
+      <hr />
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
-
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 const SettingsPage = () => {
 
@@ -119,6 +119,8 @@ const SettingsPage = () => {
 
     return (
         <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
             <h1>Settings Page</h1>
             {/* Add your settings components here */}
             <Link to="/UpdatePassword">
@@ -130,8 +132,11 @@ const SettingsPage = () => {
             <Link to="/Dashboard">
                 <button>Return to dashboard</button>
             </Link>
-            <Link to="/AddDriver">
-                <button>Add a Driver</button>
+            <Link to="/Drivers">
+                <button>Manage Drivers</button>
+            </Link>
+            <Link to="/Rewards">
+                <button>Manage Rewards</button>
             </Link>
             <div>
                 <br></br>

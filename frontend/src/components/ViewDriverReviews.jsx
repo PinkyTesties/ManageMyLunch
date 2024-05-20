@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 const ViewDriverReviews = () => {
     const { email } = useParams();
@@ -21,6 +22,8 @@ const ViewDriverReviews = () => {
 
     return (
         <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
             <h1>Reviews for {email}</h1>
             {reviews.map((review, index) => (
                 <div key={index} style={{border: '1px solid black', margin: '10px', padding: '10px'}}>

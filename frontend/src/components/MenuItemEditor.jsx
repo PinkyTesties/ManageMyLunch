@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 function MenuItemEditor() {
     const { id } = useParams();
@@ -40,6 +41,9 @@ function MenuItemEditor() {
     }
 
     return (
+        <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
         <form onSubmit={handleSubmit}>
             <label>
                 Name:
@@ -51,6 +55,7 @@ function MenuItemEditor() {
             </label>
             <button type="submit">Update</button>
         </form>
+        </div>
     );
 }
 

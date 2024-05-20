@@ -150,6 +150,9 @@ const Dashboard = ({ history }) => {
         <p>Logged in as: {name}, {university}</p>
         <div className='MenuButtons'>
           <button onClick={toggleDropdown}>Account</button>
+          <button><Link to="/Dashboard" style={{ textDecoration: 'none', color: 'Black' }}>Dashboard</Link></button>
+          <button><Link to="/OrderStatus" style={{ textDecoration: 'none', color: 'Black' }}>Orders</Link></button>
+
           <button><Link to="/Reports" style={{ textDecoration: 'none', color: 'Black' }}>Reports</Link></button>
           <button><Link to="/CompleteOrder" style={{ textDecoration: 'none', color: 'Black' }}>Pick Up Order</Link></button>
           <button><Link to="/Cart" style={{ textDecoration: 'none', color: 'Black' }}>Cart</Link></button>
@@ -164,6 +167,7 @@ const Dashboard = ({ history }) => {
         <a href="#">Profile</a><br></br>
         <a href="SettingsPage">Settings</a><br></br>
         <a href="OrderStatus">Orders</a><br></br>
+
 
         <a href="/">Logout</a><br></br>
       </Modal>

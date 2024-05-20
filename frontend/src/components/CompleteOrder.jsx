@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 
 const CompleteOrder = () => {
@@ -130,6 +131,8 @@ const CompleteOrder = () => {
 
   return (
     <div className='complete_order'>
+      <UserDashboard /> {/* Use UserDashboard */}
+
       <h2>Complete your order</h2>
       <hr />
       <p>Enter your order number to mark it as complete, or scan your qr code to mark as complete.</p>

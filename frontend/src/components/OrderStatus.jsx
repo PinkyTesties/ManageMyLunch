@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import { pushNotification } from './jsFiles/pushNotifications';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 import { differenceInSeconds } from 'date-fns'; // Import this function
 
@@ -161,50 +162,7 @@ function OrderStatus() {
   return (
     <>
       <div>
-        <header className="header">
-          <img src={logo} alt="Logo" height={100} />
-          <h1>Manage My Lunch Dashboard</h1>
-          <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
-        </header>
-        <button onClick={toggleDropdown}>Account</button>
-        <button>
-          <Link
-            to={"/Dashboard"}
-            style={{ textDecoration: "none", color: "Black" }}
-          >
-            Dashboard
-          </Link>
-        </button>
-
-        <button>
-          <Link to="/Cart" style={{ textDecoration: "none", color: "Black" }}>
-            Cart
-          </Link>
-        </button>
-        <button className="header-button-right">
-          <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
-            Logout
-          </Link>
-        </button>
-        <p>
-          Logged in as: {name}, {university}, {email}, {userID}
-        </p>
-        <Modal
-          isOpen={showDropdown}
-          onRequestClose={toggleDropdown}
-          contentLabel="Account Menu"
-          style={customStyles}
-        >
-          <a href="#">Profile</a>
-          <br></br>
-          <a href="SettingsPage">Settings</a>
-          <br></br>
-          <a href="OrderStatus">Orders</a>
-          <br></br>
-
-          <a href="/">Logout</a>
-          <br></br>
-        </Modal>
+      <UserDashboard /> {/* Use UserDashboard */}
 
         <h1>Order Confirmation</h1>
         <p>Thank you for your order!</p>

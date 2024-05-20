@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Make sure to install axios with `npm install axios` if you haven't done so
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 function Rewards() {
     const [title, setTitle] = useState('');
@@ -97,6 +98,8 @@ function Rewards() {
 
     return (
         <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
             <h1>Create a Reward</h1>
             <form onSubmit={handleSubmit}>
                 <label>
