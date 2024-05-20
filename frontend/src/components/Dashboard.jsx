@@ -6,6 +6,7 @@ import RestaurantPanel from './RestaurantPanel';
 import logo from './componentAssets/logov1.png';
 import '../style/Dashboard.css';
 import Footer from '../components/sharedComponents/Footer';
+import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 Modal.setAppElement('#root');
 
@@ -17,6 +18,7 @@ const Dashboard = () => {
   const [email, setEmail] = useState('');
   const [university, setUniversity] = useState('');
   const [userID, setUserID] = useState('');
+  const [userRewardPoints, setUserRewardPoints] = useState(0);
 
   const navigate = useNavigate();
 
@@ -37,12 +39,70 @@ const Dashboard = () => {
       .catch(err => console.log(err))
   }, []);
 
+  const [activeRewards, setActiveRewards] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8082/api/rewards/active')
+      .then(response => response.json())
+      .then(data => {
+        const rewardsData = data.map(reward => ({ id: reward._id, code: reward.code, points: reward.points, message: reward.message, title: reward.title }));
+        setActiveRewards(rewardsData);
+        console.log('Active rewards:', rewardsData); // log active rewards to console
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
+
+  useEffect(() => {
+    if (email) { // Only make the request if email is defined
+      axios.get(`http://localhost:8082/api/users/email/${email}`)
+        .then(response => {
+          setUserID(response.data._id);
+          console.log('User ID:', response.data._id);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  }, [email]); // Run this effect when the email state changes
+
+  useEffect(() => {
+    axios.get(`http://localhost:8082/api/users/${userID}`)
+      .then(response => {
+        setUserRewardPoints(response.data.rewardsPoints);
+        console.log('User reward points:', response.data.rewardsPoints);
+      })
+      .catch(error => console.error('Error:', error));
+  }, [userID]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8082/api/restaurants')
+      .then((res) => {
+        setRestaurants(res.data);
+      })
+      .catch((err) => {
+        console.log('Error from Dashboard');
+      });
+  }, []);
+
+
+
+
   useEffect(() => {
     axios
       .get('http://localhost:8082/api/restaurants')
       .then((res) => setRestaurants(res.data))
       .catch((err) => console.log('Error from Dashboard'));
   }, []);
+
+  const [eligibleRewards, setEligibleRewards] = useState([]);
+
+  useEffect(() => {
+    const filteredRewards = activeRewards.filter(
+      (reward) => reward.points <= userRewardPoints
+    );
+    console.log('Eligible rewards:', filteredRewards);
+    setEligibleRewards(filteredRewards);
+  }, [activeRewards, userRewardPoints]);
+
 
   const handleCuisineChange = (cuisine) => setSelectedCuisine(cuisine);
 
@@ -56,17 +116,11 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard'>
-      {/* Header */}
-      <header className='dashboard-header'>
-        <h1 className='title'>Manage My Lunch Dashboard</h1>
-        <p className='user-info'>Logged in as: {name}, {university}</p>
-        <div className='menu-buttons'>
-          <button onClick={toggleDropdown} className='account-button'>Account</button>
-          <Link to="/Reports"><button className='reports-button'>Reports</button></Link>
-          <Link to="/CompleteOrder"><button className='order-button'>Pick Up Order</button></Link>
-          <Link to="/Cart"><button className='cart-button'>Cart</button></Link>
-        </div>
-      </header>
+      <div>
+      <UserDashboard /> {/* Use UserDashboard */}
+
+      </div>
+
 
       {/* Account Modal */}
       <Modal
@@ -98,7 +152,21 @@ const Dashboard = () => {
 
         {/* Restaurant Cards */}
         <div className='restaurant-cards'>
-          <h2 className='rewards-title'>Rewards</h2>
+        <div className='rewards'><h2>Rewards</h2>
+
+{eligibleRewards.map((reward, index) => (
+  <div key={index}>
+    <div className='reward-box'>
+      <h4>{reward.title}</h4>
+      <p>{reward.message}</p>
+      <p className="reward-code"><b>Use code <i>{reward.code}</i> at checkout</b></p>
+
+    </div>
+  </div>
+))}
+
+</div>
+
           {RestaurantList.length === 0 ? (
             <div className='alert alert-warning' role='alert'>
               No restaurants found.

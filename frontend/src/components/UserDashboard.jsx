@@ -46,8 +46,11 @@ const UserDashboard = ({ history }) => {
         <h1 className='title'>Manage My Lunch Dashboard</h1>
         <p className='user-info'>Logged in as: {userDetails.name}, {userDetails.university}</p>
         <div className='menu-buttons'>
+        <Link to="/Dashboard"><button className='reports-button'>Dashboard</button></Link>
+
           <button onClick={toggleDropdown} className='account-button'>Account</button>
           <Link to="/Reports"><button className='reports-button'>Reports</button></Link>
+          
           <Link to="/CompleteOrder"><button className='order-button'>Pick Up Order</button></Link>
           <Link to="/Cart"><button className='cart-button'>Cart</button></Link>
         </div>
