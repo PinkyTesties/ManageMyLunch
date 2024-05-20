@@ -4,12 +4,9 @@ import '../App.css';
 import axios from 'axios';
 import MenuItemPanel from './MenuItemPanel';
 import Modal from 'react-modal';
-import logo from './componentAssets/logov1.png';
 import UserDashboard from './UserDashboard'; // Import UserDashboard
 
-
 Modal.setAppElement('#root');
-
 
 function ShowRestaurantDetails(props) {
   const [restaurant, setRestaurant] = useState({});
@@ -33,16 +30,6 @@ function ShowRestaurantDetails(props) {
       height: '50%',
     },
   };
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8082/api/menuItems?restaurant_id=${id}`)
-  //     .then(response => {
-  //       setMenuItems(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log('Error getting menu items:', error);
-  //     });
-  // }, [id]);
 
   useEffect(() => {
     axios
@@ -83,36 +70,28 @@ function ShowRestaurantDetails(props) {
       ? 'there are no menu items'
       : menuItems.map((menuItem, k) => <MenuItemPanel menuItem={menuItem} key={k} />);
 
-  // const buttonStyles = {
-  //   backgroundColor: 'grey',
-  //   color: 'white',
-  //   borderRadius: '5px',
-  //   // add more styles here
-  // };
   const RestaurantItem = (
     <div>
-
-      <div className="restaurant-item">
-        <div className='restaurant-name-food'>
-          <div className="item">
+      <div className="restaurant-details">
+        <div className='restaurant-info'>
+          <div className="back-button">
           <Link to='/dashboard' className='btn btn-outline-warning float-left'>
             Back to Restaurants
           </Link>
           </div>
-          <div className="item">
+          <div className="empty-item">
           </div>
-          <div className="item">
-            
+          <div className="empty-item">
           </div>
         </div>
-        <div className="item">
+        <div className="rating-description">
         <h5>Google Rating: </h5>
-            <span className="value">{restaurant.rating} Stars </span>
+            <span className="rating-value">{restaurant.rating} Stars </span>
             <br />
             <br />
             <b>{restaurant.description}</b>
         </div>
-        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="value">View Restaurant reviews</Link>
+        <Link to={`/ViewRestaurantReviews/${restaurant._id}`} className="review-link">View Restaurant reviews</Link>
       </div>
     </div>
   );
@@ -120,37 +99,18 @@ function ShowRestaurantDetails(props) {
   return (
     <div>
       <UserDashboard /> {/* Use UserDashboard */}
-
-
-      <header className='header'>
-        <p></p>
-      </header>
-      <hr />
-
-
-      <Modal
-        isOpen={showDropdown}
-        onRequestClose={toggleDropdown}
-        contentLabel="Account Menu"
-        style={customStyles}
-      >
-        <a href="#">Profile</a><br></br>
-        <a href="SettingsPage">Settings</a><br></br>
-        <a href="/">Logout</a><br></br>
-      </Modal>
-
-      <div className='ShowBookDetails'>
+      <div className='restaurant-details-container'>
         <div className='container'>
           <div className='row'>
             <div className='col-md-10 m-auto'>
             </div>
             <br />
             <div className='col-md-8 m-auto'>
-              <h1 className='display-4 text-center'>{restaurant.restaurantName}</h1>
+              <h1 className='restaurant-name'>{restaurant.restaurantName}</h1>
               <br /> <br />
             </div>
             <div className='col-md-10 m-auto'>{RestaurantItem}</div>
-            <div className="restaurant-view-buttons">
+            <div className="button-container">
               <div className='col-md-6 m-auto'>
               </div>
               <div className='col-md-6 m-auto'>
@@ -160,11 +120,10 @@ function ShowRestaurantDetails(props) {
           </div>
         </div >
 
-        <div className='restaurant-footer'>
+        <div className='action-buttons'>
           <Link
             to={`/CreateMenuItem/${restaurant._id}`}
             className='btn btn-outline-info btn-lg btn-block'
-          //style={buttonStyles}
           >
             Create Menu Item
           </Link>

@@ -1,95 +1,93 @@
-/* Global styles */
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* Login form container */
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px; /* Increased padding */
 }
 
-/* Form container */
-.forms-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-}
-
-/* Form title */
-.title {
-    font-size: 24px;
-    color: #000;
+.loginFormContainer {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px; /* Increased border radius */
+    padding: 60px; /* Increased padding */
+    margin: 20px;
+    width: 90%; /* Increased width */
+    max-width: 800px; /* Increased max-width */
     text-align: center;
-    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Form group */
-.form-group {
-    margin-bottom: 15px;
+.loginFormContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Input fields */
+.formTitle {
+    margin-bottom: 30px; /* Increased margin */
+    font-size: 2em; /* Increased font size */
+    color: #646cff;
+}
+
+.inputGroup {
+    margin-bottom: 40px; /* Increased margin */
+}
+
 input[type="email"],
 input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+    width: calc(100% - 40px);
+    padding: 20px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Increased border radius */
+    transition: border-color 0.3s;
+    font-size: 1.2em; /* Increased font size */
 }
 
-/* Button styles */
-.btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #021;
+input[type="email"],
+input[type="password"] {
+    width: 100%; /* Increased width */
+    padding: 20px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Increased border radius */
+    transition: border-color 0.3s;
+    font-size: 1.2em; /* Increased font size */
+    box-sizing: border-box; /* Added to include padding and border in the element's total width */
+}
+
+.submitButton {
+    background-color: #646cff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    padding: 20px 0; /* Increased padding */
+    border-radius: 10px; /* Increased border radius */
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease; 
+    font-size: 1.2em; /* Increased font size */
+    transition: background-color 0.3s;
+    width: 100%; /* Ensured button takes full width */
+    box-sizing: border-box; /* Added to include padding and border in the element's total width */
 }
 
-/* Button hover effect */
-.btn:hover {
-    background-color: #333;
+.submitButton:hover {
+    background-color: #535bf2;
 }
 
-/* Social media text */
-.social-text {
-    margin-top: 20px;
-    color: #888;
-    text-align: center;
-    font-size: 14px;
+.forgotPassword {
+    color: #646cff;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-top: 20px; /* Added margin */
+    display: inline-block; /* Added to allow margin */
 }
 
-/* Social media container */
-.social-media {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-/* Social media links */
-.social-media a {
-    display: inline-block;
-    margin: 0 10px;
-    color: #000;
-    font-size: 24px;
-    transition: color 0.3s ease; 
-}
-
-/* Social media links hover effect */
-.social-media a:hover {
-    color: #333;
+.forgotPassword:hover {
+    color: #535bf2;
 }
