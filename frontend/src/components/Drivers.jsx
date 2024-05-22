@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import UserDashboard from './UserDashboard';
+import '../style/Driver.css'
 
 const Drivers = () => {
   const [drivers, setDrivers] = useState([]);
@@ -34,31 +35,24 @@ const Drivers = () => {
     navigate(`/ViewDriverReviews/${email}`);
   };
 
-  const boxStyle = {
-    border: '1px solid black',
-    padding: '10px',
-    margin: '10px',
-    borderRadius: '5px',
-  };
-
   return (
-    <div>
+    <div className="drivers-container">
       <UserDashboard /> {/* Use UserDashboard */}
 
-      <h1>Drivers</h1>
-      <button><Link to={'/AddDriver'}>Add Drivers</Link></button>
+      <h1 className="drivers-header">Drivers</h1>
+      <button className="drivers-button"><Link to={'/AddDriver'}>Add Drivers</Link></button>
 
       {drivers.map((driver) => (
-        <div key={driver._id} style={boxStyle}>
+        <div key={driver._id} className="drivers-box">
           <h2>{driver.name}</h2>
           <p>Email: {driver.email}</p>
           <p>Date Added: {new Date(driver.date_added).toLocaleDateString()}</p>
           <p>Last Updated: {new Date(driver.updated_date).toLocaleDateString()}</p>
           <p>Current wallet balance: ${driver.wallet_balance}</p>
-          <button onClick={() => deleteDriver(driver._id)}>Delete Driver</button>
-          <button onClick={() => viewDriverReview(driver.email)}>View Reviews</button>
+          <button className="drivers-button" onClick={() => deleteDriver(driver._id)}>Delete Driver</button>
+          <button className="drivers-button" onClick={() => viewDriverReview(driver.email)}>View Reviews</button>
 
-          <button onClick={console.log("This is where the driver tracker is ")/*   () => deleteDriver(driver._id)*/}>
+          <button className="drivers-button" onClick={console.log("This is where the driver tracker is ")/*   () => deleteDriver(driver._id)*/}>
             Track Driver</button>
 
         </div>

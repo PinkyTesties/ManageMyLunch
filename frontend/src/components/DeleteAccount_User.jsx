@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../style/DeleteAccount.css';
 
 const DeleteAccount_User = () => {
     const [email, setEmail] = useState('');
@@ -50,12 +51,12 @@ const DeleteAccount_User = () => {
     };
 
     return (
-        <div>
-            <h1>Delete Account</h1>
-            <form onSubmit={(e) => { e.preventDefault(); deleteUser(); }}>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" required />
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" required />
-                <button type="submit">Delete User</button>
+        <div className="delete-account-container">
+            <h1 className="delete-account-header">Delete Account</h1>
+            <form className="delete-account-form" onSubmit={(e) => { e.preventDefault(); deleteUser(); }}>
+                <input className="delete-account-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" required />
+                <input className="delete-account-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" required />
+                <button className="delete-account-button" type="submit">Delete User</button>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
         </div>

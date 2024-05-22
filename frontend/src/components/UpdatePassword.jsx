@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import '../style/UpdatePassword.css'; // Import the CSS file
 
 function UpdatePassword() {
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:8082/api/users')
@@ -22,7 +23,7 @@ function UpdatePassword() {
 
     if (user) {
       if (user.password === newPassword) {
-        setErrorMessage("Can't use the old password"); // Display error message if the new password is the same as the old password
+        setErrorMessage("Can't use the old password");
         return;
       }
 
@@ -41,28 +42,29 @@ function UpdatePassword() {
         setUsername('');
         setNewPassword('');
         setSuccessMessage('Password updated successfully');
-        setErrorMessage(''); 
+        setErrorMessage('');
       })
       .catch(error => {
         console.error('Error updating password:', error);
-        setSuccessMessage(''); 
-        setErrorMessage('Error updating password'); 
+        setSuccessMessage('');
+        setErrorMessage('Error updating password');
       });
     } else {
-      setErrorMessage('Incorrect email or username'); // Display error message if the user is not found
+      setErrorMessage('Incorrect email or username');
     }
   };
 
   return (
-    <div>
+    <div className="update-password-container">
       <UserDashboard /> {/* Use UserDashboard */}
 
-      <h1>Reset your password</h1>
-      {successMessage && <p>{successMessage}</p>}
-      {errorMessage && <p>{errorMessage}</p>} {/* Display error message if there is any */}
-      <form onSubmit={handlePasswordUpdate}>
+      <h1 className="update-password-header">Reset your password</h1>
+      {successMessage && <p className="update-password-message update-password-success">{successMessage}</p>}
+      {errorMessage && <p className="update-password-message update-password-error">{errorMessage}</p>}
+      <form className="update-password-form" onSubmit={handlePasswordUpdate}>
         <input
           type="text"
+          className="update-password-input"
           value={username}
           onChange={e => setUsername(e.target.value)}
           placeholder="Username or Email"
@@ -70,20 +72,21 @@ function UpdatePassword() {
         />
         <input
           type="password"
+          className="update-password-input"
           value={newPassword}
           onChange={e => setNewPassword(e.target.value)}
           placeholder="New Password"
           required
         />
-        <button type="submit">Update Password</button>
+        <button type="submit" className="update-password-button">Update Password</button>
       </form>
       <p>***Below is for testing purposes, remove from final version***</p>
-      <ul>
+      <ul className="update-password-testing">
         {users.map(user => (
           <li key={user._id}>
-            User ID: {user._id} <br></br>
-            Username: {user.name}<br></br>
-            Email: {user.email}<br></br>
+            User ID: {user._id} <br />
+            Username: {user.name}<br />
+            Email: {user.email}<br />
             Password: {user.password}
           </li>
         ))}
@@ -93,3 +96,4 @@ function UpdatePassword() {
 }
 
 export default UpdatePassword;
+

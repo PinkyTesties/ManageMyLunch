@@ -90,7 +90,6 @@ const SignUp_NEW = () => {
     <div className="signup-container">
       <header className="signup-header">
         <div className="signup-header-center">
-          <img src={logo} alt='Logo' height={100} />
           <h1>Sign Up to Manage My Lunch</h1>
         </div>
       </header>

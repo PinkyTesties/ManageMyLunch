@@ -1,0 +1,167 @@
+/* Styles for the body of the document */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Styles for the main settings container */
+.settings-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  flex: 1;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for headers in the settings */
+.settings-header,
+.settings-universities-header,
+.settings-add-university-header {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* Styles for different sections in the settings */
+.settings-links,
+.settings-fees,
+.settings-universities,
+.settings-add-university {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+/* Styles for buttons in the settings */
+.settings-button,
+.settings-fee-button,
+.settings-add-university-submit-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for buttons on hover and focus in the settings */
+.settings-button:hover,
+.settings-fee-button:hover,
+.settings-add-university-submit-button:hover,
+.settings-button:focus,
+.settings-fee-button:focus,
+.settings-add-university-submit-button:focus {
+  background-color: #555;
+  transform: scale(1.05);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.5);
+}
+
+/* Styles for the settings button when it is inside a link */
+a .settings-button {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Styles for input fields in the settings */
+.settings-fee-input,
+.settings-add-university-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Styles for input fields on focus in the settings */
+.settings-fee-input:focus,
+.settings-add-university-input:focus {
+  border-color: #333;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.2);
+}
+
+/* Styles for forms in the settings */
+.settings-add-university-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles for the list of universities in the settings */
+.settings-university {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the name of the university in the settings */
+.settings-university-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Styles for the address, latitude, and longitude of the university in the settings */
+.settings-university-address,
+.settings-university-latitude,
+.settings-university-longitude {
+  margin: 5px 0;
+  color: #777;
+}
+
+/* Styles for the delete button for a university in the settings */
+.settings-university-delete-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Styles for the delete button on hover and focus for a university in the settings */
+.settings-university-delete-button:hover,
+.settings-university-delete-button:focus {
+  background-color: #c0392b;
+  transform: scale(1.05);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.5);
+}
+
+/* Styles for responsive design for smaller screens */
+@media (max-width: 768px) {
+  .settings-container {
+      padding: 10px;
+  }
+
+  .settings-button,
+  .settings-fee-button,
+  .settings-add-university-submit-button {
+      padding: 8px 16px;
+  }
+
+  .settings-fee-input,
+  .settings-add-university-input {
+      padding: 10px;
+  }
+}
