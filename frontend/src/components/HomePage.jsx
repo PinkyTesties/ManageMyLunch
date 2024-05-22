@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import Header from "./sharedComponents/Header";
 import Footer from './sharedComponents/Footer';
 import '../style/HomePage.css';
@@ -10,7 +10,7 @@ const HomePage = () => {
       <div className="content-wrap">
         <div className="home-page">
           <div className="hero-section">
-            <h1>Welcome to Our Restaurant App</h1>
+            <h1>Welcome to Manage My Lunch</h1>
             <p>Order your favorite meals with ease.</p>
           </div>
           <div className="content">

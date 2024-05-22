@@ -8,10 +8,10 @@ const Footer = () => {
       <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#">Menu</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Add your Restaurant</a></li>
+        {/* <li><a href="#">FAQ</a></li> */}
+        {/* <li><a href="#">Add your Restaurant</a></li> */}
         <li><a href="#">Sign Up to Deliver</a></li>
-        <li><a href="#">Promotions</a></li>
+        {/* <li><a href="#">Promotions</a></li> */}
       </ul>
     </div>
   );
@@ -37,7 +37,7 @@ const Footer = () => {
         <ContactForm />
       </div>
       <div className="footer-bottom">
-        <p>© 2024 Manage My Lunch | write something here</p>
+        <p>© 2024 Manage My Lunch</p>
       </div>
     </footer>
   );

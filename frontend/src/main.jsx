@@ -13,7 +13,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 //Basically every frontend page we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
 //test
-import LoginPage from "./components/LoginPage"; 
+//import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp_NEW"; 
 import Dashboard from "./components/Dashboard"; 
 import UpdatePassword from "./components/UpdatePassword"; 
@@ -47,14 +47,14 @@ import DeliverOrder from "./components/DeliverOrder";
 
 //These are vidhu imports for testing
 import HomePage from "./components/HomePage";
-import SignUp2 from "./components/SignUp_NEW";
+//import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 import Rewards from "./components/Rewards";
 //hello
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/", element: <LoginPage /> },
+  { path: "/", element: <HomePage /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/sign-up", element: <SignUp /> },
