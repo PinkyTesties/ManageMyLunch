@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import RestaurantPanel from './RestaurantPanel';
 import logo from './componentAssets/logov1.png';
+import UserDashboard from './UserDashboard';
 import '../style/Dashboard.css';
 import Footer from '../components/sharedComponents/Footer';
 
@@ -105,33 +106,11 @@ const Dashboard = () => {
   ));
 
   return (
-    
+
     <div className='dashboard'>
+      
     {/* Header */}
-    <header className='dashboard-header'>
-      <h1 className='title'>Manage My Lunch Dashboard</h1>
-      <p className='user-info'>Logged in as: {name}, {university}</p>
-      <div className='menu-buttons'>
-        <button onClick={toggleDropdown} className='account-button'>Account</button>
-        <Link to="/Reports"><button className='reports-button'>Reports</button></Link>
-        <Link to="/CompleteOrder"><button className='order-button'>Pick Up Order</button></Link>
-        <Link to="/Cart"><button className='cart-button'>Cart</button></Link>
-      </div>
-    </header>
-
-    {/* Account Modal */}
-    <Modal
-      isOpen={showDropdown}
-      onRequestClose={toggleDropdown}
-      contentLabel="Account Menu"
-      className="account-modal"
-    >
-      <a href="#">Profile</a><br></br>
-      <a href="SettingsPage">Settings</a><br></br>
-      <a href="OrderStatus">Orders</a><br></br>
-      <a href="/">Logout</a><br></br>
-    </Modal>
-
+    <UserDashboard />
     {/* Restaurant List */}
     <div className='restaurant-list'>
       {/* Filter by Cuisine */}
@@ -148,8 +127,24 @@ const Dashboard = () => {
       </div>
 
       {/* Restaurant Cards */}
+      
       <div className='restaurant-cards'>
+        
         <h2 className='rewards-title'>Rewards</h2>
+        <div className='rewards'><h2>Rewards</h2>
+
+            {eligibleRewards.map((reward, index) => (
+              <div key={index}>
+                <div className='reward-box'>
+                  <h4>{reward.title}</h4>
+                  <p>{reward.message}</p>
+                  <p className="reward-code"><b>Use code <i>{reward.code}</i> at checkout</b></p>
+
+                </div>
+              </div>
+            ))}
+
+          </div>
         {RestaurantList.length === 0 ? (
           <div className='alert alert-warning' role='alert'>
             No restaurants found.
@@ -167,6 +162,16 @@ const Dashboard = () => {
         </Link>
       </div>
     </div>
+    {/* <footer style={{
+      textAlign: 'center',
+      padding: '3px',
+      backgroundColor: 'DarkSalmon',
+      color: 'white'
+    }}>
+      <p>Author: Hege Refsnes</p>
+      <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+    </footer> */}
+
     <Footer />
   </div>
 

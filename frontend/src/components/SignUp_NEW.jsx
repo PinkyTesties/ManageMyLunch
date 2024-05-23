@@ -156,7 +156,7 @@ const SignUp_NEW = () => {
         </form>
       </main>
       <footer className="signup-footer">
-        <p>Already have an account? <Link to="/" className="signup-btn-link">Login</Link></p>
+        <p>Already have an account? <Link to="/login" className="signup-btn-link">Login</Link></p>
         <button className="signup-btn">Sign up as driver</button>
       </footer>
     </div>

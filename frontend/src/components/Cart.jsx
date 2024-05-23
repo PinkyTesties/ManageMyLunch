@@ -9,6 +9,9 @@ import Footer from '../components/sharedComponents/Footer';
 import '../style/Cart.css'; // Make sure to create and import this CSS file
 
 const Cart = () => {
+  const [cart, setCart] = useState({ menuItems: [] });
+  const [userID, setUserID] = useState("");
+
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(''); //this is the email message
   const [name, setName] = useState("");
@@ -106,8 +109,6 @@ const Cart = () => {
   };
 
   //const [cart, setCart] = useState({ menuItems: [] }); // New state variable for the cart
-  const [cart, setCart] = useState({ menuItems: [] });
-  const [userID, setUserID] = useState("");
 
   useEffect(() => {
     axios
@@ -460,7 +461,6 @@ const handleBuyNow = (e) => {
           <Footer />
     </>
   );
-  
 };
 
 export default Cart;

@@ -47,6 +47,8 @@ const [userID, setUserID] = useState('');
     <div className='dashboard'>
       {/* Header */}
       <header className='dashboard-header'>
+      <img src={logo} alt='Logo' height={100} />
+        
         <h1 className='title'>Manage My Lunch Dashboard</h1>
         <p className='user-info'>Logged in as: {userDetails.name}, {userDetails.university}</p>
         <div className='menu-buttons'>

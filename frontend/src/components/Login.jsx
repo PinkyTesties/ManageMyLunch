@@ -37,6 +37,7 @@ const Login = () => {
                         <div className="inputGroup">
                             <input
                                 type="email"
+                                id = "email"
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

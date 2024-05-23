@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import { pushNotification } from './jsFiles/pushNotifications';
-import UserDashboard from './UserDashboard'; // Import UserDashboard
 
 import { differenceInSeconds } from 'date-fns'; // Import this function
 
@@ -39,7 +38,7 @@ function OrderStatus() {
   useEffect(() => {
     prevTotalRemainingTimeInSeconds.current = totalRemainingTimeInSeconds;
   }, [totalRemainingTimeInSeconds]);
-
+  
   useEffect(() => {
     if (totalRemainingTimeInSeconds === 0 && prevTotalRemainingTimeInSeconds.current > 0) {
       console.log('Edit time has elapsed.');
@@ -56,15 +55,6 @@ function OrderStatus() {
       height: "50%",
     },
   };
-
-  const handleCurrentOrdersClick = () => {
-    setPage("current-orders");
-  };
-
-  const handlePastOrdersClick = () => {
-    setPage("past-orders");
-  };
-
 
   useEffect(() => {
     axios
@@ -162,7 +152,50 @@ function OrderStatus() {
   return (
     <>
       <div>
-      <UserDashboard /> {/* Use UserDashboard */}
+        <header className="header">
+          <img src={logo} alt="Logo" height={100} />
+          <h1>Manage My Lunch Dashboard</h1>
+          <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
+        </header>
+        <button onClick={toggleDropdown}>Account</button>
+        <button>
+          <Link
+            to={"/Dashboard"}
+            style={{ textDecoration: "none", color: "Black" }}
+          >
+            Dashboard
+          </Link>
+        </button>
+
+        <button>
+          <Link to="/Cart" style={{ textDecoration: "none", color: "Black" }}>
+            Cart
+          </Link>
+        </button>
+        <button className="header-button-right">
+          <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
+            Logout
+          </Link>
+        </button>
+        <p>
+          Logged in as: {name}, {university}, {email}, {userID}
+        </p>
+        <Modal
+          isOpen={showDropdown}
+          onRequestClose={toggleDropdown}
+          contentLabel="Account Menu"
+          style={customStyles}
+        >
+          <a href="#">Profile</a>
+          <br></br>
+          <a href="SettingsPage">Settings</a>
+          <br></br>
+          <a href="OrderStatus">Orders</a>
+          <br></br>
+
+          <a href="/">Logout</a>
+          <br></br>
+        </Modal>
 
         <h1>Order Confirmation</h1>
         <p>Thank you for your order!</p>
@@ -171,17 +204,9 @@ function OrderStatus() {
         </p>
         <p>We will send you an email confirmation shortly.</p>
 
-
-        <div className='col-md-11'>
-              <button onClick={handleCurrentOrdersClick}>All Current Orders</button>
-              <button onClick={handlePastOrdersClick}>Order History</button>
-            </div>
-
         <p>{/*Your order ID is: { }*/}</p>
         <div>
-          
           <h3>Current orders</h3>
-
           {orders
             .filter(
               (order) =>
@@ -232,49 +257,30 @@ function OrderStatus() {
               );
 
               return (
-                
                 <div
-                
-
-
                   key={index}
                   style={{
                     border: "1px solid black",
                     padding: "10px",
                     margin: "10px",
-                    width: "1000px",
+                    width: "300px",
                     background: "#fff",
                   }}
                 >
                   <h2>{order.restaurant_name}</h2>
                   <h3>Cost: ${order.cost.toFixed(2)}</h3>
-
-                  {order.delivery_date.split("T")[0] !== new Date().toISOString().split("T")[0] &&
-                    <p>Delivery Date: {order.delivery_date.split("T")[0]}
-                      <br /> <i><b>This order will be fulfilled on the selected date.</b></i>
-                    </p>
-
-                  }
-                  {order.delivery_date.split("T")[0] === new Date().toISOString().split("T")[0] &&
-                    <p>Delivery Date: {order.delivery_date.split("T")[0]} (Today)</p>
-                  }
-
+                  <p>{order.email}</p>
+                  {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
                   <p>
-                    Order Contents:{" "}
+                    Menu Items:{" "}
                     {order.menuItems
                       .map((id) => menuItems[id] || id)
                       .join(", ")}
                   </p>
-
-                  {order.additionalInfo !== "" ? (
-                    <p>Additional Info: {order.additionalInfo}</p>
-                  ) : (
-                    <p>No additional information</p>
-                  )}
+                  <p>Additional Info: {order.additionalInfo}</p>
                   <p>Status: {order.orderStatus}</p>
-
-
-                  {/*<p>Driver contact: {order.driver_email}</p>*/}
+                  <p>Order code: {order.code}</p>
+                  <p>Driver contact: {order.driver_email}</p>
 
                   <p></p>
                   {totalRemainingTimeInSeconds > 0 ? (
@@ -282,6 +288,7 @@ function OrderStatus() {
                       <button className="edit-button">Edit Order</button>
                     </Link>
                   ) : (
+                    
                     <button disabled className="edit-button disabled">
                       Edit Order
                     </button>
@@ -289,11 +296,15 @@ function OrderStatus() {
                   {totalRemainingTimeInSeconds > 0
                     ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
                     : " Edit Time has elapsed"}
-                  {order.orderStatus === "Delivered" && (
-                    <button onClick={() => navigate(`/CompleteOrder`)}>
-                      Confirm Order Pickup
-                    </button>
-                  )}
+                  {
+                    order.orderStatus === "Delivered" && (
+                      <button onClick={() => navigate(`/CompleteOrder`)}>
+                        Confirm Order Pickup
+                      </button>
+                    )
+
+                    //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
+                  }
                 </div>
               );
             })}
@@ -311,7 +322,7 @@ function OrderStatus() {
                 border: "1px solid black",
                 padding: "10px",
                 margin: "10px",
-                width: "1000px",
+                width: "300px",
                 background: "#fff",
               }}
             >
@@ -330,11 +341,11 @@ function OrderStatus() {
                 </Link>
               </button>
               <button>
-                <Link to={`/DriverReviewForm/${order.driver_email}`}>
-                  Rate your Driver
+              <Link to={`/DriverReviewForm/${order.driver_email}`}>
+                Rate your Driver
                 </Link>
 
-              </button>
+                </button>
             </div>
           ))}
       </div>

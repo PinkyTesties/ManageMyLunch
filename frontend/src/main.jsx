@@ -54,7 +54,7 @@ import Rewards from "./components/Rewards";
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/", element: <LoginPage /> },
+  { path: "/oldLogin", element: <LoginPage /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/sign-up", element: <SignUp /> },
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
   { path: "/DeliverOrder/:id", element: <DeliverOrder />},
 
   //These are vidhu imports for testing
-  { path: "/HomePage", element: <HomePage /> },
+  { path: "/", element: <HomePage /> },
  // { path: "/SignUp2", element: <SignUp2 /> },
   { path: "/Login", element: <Login /> },
 
