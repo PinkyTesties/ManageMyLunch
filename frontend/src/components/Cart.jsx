@@ -43,9 +43,9 @@ const Cart = () => {
   const [serviceFee, setServiceFee] = useState(0);
 
 
-  
+
   useEffect(() => {
-    Promise.all(cart.menuItems.map(item => 
+    Promise.all(cart.menuItems.map(item =>
       fetch(`http://localhost:8082/api/menuItems/${item._id}`)
         .then(response => response.json())
     )).then(data => setMenuItems(data));
@@ -58,7 +58,7 @@ const Cart = () => {
   }, []);
 
 
-  
+
   useEffect(() => {
     axios.get('http://localhost:8082/api/systemAdmin/getServiceFee')
       .then(response => setServiceFee(response.data.fee))
@@ -89,10 +89,10 @@ const Cart = () => {
           if (reward.menuItemDiscount) {
             let newTotalCost = totalCost - reward.dollarValue;
             newTotalCost = newTotalCost < 0 ? 0 : newTotalCost;
-            setTotalCost(newTotalCost);            
+            setTotalCost(newTotalCost);
             setSubtractAmount(reward.dollarValue);
             setDeliveryFee(deliveryFee);
-             // Subtract the discount amount from the total cost as it is a generic cart menu item discount
+            // Subtract the discount amount from the total cost as it is a generic cart menu item discount
           }
           if (reward.deliveryDiscount) {
             // Assuming that the discount is a fixed amount specified in dollarValue
@@ -187,46 +187,46 @@ const Cart = () => {
         return item.name;
       }
     }).join("\n");
-  
+
 
     const emailParams = {
-        email_from: email,
-        message: 
-        "Thank you "+ name+ " for your order! \n"+
+      email_from: email,
+      message:
+        "Thank you " + name + " for your order! \n" +
         "Your order will be delivered to " + university + " on " + deliveryDate + ". \n\n" +
         "Your order details: \n\n" +
-        
+
         "Your order total is $" + (totalCost + deliveryFee + serviceFee).toFixed(2) + ". Your order will be delivered lunch time of " + deliveryDate + ". \n\n" +
         "Your cart items: \n" + cartItemsString
-        };
+    };
 
     emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
-        .then((response) => {
-           console.log('SUCCESS!', response.status, response.text);
-        }, (err) => {
-           console.log('FAILED...', err);
-        });
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      }, (err) => {
+        console.log('FAILED...', err);
+      });
 
     console.log('Email:', email);
     console.log('Message:', message);
-};
+  };
 
-const handleBuyNow = (e) => {
-  // Log the cost of each menuItem
+  const handleBuyNow = (e) => {
+    // Log the cost of each menuItem
     cart.menuItems.forEach(item => {
       console.log(`Cost of item ${item._id}: ${item.cost}`);
     });
-  
+
     const totalCost = cart.menuItems.reduce((total, item) => {
       console.log(`Current total: ${total}, cost of current item: ${item.cost}`);
       return total + parseFloat(item.cost);
     }, 0);
-  
+
     const code = Math.floor(1000 + Math.random() * 9000);
-  
+
     let finalCost = totalCost - subtractDiscountAmount + serviceFee;
     finalCost = finalCost < 0 ? deliveryFee : finalCost + deliveryFee;
-  
+
     const completedCart = {
       email: email,
       cost: (finalCost),
@@ -251,15 +251,15 @@ const handleBuyNow = (e) => {
       })
       .catch((err) => console.log(err));
 
-      sendEmail(e);
+    sendEmail(e);
 
     deleteCart();
   }
 
   // return (
-    
 
-      
+
+
   //   <>
   //     <UserDashboard /> {/* Use UserDashboard */}
 
@@ -303,7 +303,7 @@ const handleBuyNow = (e) => {
   //                 <button onClick={() => { handleRemoveItem(index); handleRemove(item._id, index); }}>Remove from cart</button>
   //               </div>
   //               <p><b>${parseFloat(item.cost).toFixed(2)}</b></p>
-                
+
   //               {item.ingredients.map((ingredient, i) => (
   //                 <div key={i}>
   //                   <p>Ingredient Name: {ingredient.name}</p>
@@ -410,56 +410,88 @@ const handleBuyNow = (e) => {
   //     </div>
 
   //   </div>
-         
+
   //   </>
   // );
 
   return (
-    <>
-    <div className="cart-container">
-      <header className="cart-header">
-        <h1>Your Cart</h1>
-      </header>
-      <div className="cart-details">
-        <span>Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required /></span>
-        <h2>{restaurantName}</h2>
-        <h2>Total Cost: ${totalCost.toFixed(2)}</h2>
-      </div>
-      <hr />
-      <div className="cart-items-container">
-        {cart.menuItems.map((item, index) => (
-          <div className="cart-item" key={index}>
-            <img src={beefImage} alt="Item" className="cart-item-image" />
-            <div className="cart-item-details">
-              <h4>{item.name}</h4>
-              <p>${parseFloat(item.cost).toFixed(2)}</p>
-              <button onClick={() => handleRemove(item._id, index)}>Remove</button>
-              {item.ingredients.map((ingredient, i) => (
-                <div key={i} className="cart-item-ingredient">
-                  <p>{ingredient.name} - {ingredient.quantity}</p>
-                </div>
-              ))}
-              <p>{item.additional_information}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="cart-actions">
-        <input
-          type="text"
-          value={additionalInfo}
-          onChange={(e) => setAdditionalInfo(e.target.value)}
-          placeholder="Add additional info here"
-          className="additional-info-input"
-        />
-        <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0} className="buy-now-button">
-          Buy Now
-        </button>
+    <div class="wholePage">
+      <div>
+        <UserDashboard />
       </div>
 
+      <div className="cart-container">
+        <header className="cart-header">
+          <h1>Your Cart with '{restaurantName}'</h1>
+        </header>
+        <div className="cart-details">
+
+          <div className="delivery-and-total-cost">
+            <span>Delivery Date: <input type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} required /></span>
+            <div className="totalCost">
+            <h1>Total Cost: ${(totalCost + deliveryFee + serviceFee).toFixed(2)}</h1>
+            </div>
+          </div>
+         
+          <br></br>
+          <p>Cart cost: ${totalCost.toFixed(2)}</p>
+          <p>Service Fee: ${serviceFee}</p>
+          <p>Delivery Fee: ${deliveryFee}</p>
+          <br></br>
+          <p>Discount code applied: {appliedDiscountCode}</p>{/* Display the discounts applied to the cart, none by default */}
+          <br></br>
+
+
+          <br></br>
+          <br></br>
+          <div>
+            <input
+              type="text"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+              placeholder="Enter discount code"
+            />
+            <button onClick={handleApplyDiscount}>Apply</button>
+          </div>
+        </div>
+        <hr />
+        <div className="cart-items-container">
+          {cart.menuItems.map((item, index) => (
+            <div className="cart-item" key={index}>
+              <img src={beefImage} alt="Item" className="cart-item-image" />
+              <div className="cart-item-details">
+                <h4>{item.name}</h4>
+                <p>${parseFloat(item.cost).toFixed(2)}</p>
+                <button onClick={() => handleRemove(item._id, index)}>Remove</button>
+                {item.ingredients.map((ingredient, i) => (
+                  <div key={i} className="cart-item-ingredient">
+                    <p>{ingredient.name} - {ingredient.quantity}</p>
+                  </div>
+                ))}
+                <p>{item.additional_information}</p>
+              </div>
+            </div>
+          ))}
+          <div className="cart-actions">
+            <input
+              type="text"
+              value={additionalInfo}
+              onChange={(e) => setAdditionalInfo(e.target.value)}
+              placeholder="Add additional info here"
+              className="additional-info-input"
+            />
+            <button onClick={handleBuyNow} disabled={cart.menuItems.length === 0} className="buy-now-button">
+              Buy Now
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
-          <Footer />
-    </>
+
+
+
+
   );
 };
 

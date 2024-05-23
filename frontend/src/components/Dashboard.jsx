@@ -130,13 +130,13 @@ const Dashboard = () => {
       
       <div className='restaurant-cards'>
         
-        <h2 className='rewards-title'>Rewards</h2>
         <div className='rewards'><h2>Rewards</h2>
 
             {eligibleRewards.map((reward, index) => (
               <div key={index}>
                 <div className='reward-box'>
-                  <h4>{reward.title}</h4>
+                  <br></br>
+                  <h4><b>{reward.title}</b></h4>
                   <p>{reward.message}</p>
                   <p className="reward-code"><b>Use code <i>{reward.code}</i> at checkout</b></p>
 
@@ -154,12 +154,7 @@ const Dashboard = () => {
             {RestaurantList}
           </div>
         )}
-        <Link to='/create-restaurant' className='add-restaurant-button'>
-          + Add a Restaurant
-        </Link>
-        <Link to='/delete-restaurant' className='remove-restaurant-button'>
-          - Remove a Restaurant
-        </Link>
+
       </div>
     </div>
     {/* <footer style={{

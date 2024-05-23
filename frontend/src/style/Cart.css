@@ -1,4 +1,11 @@
 /* Styles for the main container of the cart */
+.root {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ff6347;
+}
 .cart-container {
   font-family: 'Roboto', sans-serif;
   max-width: 1200px;
@@ -32,11 +39,16 @@
 /* Styles for the details of the cart */
 .cart-details {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 20px;
 }
 
+.cart-details .delivery-and-total-cost {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 .cart-details span,
 .cart-details h2 {
   margin: 0;

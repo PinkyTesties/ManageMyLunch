@@ -90,6 +90,7 @@
 
 .rewards {
   border-right: 1px solid rgba(0,0,.125);
+
 }
 
 .rewards h2 {
@@ -136,7 +137,7 @@
 }
 
 .reward-box {
-  width: 200px;
+  width: 400px;
   height: 200px;
   border: 1px solid #000;
   margin: 10px;

@@ -104,7 +104,8 @@ body {
 .restaurant-list {
   padding: 20px;
   flex-grow: 1;
-  background-color: rgb(199, 230, 230);
+  background-color: rgb(219, 231, 231);
+  
 }
 
 /* Filter container */
@@ -148,8 +149,8 @@ body {
 /* Restaurant cards */
 .restaurant-cards {
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 /* Rewards title */
