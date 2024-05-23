@@ -1,3 +1,154 @@
+/* Header.css */
+
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 0; /* Increase padding for a more spacious look */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px; /* Increase padding for more space on the sides */
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Add gap to create space between elements */
+}
+
+.title {
+  font-size: 2rem; /* Increase font size for more emphasis */
+  margin: 0;
+  margin-left: 10px;
+  color: #333333;
+  font-weight: 600; /* Make the title bolder */
+}
+
+.search-bar-container {
+  margin-right: 20px;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.3s ease; /* Add transition for a smooth effect */
+}
+
+.search-bar:focus {
+  border-color: #333333; 
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.login,
+.signup {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #ffcc29;
+  color: #333333;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.login:hover,
+.signup:hover {
+  background-color: #ffc107;
+  transform: scale(1.05); /* Increase size on hover */
+}
+.auth-button {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  color: #000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 10px;
+}
+
+.footer .logo-text {
+  color: #000;
+}
+
+.footer .about {
+  margin-right: 30px;
+}
+
+.footer .about .logo-text .span {
+  color: #5379fa;
+}
+
+.footer .links {
+  margin-right: 30px;
+}
+
+.footer .links ul a {
+  color: #000;
+  text-decoration: none;
+}
+
+.footer .contact-form .contact-input {
+  background: #f8f9fa;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.footer .btn-big {
+  color: #fff;
+  background: #5379fa;
+  padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+}
+
+.footer-bottom {
+  background: #f8f9fa;
+  color: #686868;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+
+/* index.css */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -145,7 +296,7 @@ button:focus, button:focus-visible {
   font-size: 20px;
   font-weight: bold;
 }
-/*
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -161,7 +312,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #b7b7b7;
+  background-color: #fff;
 }
 
 header img {
@@ -172,7 +323,7 @@ header img {
   display: block;
   margin: 5px;
 }
-*/
+
 .item {
   text-align: center;
 }
@@ -188,7 +339,7 @@ header img {
   padding-top: 4em;
   padding-right: 8em;
 }
-/*
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -201,7 +352,7 @@ header img {
     background-color: #f9f9f9;
   }
 }
-*/
+
 .MenuButtons {
   display: flex;
   justify-content: space-between;

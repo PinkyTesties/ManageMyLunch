@@ -1,58 +1,111 @@
+/* Styles for the footer, positions it at the bottom of the page */
 .footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    color: #000;
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .footer-section {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .footer .logo-text {
-    color: #000;
-  }
-  
-  .footer .about {
-    margin-right: 30px;
-  }
-  
-  .footer .about .logo-text .span {
-    color: #5379fa;
-  }
-  
-  .footer .links {
-    margin-right: 30px;
-  }
-  
-  .footer .links ul a {
-    color: #000;
-    text-decoration: none;
-  }
-  
-  .footer .contact-form .contact-input {
-    background: #f8f9fa;
-    border: none;
-    margin-bottom: 10px;
-  }
-  
-  .footer .btn-big {
-    color: #fff;
-    background: #5379fa;
-    padding: 10px 20px;
-    font-size: 20px;
-    border: none;
-  }
-  
-  .footer-bottom {
-    background: #f8f9fa;
-    color: #686868;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-  }
+  position: static; /* Change this from 'fixed' */
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Styles for the content within the footer, organizes it into a flexible layout */
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+/* Styles for the links and contact sections within the footer */
+.footer-links, .footer-contact {
+  flex: 1;
+  max-width: 250px;
+  margin: 5px;
+}
+
+/* Styles for the title within the footer */
+.footer-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #fff;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+
+/* Styles for the list of links within the footer */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Styles for the list items within the list of links */
+.footer-links ul li {
+  margin: 5px 0;
+}
+
+/* Styles for the links within the list items */
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Styles for the hover state of the links */
+.footer-links ul li a:hover {
+  color: #ffd700;
+}
+
+/* Styles for the contact form within the footer */
+.footer-contact form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for the email and message inputs within the contact form */
+.input-email, .input-message {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: #444;
+  color: #fff;
+}
+
+/* Styles for the placeholders within the email and message inputs */
+.input-email::placeholder, .input-message::placeholder {
+  color: #bbb;
+}
+
+/* Styles for the send button within the contact form */
+.btn-send {
+  display: inline-block;
+  background-color: #ffd700;
+  color: #333;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+}
+
+/* Styles for the hover state of the send button */
+.btn-send:hover {
+  background-color: #ffa500;
+}
+
+/* Styles for the bottom section of the footer */
+.footer-bottom {
+  border-top: 1px solid #555;
+  padding: 5px 0;
+}
+
+/* Styles for the paragraph within the bottom section of the footer */
+.footer-bottom p {
+  margin: 0;
+  font-size: 12px;
+}

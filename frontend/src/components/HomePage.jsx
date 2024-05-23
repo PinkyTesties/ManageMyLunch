@@ -1,33 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from "./sharedComponents/Header";
-import RestaurantPanel from './RestaurantPanel';
 import Footer from './sharedComponents/Footer';
 import '../style/HomePage.css';
 
 const HomePage = () => {
-  const [restaurants, setRestaurants] = useState([]);
-
-  useEffect(() => {
-    // Replace this with the actual API call
-    fetch('http://localhost:8082/api/restaurants')
-      .then(response => response.json())
-      .then(data => setRestaurants(data));
-  }, []);
-
   return (
-    <div>
-      <Header /> {/* Include Header */}
-      <div className="home-page">
-        <h1>Welcome to Our Restaurant App</h1>
-        <div className="restaurant-list">
-          {restaurants.map(restaurant => (
-            <RestaurantPanel key={restaurant._id} restaurant={restaurant} />
-          ))}
+    <div className="page-container">
+      <Header />
+      <div className="content-wrap">
+        <div className="home-page">
+          <div className="hero-section">
+            <h1>Welcome to Our Restaurant App</h1>
+            <p>Order your favorite meals with ease.</p>
+          </div>
+          <div className="content">
+            <div className="info-box">
+              <h2>About Us</h2>
+              <p>Who we are and what we do...</p>
+              <button className="cta-button">Learn More</button>
+            </div>
+            <div className="info-box">
+              <h2>Become a Driver</h2>
+              <p>Information about becoming a driver...</p>
+              <button className="cta-button">Sign Up</button>
+            </div>
+            <div className="info-box">
+              <h2>Food Providers</h2>
+              <p>Information for food providers...</p>
+              <button className="cta-button">Join Us</button>
+            </div>
+          </div>
         </div>
       </div>
-      <Footer /> {/* Include Footer */}
+      <Footer />
     </div>
   );
 };
 
 export default HomePage;
+
