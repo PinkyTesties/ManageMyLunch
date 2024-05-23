@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import './buttonTeststyle.css';
 
 const MenuItemViewer = () => {
   const { id } = useParams();
@@ -14,6 +15,12 @@ const MenuItemViewer = () => {
   const [ingredientCounts, setIngredientCounts] = useState({});
   const [instructions, setInstructions] = useState('');
   const [quantity, setQuantity] = useState(1);
+
+
+  const [hidden, setHidden] = useState(false);
+  const [animateCheck, setAnimateCheck] = useState(false);
+  const [animateMessage, setAnimateMessage] = useState(false);
+
 
   useEffect(() => {
     axios
@@ -101,9 +108,20 @@ const MenuItemViewer = () => {
         restaurant_id: menuItem.restaurant_id // assuming the restaurant_id is stored in the menuItem object
       });
 
+      setHidden(true);
+      setAnimateCheck(true);
+      setAnimateMessage(true);
+
+      setTimeout(() => {
+          setHidden(false);
+          setAnimateCheck(false);
+          setAnimateMessage(false);
+      }, 4000); 
+
+
       console.log(response.data);
-      alert("Added to cart");
-      navigate("/dashboard");
+      //alert("Added to cart");
+      //navigate("/dashboard");
     } catch (error) {
       console.error(error);
     }
@@ -139,7 +157,17 @@ const MenuItemViewer = () => {
             <textarea value={instructions} onChange={handleInstructionsChange} placeholder="Additional instructions..."></textarea>
           </div>
           <br></br>
-          <button onClick={addToCart}>Add to cart</button>
+          <button className={`animatedCartBtn ${hidden ? 'hide' : ''}`} id="btn" onClick={addToCart}>
+        Add To Cart
+      </button>
+      <div className="row">
+        <span className={`check ${animateCheck ? 'rotateIn' : ''}`} id="check">
+          <i className="bi bi-check-lg"></i>
+        </span>
+        <span className={`message ${animateMessage ? 'fadeIn' : ''}`} id="message">
+          
+        </span>
+      </div>
 
         </>
       ) : null}

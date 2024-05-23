@@ -119,8 +119,7 @@ const Dashboard = () => {
           <button
             key={cuisine}
             className={`filter-button ${selectedCuisine === cuisine ? 'active' : ''}`}
-            onClick={() => handleCuisineChange(cuisine === 'All' ? '' : cuisine)}
-          >
+            onClick={() => handleCuisineChange({ target: { value: cuisine === 'All' ? '' : cuisine } })}          >
             {cuisine}
           </button>
         ))}

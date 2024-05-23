@@ -1,0 +1,98 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animatedCartBtn {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.animatedCartBtn.hide {
+    display: none;
+}
+
+.animatedCartBtn:hover {
+    background: #0056b3;
+}
+
+.check {
+    position: relative;
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #01a00a;
+    color: #fff;
+    font-size: 30px;
+    border: 1px solid #049117;
+    margin-right: 10px; /* Add some space between the check and the message */
+}
+
+.check.rotateIn {
+    animation: rotateIn 0.5s forwards;
+}
+
+.message {
+    opacity: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.message.fadeIn {
+    animation: fadeIn 1.3s 0.5s forwards;
+}
+
+.row {
+    transform: translateY(-25px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* Ensure the row is a flex row */
+}
+
+.hide {
+    display: none;
+}
+
+@keyframes rotateIn {
+    0% {
+        opacity: 0;
+        scale: 0.5;
+        transform: rotate(0deg);
+        filter: blur(5px);
+    }
+    50% {
+        opacity: 1;
+        scale: 1.2;
+    }
+    90% {
+        opacity: 1;
+        scale: 1;
+        transform: rotate(360deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-60px);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
