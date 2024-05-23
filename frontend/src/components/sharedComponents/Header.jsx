@@ -8,9 +8,7 @@ const Header = () => {
     <header className="header-container">
       <div className="header-content">
         <div className="header-left-section">
-          {/* HamburgerMenu removed */}
           <h1 class="header-title">Manage <span>My Lunch</span></h1>
-          {/* Search bar removed */}
         </div>
         <div className="header-right-section">
           <div className="header-auth-buttons">
