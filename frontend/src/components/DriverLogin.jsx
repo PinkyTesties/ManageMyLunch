@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './componentAssets/logov1.png';
+import '../style/Login.css';
 
 
 axios.defaults.withCredentials = true;
@@ -27,51 +28,104 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="container mt-5">
-      {error && <div className="alert alert-danger">{error}</div>}
-      <header>
-        <img src={logo} alt='Logo'/>
-        <Link to="/" className="btn-btn-link"><h2>Login as a Driver</h2></Link>
-        <button className='btn-btn'><Link to="/sign-up">Sign Up</Link></button>
-      </header>
-      <hr />
-      <main className='main-login'>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="loginPage">
+            <div className="formContainer">
+                <div className="loginFormContainer">
+                    <form onSubmit={handleSubmit} className="loginForm">
+                        <h2 className="formTitle">Driver Sign in</h2>
+                        <div className="inputGroup">
+                            <input
+                                type="email"
+                                id = "email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className="inputGroup">
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <button type="submit" className="submitButton">Login</button>
+                        <p><a href="#" className="forgotPassword">Forgot Password?</a></p>
+                    </form>
+                </div>
+            </div>
+            {error && <p>{error}</p>}
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button className='btn-btn' type="submit">Login</button>
-      <br></br>
-      <br></br>
-      
-      </form>
-      </main>
-      
-    </div>
   );
 };
 
 export default LoginPage;
+
+/*
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import '../style/Login.css';
+
+axios.defaults.withCredentials = true;
+
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError('');
+
+        try {
+            const { data } = await axios.post('http://localhost:8082/api/login', { email, password });
+            const { success, userExists } = data;
+            if (success) {
+                navigate('/dashboard');
+            } else {
+                setError(userExists ? "Incorrect password" : "User doesn't exist. Please sign up.");
+            }
+        } catch (error) {
+            setError(error.response && error.response.data ? error.response.data.message || error.response.data.error : "An error occurred. Please try again.");
+        }
+    };
+
+    return (
+        <div className="loginPage">
+            <div className="formContainer">
+                <div className="loginFormContainer">
+                    <form onSubmit={handleSubmit} className="loginForm">
+                        <h2 className="formTitle">Sign in</h2>
+                        <div className="inputGroup">
+                            <input
+                                type="email"
+                                id = "email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className="inputGroup">
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <button type="submit" className="submitButton">Login</button>
+                        <p><a href="#" className="forgotPassword">Forgot Password?</a></p>
+                    </form>
+                </div>
+            </div>
+            {error && <p>{error}</p>}
+        </div>
+    );
+};
+
+export default Login;
+
+*/
