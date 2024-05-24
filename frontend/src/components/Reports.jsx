@@ -21,7 +21,29 @@ function Reports() {
     const [receipts, setReceipts] = useState([]);
     const [totalReceipts, setTotalReceipts] = useState(0);
     const [dailyReceipts, setDailyReceipts] = useState(0);
-    const [users, setUsers] = useState([]);
+    const [totalUsers, setTotalUsers] = useState(0);
+
+// Add this to your existing state variables
+const [users, setUsers] = useState([]);
+
+
+// Add this useEffect hook to fetch the total number of users when the component mounts
+useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8082/api/users');
+        if (Array.isArray(response.data)) {
+          setTotalUsers(response.data.length);
+        } else {
+          console.error('API did not return an array');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    fetchTotalUsers();
+  }, []);
 
     const fetchPopularMenuItem = async () => {
         try {
@@ -123,6 +145,8 @@ function Reports() {
             fetchReceiptsForDate(date);
         } else if (page === 'DailyOrderCount') {
             fetchOrdersForDate(date);
+        } else if (page === 'NewUsers') {
+            fetchUsersForDate(date);
         }
     };
 
@@ -202,40 +226,49 @@ function Reports() {
                         <button onClick={() => { setPage('QR'); }}>Successful QR Pickup</button>
                         <button onClick={() => { setPage('DailyOrderCount'); }}>Daily Order Count</button>
                         <button onClick={() => { setPage('Receipts'); }}>Receipts</button>
-                        <button onClick={() => { setPage('NewUsers'); }}>New Users</button>
+                        <button onClick={() => { setPage('NewUsers'); }}>Users</button>
                     </div>
                 </div>
                 {page === 'item' && popularItemDetails && (
-                    <>
+                    <div>
+                    <p>These are the details on the currently most ordered food item on the Manage My Lunch platform. </p>
+                    <div className="receipt-container">
                         <h5>Most popular item:</h5>
-                        <p>{popularItemDetails.name}</p>
-                        <p>ID: {popularItemDetails._id}</p>
-                        <p>Price: ${popularItemDetails.cost}</p>
+                        <p>{popularItemDetails.name} (ID: {popularItemDetails._id})</p>
+                        <p>Price: ${popularItemDetails.cost.toFixed(2)}</p>
                         <p>Description: {popularItemDetails.item_desc}</p>
-                        <p>Restaurant: {restaurantDetails ? restaurantDetails.restaurantName : 'N/A'}</p>
-                        <p>Restaurant ID: {popularItemDetails.restaurant_id}</p>
-                        <p>Completed orders counted: {orderCount}</p>
+                        <br></br><p>This item is sold by the restaurant: {restaurantDetails ? restaurantDetails.restaurantName : 'N/A'} (ID: {popularItemDetails.restaurant_id})</p>
+                        <br></br><p>Completed orders searched: {orderCount}</p>
                         <p>Amount of times item "{popularItemDetails.name}" appears: {popularItemCount}</p>
-                    </>
+                    </div>
+                    </div>
                 )}
                 {page === 'restaurant' && popularRestaurant && (
-                    <>
-                        <h5>Most popular restaurant:</h5>
+                    <div>
+                    <h5>Most popular restaurant:</h5>
+                    <p>These are the details of the current most popular restaurant on Manage My Lunch</p>
+                    <div className="receipt-container">
                         <p>{popularRestaurant.restaurantName}</p>
                         <p>Restaurant ID: {popularRestaurant._id}</p>
+                        <br></br>
                         <p>Rating: {popularRestaurant.rating} stars</p>
                         <p>Description: {popularRestaurant.description}</p>
+                        <br></br>
                         <p>Appears in completed orders: {popularRestaurantCount} times</p>
-                    </>
+                    </div>
+                    
+                    </div>
                 )}
                 {page === 'QR' && (
-                    <>
-                        <p>QR Code info goes here</p>
-                    </>
+                    <div className="receipt-container">
+                    <p>QR Code info goes here</p>
+                    </div>
                 )}
                 {page === 'DailyOrderCount' && (
-                    <>
-                        <h4>Daily Order Count</h4>
+                    <div>
+                    <h4>Order count on a specified date</h4>
+
+                    <div className="receipt-container">
                         <br />
                         <div>
                             <label>Select a date:</label>
@@ -243,7 +276,8 @@ function Reports() {
                         </div>
                         <br />
                         <h5>Total orders for selected date: {orderCount}</h5>
-                    </>
+                    </div>
+                    </div>
                 )}
                 {page === 'Receipts' && (
                     <>
@@ -269,8 +303,7 @@ function Reports() {
                 )}
                 {page === 'NewUsers' && (
                     <>
-                        <h4>Total New Users</h4>
-                        <br />
+<h4>Total users signed up to manage my lunch: {totalUsers}</h4>                        <br />
                         <div>
                             <label>Select a date:</label>
                             <DatePicker selected={selectedDate} onChange={handleDateChange} />

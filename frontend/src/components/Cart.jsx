@@ -449,7 +449,7 @@ const Cart = () => {
               onChange={(e) => setDiscountCode(e.target.value)}
               placeholder="Enter discount code"
             />
-            <button onClick={handleApplyDiscount}>Apply</button>
+            <button className='cartButton' onClick={handleApplyDiscount}>Apply</button>
           </div>
         </div>
         <hr />
@@ -460,7 +460,7 @@ const Cart = () => {
               <div className="cart-item-details">
                 <h4>{item.name}</h4>
                 <p>${parseFloat(item.cost).toFixed(2)}</p>
-                <button onClick={() => handleRemove(item._id, index)}>Remove</button>
+                <button className='cartButton' onClick={() => handleRemove(item._id, index)}>Remove</button>
                 {item.ingredients.map((ingredient, i) => (
                   <div key={i} className="cart-item-ingredient">
                     <p>{ingredient.name} - {ingredient.quantity}</p>

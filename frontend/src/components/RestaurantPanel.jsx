@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-
+import '../style/RestaurantPanel.css';
 const RestaurantPanel = ({ restaurant }) => {
 
   return (
@@ -14,7 +14,9 @@ const RestaurantPanel = ({ restaurant }) => {
         height={200}
       />
       </Link>
+      <div className='title'>
       <b>{restaurant.restaurantName}</b>
+      </div>
       <hr></hr>
       </div>
       <p>{restaurant.description}</p>

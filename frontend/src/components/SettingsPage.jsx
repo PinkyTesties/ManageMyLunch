@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
 import UserDashboard from './UserDashboard'; // Import UserDashboard
 import '../style/settingsPage.css'; // Make sure to create and import this CSS file
-
+import Footer from '../components/sharedComponents/Footer';
 const SettingsPage = () => {
 
-    const [deliveryFee, setDeliveryFee] = useState(0);
-    const [serviceFee, setServiceFee] = useState(0);
+
+
+    const [deliveryFee_New, setDeliveryFee_New] = useState(0);
+    const [deliveryFee_Current, setDeliveryFee_Current] = useState(0);
+
+    const [serviceFee_New, setServiceFee_New] = useState(0);
+    const [serviceFee_Current, setServiceFee_Current] = useState(0);
+
 
     const [universityName, setUniversityName] = useState('');
     const [address, setAddress] = useState('');
@@ -57,7 +63,7 @@ const SettingsPage = () => {
         const fetchDeliveryFee = async () => {
             try {
                 const response = await axios.get('http://localhost:8082/api/systemAdmin/getDeliveryFee');
-                setDeliveryFee(response.data.fee);
+                setDeliveryFee_Current(response.data.fee);
             } catch (error) {
                 console.error(error);
             }
@@ -70,7 +76,7 @@ const SettingsPage = () => {
         const fetchServiceFee = async () => {
             try {
                 const response = await axios.get('http://localhost:8082/api/systemAdmin/getServiceFee');
-                setServiceFee(response.data.fee);
+                setServiceFee_Current(response.data.fee);
             } catch (error) {
                 console.error(error);
             }
@@ -81,29 +87,36 @@ const SettingsPage = () => {
 
 
     const handleDeliveryFeeChange = (event) => {
-        setDeliveryFee(event.target.value);
+        setDeliveryFee_New(event.target.value);
     }
 
     const handleServiceFeeChange = (event) => {
-        setServiceFee(event.target.value);
+        setServiceFee_New(event.target.value);
     }
 
-
     const updateDeliveryFee = async () => {
-        try {
-            await axios.post('http://localhost:8082/api/systemAdmin/updateDeliveryFee', { fee: deliveryFee });
-            console.log('Delivery fee updated');
-        } catch (error) {
-            console.error(error);
+        const confirmation = window.confirm('Are you sure you want to update the delivery fee? from $' + deliveryFee_Current + ' to $' + deliveryFee_New + '?');
+        if (confirmation) {
+            try {
+                await axios.post('http://localhost:8082/api/systemAdmin/updateDeliveryFee', { fee: deliveryFee_New });
+                console.log('Delivery fee updated');
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
     const updateServiceFee = async () => {
-        try {
-            await axios.post('http://localhost:8082/api/systemAdmin/updateServiceFee', { fee: serviceFee });
-            console.log('Service fee updated');
-        } catch (error) {
-            console.error(error);
+       
+
+        const confirmation = window.confirm('Are you sure you want to update the delivery fee? from $' + serviceFee_Current + ' to $' + serviceFee_New + '?');
+        if (confirmation) {
+            try {
+                await axios.post('http://localhost:8082/api/systemAdmin/updateServiceFee', { fee: serviceFee_New });
+                console.log('Service fee updated');
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
@@ -122,7 +135,8 @@ const SettingsPage = () => {
         <div className='pageContainer'>
       <UserDashboard /> {/* Use UserDashboard */}
 
-            <h1>Settings Page</h1>
+        <div className="contentContainer">
+            <h1>Admin Settings</h1>
             <div className="buttonMenu">
             {/* Add your settings components here */}
             <Link to="/UpdatePassword">
@@ -139,26 +153,14 @@ const SettingsPage = () => {
                 <button>Manage Rewards</button>
             </Link>
             </div>
-            <br></br>
-            <div className="serviceFeeBox">
-                <br></br>
-                <label>Delivery Fee: $</label>
-                <input type="number" placeholder={deliveryFee} onChange={handleDeliveryFeeChange} />
-                <button onClick={updateDeliveryFee}>Update Delivery Fee</button>
-            </div>
-            <br></br>
-            <div>
-                <label>Service Fee: $</label>
-                <input type="number" placeholder={serviceFee} onChange={handleServiceFeeChange} />
-                <button onClick={updateServiceFee}>Update Service Fee</button>
-
-            </div>
+           
 
             <hr></hr>
             <h2>Universities</h2>
-            <p>Manage My Lunch is available for the following Universities</p>
+            <p>Manage My Lunch is available for the following Universities:</p>
             <div>
                 {universities.map((university) => (
+                    <div className='universityBox'>
                     <div key={university._id}>
                         <h3>{university.name}</h3>
                         <p>Address: {university.address}</p>
@@ -167,11 +169,12 @@ const SettingsPage = () => {
                     <br></br>
                     <button onClick={() => deleteUniversity(university._id)}>Delete University</button>
                     </div>
+                    </div>
                 ))}
             </div>
-            <br></br>
-            <br></br>
+
             <hr></hr>
+            <div className="addUniversity">
             <h2>Add a university</h2>
 
             <form onSubmit={addUniversity}>
@@ -202,6 +205,26 @@ const SettingsPage = () => {
                 <br></br>
                 <button type="submit">Add University</button>
             </form>
+            </div>
+
+            <hr></hr>
+            <br></br>
+            <h2>Danger Zone</h2>
+            <div className="serviceFeeBox">
+
+                <label>Delivery Fee: </label>
+                <input type="number" placeholder={deliveryFee_Current} onChange={handleDeliveryFeeChange} />
+                <button onClick={updateDeliveryFee}>Update Delivery Fee</button>
+            </div>
+            <br></br>
+            <div className="serviceFeeBox">
+                <label>Service Fee: </label>
+                <input type="number" placeholder={serviceFee_Current} onChange={handleServiceFeeChange} />
+                <button onClick={updateServiceFee}>Update Service Fee</button>
+
+            </div>
+            </div>
+            <Footer />
         </div>
     );
 }

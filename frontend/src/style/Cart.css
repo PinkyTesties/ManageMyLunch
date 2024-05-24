@@ -160,6 +160,18 @@
   margin-top: auto;
 }
 
+.cartButton {
+  background-color: #36cf70;
+  border: none;
+  color: white;
+  padding: 10px 20px; /* Reduced padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Reduced font size */
+  margin: 4px 2px;
+  cursor: pointer;
+}
 /* Styles for responsive design */
 @media (max-width: 768px) {
   .cart-details {
