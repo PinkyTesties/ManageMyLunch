@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import '../style/settingsPage.css'; // Make sure to create and import this CSS file
 
 const SettingsPage = () => {
 
@@ -118,10 +119,11 @@ const SettingsPage = () => {
       };
 
     return (
-        <div>
+        <div className='pageContainer'>
       <UserDashboard /> {/* Use UserDashboard */}
 
             <h1>Settings Page</h1>
+            <div className="buttonMenu">
             {/* Add your settings components here */}
             <Link to="/UpdatePassword">
                 <button>Change Password</button>
@@ -129,16 +131,16 @@ const SettingsPage = () => {
             <Link to="/DeleteAccount_User">
                 <button>Delete Account</button>
             </Link>
-            <Link to="/Dashboard">
-                <button>Return to dashboard</button>
-            </Link>
+
             <Link to="/Drivers">
                 <button>Manage Drivers</button>
             </Link>
             <Link to="/Rewards">
                 <button>Manage Rewards</button>
             </Link>
-            <div>
+            </div>
+            <br></br>
+            <div className="serviceFeeBox">
                 <br></br>
                 <label>Delivery Fee: $</label>
                 <input type="number" placeholder={deliveryFee} onChange={handleDeliveryFeeChange} />
