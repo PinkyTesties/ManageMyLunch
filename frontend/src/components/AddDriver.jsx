@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import UserDashboard from './UserDashboard';
 import '../style/AddDriver.css';
+import Footer from './sharedComponents/Footer';
 
 const AddDriver = () => {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ const AddDriver = () => {
 
             <div>
                 <h1>Add a driver</h1>
-      <button onClick={() => navigate('/Drivers')}>View Drivers</button>
+      <button className='driverButton' onClick={() => navigate('/Drivers')}>View Drivers</button>
 
             </div>
             <div className='formContainer'>
@@ -54,6 +55,7 @@ const AddDriver = () => {
                 <input type="submit" value="Submit" />
             </form>
             </div>
+            <Footer />
         </div>
     );
 };

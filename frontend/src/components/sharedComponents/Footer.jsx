@@ -35,7 +35,7 @@ const Footer = () => {
         <ContactForm />
       </div>
       <div className="footer-bottom">
-        <p>© 2024 Manage My Lunch </p>
+        <p>© 2024 Manage My Lunch | Version 0.9 Beta</p>
       </div>
     </footer>
   );

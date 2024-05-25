@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import '../style/Reports.css'
 
 const ViewDriverReviews = () => {
     const { email } = useParams();
     const [reviews, setReviews] = useState([]);
+  const [drivers, setDrivers] = useState([]);
+  const navigate = useNavigate();
+
+  const [driverName, setDriverName] = useState('');
+
+  useEffect(() => {
+    fetch(`http://localhost:8082/api/drivers/email/${email}`)
+      .then(response => response.json())
+      .then(data => setDriverName(data.name))
+      .catch(error => console.error('Error:', error));
+  }, [email]);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -22,19 +34,26 @@ const ViewDriverReviews = () => {
 
     return (
         <div>
-      <UserDashboard /> {/* Use UserDashboard */}
+        <UserDashboard /> {/* Use UserDashboard */}
+        <h1>Reviews for Driver: {driverName}</h1>
+      <button className='driverButton' onClick={() => navigate('/Drivers')}>View All Drivers</button>
 
-            <h1>Reviews for {email}</h1>
-            {reviews.map((review, index) => (
-                <div key={index} style={{border: '1px solid black', margin: '10px', padding: '10px'}}>
-                    <h2>{review.title}</h2>
-                    <p>{review.textarea}</p>
-                    <p>Reviewed by: {review.name}</p>
-                    <p>Rating: {review.stars}</p>
-                    <p>Review Date: {new Date(review.date).toLocaleDateString()}</p>
-                </div>
-            ))}
+        {reviews.length > 0 ? (
+          reviews.map((review, index) => (
+            <div className='review-container' key={index}>
+              <h2>{review.title}</h2>
+              <p>{review.textarea}</p>
+              <p>Reviewed by: {review.name}</p>
+              <p>Rating: {review.stars}</p>
+              <p>Review Date: {new Date(review.date).toLocaleDateString()}</p>
+            </div>
+          ))
+        ) : (
+            <div className='review-container'>
+          <p>No reviews for {driverName}</p>
         </div>
+        )}
+      </div>
     );
 };
 
