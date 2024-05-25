@@ -456,7 +456,7 @@ const Cart = () => {
         <div className="cart-items-container">
           {cart.menuItems.map((item, index) => (
             <div className="cart-item" key={index}>
-              <img src={beefImage} alt="Item" className="cart-item-image" />
+              <img src={`http://localhost:8082/menuItem_Assets/${item.menuItemImage}`} alt="Item" className="cart-item-image" />
               <div className="cart-item-details">
                 <h4>{item.name}</h4>
                 <p>${parseFloat(item.cost).toFixed(2)}</p>
@@ -485,6 +485,7 @@ const Cart = () => {
         </div>
 
       </div>
+      <Footer />
     </div>
 
 

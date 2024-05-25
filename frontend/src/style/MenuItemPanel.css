@@ -1,0 +1,23 @@
+/* Styles for the restaurant image */
+.menucard-container img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+.menucard-container img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Styles for responsive design */
+  @media (max-width: 768px) {
+    .menucard-container img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .title {
+    margin-top: 10px; /* Adjust this value to increase or decrease the space */
+  }

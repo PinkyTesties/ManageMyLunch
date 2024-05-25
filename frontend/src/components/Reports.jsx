@@ -244,7 +244,7 @@ useEffect(() => {
                     </div>
                 )}
                 {page === 'restaurant' && popularRestaurant && (
-                    <div>
+                    <div className="receipt-container">
                     <h5>Most popular restaurant:</h5>
                     <p>These are the details of the current most popular restaurant on Manage My Lunch</p>
                     <div className="receipt-container">

@@ -35,7 +35,7 @@
     color: #fff;
     font-size: 30px;
     border: 1px solid #049117;
-    margin-right: 10px; /* Add some space between the check and the message */
+    margin-right: 10px;
 }
 
 .check.rotateIn {
@@ -59,7 +59,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row; /* Ensure the row is a flex row */
+    flex-direction: row;
 }
 
 .hide {

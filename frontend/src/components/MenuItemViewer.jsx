@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import UserDashboard from './UserDashboard'; // Import UserDashboard
+import '../style/MenuItemViewer.css';
+import Footer from './sharedComponents/Footer';
 import './buttonTeststyle.css';
 
 const MenuItemViewer = () => {
@@ -113,10 +115,10 @@ const MenuItemViewer = () => {
       setAnimateMessage(true);
 
       setTimeout(() => {
-          setHidden(false);
-          setAnimateCheck(false);
-          setAnimateMessage(false);
-      }, 4000); 
+        setHidden(false);
+        setAnimateCheck(false);
+        setAnimateMessage(false);
+      }, 4000);
 
 
       console.log(response.data);
@@ -130,47 +132,55 @@ const MenuItemViewer = () => {
   return (
     <div>
       <div>
-      <UserDashboard /> {/* Use UserDashboard */}
+        <UserDashboard /> {/* Use UserDashboard */}
 
       </div>
       {menuItem ? (
         <>
-        <header>
-        <h3>{menuItem.name}</h3>
-          <button>
-            <Link to={`/MenuItemEditor/${menuItem._id}`}>Edit this item</Link>
-          </button>
-          </header>
-          <hr/>
-          <div>   
+
+          <div className='menuContainer'>
+            <h3>{menuItem.name}</h3>
+            <button onClick={() => navigate(`/MenuItemEditor/${menuItem._id}`)}>
+              Edit this item
+            </button>
+          </div>
+          <hr />
+          <div className='menuContainer'>
             <p>Description: {menuItem.item_desc}</p>
             <p>Ingredients:</p>
-            {menuItem.ingredients.map((ingredient, index) => (
-              <div className='menu-item' key={index}>
-                <span>{ingredient.name}: </span>
-                <span>{ingredientCounts[ingredient.name]}</span>
-                <button onClick={() => incrementIngredient(ingredient.name)}>+</button>
-                <button onClick={() => decrementIngredient(ingredient.name)}>-</button>
-              </div>
-            ))}
+            <ul>
+              {menuItem.ingredients.map((ingredient, index) => (
+                <div key={index}>
+                  <div className='menu-item'>
+                    <span>{ingredient.name}: </span>
+                    <span>{ingredientCounts[ingredient.name]}</span>
+                    <button className='buttonDown' onClick={() => decrementIngredient(ingredient.name)}>-</button>
+
+                    <button className='buttonUp' onClick={() => incrementIngredient(ingredient.name)}>+</button>
+                  </div>
+                </div>
+              ))}
+            </ul>
             <br></br>
             <textarea value={instructions} onChange={handleInstructionsChange} placeholder="Additional instructions..."></textarea>
+            <br></br>
+            <button className={`animatedCartBtn ${hidden ? 'hide' : ''}`} id="btn" onClick={addToCart}>
+              Add To Cart
+            </button>
+            <div className="row">
+              <span className={`check ${animateCheck ? 'rotateIn' : ''}`} id="check">
+                <i className="bi bi-check-lg"></i>
+              </span>
+              <span className={`message ${animateMessage ? 'fadeIn' : ''}`} id="message">
+              Added To cart
+              </span>
+            </div>
+
           </div>
-          <br></br>
-          <button className={`animatedCartBtn ${hidden ? 'hide' : ''}`} id="btn" onClick={addToCart}>
-        Add To Cart
-      </button>
-      <div className="row">
-        <span className={`check ${animateCheck ? 'rotateIn' : ''}`} id="check">
-          <i className="bi bi-check-lg"></i>
-        </span>
-        <span className={`message ${animateMessage ? 'fadeIn' : ''}`} id="message">
-          
-        </span>
-      </div>
 
         </>
       ) : null}
+      <Footer />
     </div>
   );
 };

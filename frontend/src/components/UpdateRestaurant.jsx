@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../App.css';
+import UserDashboard from './UserDashboard';
+import Footer from './sharedComponents/Footer';
+import '../style/UpdateRestaurant.css';
 
 function UpdateRestaurant(props) {
   const [restaurant, setRestaurant] = useState({
@@ -58,47 +60,45 @@ function UpdateRestaurant(props) {
   };
 
   return (
-    <div className='UpdateBookInfo'>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-8 m-auto'>
-            <br />
-            <Link to='/dashboard' className='btn btn-outline-warning float-left'>
-              Show restaurant List
-            </Link>
-          </div>
-        </div>
+    <div>
+      <UserDashboard />
+    <div className='update-restaurant-container'>
 
-        <div className='row'>
-          <div className='col-md-8 m-auto'>
-            <h1 className='display-4 text-center'>Edit restaurant</h1>
-            <p className='lead text-center'>Update restaurant's Info</p>
+<button onClick={() => navigate('/dashboard')} className='dashboard-button'>
+  Show restaurant List
+</button>
 
-            <form noValidate onSubmit={onSubmit}>
-              <div className='form-group'>
-                <label htmlFor='title'>Name</label>
-                <input
-                  type='text'
-                  placeholder='Name of the restaurant'
-                  name='restaurantName'
-                  className='form-control'
-                  value={restaurant.restaurantName}
-                  onChange={onChange}
-                />
-              </div>
-              <br />
-              {/* Add other form fields similarly */}
-              <button
-                type='submit'
-                className='btn btn-outline-info btn-lg btn-block'
-              >
-                Update restaurant
-              </button>
-            </form>
-          </div>
-        </div>
+  <div className='update-restaurant-content'>
+    <h1 className='title'>Edit restaurant</h1>
+    <p className='subtitle'>Update restaurant's Info</p>
+
+    <form noValidate onSubmit={onSubmit} className='update-form'>
+      <div className='form-group'>
+        <label htmlFor='title'>Name</label>
+        <input
+          type='text'
+          placeholder='Name of the restaurant'
+          name='restaurantName'
+          className='form-input'
+          value={restaurant.restaurantName}
+          onChange={onChange}
+        />
       </div>
-    </div>
+      {/* Add other form fields similarly */}
+      <button
+        type='submit'
+        className='submit-button'
+      >
+        Update restaurant
+      </button>
+    </form>
+    <br></br>
+    <br></br>
+    <br></br>
+  </div>
+</div>
+<Footer />
+</div>
   );
 }
 

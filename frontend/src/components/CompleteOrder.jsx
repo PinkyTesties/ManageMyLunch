@@ -42,7 +42,7 @@ const CompleteOrder = () => {
       const updatedCart = await response.json();
       setCart(updatedCart);
       // Add points to user profile
-      const amountPoints = cart.cost;
+      const amountPoints = parseFloat(cart.cost.toFixed(2));
       console.log("The points to add are: ", amountPoints);
 
       // Fetch the user by email

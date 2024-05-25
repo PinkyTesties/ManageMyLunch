@@ -223,10 +223,10 @@ function OrderStatus() {
                     >
 
                       <h1>Order From {order.restaurant_name}</h1>
-                      <p>Thank you for your order!</p>
 
-                      <h2>{order.restaurant_name}</h2>
                       <h3>Cost: ${order.cost.toFixed(2)}</h3>
+                      <p>Thank you for your order!</p>
+                      <br></br>
                       <p>{order.email}</p>
                       {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
                       <p>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
+import UserDashboard from './UserDashboard';
 import axios from 'axios';
+import Footer from './sharedComponents/Footer';
+import '../style/CreateMenuItem.css';
 
 const CreateMenuItem = () => {
   const params = useParams();
@@ -36,7 +38,7 @@ const CreateMenuItem = () => {
       const value = e.target.name === 'quantity' ? parseInt(e.target.value, 10) : e.target.value;
       return { ...ingredient, [e.target.name]: value };
     });
-  
+
     setMenuItem(prevState => ({
       ...prevState,
       ingredients: newIngredients
@@ -50,32 +52,6 @@ const CreateMenuItem = () => {
     }));
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  
-  //   const isValid = menuItem.ingredients.every(
-  //     ingredient => ingredient.name && ingredient.quantity
-  //   );
-  
-  //   if (!isValid) {
-  //     alert('Each ingredient must have a name and a quantity.');
-  //     return;
-  //   }
-  
-  //   const menuItemWithQuantityAsString = {
-  //     ...menuItem,
-  //     ingredients: menuItem.ingredients.map(ingredient => ({
-  //       ...ingredient,
-  //       quantity: String(ingredient.quantity)
-  //     }))
-  //   };
-  
-  //   axios
-  //     .post('http://localhost:8082/api/menuItems', menuItemWithQuantityAsString)
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => console.error(err));
-  // };
-
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -87,7 +63,7 @@ const CreateMenuItem = () => {
     formData.append('ingredients', JSON.stringify(menuItem.ingredients)); // Convert array to JSON string
     formData.append('additional_information', menuItem.additional_information);
     formData.append('image', image);
-  
+
     axios
       .post("http://localhost:8082/api/menuItems", formData, {
         headers: {
@@ -107,9 +83,15 @@ const CreateMenuItem = () => {
 
   return (
     <div>
-      <h3>Create New Menu Item</h3>
+      <UserDashboard />
+        <div className="container">
+          <br></br>
+        <h3>Create New Menu Item</h3>
+
+      <div className='mainContentContainer'>
+
       <form onSubmit={onSubmit}>
-      <div className="form-group">
+        <div className="form-group">
           <label>Name: </label>
           <input type="text" required className="form-control" name="name" value={menuItem.name} onChange={onChange} />
         </div>
@@ -122,52 +104,55 @@ const CreateMenuItem = () => {
           <input type="text" className="form-control" name="item_desc" value={menuItem.item_desc} onChange={onChange} />
         </div>
         <div className="form-group">
-  <label>Restaurant ID: </label>
-  <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
-</div>   
-        
-<div className="form-group">
-  <label>Ingredients: </label>
-  {menuItem.ingredients.map((ingredient, index) => (
-    <div key={index}>
-      <input
-        type="text"
-        className="form-control"
-        name="name"
-        value={ingredient.name}
-        onChange={onIngredientChange(index)}
-      />
-<input
-  type="number"
-  className="form-control"
-  name="quantity"
-  value={ingredient.quantity}
-  onChange={onIngredientChange(index)}
-/>
-    </div>
-  ))}
-<button type="button" onClick={addIngredient}>Add Another Ingredient</button>
-</div>
+          <label>Restaurant ID: </label>
+          <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
+        </div>
+
+        <div className="form-group">
+          <label>Ingredients: </label>
+          {menuItem.ingredients.map((ingredient, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={ingredient.name}
+                onChange={onIngredientChange(index)}
+              />
+              <input
+                type="number"
+                className="form-control"
+                name="quantity"
+                value={ingredient.quantity}
+                onChange={onIngredientChange(index)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={addIngredient}>Add Another Ingredient</button>
+        </div>
         <div className="form-group">
           <label>Additional Information: </label>
           <input type="text" className="form-control" name="additional_information" value={menuItem.additional_information} onChange={onChange} />
         </div>
         <br></br>
         <div className="form-group">
-      <label htmlFor="image">Image:</label>
-      <input
-        type="file"
-        name="image"
-        className="form-control"
-        onChange={onChange}
-      />
-    </div>
-        
+          <label htmlFor="image">Image:</label>
+          <input
+            type="file"
+            name="image"
+            className="form-control"
+            onChange={onChange}
+          />
+        </div>
+
         <br></br>
         <div className="form-group">
           <input type="submit" value="Create Menu Item" className="btn btn-primary" />
         </div>
       </form>
+      </div>
+      </div>
+      <Footer />
     </div>
   );
 };

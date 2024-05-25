@@ -61,30 +61,30 @@ const ReviewForm = () => {
   return (
     <div>
       <UserDashboard />
-            <div className="review-form-container">
-  <h1 className="form-title">Write a Review for '{restaurant ? restaurant.restaurantName : 'Loading...'}'</h1>
+      <div className="review-form-container">
+        <h1 className="form-title">Write a Review for '{restaurant ? restaurant.restaurantName : 'Loading...'}'</h1>
 
-  <form className="review-form">
-    <label className="form-label">
-      Name:
-      <input className="form-input" type="text" name="name" onChange={handleChange} />
-    </label>
-    <label className="form-label">
-      Stars:
-      <input className="form-input" type="number" name="stars" onChange={handleChange} />
-    </label>
-    <label className="form-label">
-      Title:
-      <input className="form-input" type="text" name="title" onChange={handleChange} />
-    </label>
-    <label className="form-label">
-      Review:
-      <textarea className="form-textarea" name="textarea" onChange={handleChange} />
-    </label>
-    <button className="form-submit-btn" type="submit">Submit Review</button>
-  </form>
-</div>
-    <Footer />
+        <form className="review-form" onSubmit={handleSubmit}>
+          <label className="form-label">
+            Name:
+            <input className="form-input" type="text" name="name" onChange={handleChange} />
+          </label>
+          <label className="form-label">
+            Stars:
+            <input className="form-input" type="number" name="stars" onChange={handleChange} />
+          </label>
+          <label className="form-label">
+            Title:
+            <input className="form-input" type="text" name="title" onChange={handleChange} />
+          </label>
+          <label className="form-label">
+            Review:
+            <textarea className="form-textarea" name="textarea" onChange={handleChange} />
+          </label>
+          <button className="form-submit-btn" type="submit">Submit Review</button>
+        </form>
+      </div>
+      <Footer />
     </div>
 
   );

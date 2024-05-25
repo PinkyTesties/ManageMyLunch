@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 import './buttonTeststyle.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons
+import '../style/MenuItemPanel.css';
 
 const MenuItemPanel = ({ menuItem }) => {
   const [name, setName] = useState('');
@@ -29,7 +31,7 @@ const MenuItemPanel = ({ menuItem }) => {
         }
       })
       .catch(err => console.log(err))
-  }, [])
+  }, [navigate]);
 
   const addToCart = async () => {
     try {
@@ -75,6 +77,9 @@ const MenuItemPanel = ({ menuItem }) => {
             height={200}
           />
         </Link>
+        <br></br>
+        <br></br>
+
         <span><p>{menuItem.name}</p></span>
         <hr></hr>
       </div>
