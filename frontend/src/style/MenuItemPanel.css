@@ -21,3 +21,16 @@
   .title {
     margin-top: 10px; /* Adjust this value to increase or decrease the space */
   }
+  .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .deleteButton:hover {
+    background-color: darkred;
+  }

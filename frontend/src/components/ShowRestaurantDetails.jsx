@@ -113,6 +113,11 @@ function ShowRestaurantDetails(props) {
             <br></br>
             <br></br>
             <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+
 
         <div className='restaurant-details-container'>
  

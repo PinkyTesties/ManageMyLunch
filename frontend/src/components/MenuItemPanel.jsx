@@ -66,6 +66,18 @@ const MenuItemPanel = ({ menuItem }) => {
       console.error(error);
     }
   }
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this item?');
+    if (confirmDelete) {
+      try {
+        const response = await axios.delete(`http://localhost:8082/api/menuItems/${id}`);
+        console.log(response.data.msg); // Log the server's response message
+        navigate('/dashboard');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <div className='menucard-container'>
@@ -86,9 +98,12 @@ const MenuItemPanel = ({ menuItem }) => {
       
       <p>${menuItem.cost.toFixed(2)}</p>
       <br></br>
+      <p>{menuItem.item_desc}</p>
+
       <button className={`animatedCartBtn ${hidden ? 'hide' : ''}`} id="btn" onClick={addToCart}>
         Add To Cart
       </button>
+      <button className='deleteButton' onClick={() => handleDelete(menuItem._id)}> Delete Item</button>
       <div className="row">
         <span className={`check ${animateCheck ? 'rotateIn' : ''}`} id="check">
           <i className="bi bi-check-lg"></i>
@@ -97,7 +112,6 @@ const MenuItemPanel = ({ menuItem }) => {
           Added To Cart
         </span>
       </div>
-      <p>{menuItem.item_desc}</p>
     </div>
   );
 };
