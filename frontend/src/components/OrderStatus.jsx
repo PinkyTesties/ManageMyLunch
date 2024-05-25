@@ -259,7 +259,7 @@ function OrderStatus() {
                         : " Edit Time has elapsed"}
                       {
                         order.orderStatus === "Delivered" && (
-                          <button onClick={() => navigate(`/CompleteOrder`)}>
+                          <button className='pickup-button' onClick={() => navigate(`/CompleteOrder`)}>
                             Confirm Order Pickup
                           </button>
                         )

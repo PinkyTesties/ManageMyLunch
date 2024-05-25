@@ -63,3 +63,15 @@
   .reviewButton:hover {
     background-color: #45a049;
   }
+
+  .pickup-button {
+    background-color: rgb(0, 218, 0);
+    border: none;
+    padding: 20px 32px; 
+
+  }
+
+
+.pickup-button:hover {
+    background-color: rgb(0, 180, 0);
+}
