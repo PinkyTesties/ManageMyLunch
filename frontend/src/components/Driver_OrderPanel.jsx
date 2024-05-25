@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
-
+import '../style/orderPanel.css'; // Make sure to create and import this CSS file
 import axios from 'axios';
 
 
@@ -69,7 +69,10 @@ const Driver_OrderPanel = ({ order, email }) => {
 
 
   return (
+    <div>
+      <br></br>
     <div className='order-container'>
+      
       <h2>Order From {order.restaurant_name}</h2>
       <p>Order id: {order._id}</p>
       <p>Restaurant Location: {restaurantAddress}</p>
@@ -84,6 +87,7 @@ const Driver_OrderPanel = ({ order, email }) => {
     Select Order
   </button>
   <hr />
+    </div>
     </div>
   );
 };

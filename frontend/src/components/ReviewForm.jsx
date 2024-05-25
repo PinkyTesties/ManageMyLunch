@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import UserDashboard from './UserDashboard';
+import Footer from './sharedComponents/Footer';
+import '../style/reviewForm.css';
 
 const ReviewForm = () => {
   const { id } = useParams(); // Get the restaurant ID from the URL
@@ -42,7 +44,6 @@ const ReviewForm = () => {
     try {
       await axios.post('http://localhost:8082/api/reviewForm', review);
       alert('Review submitted successfully');
-      navigate('/OrderStatus');
       setReview({
         name: '',
         stars: '',
@@ -50,6 +51,8 @@ const ReviewForm = () => {
         textarea: '',
         restaurantID: ''
       });
+      navigate('/OrderStatus');
+
     } catch (err) {
       console.error(err);
     }
@@ -57,31 +60,31 @@ const ReviewForm = () => {
 
   return (
     <div>
-      <h2>Review Form</h2>
-      <p>Restaurant Name: {restaurant ? restaurant.restaurantName : 'Loading...'}</p>
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" name="name" value={review.name} onChange={handleChange} required />
-      </label>
-      <label>
-        Stars:
-        <input type="text" name="stars" value={review.stars} onChange={handleChange} required />
-      </label>
-      <label>
-        Title:
-        <input type="text" name="title" value={review.title} onChange={handleChange} required/>
-      </label>
-      <label>
-        Textarea:
-        <input type="text" name="textarea" value={review.textarea} onChange={handleChange} required/>
-      </label>
-      {/* <label>
-        Restaurant ID:
-        <input type="text" name="restaurantID" value={review.restaurantID} onChange={handleChange} />
-      </label> */}
-      <button type="submit">Submit Review</button>
-    </form>
+      <UserDashboard />
+            <div className="review-form-container">
+  <h1 className="form-title">Write a Review for '{restaurant ? restaurant.restaurantName : 'Loading...'}'</h1>
+
+  <form className="review-form">
+    <label className="form-label">
+      Name:
+      <input className="form-input" type="text" name="name" onChange={handleChange} />
+    </label>
+    <label className="form-label">
+      Stars:
+      <input className="form-input" type="number" name="stars" onChange={handleChange} />
+    </label>
+    <label className="form-label">
+      Title:
+      <input className="form-input" type="text" name="title" onChange={handleChange} />
+    </label>
+    <label className="form-label">
+      Review:
+      <textarea className="form-textarea" name="textarea" onChange={handleChange} />
+    </label>
+    <button className="form-submit-btn" type="submit">Submit Review</button>
+  </form>
+</div>
+    <Footer />
     </div>
 
   );

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Assuming you're using axios for HTTP requests
+import UserDashboard from './UserDashboard';
+import Footer from './sharedComponents/Footer';
+import '../style/editOrderPage.css'; // Make sure to create and import this CSS file
 
 const EditOrder = () => {
   const { id } = useParams();
@@ -63,18 +66,24 @@ const EditOrder = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div>
-      <h1>Edit Order</h1>
-      <p>Order ID: {id}</p>
+    <div className="editPage-order-container">
+    <div className="editPage-dashboard-container">
+      <UserDashboard />
+    </div>
+    <div className="editPage-edit-order-container">
+      <h1 className="editPage-order-title">Edit Order</h1>
+      <p className="editPage-order-id">Order ID: {id}</p>
       {menuItems && menuItems.length > 0 && menuItems.map((item, index) => (
-        <div key={index} style={{ border: '1px solid black', padding: '10px', margin: '10px' }}>
-          <p>{item.name}</p>
-          <button onClick={() => removeItem(index)}>Remove Item</button>
+        <div key={index} className="editPage-item-container">
+          <p className="editPage-item-name">{item.name}</p>
+          <button className="editPage-remove-btn" onClick={() => removeItem(index)}>Remove Item</button>
         </div>
       ))}
-      <button onClick={submitChanges}>Submit Changes</button>
-      <button onClick={cancelOrder}>Cancel Order</button>
+      <button className="editPage-submit-btn" onClick={submitChanges}>Submit Changes</button>
+      <button className="editPage-cancel-btn" onClick={cancelOrder}>Cancel Order</button>
     </div>
+    <Footer />
+  </div>
   );
 };
 

@@ -1,0 +1,71 @@
+.editPage-order-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .editPage-dashboard-container {
+    margin-bottom: 20px;
+  }
+  
+  .editPage-edit-order-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .editPage-order-title {
+    text-align: center;
+    color: #343a40;
+  }
+  
+  .editPage-order-id {
+    margin-bottom: 20px;
+    color: #6c757d;
+  }
+  
+  .editPage-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .editPage-item-name {
+    margin-right: 10px;
+  }
+  
+  .editPage-remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .editPage-submit-btn, .cancel-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  .editPage-submit-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .editPage-cancel-btn {
+    background-color: #dc3545;
+    color: white;
+  }

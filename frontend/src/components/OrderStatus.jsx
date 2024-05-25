@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
 import { pushNotification } from './jsFiles/pushNotifications';
-
+import UserDashboard from "./UserDashboard";
 import { differenceInSeconds } from 'date-fns'; // Import this function
-
+import '../style/orderStatus.css'; // Make sure to create and import this CSS file
+import Footer from "./sharedComponents/Footer";
 
 Modal.setAppElement("#root");
 
@@ -24,6 +25,7 @@ function OrderStatus() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [totalRemainingTimeInSeconds, setTotalRemainingTimeInSeconds] = useState(0);
+  const [view, setView] = useState('current');
 
   //const uniqueMenuItemIds = [...new Set(menuItemIds)];
 
@@ -38,7 +40,7 @@ function OrderStatus() {
   useEffect(() => {
     prevTotalRemainingTimeInSeconds.current = totalRemainingTimeInSeconds;
   }, [totalRemainingTimeInSeconds]);
-  
+
   useEffect(() => {
     if (totalRemainingTimeInSeconds === 0 && prevTotalRemainingTimeInSeconds.current > 0) {
       console.log('Edit time has elapsed.');
@@ -152,203 +154,171 @@ function OrderStatus() {
   return (
     <>
       <div>
-        <header className="header">
-          <img src={logo} alt="Logo" height={100} />
-          <h1>Manage My Lunch Dashboard</h1>
-          <p>***** CSS NOT DONE. DO NOT SUBMIT *****</p>
-        </header>
-        <button onClick={toggleDropdown}>Account</button>
-        <button>
-          <Link
-            to={"/Dashboard"}
-            style={{ textDecoration: "none", color: "Black" }}
-          >
-            Dashboard
-          </Link>
-        </button>
+        <UserDashboard />
 
-        <button>
-          <Link to="/Cart" style={{ textDecoration: "none", color: "Black" }}>
-            Cart
-          </Link>
-        </button>
-        <button className="header-button-right">
-          <Link to={"/"} style={{ textDecoration: "none", color: "Black" }}>
-            Logout
-          </Link>
-        </button>
-        <p>
-          Logged in as: {name}, {university}, {email}, {userID}
-        </p>
-        <Modal
-          isOpen={showDropdown}
-          onRequestClose={toggleDropdown}
-          contentLabel="Account Menu"
-          style={customStyles}
-        >
-          <a href="#">Profile</a>
-          <br></br>
-          <a href="SettingsPage">Settings</a>
-          <br></br>
-          <a href="OrderStatus">Orders</a>
-          <br></br>
-
-          <a href="/">Logout</a>
-          <br></br>
-        </Modal>
-
-        <h1>Order Confirmation</h1>
-        <p>Thank you for your order!</p>
-        <p>
-          Your order has been placed successfully and is now being processed.
-        </p>
-        <p>We will send you an email confirmation shortly.</p>
 
         <p>{/*Your order ID is: { }*/}</p>
-        <div>
-          <h3>Current orders</h3>
-          {orders
-            .filter(
-              (order) =>
-                order.orderStatus === "Delivered" ||
-                order.orderStatus == "Accepted By Driver" ||
-                order.orderStatus === "Pending"
-            )
-            .map((order, index) => {
-              // Parse order.date_created to get the year, month, and day
-              const orderDate = new Date(order.date_created);
-              const year = orderDate.getFullYear();
-              const month = orderDate.getMonth(); // Note: months are 0-based in JavaScript Date objects
-              const day = orderDate.getDate();
 
-              // Convert time_created to 24-hour format
-              const [time, modifier] = order.time_created.split(" ");
-              let [hours, minutes, seconds] = time.split(":");
-              if (modifier === "PM" && hours !== "12") {
-                hours = Number(hours) + 12;
-              } else if (modifier === "AM" && hours === "12") {
-                hours = "00";
-              }
+        <div className="cart-container-orderStatus">
+          <div className="buttons">
+            <button className="statusButton" onClick={() => setView('current')}>Current Orders</button>
+            <button className="statusButton" onClick={() => setView('past')}>Past Orders</button>
+          </div>
 
-              hours = hours.toString(); // Convert hours back to a string
+          {view === 'current' ? (
+            <div className="currentOrdersView">
+              {orders
+                .filter(
+                  (order) =>
+                    order.orderStatus === "Delivered" ||
+                    order.orderStatus == "Accepted By Driver" ||
+                    order.orderStatus === "Pending"
+                )
+                .map((order, index) => {
+                  // Parse order.date_created to get the year, month, and day
+                  const orderDate = new Date(order.date_created);
+                  const year = orderDate.getFullYear();
+                  const month = orderDate.getMonth(); // Note: months are 0-based in JavaScript Date objects
+                  const day = orderDate.getDate();
 
-              const time24 = `${hours.padStart(2, "0")}:${minutes}:${seconds}`;
-
-              // Create the orderTime Date object
-              const orderTime = new Date(
-                year,
-                month,
-                day,
-                ...time24.split(":")
-              );
-
-              // Calculate the total remaining time in seconds
-              const totalRemainingTimeInSeconds = Math.max(
-                0,
-                5 * 60 - (currentTime - orderTime) / 1000
-              );
-
-              // Calculate the remaining minutes and seconds
-              const remainingMinutes = Math.floor(
-                totalRemainingTimeInSeconds / 60
-              );
-              const remainingSeconds = Math.floor(
-                totalRemainingTimeInSeconds % 60
-              );
-
-              return (
-                <div
-                  key={index}
-                  style={{
-                    border: "1px solid black",
-                    padding: "10px",
-                    margin: "10px",
-                    width: "300px",
-                    background: "#fff",
-                  }}
-                >
-                  <h2>{order.restaurant_name}</h2>
-                  <h3>Cost: ${order.cost.toFixed(2)}</h3>
-                  <p>{order.email}</p>
-                  {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
-                  <p>
-                    Menu Items:{" "}
-                    {order.menuItems
-                      .map((id) => menuItems[id] || id)
-                      .join(", ")}
-                  </p>
-                  <p>Additional Info: {order.additionalInfo}</p>
-                  <p>Status: {order.orderStatus}</p>
-                  <p>Order code: {order.code}</p>
-                  <p>Driver contact: {order.driver_email}</p>
-
-                  <p></p>
-                  {totalRemainingTimeInSeconds > 0 ? (
-                    <Link to={`/EditOrder/${order._id}`}>
-                      <button className="edit-button">Edit Order</button>
-                    </Link>
-                  ) : (
-                    
-                    <button disabled className="edit-button disabled">
-                      Edit Order
-                    </button>
-                  )}
-                  {totalRemainingTimeInSeconds > 0
-                    ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
-                    : " Edit Time has elapsed"}
-                  {
-                    order.orderStatus === "Delivered" && (
-                      <button onClick={() => navigate(`/CompleteOrder`)}>
-                        Confirm Order Pickup
-                      </button>
-                    )
-
-                    //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
+                  // Convert time_created to 24-hour format
+                  const [time, modifier] = order.time_created.split(" ");
+                  let [hours, minutes, seconds] = time.split(":");
+                  if (modifier === "PM" && hours !== "12") {
+                    hours = Number(hours) + 12;
+                  } else if (modifier === "AM" && hours === "12") {
+                    hours = "00";
                   }
-                </div>
-              );
-            })}
+
+                  hours = hours.toString(); // Convert hours back to a string
+
+                  const time24 = `${hours.padStart(2, "0")}:${minutes}:${seconds}`;
+
+                  // Create the orderTime Date object
+                  const orderTime = new Date(
+                    year,
+                    month,
+                    day,
+                    ...time24.split(":")
+                  );
+
+                  // Calculate the total remaining time in seconds
+                  const totalRemainingTimeInSeconds = Math.max(
+                    0,
+                    5 * 60 - (currentTime - orderTime) / 1000
+                  );
+
+                  // Calculate the remaining minutes and seconds
+                  const remainingMinutes = Math.floor(
+                    totalRemainingTimeInSeconds / 60
+                  );
+                  const remainingSeconds = Math.floor(
+                    totalRemainingTimeInSeconds % 60
+                  );
+
+                  return (
+                    <div className="completed-order-container-orderStatus"
+                      key={index}
+
+                    >
+
+                      <h1>Order From {order.restaurant_name}</h1>
+                      <p>Thank you for your order!</p>
+
+                      <h2>{order.restaurant_name}</h2>
+                      <h3>Cost: ${order.cost.toFixed(2)}</h3>
+                      <p>{order.email}</p>
+                      {/* Display the "Edit Order" button if the difference in minutes is less than or equal to 5 */}
+                      <p>
+                        Menu Items:{" "}
+                        {order.menuItems
+                          .map((id) => menuItems[id] || id)
+                          .join(", ")}
+                      </p>
+
+
+
+                      <p>Additional Info: {order.additionalInfo}</p>
+                      <p>Status: {order.orderStatus}</p>
+                      <p>Order code: {order.code}</p>
+                      <p>Driver contact: {order.driver_email}</p>
+
+                      <p></p>
+                      {totalRemainingTimeInSeconds > 0 ? (
+                        <Link to={`/EditOrder/${order._id}`}>
+                          <button className="edit-button">Edit Order</button>
+                        </Link>
+                      ) : (
+
+                        <button disabled className="edit-button disabled">
+                          Edit Order
+                        </button>
+                      )}
+                      {totalRemainingTimeInSeconds > 0
+                        ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                        : " Edit Time has elapsed"}
+                      {
+                        order.orderStatus === "Delivered" && (
+                          <button onClick={() => navigate(`/CompleteOrder`)}>
+                            Confirm Order Pickup
+                          </button>
+                        )
+
+                        //<button onClick={() => navigate(`/CompleteOrder/${order._id}`)}>Confirm Order Pickup</button>
+                      }
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+
+            <div className="currentOrdersView">
+
+              <div className="completed-order-container-orderStatus">
+                <h3>Your previous orders</h3>
+
+              </div>
+              <div className="completed-order-container-orderStatus">
+
+                {orders
+                  .filter((order) => order.orderStatus === "Completed")
+                  .map((order, index) => (
+                    <div
+                      key={index}
+
+                    >
+                      <h2>{order.restaurant_name}</h2>
+                      <h2>Cost: ${order.cost.toFixed(2)}</h2>
+
+                      <p>Email: {order.email}</p>
+                      <p>
+                        Menu Items:{" "}
+                        {order.menuItems.map((id) => menuItems[id] || id).join(", ")}
+                      </p>
+                      <p>Additional Info: {order.additionalInfo}</p>
+                      <p>Status: {order.orderStatus}</p>
+
+                      <button className='reviewButton' onClick={() => navigate(`/ReviewForm/${order.restaurant_id}`)}>
+                        Rate this Restaurant
+                      </button>
+                      <button className='reviewButton' onClick={() => navigate(`/DriverReviewForm/${order.driver_email}`)}>
+                        Rate your Driver
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+          )}
+
+
+
+
         </div>
       </div>
 
-      <div>
-        <h3>Order history</h3>
-        {orders
-          .filter((order) => order.orderStatus === "Completed")
-          .map((order, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid black",
-                padding: "10px",
-                margin: "10px",
-                width: "300px",
-                background: "#fff",
-              }}
-            >
-              <h2>Restaurant Name: {order.restaurant_name}</h2>
-              <h2>Cost: ${order.cost.toFixed(2)}</h2>
-              <p>Email: {order.email}</p>
-              <p>
-                Menu Items:{" "}
-                {order.menuItems.map((id) => menuItems[id] || id).join(", ")}
-              </p>
-              <p>Additional Info: {order.additionalInfo}</p>
-              <p>Status: {order.orderStatus}</p>
-              <button>
-                <Link to={`/ReviewForm/${order.restaurant_id}`}>
-                  Rate this Restaurant
-                </Link>
-              </button>
-              <button>
-              <Link to={`/DriverReviewForm/${order.driver_email}`}>
-                Rate your Driver
-                </Link>
+      <Footer />
 
-                </button>
-            </div>
-          ))}
-      </div>
     </>
   );
 }

@@ -6,9 +6,8 @@ import Driver_OrderPanel from "./Driver_OrderPanel";
 import logo from "./componentAssets/logov1.png";
 import RestaurantPanel_Driver from "./RestaurantPanel_Driver";
 import emailjs from 'emailjs-com';
-
-Modal.setAppElement("#root");
-
+import "../style/DriverDashboard.css";
+import Footer from "./sharedComponents/Footer";
 const Dashboard = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -21,7 +20,7 @@ const Dashboard = () => {
   const [page, setPage] = useState("orders");
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [walletBalance, setWalletBalance] = useState(0);
-
+  const [orderStatus, setOrderStatus] = useState({});
   const [deliveryFee, setDeliveryFee] = useState(0); // State variable for delivery fee
   const navigate = useNavigate();
 
@@ -31,14 +30,18 @@ const Dashboard = () => {
 
   const [showDeliverButton, setShowDeliverButton] = useState(false);
 
-  const handleCollectedClick = () => {
-    setShowDeliverButton(true);
+  const handleCollectedClick = (orderId) => {
+    setOrderStatus(prevStatus => ({
+      ...prevStatus,
+      [orderId]: 'Deliver Now'
+    }));
   };
 
   const handleDeliverNowClick = (orderId) => {
     sendEmail();
     navigate(`/DeliverOrder/${orderId}`);
   };
+
   const customStyles = {
     content: {
       top: "0%",
@@ -178,13 +181,13 @@ const Dashboard = () => {
       // Send email to customer
       const emailParams = {
         email_from: order.email,
-        message: 
-        "Hey there "+ order.customerName + ", "+
-        "Your order from " + order.restaurant_name +" has been collected and is with our driver, " + name + "!\n\n" +
-        "Your order will be delivered by "+ name +" to "+ order.delivery_location + " shorty, we will let you know once its been delivered. \n\n" +
-        "Log in to Manage My Lunch at any time to view your order. \n\n"
+        message:
+          "Hey there " + order.customerName + ", " +
+          "Your order from " + order.restaurant_name + " has been collected and is with our driver, " + name + "!\n\n" +
+          "Your order will be delivered by " + name + " to " + order.delivery_location + " shorty, we will let you know once its been delivered. \n\n" +
+          "Log in to Manage My Lunch at any time to view your order. \n\n"
       };
-    
+
       emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
         .then((response) => {
           console.log('SUCCESS!', response.status, response.text);
@@ -193,85 +196,31 @@ const Dashboard = () => {
         });
     });
   };
-  // const handleDelivered = (orderId, email) => {
-  //   let deliveryFee = 0; // Define deliveryFee in the outer scope
 
-  //   axios.put(`http://localhost:8082/api/completedCarts/status/${orderId}`, { orderStatus: 'Delivered' })
-  //     .then(response => {
-  //       // After updating the order status, fetch the order to get the delivery fee
-  //       return axios.get(`http://localhost:8082/api/completedCarts/id/${orderId}`);
-  //     })
-  //     .then(response => {
-  //       if (response.data) {
-  //         deliveryFee = response.data.delivery_fee; // Update deliveryFee
-  //         console.log(`Amount of: ${deliveryFee} added to driver wallet`);
-  //         // Fetch the driver's current wallet balance
-  //         return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
-  //       }
-  //     })
-  //     .then(response => {
-  //       if (response.data) {
-  //         // Calculate the new balance
-  //         const newBalance = response.data.wallet_balance + deliveryFee;
-  //         // Update the driver's wallet balance
-  //         return axios.put(`http://localhost:8082/api/drivers/${response.data._id}`, { wallet_balance: newBalance });
-  //       }
-  //     })
-  //     .then(response => {
-  //       // Fetch the updated wallet balance
-  //       return axios.get(`http://localhost:8082/api/drivers/email/${email}`);
-  //     })
-  //     .then(response => {
-  //       if (response.data) {
-  //         // Update the local walletBalance state variable
-  //         setWalletBalance(response.data.wallet_balance);
-  //       }
-  //       // Update the local state if necessary
-  //       setSelectedOrders(selectedOrders.map(order =>
-  //         order._id === orderId ? { ...order, orderStatus: 'Delivered' } : order
-  //       ));
-  //     })
-  //     .catch(error => {
-  //       console.error('There was an error!', error);
-  //     });
-  // };
 
   return (
     <div>
       <header className='header'>
         <img src={logo} alt="Logo" height={100} />
         <h1>Driver Dashboard</h1>
-        <button onClick={toggleDropdown}>Account</button>
+        <button onClick={() => navigate('/')}>Logout</button>
       </header>
       <hr />
-      <p>
-        Logged in as: {name} <br></br>
-        Current earnings: ${walletBalance !== undefined ? walletBalance.toFixed(2) : 'Loading...'}
-      </p>
+      <h2 className="display-4 text-center">Orders Available</h2>
+      <br />
+      <div className="masterContainer">
+        <p>
+          Driver Logged in: {name} <br></br>
+          Current earnings: ${walletBalance !== undefined ? walletBalance.toFixed(2) : 'Loading...'}
+        </p>
+      </div>
 
+      <div className="container">
+        <div className="row">
 
+          <div className="masterContainer">
 
-      <Modal
-        isOpen={showDropdown}
-        onRequestClose={toggleDropdown}
-        contentLabel="Account Menu"
-        style={customStyles}
-      >
-        <a href="#">Profile</a>
-        <br></br>
-
-        <a href="/">Logout</a>
-        <br></br>
-      </Modal>
-
-      <div className="ShowBookList">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h2 className="display-4 text-center">Orders Available</h2>
-              <br />
-            </div>
-            <div className='col-md-11'>
+            <div >
               <button onClick={handleAllOrdersClick}>All Available Orders</button>
               <button onClick={handleFilterByRestaurantClick}>
                 Select By Restaurant
@@ -283,11 +232,13 @@ const Dashboard = () => {
             </div>
 
             {page === "all-orders" && (
-
-              <div className="ShowBookList">
-                These are all the orders available for: {today.toDateString()}.
+              <section >
+                <div className="date-text">
+                  These are all the orders available for: {today.toDateString()}.
+                  <br></br>
+                </div>
                 <div className="order-cards-container">
-
+                  <br></br>
                   {OrderList.length === 0 ? (
                     <div className="alert alert-warning" role="alert">
                       No orders found.
@@ -295,54 +246,48 @@ const Dashboard = () => {
                   ) : (
                     <div className="row">{OrderList}</div>
                   )}
-                </div>{" "}
-              </div>
+                </div>
+              </section>
             )}
 
             {page === "batch-orders" && (
-              <div>
-                <div><h2>Select Batch Orders</h2></div>
+              <section>
+                <h2>Select Batch Orders</h2>
                 These are all the orders available for: {today.toDateString()}.
-
-                <div>
-                  {/* Display selected orders here */}
-                  <div className="order-cards-container"> {RestaurantList}</div>
-                </div>
-              </div>
+                <div className="order-cards-container"> {RestaurantList}</div>
+              </section>
             )}
 
-            {page === "selectedOrders" && (
-              <div className="selected-orders-section">
-                <h2>Selected Orders</h2>
-                {selectedOrders.map((order) => (
-                  <div
-                    key={order._id}
-                    style={{
-                      border: "1px solid black",
-                      padding: "10px",
-                      marginBottom: "10px",
-                      width: "250px"
-                    }}
-                  >
-                    <p>Order ID: {order._id}</p>
-                    <p>Restaurant Name: {order.restaurant_name}</p>
-                    <p>Customer: {order.customerName}</p>
-                    <p>Delivery Location: {order.delivery_location}</p>
-                    {/***
-                    <button onClick={() => handleDelivered(order._id, email)}>
-                      Mark as Delivered
-                    </button> */}
-                    <div>
-                      {!showDeliverButton && <button onClick={handleCollectedClick}>Collected</button>}
-                      {showDeliverButton && <button onClick={() => handleDeliverNowClick(order._id)}>Deliver Now</button>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+{page === "selectedOrders" && (
+  <div className="selected-orders-section">
+    <h2>Selected Orders</h2>
+    {selectedOrders.map((order) => (
+      <div key={order._id} className="order-card">
+        <p>Order ID: {order._id}</p>
+        <p>Restaurant Name: {order.restaurant_name}</p>
+        <p>Customer: {order.customerName}</p>
+        <p>Delivery Location: {order.delivery_location}</p>
+        <div className="order-actions">
+          {orderStatus[order._id] === 'Deliver Now' ? (
+            <button onClick={() => handleDeliverNowClick(order._id)}>
+              Deliver Now
+            </button>
+          ) : (
+            orderStatus[order._id] !== 'Collected' && 
+            <button onClick={() => handleCollectedClick(order._id)}>
+              Collected
+            </button>
+          )}
+          {showDeliverButton && <button onClick={() => handleDeliverNowClick(order._id)}>Deliver Now</button>}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
