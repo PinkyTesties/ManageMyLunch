@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 import './buttonTeststyle.css';
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons
 import '../style/MenuItemPanel.css';
 
 const MenuItemPanel = ({ menuItem }) => {

@@ -1,3 +1,9 @@
+/*
+Testing QR Code Reading and Generation
+
+Created by Tyler Costa 19075541
+*/
+
 import React, { useState } from 'react';
 import QRCode from 'qrcode.react';
 import { QrReader } from 'react-qr-reader';
