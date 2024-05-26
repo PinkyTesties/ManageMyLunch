@@ -27,6 +27,10 @@ function ShowRestaurantDetails(props) {
   //Variables
   const [restaurant, setRestaurant] = useState({});
   const [menuItems, setMenuItems] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [university, setUniversity] = useState("")
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -43,6 +47,24 @@ function ShowRestaurantDetails(props) {
       });
   }, [id]);
 
+  //Fetching and setting of session variables
+  useEffect(() => {
+    axios
+      .get("http://localhost:8082")
+      .then((res) => {
+        if (res.data.valid) {
+          setName(res.data.name);
+          setEmail(res.data.email);
+          console.log("Email:", res.data.email);
+          setUniversity(res.data.university);
+        } else {
+          //If not logged in. Send back to homepage
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   //Function to handle deleting the restaurant
   const onDeleteClick = (id) => {
     if (window.confirm('Are you sure you want to delete this restaurant?')) {
@@ -56,6 +78,21 @@ function ShowRestaurantDetails(props) {
         });
     }
   };
+
+  useEffect(() => {
+    if (email) {
+      const fetchUserAdminStatus = async () => {
+        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const data = await response.json();
+
+        console.log(data);
+
+        setIsAdmin(data.isAdmin);
+      };
+
+      fetchUserAdminStatus();
+    }
+  }, [email]);
 
   //Fetch the menu items
   useEffect(() => {
@@ -99,6 +136,8 @@ function ShowRestaurantDetails(props) {
               <div className="empty-item">
               </div>
             </div>
+            <p>Account name {email}</p>
+
             <div className="rating-description">
               {/* Display the restaurant rating, description and link to view reviews */}
               <h5>Google Rating: </h5>
@@ -122,11 +161,10 @@ function ShowRestaurantDetails(props) {
             <br></br>
             <br></br>
 
-
-
         <div className='restaurant-details-container'>
  
-
+        {/*Control buttons for admin users*/}
+        {isAdmin && (
           <div className='action-buttons'>
             <Link
               to={`/CreateMenuItem/${restaurant._id}`}
@@ -134,13 +172,15 @@ function ShowRestaurantDetails(props) {
             >
               Create Menu Item
             </Link>
-            <Link
-              to={`/UpdateRestaurant/${restaurant._id}`}
-              className='btn btn-outline-info btn-lg btn-block'
-            >
-              Edit restaurant
-            </Link>
-            
+
+           
+              <Link
+                to={`/UpdateRestaurant/${restaurant._id}`}
+                className='btn btn-outline-info btn-lg btn-block'
+              >
+                Edit restaurant
+              </Link>
+     
             <button
               type='button'
               className='btn btn-outline-danger btn-lg btn-block'
@@ -151,6 +191,7 @@ function ShowRestaurantDetails(props) {
               Delete Restaurant
             </button>
           </div>
+                 )}
         </div>
       </div>
       <Footer />

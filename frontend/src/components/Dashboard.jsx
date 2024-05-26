@@ -31,7 +31,8 @@ const Dashboard = () => {
   const [university, setUniversity] = useState("");
   const [userID, setUserID] = useState("");
   const [userRewardPoints, setUserRewardPoints] = useState(0);
-
+  const [isAdmin, setIsAdmin] = useState(false);
+ 
   const navigate = useNavigate();
 
   //Fetching and setting of session variables
@@ -84,6 +85,22 @@ const Dashboard = () => {
           console.log("User ID:", response.data._id);
         })
         .catch((error) => console.error("Error:", error));
+    }
+  }, [email]);
+
+  //Fetching user admin status using the logged in email
+  useEffect(() => {
+    if (email) {
+      const fetchUserAdminStatus = async () => {
+        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const data = await response.json();
+
+        console.log(data);
+
+        setIsAdmin(data.isAdmin);
+      };
+
+      fetchUserAdminStatus();
     }
   }, [email]);
 
@@ -155,9 +172,8 @@ const Dashboard = () => {
           ].map((cuisine) => (
             <button
               key={cuisine}
-              className={`filter-button ${
-                selectedCuisine === cuisine ? "active" : ""
-              }`}
+              className={`filter-button ${selectedCuisine === cuisine ? "active" : ""
+                }`}
               onClick={() =>
                 handleCuisineChange({
                   target: { value: cuisine === "All" ? "" : cuisine },
@@ -168,34 +184,37 @@ const Dashboard = () => {
             </button>
           ))}
         </div>
-        <button
-          className="add-restaurant-button"
-          onClick={() => navigate("/create-restaurant")}
-        >
-          Add a Restaurant
-        </button>
-
+        {/*Render button if user is Admin */}
+        {isAdmin && (
+          <button
+            className="add-restaurant-button"
+            onClick={() => navigate("/create-restaurant")}
+          >
+            Add a Restaurant
+          </button>
+        )}
         <div className="restaurant-cards">
-          <div className="rewards">
-            <h2>Rewards</h2>
+        <section className="rewards">
+  <header>
+    <h2>Rewards</h2>
+  </header>
 
-            {eligibleRewards.map((reward, index) => (
-              <div key={index}>
-                <div className="reward-box">
-                  <br></br>
-                  <h4>
-                    <b>{reward.title}</b>
-                  </h4>
-                  <p>{reward.message}</p>
-                  <p className="reward-code">
-                    <b>
-                      Use code <i>{reward.code}</i> at checkout
-                    </b>
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+  {eligibleRewards.map((reward, index) => (
+
+    <article key={index} className="reward-box">
+          <br></br>
+      <h4>
+        <strong>{reward.title}</strong>
+      </h4>
+      <p>{reward.message}</p>
+      <p className="reward-code">
+        <strong>
+          Use code <em>{reward.code}</em> at checkout
+        </strong>
+      </p>
+    </article>
+  ))}
+</section>
           {/* Restaurant Cards from RestaurantPanel.jsx are displayed here*/}
 
           {RestaurantList.length === 0 ? (

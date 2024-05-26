@@ -103,6 +103,31 @@ router.put('/email/:email', (req, res) => {
     );
 });
 
+// @route   PUT api/users/update-password
+// @desc    Update user password
+// @access  Public
+router.put('/update-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  // Find the user by email
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(400).json({ error: 'No user found with this email' });
+  }
+
+  // Update the user's password
+  user.password = newPassword;
+
+  // Save the updated user
+  try {
+    await user.save();
+    res.json({ msg: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating password' });
+  }
+});
+
 // @route   DELETE api/users/:id
 // @desc    Delete users by id
 // @access  Public

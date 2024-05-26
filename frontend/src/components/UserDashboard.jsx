@@ -30,11 +30,14 @@ const UserDashboard = ({ history }) => {
   const [email, setEmail] = useState("");
   const [university, setUniversity] = useState("");
   const [userID, setUserID] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     university: "",
     userID: "",
+
   });
 
   const navigate = useNavigate();
@@ -43,6 +46,8 @@ const UserDashboard = ({ history }) => {
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
+
+
 
   //Fetch the user details from the session
   useEffect(() => {
@@ -55,6 +60,7 @@ const UserDashboard = ({ history }) => {
             email: res.data.email,
             university: res.data.university,
             userID: res.data._id,
+
           });
         } else {
           //Redirect to the login page if the user is not logged in
@@ -63,6 +69,22 @@ const UserDashboard = ({ history }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    if (userDetails && userDetails.email) {
+      const fetchUserAdminStatus = async () => {
+        const email = userDetails.email;
+        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const data = await response.json();
+
+        console.log(data);  // for debugging purposes
+
+        setIsAdmin(data.isAdmin);
+      };
+
+      fetchUserAdminStatus();
+    }
+  }, [userDetails]);
 
   //Return the header
   return (
@@ -78,9 +100,12 @@ const UserDashboard = ({ history }) => {
           <Link to="/dashboard">
             <button className="cart-button">Dashboard</button>
           </Link>
-          <Link to="/Reports">
-            <button className="reports-button">Reports</button>
-          </Link>
+          {/**Only admin has access to Reports Page */}
+          {isAdmin && (
+            <Link to="/Reports">
+              <button className="reports-button">Reports</button>
+            </Link>
+          )}
           <Link to="/CompleteOrder">
             <button className="order-button">Pick Up Order</button>
           </Link>
@@ -99,10 +124,10 @@ const UserDashboard = ({ history }) => {
         contentLabel="Account Menu"
         style={{
           content: {
-            width: "500px", 
-            height: "600px", 
-            right: "0px", 
-            left: "auto", 
+            width: "500px",
+            height: "600px",
+            right: "0px",
+            left: "auto",
           },
         }}
       >
@@ -125,7 +150,7 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: "background-color 0.3s ease", 
+            transition: "background-color 0.3s ease",
           }}
           onMouseOver={(e) =>
             (e.currentTarget.style.backgroundColor = "#d4d4d4")
@@ -136,8 +161,10 @@ const UserDashboard = ({ history }) => {
         >
           Dashboard
         </a>
+        {/**Admin will access SettingsPage, Normal user see SettingsPage_User.
+         *  SettingsPage has same functions SettingsPage user, as well as additional admin settings */}
         <a
-          href="SettingsPage"
+          href={isAdmin ? "SettingsPage" : "SettingsPage_User"}
           style={{
             display: "block",
             padding: "10px",
@@ -155,7 +182,6 @@ const UserDashboard = ({ history }) => {
           onMouseOut={(e) =>
             (e.currentTarget.style.backgroundColor = "#f2eded")
           }
-          
         >
           Settings
         </a>
@@ -171,10 +197,10 @@ const UserDashboard = ({ history }) => {
             textAlign: "center",
             borderRadius: "5px",
             transition: 'background-color 0.3s ease'
-          }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} 
-          >
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
+        >
           Pickup Order
         </a>
         <a
@@ -189,10 +215,10 @@ const UserDashboard = ({ history }) => {
             textAlign: "center",
             borderRadius: "5px",
             transition: 'background-color 0.3s ease'
-          }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'}
           onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
-          >
+        >
           Cart
         </a>
         <a
@@ -206,11 +232,11 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' 
-          }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+            transition: 'background-color 0.3s ease'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'}
           onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
-          >
+        >
           Orders
         </a>
         <br></br>
@@ -226,11 +252,11 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' 
-          }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} 
-          >
+            transition: 'background-color 0.3s ease'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
+        >
           Logout
         </a>
         <br></br>

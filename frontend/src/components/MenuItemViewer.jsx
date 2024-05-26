@@ -33,6 +33,7 @@ const MenuItemViewer = () => {
   const [ingredientCounts, setIngredientCounts] = useState({});
   const [instructions, setInstructions] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   //animation variables
   const [hidden, setHidden] = useState(false);
@@ -72,6 +73,22 @@ const MenuItemViewer = () => {
       })
       .catch(error => console.error(error));
   }, [id]);
+
+  // Fetch the user's admin status
+  useEffect(() => {
+    if (email) {
+      const fetchUserAdminStatus = async () => {
+        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const data = await response.json();
+
+        console.log(data);
+
+        setIsAdmin(data.isAdmin);
+      };
+
+      fetchUserAdminStatus();
+    }
+  }, [email]);
 
   // Function to increment the ingredient count
   const incrementIngredient = (ingredient) => {
@@ -162,9 +179,12 @@ const MenuItemViewer = () => {
           <div className='menuContainer'>
             {/**Gives admin the ability to edit the menu item */}
             <h3>{menuItem.name}</h3>
+            {/*Only render this button if the user is an admin */}
+            {isAdmin && (
             <button onClick={() => navigate(`/MenuItemEditor/${menuItem._id}`)}>
               Edit this item
             </button>
+            )}
           </div>
           <hr />
           <div className='menuContainer'>

@@ -103,6 +103,7 @@ app.get('/', (req, res) => {
       email: req.session.email, 
       university: req.session.university, 
       _id: req.session.id, 
+      isAdmin: req.session.isAdmin,
 });
   } else {
     return res.json({valid:false});
