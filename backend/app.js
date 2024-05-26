@@ -99,7 +99,11 @@ app.use('/menuItem_assets', express.static('menuItem_assets'));
 
 app.get('/', (req, res) => {
   if(req.session.name) {
-    return res.json({valid:true, name: req.session.name, email: req.session.email, university: req.session.university, _id: req.session.id});
+    return res.json({valid:true, name: req.session.name, 
+      email: req.session.email, 
+      university: req.session.university, 
+      _id: req.session.id, 
+});
   } else {
     return res.json({valid:false});
     }

@@ -50,6 +50,7 @@ import HomePage from "./components/HomePage";
 import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 import Rewards from "./components/Rewards";
+import SettingsPage_User from "./components/SettingsPage_User";
 //hello
 
 // Routes
@@ -88,6 +89,7 @@ const router = createBrowserRouter([
   { path: "/Map", element: <MapWithControls />},
   { path: "/DeliverOrder/:id", element: <DeliverOrder />},
   { path: "/ButtonTest", element: <ButtonTest />},
+  { path: "/SettingsPage_User", element: <SettingsPage_User />},
 
   //These are vidhu imports for testing
   { path: "/", element: <HomePage /> },

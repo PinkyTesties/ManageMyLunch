@@ -1,6 +1,10 @@
+/*
+NOT NEEDED ANYMORE
+
+*/
+
 import React from 'react';
 import axios from 'axios';
-//import { useAuth } from '../../../../../backend/controller/useAuth'
 
 const DeleteAccount = () => {
   const { token } = useAuth(); // Get the token from your auth context

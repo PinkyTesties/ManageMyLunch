@@ -1,14 +1,27 @@
+/**
+Reports.jsx
+
+This is the admin resport generation page. It fetches data from the backend API to display the most popular menu item, most popular restaurant, daily order count, receipts, and new users. 
+The user can select a date to view the data for that specific date on Dailey order count, reciepts and users
+
+Created by Tyler Costa 19075541
+ */
+
+// React imports
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import UserDashboard from './UserDashboard'; // Import UserDashboard
+// Header
+import UserDashboard from './UserDashboard';
+//Styles
 import '../style/Reports.css'
-//import UserDashboard from './UserDashboard';
+// Footer
 import Footer from './sharedComponents/Footer';
 
 
 function Reports() {
+    //Variables
     const [popularItem, setPopularItem] = useState(null);
     const [orderCount, setOrderCount] = useState(null);
     const [popularItemCount, setPopularItemCount] = useState(null);
@@ -23,40 +36,43 @@ function Reports() {
     const [dailyReceipts, setDailyReceipts] = useState(0);
     const [totalUsers, setTotalUsers] = useState(0);
 
-// Add this to your existing state variables
-const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
-
-// Add this useEffect hook to fetch the total number of users when the component mounts
-useEffect(() => {
-    const fetchTotalUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8082/api/users');
-        if (Array.isArray(response.data)) {
-          setTotalUsers(response.data.length);
-        } else {
-          console.error('API did not return an array');
+    //Fetches the total number of users
+    useEffect(() => {
+        const fetchTotalUsers = async () => {
+            try {
+                const response = await axios.get('http://localhost:8082/api/users');
+                if (Array.isArray(response.data)) {
+                    setTotalUsers(response.data.length);
+                } else {
+                    console.error('API did not return an array');
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  
-    fetchTotalUsers();
-  }, []);
 
+        fetchTotalUsers();
+    }, []);
+
+    //Fetches the most popular menu item
     const fetchPopularMenuItem = async () => {
         try {
+            //Get all carts in completed Carts
             const response = await axios.get('http://localhost:8082/api/completedCarts');
             const completedCarts = response.data;
 
+            //Set the order count to the length of the completed carts
             setOrderCount(completedCarts.length);
 
+            //Get all menu items from the completed carts
             let allMenuItems = [];
             completedCarts.forEach(cart => {
                 allMenuItems = [...allMenuItems, ...cart.menuItems];
             });
 
+            //Count the number of times each menu item appears
             const counts = allMenuItems.reduce((acc, value) => {
                 if (!acc[value]) {
                     acc[value] = 0;
@@ -65,10 +81,11 @@ useEffect(() => {
                 return acc;
             }, {});
 
+            //set the most popular menu item
             const popularMenuItem = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-
             setPopularItem(popularMenuItem);
 
+            //Count the number of times the most popular menu item appears
             let count = 0;
             completedCarts.forEach(cart => {
                 if (cart.menuItems.includes(popularMenuItem)) {
@@ -78,10 +95,12 @@ useEffect(() => {
 
             setPopularItemCount(count);
 
+            //Get the details of the most popular menu item
             const menuItemResponse = await axios.get(`http://localhost:8082/api/menuItems/${popularMenuItem}`);
             setPopularItemDetails(menuItemResponse.data);
 
             try {
+                //Get the restaurant details of the most popular menu item
                 const restaurantResponse = await axios.get(`http://localhost:8082/api/restaurants/${menuItemResponse.data.restaurant_id}`);
                 setRestaurantDetails(restaurantResponse.data);
             } catch (error) {
@@ -92,16 +111,20 @@ useEffect(() => {
         }
     };
 
+    //Fetches the most popular restaurant
     const fetchPopularRestaurant = async () => {
         try {
+            //Get all carts in completed Carts
             const response = await axios.get('http://localhost:8082/api/completedCarts');
             const completedCarts = response.data;
 
+            //Get all restaurant IDs from the completed carts
             let allRestaurants = [];
             completedCarts.forEach(cart => {
                 allRestaurants.push(cart.restaurant_id);
             });
 
+            //Count the number of times each restaurant appears
             const counts = allRestaurants.reduce((acc, value) => {
                 if (!acc[value]) {
                     acc[value] = 0;
@@ -110,10 +133,11 @@ useEffect(() => {
                 return acc;
             }, {});
 
+            //Set the most popular restaurant
             const popularRestaurantId = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-
             setPopularRestaurantCount(counts[popularRestaurantId]);
 
+            //Get the details of the most popular restaurant
             const restaurantResponse = await axios.get(`http://localhost:8082/api/restaurants/${popularRestaurantId}`);
             setPopularRestaurant(restaurantResponse.data);
         } catch (error) {
@@ -121,11 +145,13 @@ useEffect(() => {
         }
     };
 
+    //Fetches the order count for a specific date
     const fetchOrdersForDate = async (date) => {
         try {
             const response = await axios.get('http://localhost:8082/api/completedCarts');
             const completedCarts = response.data;
 
+            //Filter the completed carts to only include carts from the selected date
             const cartsForDate = completedCarts.filter(cart => {
                 const cartDate = new Date(cart.date_created);
                 return cartDate.getDate() === date.getDate() &&
@@ -133,12 +159,14 @@ useEffect(() => {
                     cartDate.getFullYear() === date.getFullYear();
             });
 
+            //Set the order count to the number of carts for the selected date
             setOrderCount(cartsForDate.length);
         } catch (error) {
             console.error(error);
         }
     };
 
+    //Handles the date change for the date picker
     const handleDateChange = (date) => {
         setSelectedDate(date);
         if (page === 'Reciepts') {
@@ -150,10 +178,13 @@ useEffect(() => {
         }
     };
 
+    //Fetches the total number of receipts on selected date
     useEffect(() => {
         fetchReceiptsForDate(selectedDate);
     }, [selectedDate]);
 
+
+    //fetches all cinpleted carts and uses that to determine the total number of receipts
     useEffect(() => {
         const fetchAllReceipts = async () => {
             const response = await axios.get('http://localhost:8082/api/completedCarts');
@@ -163,15 +194,18 @@ useEffect(() => {
         fetchAllReceipts();
     }, []);
 
+    //sets the daily receipts to the length of the receipts array 
     useEffect(() => {
         setDailyReceipts(receipts.length);
     }, [receipts]);
 
+    //Fetches the total number of receipts on a specific date
     const fetchReceiptsForDate = async (date) => {
         try {
             const response = await axios.get('http://localhost:8082/api/completedCarts');
             const completedCarts = response.data;
 
+            //Filter the completed carts to only include carts from the selected date
             const cartsForDate = completedCarts.filter(cart => {
                 const cartDate = new Date(cart.date_created);
                 return cartDate.getDate() === date.getDate() &&
@@ -179,6 +213,7 @@ useEffect(() => {
                     cartDate.getFullYear() === date.getFullYear();
             });
 
+            //Set the order count to the number of carts for the selected date
             for (let cart of cartsForDate) {
                 const menuItems = await Promise.all(cart.menuItems.map(async (itemId) => {
                     const response = await axios.get(`http://localhost:8082/api/menuItems/${itemId}`);
@@ -187,6 +222,7 @@ useEffect(() => {
                 cart.menuItems = menuItems;
             }
 
+            //Set the receipts to the carts for the selected date
             setReceipts(cartsForDate);
 
         } catch (error) {
@@ -194,11 +230,14 @@ useEffect(() => {
         }
     };
 
+    //Fetches the total number of users created on a specific date
     const fetchUsersForDate = async (date) => {
         try {
+            //Get all users
             const response = await axios.get('http://localhost:8082/api/users');
             const allUsers = response.data;
 
+            //Filter the users to only include users from the selected date
             const usersForDate = allUsers.filter(user => {
                 const userDate = new Date(user.date_added);
                 return userDate.getDate() === date.getDate() &&
@@ -206,20 +245,24 @@ useEffect(() => {
                     userDate.getFullYear() === date.getFullYear();
             });
 
+            //Set the users to the users created to the selected date
             setUsers(usersForDate);
         } catch (error) {
             console.error('Failed to fetch users:', error);
         }
     };
 
+    // Render the page
     return (
-        <>
+        <div>
+            {/**Header */}
             <UserDashboard />
             <div className='report'>
 
                 <div>
                     <h2>Admin Report Generation</h2>
                     <hr />
+                    {/**Buttons */}
                     <div className='MenuButtons'>
                         <button onClick={() => { setPage('item'); fetchPopularMenuItem(); }}>Popular Menu Items</button>
                         <button onClick={() => { setPage('restaurant'); fetchPopularRestaurant(); }}>Popular Restaurants</button>
@@ -229,58 +272,68 @@ useEffect(() => {
                         <button onClick={() => { setPage('NewUsers'); }}>Users</button>
                     </div>
                 </div>
+
+                {/** Popular menu items*/}
                 {page === 'item' && popularItemDetails && (
                     <div>
-                    <p>These are the details on the currently most ordered food item on the Manage My Lunch platform. </p>
-                    <div className="receipt-container">
-                        <h5>Most popular item:</h5>
-                        <p>{popularItemDetails.name} (ID: {popularItemDetails._id})</p>
-                        <p>Price: ${popularItemDetails.cost.toFixed(2)}</p>
-                        <p>Description: {popularItemDetails.item_desc}</p>
-                        <br></br><p>This item is sold by the restaurant: {restaurantDetails ? restaurantDetails.restaurantName : 'N/A'} (ID: {popularItemDetails.restaurant_id})</p>
-                        <br></br><p>Completed orders searched: {orderCount}</p>
-                        <p>Amount of times item "{popularItemDetails.name}" appears: {popularItemCount}</p>
-                    </div>
+                        <p>These are the details on the currently most ordered food item on the Manage My Lunch platform. </p>
+                        <div className="receipt-container">
+                            <h5>Most popular item:</h5>
+                            <p>{popularItemDetails.name} (ID: {popularItemDetails._id})</p>
+                            <p>Price: ${popularItemDetails.cost.toFixed(2)}</p>
+                            <p>Description: {popularItemDetails.item_desc}</p>
+                            <br></br><p>This item is sold by the restaurant: {restaurantDetails ? restaurantDetails.restaurantName : 'N/A'} (ID: {popularItemDetails.restaurant_id})</p>
+                            <br></br><p>Completed orders searched: {orderCount}</p>
+                            <p>Amount of times item "{popularItemDetails.name}" appears: {popularItemCount}</p>
+                        </div>
                     </div>
                 )}
+
+                {/** Popular restaurants*/}
                 {page === 'restaurant' && popularRestaurant && (
                     <div className="receipt-container">
-                    <h5>Most popular restaurant:</h5>
-                    <p>These are the details of the current most popular restaurant on Manage My Lunch</p>
-                    <div className="receipt-container">
-                        <p>{popularRestaurant.restaurantName}</p>
-                        <p>Restaurant ID: {popularRestaurant._id}</p>
-                        <br></br>
-                        <p>Rating: {popularRestaurant.rating} stars</p>
-                        <p>Description: {popularRestaurant.description}</p>
-                        <br></br>
-                        <p>Appears in completed orders: {popularRestaurantCount} times</p>
-                    </div>
-                    
+                        <h5>Most popular restaurant:</h5>
+                        <p>These are the details of the current most popular restaurant on Manage My Lunch</p>
+                        <div className="receipt-container">
+                            <p>{popularRestaurant.restaurantName}</p>
+                            <p>Restaurant ID: {popularRestaurant._id}</p>
+                            <br></br>
+                            <p>Rating: {popularRestaurant.rating} stars</p>
+                            <p>Description: {popularRestaurant.description}</p>
+                            <br></br>
+                            <p>Appears in completed orders: {popularRestaurantCount} times</p>
+                        </div>
+
                     </div>
                 )}
+
+                {/** Successful QR pickup*/}
                 {page === 'QR' && (
                     <div className="receipt-container">
-                    <p>QR Code info goes here</p>
+                        <p>QR Code info goes here</p>
                     </div>
                 )}
+
+                {/** Order count on a specific date*/}
                 {page === 'DailyOrderCount' && (
                     <div>
-                    <h4>Order count on a specified date</h4>
+                        <h4>Order count on a specified date</h4>
 
-                    <div className="receipt-container">
-                        <br />
-                        <div>
-                            <label>Select a date:</label>
-                            <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                        <div className="receipt-container">
+                            <br />
+                            <div>
+                                <label>Select a date:</label>
+                                <DatePicker selected={selectedDate} onChange={handleDateChange} />
+                            </div>
+                            <br />
+                            <h5>Total orders for selected date: {orderCount}</h5>
                         </div>
-                        <br />
-                        <h5>Total orders for selected date: {orderCount}</h5>
-                    </div>
                     </div>
                 )}
+
+                {/**All receipts on a specific date */}
                 {page === 'Receipts' && (
-                    <>
+                    <div>
                         <h4>Total Receipts: {totalReceipts}</h4>
                         <br />
                         <div>
@@ -299,11 +352,13 @@ useEffect(() => {
                                 </div>
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
+
+                {/**New users on a specific date */}
                 {page === 'NewUsers' && (
-                    <>
-<h4>Total users signed up to manage my lunch: {totalUsers}</h4>                        <br />
+                    <div>
+                        <h4>Total users signed up to manage my lunch: {totalUsers}</h4>                        <br />
                         <div>
                             <label>Select a date:</label>
                             <DatePicker selected={selectedDate} onChange={handleDateChange} />
@@ -320,12 +375,12 @@ useEffect(() => {
                                 </div>
                             ))}
                         </div>
-                    </>
+                    </div>
                 )}
 
             </div>
             <Footer />
-        </>
+        </div>
     );
 }
 

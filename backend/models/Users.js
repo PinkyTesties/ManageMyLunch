@@ -41,6 +41,31 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  emailAfterPurchase: {
+    type: Boolean,
+    default: true
+  },
+  emailAfterDriverAcceptance: {
+    type: Boolean,
+    default: true
+  },
+  emailAfterDriverCollection: { 
+    type: Boolean,
+    default: true
+  },
+emailAfterDriverDelivery: { 
+  type: Boolean,
+  default: true
+},
+emailAfterOrderComplete: { 
+  type: Boolean,
+  default: true
+},
+isAdmin: {
+  type: Boolean,
+  default: false
+},
+
 
 });
 

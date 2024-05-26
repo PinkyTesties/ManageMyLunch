@@ -1,35 +1,48 @@
+/*
+DriverDashboard.jsx
+This is the main page for the driver. It displays all the orders available for the driver to accept. 
+The driver can accept the orders by restaurant or select the orders they want to deliver.
+
+The driver can also view their current earnings and logout from this page.
+The page renders rhe Driver_OrderPanel component to display the order details to the driver.
+The page also renders the RestaurantPanel_Driver component to display the restaurant details to the driver.
+
+Created by Tyler Costa 19075541
+*/
+
+//React imports
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+//Import Driver_OrderPanel
 import Driver_OrderPanel from "./Driver_OrderPanel";
+//Import logo
 import logo from "./componentAssets/logov1.png";
+//Import RestaurantPanel_Driver
 import RestaurantPanel_Driver from "./RestaurantPanel_Driver";
+//Import emailjs
 import emailjs from 'emailjs-com';
+//Styles
 import "../style/DriverDashboard.css";
+//Import Footer
 import Footer from "./sharedComponents/Footer";
+
 const Dashboard = () => {
+  //Variables
   const [restaurants, setRestaurants] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedCuisine, setSelectedCuisine] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [university, setUniversity] = useState("");
   const [userID, setUserID] = useState("");
-  const [orders, setOrders] = useState([]); // State variable for orders
+  const [orders, setOrders] = useState([]);
   const [page, setPage] = useState("orders");
   const [selectedOrders, setSelectedOrders] = useState([]);
   const [walletBalance, setWalletBalance] = useState(0);
   const [orderStatus, setOrderStatus] = useState({});
-  const [deliveryFee, setDeliveryFee] = useState(0); // State variable for delivery fee
   const navigate = useNavigate();
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const [showDeliverButton, setShowDeliverButton] = useState(false);
 
+  //Function to handle collected click
   const handleCollectedClick = (orderId) => {
     setOrderStatus(prevStatus => ({
       ...prevStatus,
@@ -37,25 +50,15 @@ const Dashboard = () => {
     }));
   };
 
+  //Function to handle deliver now click
   const handleDeliverNowClick = (orderId) => {
+    //send email to customer
     sendEmail();
+    //Redirect to DeliverOrder page where the driver views the map to delivery location
     navigate(`/DeliverOrder/${orderId}`);
   };
 
-  const customStyles = {
-    content: {
-      top: "0%",
-      right: "0%",
-      bottom: "auto",
-      left: "auto",
-      width: "20%",
-      height: "50%",
-    },
-  };
-
-
-
-
+  //Fetch and set the driver's name and email from session
   useEffect(() => {
     axios
       .get("http://localhost:8082")
@@ -66,12 +69,14 @@ const Dashboard = () => {
           setEmail(res.data.email);
           setUserID(res.data._id);
         } else {
+          // If the user is not logged in, redirect to the login page
           navigate("/DriverLogin");
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
+  //Fetch the driver's wallet balance
   useEffect(() => {
     if (email) { // Only make the request if email is not an empty string
       axios.get(`http://localhost:8082/api/drivers/email/${email}`)
@@ -83,6 +88,7 @@ const Dashboard = () => {
     }
   }, [email]); // Add email as a dependency
 
+  //Fetch the orders
   useEffect(() => {
     axios
       .get("http://localhost:8082/api/restaurants")
@@ -94,34 +100,39 @@ const Dashboard = () => {
       });
   }, []);
 
+  //Change the page to all orders
   const handleAllOrdersClick = () => {
     setPage("all-orders");
   };
 
+  //Change the page to batch orders
   const handleFilterByRestaurantClick = () => {
     setPage("batch-orders");
   };
 
+  //Change the page to selected orders
   const handleSelectedOrdersClick = () => {
     setPage("selectedOrders");
   };
 
+  //Fetch the orders with status 'pending'
   useEffect(() => {
     const fetchOrders = () => {
       axios
-        .get("http://localhost:8082/api/completedCarts") // Fetch completed carts
+        .get("http://localhost:8082/api/completedCarts")
         .then((res) => {
           const pendingCarts = res.data.filter(
             (cart) => cart.orderStatus === "Pending"
-          ); // Filter for 'Pending' carts
-          setOrders(pendingCarts); // Set orders state variable
+          );
+          // Set the orders to the pending carts
+          setOrders(pendingCarts);
         })
         .catch((err) => {
           console.log("Error from DriverDashboard");
         });
     };
 
-    // Fetch orders immediately and then every 5 seconds
+    // Fetch orders immediately and then refresh every second, we can update this to a longer time if needed for performance
     fetchOrders();
     const intervalId = setInterval(fetchOrders, 1000);
 
@@ -129,7 +140,7 @@ const Dashboard = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-
+  //Fetch the selected orders with status 'Accepted By Driver' 
   useEffect(() => {
     if (page === "selectedOrders") {
       axios
@@ -151,19 +162,15 @@ const Dashboard = () => {
     }
   }, [page, selectedOrders]);
 
-  // const OrderList = orders.map(
-  //   (
-  //     order,
-  //     k // Map over orders to create Driver_OrderPanel components
-  //   ) => <Driver_OrderPanel order={order} email={email} key={k} />  );
 
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+  today.setHours(0, 0, 0, 0);
 
+  //Get the orders for today only
   const OrderList = orders
     .filter(order => {
       const orderDate = new Date(order.delivery_date);
-      orderDate.setHours(0, 0, 0, 0); // Set the time to 00:00:00 for accurate comparison
+      orderDate.setHours(0, 0, 0, 0);
       return orderDate.getTime() === today.getTime();
     })
     .map((order, k) => <Driver_OrderPanel order={order} email={email} key={k} />);
@@ -171,13 +178,27 @@ const Dashboard = () => {
   const RestaurantList = restaurants.map(
     (
       restaurant,
-      k // Map over orders to create Driver_OrderPanel components
+      k // Map over orders to create Driver_OrderPanel components similar to the dashboard in the customer side
     ) => <RestaurantPanel_Driver restaurant={restaurant} key={k} />
   );
 
-  const sendEmail = () => {
-    // Iterate over orders
-    orders.forEach(order => {
+  //Function to send email to customer
+  const sendEmail = async () => {
+    // Fetch user's email preference
+    const fetchUserEmailPreference = async (email) => {
+      const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+      const data = await response.json();
+      return data.emailAfterDriverCollection;
+    };
+  
+    for (const order of orders) {
+      const emailAfterDriverCollection = await fetchUserEmailPreference(order.email);
+  
+      // If user does not want to receive emails, skip this order
+      if (!emailAfterDriverCollection) {
+        continue;
+      }
+  
       // Send email to customer
       const emailParams = {
         email_from: order.email,
@@ -187,17 +208,18 @@ const Dashboard = () => {
           "Your order will be delivered by " + name + " to " + order.delivery_location + " shorty, we will let you know once its been delivered. \n\n" +
           "Log in to Manage My Lunch at any time to view your order. \n\n"
       };
-
+  
+      // Send email using emailjs api
       emailjs.send('service_gmcskkn', 'template_v78bl21', emailParams, 'XfgsvummwbkF3G1dV')
         .then((response) => {
           console.log('SUCCESS!', response.status, response.text);
         }, (err) => {
           console.log('FAILED...', err);
         });
-    });
+    }
   };
 
-
+  //Render the DriverDashboard
   return (
     <div>
       <header className='header'>
@@ -209,18 +231,20 @@ const Dashboard = () => {
       <h2 className="display-4 text-center">Orders Available</h2>
       <br />
       <div className="masterContainer">
+        {/* Display the driver's name and wallet balance */}
         <p>
           Driver Logged in: {name} <br></br>
           Current earnings: ${walletBalance !== undefined ? walletBalance.toFixed(2) : 'Loading...'}
         </p>
       </div>
 
-      <div className="container">
-        <div className="row">
+      <div>
+        <div>
 
           <div className="masterContainer">
 
-            <div >
+          <div >
+            {/* Display controls to change the page */}
               <button onClick={handleAllOrdersClick}>All Available Orders</button>
               <button onClick={handleFilterByRestaurantClick}>
                 Select By Restaurant
@@ -231,6 +255,7 @@ const Dashboard = () => {
               </button>
             </div>
 
+            {/**All orders */}
             {page === "all-orders" && (
               <section >
                 <div className="date-text">
@@ -250,6 +275,7 @@ const Dashboard = () => {
               </section>
             )}
 
+            {/**Batch orders */}
             {page === "batch-orders" && (
               <section>
                 <h2>Select Batch Orders</h2>
@@ -258,35 +284,37 @@ const Dashboard = () => {
               </section>
             )}
 
-{page === "selectedOrders" && (
-  <div className="selected-orders-section">
-    <h2>Selected Orders</h2>
-    {selectedOrders.map((order) => (
-      <div key={order._id} className="order-card">
-        <p>Order ID: {order._id}</p>
-        <p>Restaurant Name: {order.restaurant_name}</p>
-        <p>Customer: {order.customerName}</p>
-        <p>Delivery Location: {order.delivery_location}</p>
-        <div className="order-actions">
-          {orderStatus[order._id] === 'Deliver Now' ? (
-            <button onClick={() => handleDeliverNowClick(order._id)}>
-              Deliver Now
-            </button>
-          ) : (
-            orderStatus[order._id] !== 'Collected' && 
-            <button onClick={() => handleCollectedClick(order._id)}>
-              Collected
-            </button>
-          )}
-          {showDeliverButton && <button onClick={() => handleDeliverNowClick(order._id)}>Deliver Now</button>}
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+            {/**Selected Orders */}
+            {page === "selectedOrders" && (
+              <div className="selected-orders-section">
+                <h2>Selected Orders</h2>
+                {selectedOrders.map((order) => (
+                  <div key={order._id} className="order-card">
+                    <p>Order ID: {order._id}</p>
+                    <p>Restaurant Name: {order.restaurant_name}</p>
+                    <p>Customer: {order.customerName}</p>
+                    <p>Delivery Location: {order.delivery_location}</p>
+                    <div className="order-actions">
+                      {orderStatus[order._id] === 'Deliver Now' ? (
+                        <button onClick={() => handleDeliverNowClick(order._id)}>
+                          Deliver Now
+                        </button>
+                      ) : (
+                        orderStatus[order._id] !== 'Collected' &&
+                        <button onClick={() => handleCollectedClick(order._id)}>
+                          Collected
+                        </button>
+                      )}
+                      {showDeliverButton && <button onClick={() => handleDeliverNowClick(order._id)}>Deliver Now</button>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
+      {/**Footer */}
       <Footer />
     </div>
   );

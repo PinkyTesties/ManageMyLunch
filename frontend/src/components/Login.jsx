@@ -1,16 +1,26 @@
+/*
+Login.jsx
+This file is used to display the login page of the website. The user can login as a customer from this page.
+
+Created by Vidhusan S
+
+*/
+
+//React imports
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+//Styles
 import '../style/Login.css';
 
-axios.defaults.withCredentials = true;
-
 const Login = () => {
+    //Variables
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    //Handle the form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
@@ -28,6 +38,7 @@ const Login = () => {
         }
     };
 
+    //Render the login page content
     return (
         <div className="loginPage">
             <div className="formContainer">

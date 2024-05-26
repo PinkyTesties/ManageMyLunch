@@ -1,12 +1,29 @@
+/*
+SignUP_NEW.jsx
+
+This is the new sign up page
+It allows users to sign up to the Manage My Lunch application
+It fetches the universities from the backend and displays them in a dropdown
+It validates the user input and displays error messages if the input is invalid
+
+Created by Vidhusan
+
+
+*/
+
+//React imports
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+//Styles
 import logo from './componentAssets/logov1.png';
 import '../style/SignUp.css';
 
 const SignUp_NEW = () => {
+  //Variables
   const navigate = useNavigate();
 
+  //create user object
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -21,6 +38,7 @@ const SignUp_NEW = () => {
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [universities, setUniversities] = useState([]);
 
+  //Fetch the universities
   useEffect(() => {
     const fetchUniversities = async () => {
       try {
@@ -34,6 +52,7 @@ const SignUp_NEW = () => {
     fetchUniversities();
   }, []);
 
+  //Function to handle the input fields
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -42,6 +61,7 @@ const SignUp_NEW = () => {
     }
   };
 
+  //Function to handle the form submission
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,6 +77,7 @@ const SignUp_NEW = () => {
 
     setLoading(true);
 
+    
     try {
       const response = await axios.post("http://localhost:8082/api/users", user);
       setUser({
@@ -66,6 +87,7 @@ const SignUp_NEW = () => {
         confirmPassword: "",
         university: "",
       });
+      
       setConfirmation("User signed up successfully!");
       navigate("/");
     } catch (error) {
@@ -86,6 +108,7 @@ const SignUp_NEW = () => {
     }
   };
 
+  //Return the sign up form
   return (
     <div className="signup-container">
       <header className="signup-header">

@@ -1,3 +1,9 @@
+/*
+
+THIS IS NO LONGER USED IN THE APPLICATION. IT WAS REPLACED BY THE DELETE BUTTON IN THE DASHBOARD.
+- Tyler
+*/
+
 import React, { useState } from 'react';
 
 const DeleteMenuItem = () => {
@@ -16,8 +22,8 @@ const DeleteMenuItem = () => {
         .then(data => {
             if (data.msg) {
                 console.log(data.msg);
-                alert('Menu item deleted successfully'); // Display success message
-                window.location = '/dashboard'; // Redirect to dashboard
+                alert('Menu item deleted successfully');
+                window.location = '/dashboard';
             } else if (data.error) {
                 console.error(data.error);
             }

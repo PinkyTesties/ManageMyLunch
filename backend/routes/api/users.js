@@ -92,6 +92,17 @@ router.put('/:id', (req, res) => {
     );
 });
 
+// @route   PUT api/users/email/:email
+// @desc    Update user by email
+// @access  Public
+router.put('/email/:email', (req, res) => {
+  User.findOneAndUpdate({ email: req.params.email }, req.body)
+    .then(user => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
+
 // @route   DELETE api/users/:id
 // @desc    Delete users by id
 // @access  Public

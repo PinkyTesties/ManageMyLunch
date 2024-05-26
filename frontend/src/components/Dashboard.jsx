@@ -170,9 +170,9 @@ const Dashboard = () => {
         </div>
         <button
           className="add-restaurant-button"
-          onClick={() => navigate("/AddDriver")}
+          onClick={() => navigate("/create-restaurant")}
         >
-          Add a Driver
+          Add a Restaurant
         </button>
 
         <div className="restaurant-cards">

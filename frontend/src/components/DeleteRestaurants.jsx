@@ -1,3 +1,8 @@
+/*
+THIS IS NO LONGER USED IN THE APPLICATION. IT WAS REPLACED BY THE DELETE BUTTON IN THE DASHBOARD.
+
+*/
+
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 

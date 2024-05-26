@@ -1,12 +1,11 @@
-.edit-button {
-    /* Your normal button styles here */
-  }
-  
+/* This file contains the CSS for the Disabled button in orderStatus */
+
   .edit-button.disabled {
-    background-color: grey; /* Change to the color you want */
-    color: white; /* Change to the color you want */  }
+    background-color: grey; 
+    color: white;
+   }
   
   .edit-button.disabled:hover {
-    background-color: grey; /* Same color as the non-hover state */
-    color: white; /* Same color as the non-hover state */
+    background-color: grey; 
+    color: white; 
   }

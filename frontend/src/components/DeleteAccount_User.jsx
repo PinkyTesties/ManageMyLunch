@@ -1,21 +1,35 @@
+/*
+This page is used to delete the user account. The user must enter their password to confirm the deletion of their account.
 
+The user cannot undo this action. The user will be redirected to the login page after the account is deleted.
+The user can onloy delete their own account. And will be prompted to confirm the deletion of their account.
 
+Created by:
+Tyler Costa 19075541
+*/
+
+//React imports
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
+//Header
 import UserDashboard from "./UserDashboard";
+//Styles
 import "../style/Reports.css";
+//Footer
 import Footer from "./sharedComponents/Footer";
 
 const DeleteAccount_User = () => {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [name, setName] = useState("");
   const [sessionEmail, setSessionEmail] = useState("");
+  const [name, setName] = useState("");
   const [university, setUniversity] = useState("");
-  const [userID, setUserID] = useState("");
-  const [userRewardPoints, setUserRewardPoints] = useState(0);
 
+  const navigate = useNavigate();
+
+  //Fetching and setting of session variables
   useEffect(() => {
     axios
       .get("http://localhost:8082")
@@ -25,15 +39,16 @@ const DeleteAccount_User = () => {
           setSessionEmail(res.data.email);
           console.log("Email:", res.data.email);
           setUniversity(res.data.university);
-          //setUserID(res.data.userId);
-          //req.session.userId
+
         } else {
+          //If not logged in. Send back to homepage
           navigate("/");
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
+  //Function to delete the user account
   const deleteUser = () => {
     if (!password) {
       setErrorMessage('Please fill in all fields.');
@@ -41,10 +56,12 @@ const DeleteAccount_User = () => {
     }
   
     if (
+      //Prompt user to confirm deletion
       window.confirm(
         "Are you sure you want to delete your account? This action cannot be undone."
       )
     ) {
+      
       fetch(`http://localhost:8082/api/users/delete`, {
         method: "POST",
         headers: {
@@ -60,8 +77,10 @@ const DeleteAccount_User = () => {
       })
       .then((data) => {
         if (data.error) {
+          //Delete failed, display error message
           setErrorMessage(data.error);
         } else {
+          //Successfull deletion, redirect to login page
           alert("Account deleted successfully.");
           navigate("/");
         }
@@ -72,9 +91,10 @@ const DeleteAccount_User = () => {
     }
   };
   
-
+//Render the delete account form
   return (
     <div>
+      {/* Header */}
       <UserDashboard />
       <h1>Delete Account</h1>
       <div className="deleteUserContainer">
@@ -84,6 +104,7 @@ const DeleteAccount_User = () => {
             deleteUser();
           }}
         >
+          {/* Email and password fields, email is read only so that it cannot be edited */}
           <input type="email" value={sessionEmail} readOnly />
           <input
             type="password"
@@ -95,7 +116,9 @@ const DeleteAccount_User = () => {
           <button type="submit">Delete Account</button>
         </form>
       </div>
+      {/* Error message */}
       {errorMessage && <p>{errorMessage}</p>}
+      {/* Footer */}
         <Footer />
     </div>
   );

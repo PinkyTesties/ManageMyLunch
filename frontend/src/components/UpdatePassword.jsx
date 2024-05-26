@@ -1,15 +1,30 @@
+/*
+UpdatePassword.jsx
+
+This is the update password page
+It allows the admin change the password of a selected user
+
+Created by Tyler Costa 19075541
+*/
+
+//React imports
 import React, { useState, useEffect } from "react";
-import UserDashboard from "./UserDashboard"; // Import UserDashboard
-import "../style/UpdatePassword.css"; // Import the CSS file
+//Header
+import UserDashboard from "./UserDashboard";
+//Styles
+import "../style/UpdatePassword.css";
+//Footer
 import Footer from "./sharedComponents/Footer";
+
 function UpdatePassword() {
+  //Variables
   const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedUserEmail, setSelectedUserEmail] = useState("");
 
+  //Fetch the users
   const fetchUsers = () => {
     fetch("http://localhost:8082/api/users")
       .then((response) => response.json())
@@ -20,6 +35,7 @@ function UpdatePassword() {
     fetchUsers();
   }, []);
 
+  //Function to handle updating the password
   const handlePasswordUpdate = async (event) => {
     event.preventDefault();
 
@@ -30,7 +46,8 @@ function UpdatePassword() {
 
     if (user) {
       if (user.password === newPassword) {
-        setErrorMessage("Can't use the old password"); // Display error message if the new password is the same as the old password
+        // Display error message if the new password is the same as the old password
+        setErrorMessage("Can't use the old password"); 
         alert("Cannot use the previous password");
         return;
       }
@@ -40,9 +57,11 @@ function UpdatePassword() {
         "Are you sure you want to update the password?"
       );
       if (!confirmUpdate) {
-        return; // If the user clicks "Cancel", stop the function
+        //Cancel
+        return; 
       }
 
+      //Update the password of the selected user in the database
       fetch(`http://localhost:8082/api/users/${user._id}`, {
         method: "PUT",
         headers: {
@@ -55,11 +74,13 @@ function UpdatePassword() {
         .then((response) => response.json())
         .then((data) => {
           setUsers(users.map((user) => (user._id === data._id ? data : user)));
+          //Reset the form and display a success message
           setSelectedUserEmail("");
           setNewPassword("");
           setSuccessMessage("Password updated successfully");
           setErrorMessage("");
-          fetchUsers(); // Refresh the users
+          //refresh the users
+          fetchUsers(); 
         })
         .catch((error) => {
           console.error("Error updating password:", error);
@@ -67,18 +88,21 @@ function UpdatePassword() {
           setErrorMessage("Error updating password");
         });
     } else {
-      setErrorMessage("Incorrect email or username"); // Display error message if the user is not found
+      // Display error message if the user does not exist
+      setErrorMessage("Incorrect email or username"); 
     }
   };
 
+  //Render the update password page
   return (
     <div classname='wholePage'>
-      <UserDashboard /> {/* Use UserDashboard */}
+      {/* Header */}
+      <UserDashboard /> 
       <h1>Reset your password</h1>
       <div className="passwordContainer">
       {successMessage && <p>{successMessage}</p>}
       {errorMessage && <p>{errorMessage}</p>}{" "}
-      {/* Display error message if there is any */}
+      {/* Display error message here */}
       <form onSubmit={handlePasswordUpdate}>
         <input
         className="input-small"
@@ -99,6 +123,7 @@ function UpdatePassword() {
         />
         <button className='update-button'type="submit">Update Password</button>
       </form>
+      {/**Display users in boxes */}
       <div className="user-grid">
         {users.map((user) => (
           <div key={user._id} className="user-box">
@@ -116,7 +141,8 @@ function UpdatePassword() {
         ))}
       </div>
       </div>
-      <Footer></Footer>
+      {/**Footer */}
+      <Footer />
     </div>
   );
 }

@@ -119,9 +119,11 @@ const CompleteOrder = () => {
       );
       const fetchedCart = await response.json();
       if (fetchedCart && fetchedCart._id) {
+        // If a cart is found
         setMessage(`Found cart with code ${codeToInsert}`);
         setCart(fetchedCart); // Set the cart state variable
       } else {
+        // If no cart is found
         setMessage(`No cart found with code ${codeToInsert}`);
         alert(`No cart found with code ${codeToInsert}`);
         setCart(null); // Clear the cart state variable
@@ -132,7 +134,21 @@ const CompleteOrder = () => {
   };
 
   //Handles the email sending to the user
-  const sendEmail = () => {
+  const sendEmail = async () => {
+    // Fetch user's email preference
+    const fetchUserEmailPreference = async (email) => {
+      const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+      const data = await response.json();
+      return data.emailAfterOrderComplete;
+    };
+  
+    const emailAfterOrderComplete = await fetchUserEmailPreference(cart.email);
+  
+    // If user does not want to receive emails, return
+    if (!emailAfterOrderComplete) {
+      return;
+    }
+  
     // The actual contents of the email
     const emailParams = {
       email_from: cart.email,
@@ -146,7 +162,7 @@ const CompleteOrder = () => {
         "Thank you for ordering with Manage My Lunch! Please take the time to review your driver here: http://localhost:5173/OrderStatus.\n\n" +
         "We hope you enjoy your meal! \n\n",
     };
-
+  
     // Send the email using the emailJS api keys
     emailjs
       .send(

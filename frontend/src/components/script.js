@@ -1,3 +1,5 @@
+/* This file handles the confirmation animation on MenuItemPanel */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './buttonTeststyle.css';

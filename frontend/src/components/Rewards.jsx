@@ -1,10 +1,23 @@
+/*
+Rewards.jsx
+
+This component is used to display the rewards page for the admin. It allows the admin to create rewards and view or edit existing rewards.
+
+Created by Tyler Costa 19075541
+*/
+
+//React imports
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+//Header
 import UserDashboard from './UserDashboard';
+//Styles
 import '../style/Rewards.css';
+//Footer
 import Footer from '../components/sharedComponents/Footer';
 
 function Rewards() {
+    //Variables
     const [title, setTitle] = useState('');
     const [points, setPoints] = useState('');
     const [dollarValue, setDollarValue] = useState('');
@@ -12,29 +25,31 @@ function Rewards() {
     const [code, setCode] = useState('');
     const [rewardType, setRewardType] = useState('');
     const [rewardStatus, setRewardStatus] = useState('');
-    const [showTooltip, setShowTooltip] = useState(false);
 
     const [rewards, setRewards] = useState([]);
     const [newStatus, setNewStatus] = useState({});
     const [isDropdownUsed, setIsDropdownUsed] = useState({});
 
+    // Fetch / change rewards based on the selected status
     const handleStatusChange = (id, e) => {
         setNewStatus(prevStatus => ({ ...prevStatus, [id]: e.target.value }));
         setIsDropdownUsed(prevUsed => ({ ...prevUsed, [id]: true }));
     };
 
+    // Update the status of a reward
     const handleConfirmClick = async (id) => {
         if (newStatus[id]) {
-            // Ask the user for confirmation before proceeding
+            // Ask the user for confirmation
             if (window.confirm('Are you sure you want to update the status of this reward?')) {
                 try {
+                    // Send a PUT request to update the reward status
                     const response = await axios.put(`http://localhost:8082/api/rewards/update/${id}`, {
                         rewardStatus: newStatus[id]
                     });
-    
+                    
                     if (response.status === 200) {
                         console.log(`Updated status of reward ${id} to ${newStatus[id]}`);
-                        // Update the local state to reflect the change
+                        // Update the rewards in real time
                         setRewards(rewards.map(reward => reward._id === id ? { ...reward, rewardStatus: newStatus[id] } : reward));
                         // Hide the confirm button
                         setIsDropdownUsed(prevUsed => ({ ...prevUsed, [id]: false }));
@@ -50,10 +65,12 @@ function Rewards() {
         }
     };
 
+    // Fetch rewards based on the selected status
     useEffect(() => {
         fetchRewards(rewardStatus);
     }, [rewardStatus]);
 
+    // Fetch rewards based on the selected status
     const fetchRewards = async (status) => {
         try {
             const response = await axios.get(`http://localhost:8082/api/rewards/filter?status=${status}`);
@@ -64,9 +81,11 @@ function Rewards() {
         }
     };
 
+    // Handle the submission of a new reward
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Create a reward object
         const reward = {
             title,
             points,
@@ -89,6 +108,7 @@ function Rewards() {
             console.log('Reward created successfully');
         } else {
             console.log('Error creating reward');
+            //Notify user if creation failed
             alert('Reward creation failed. Please check that your inputs are valid.');
         }
         // Clear the form when the reward is created
@@ -102,18 +122,19 @@ function Rewards() {
 
     }
 
+    //Render the rewards page
     return (
         <div>
             <div className='mainContainer'>
-                <UserDashboard /> {/* Use UserDashboard */}
+                {/**Header */}
+                <UserDashboard /> 
 
                 <div className='createReward'>
                     <h1>Create a Reward</h1>
                     <form onSubmit={handleSubmit}>
-
-
-
+                        {/**Form to create a reward */}
                         <div className='disclaimer'>
+                            {/**Disclaimer */}
                             <p>Note:
                                 <br></br>  - Menu Item Discount will only subtract from the cart, the delivery fee will remain the same.
                                 <br></br>  - Delivery Discount will subtract from the delivery fee, and Free Delivery will set the delivery fee to 0.
@@ -152,8 +173,6 @@ function Rewards() {
                         </label>
                         <br></br>
 
-
-
                         <label>
                             Message:
                             <textarea value={message} onChange={e => setMessage(e.target.value)} />
@@ -167,6 +186,7 @@ function Rewards() {
                         <br></br>
 
                         <label>
+                            {/**Set the reward status on creation*/}
                             Reward Status on Creation:
                             <select value={rewardStatus} onChange={e => setRewardStatus(e.target.value)}>
                                 <option value="">Select...</option>
@@ -179,14 +199,15 @@ function Rewards() {
                         <br></br>
                         <br></br>
 
-
-
                         <input type="submit" value="Create Reward" />
                     </form>
 
                 <hr></hr>
 
                 <div className='existingRewards'>
+                {/**Display existing rewards */}
+                {/**Admin can change their status here */}
+
                 <h1>Existing Rewards</h1>
 
                 <label>
@@ -224,6 +245,7 @@ function Rewards() {
                 </div>
 
             </div>
+            {/**Footer */}
             <Footer />
         </div>
     );

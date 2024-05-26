@@ -4,7 +4,7 @@ The user can also apply a discount code to the cart and buy the items in the car
 
 All Cart functionality is handled in this file.
 
-Created by Tyler Costa 19075541
+Created by Tyler Costa 19075541 and Vidhusan
 
 */
 
@@ -19,13 +19,17 @@ import "../style/Cart.css"; // Make sure to create and import this CSS file
 
 const Cart = () => {
   const [cart, setCart] = useState({ menuItems: [] });
-
+  const [userID, setUserID] = useState("");
   // Cart variables for the cart items, pricing and reward system
+  const [message, setMessage] = useState(''); //this is the email message
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [university, setUniversity] = useState("");
   const [restaurantName, setRestaurantName] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
+  const [menuItems, setMenuItems] = useState([]);
+
   const [totalCost, setTotalCost] = useState(0);
   const [appliedDiscountCode, setAppliedDiscountCode] = useState("None");
   const [subtractDiscountAmount, setSubtractAmount] = useState(0);
@@ -181,63 +185,77 @@ const Cart = () => {
       .catch((err) => console.log(err));
   }
 
-  //Email controller
-  const sendEmail = () => {
-    //Create a list of all itmes in the cart and their prices for email
-    let cartItemsString = cart.menuItems
-      .map((item) => {
-        if (item.price) {
-          return item.name + " - $" + item.price.toFixed(2);
-        } else {
-          console.error(`Item ${item.name} does not have a price`);
-          return item.name;
-        }
-      })
-      .join("\n");
+// Fetch user's emailAfterPurchase property
+const fetchUserEmailPreference = async () => {
+  const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+  const data = await response.json();
+  return data.emailAfterPurchase;
+};
 
-      //the actual email message
-    const emailParams = {
-      email_from: email,
-      message:
-        "Thank you " +
-        name +
-        " for your order! \n" +
-        "Your order will be delivered to " +
-        university +
-        " on " +
-        deliveryDate +
-        ". \n\n" +
-        "Your order details: \n\n" +
-        "Your order total is $" +
-        (totalCost + deliveryFee + serviceFee).toFixed(2) +
-        ". Your order will be delivered lunch time of " +
-        deliveryDate +
-        ". \n\n" +
-        "Your cart items: \n" +
-        cartItemsString, // Add the list of cart items from above to the email
-    };
+// Email controller
+const sendEmail = async () => {
+  // Check user's emailAfterPurchase property
+  const emailAfterPurchase = await fetchUserEmailPreference();
+  if (!emailAfterPurchase) {
+    return; // If emailAfterPurchase is false, do nothing
+  }
 
-    //Api keys as per set in emailJS account
-    emailjs
-      .send(
-        "service_gmcskkn",
-        "template_v78bl21",
-        emailParams,
-        "XfgsvummwbkF3G1dV"
-      )
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-        },
-        (err) => {
-          console.log("FAILED...", err);
-        }
-      );
+  // Create a list of all items in the cart and their prices for email
+  let cartItemsString = cart.menuItems
+    .map((item) => {
+      if (item.price) {
+        return item.name + " - $" + item.price.toFixed(2);
+      } else {
+        console.error(`Item ${item.name} does not have a price`);
+        return item.name;
+      }
+    })
+    .join("\n");
 
-      //output to console
-    console.log("Email:", email);
-    console.log("Message:", message);
+  // The actual email message
+  const emailParams = {
+    email_from: email,
+    message:
+      "Thank you " +
+      name +
+      " for your order! \n" +
+      "Your order will be delivered to " +
+      university +
+      " on " +
+      deliveryDate +
+      ". \n\n" +
+      "Your order details: \n\n" +
+      "Your order total is $" +
+      (totalCost + deliveryFee + serviceFee).toFixed(2) +
+      ". Your order will be delivered lunch time of " +
+      deliveryDate +
+      ". \n\n" +
+      "Your cart items: \n" +
+      // Add the list of cart items from above to the email
+      cartItemsString, 
   };
+
+  // Api keys as per set in emailJS account
+  emailjs
+    .send(
+      "service_gmcskkn",
+      "template_v78bl21",
+      emailParams,
+      "XfgsvummwbkF3G1dV"
+    )
+    .then(
+      (response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      (err) => {
+        console.log("FAILED...", err);
+      }
+    );
+
+  // Output to console
+  console.log("Email:", email);
+  console.log("Message:", message);
+};
 
   //Handles the confimration of the purchase, and submitting to 'completedCart' collection in mongo
   const handleBuyNow = (e) => {

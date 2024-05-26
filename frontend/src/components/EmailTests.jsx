@@ -1,8 +1,23 @@
+/*
+This is a file that contains testing for sending emails and push notifications. It is not used in the final product.
+But it is a good example of how to send emails and push notifications in a React application. And I will use it as a reference when its required in the future.
+
+Tyler Costa 19075541
+
+
+REFERENCES:
+
+M, tech(2023, March 12). Send Email through Forms : React Js | Email js [Video]. YouTube. https://www.youtube.com/watch?v=Nm_IHH4iOx4&ab_channel=techM
+*/
+
+//React imports
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+//Import pushNotification function
 import { pushNotification } from './jsFiles/pushNotifications';
 
 const EmailTest = () => {
+    //Variables
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
@@ -16,7 +31,6 @@ const EmailTest = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your sign-up logic here
         console.log('Email:', email);
         console.log('Message:', message);
     };
@@ -41,7 +55,7 @@ const EmailTest = () => {
     };
 
     const title = "Manage My Lunch";
-    const content = "Fuck off wanker";
+    const content = "This is a test notification from Manage My Lunch.";
 
     return (
         <div>

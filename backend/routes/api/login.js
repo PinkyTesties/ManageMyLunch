@@ -28,10 +28,13 @@ router.post('/', (req, res) => {
         req.session.id = user._id;
         req.session.email = user.email;
 
+
         console.log(req.session.name);
         console.log(req.session.university);
         console.log(req.session.id);
         console.log(req.session.email);
+
+
         //console.log(req.session.user);
 
 

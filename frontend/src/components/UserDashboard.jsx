@@ -1,13 +1,30 @@
+/*
+UserDashboard.jsx
+
+This the header for most pages within in the manage my lunch application
+It contains the logo and the navigation buttons
+
+It also contains a modal that displays the account menu when the account button is clicked
+
+Created by Vidhusan
+
+*/
+
+//React imports
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+//logo
 import logo from "./componentAssets/logov1.png";
+//Styles
 import "../style/UserDashboard.css";
 
+//Modal
 Modal.setAppElement("#root");
 
 const UserDashboard = ({ history }) => {
+  //Variables
   const [showDropdown, setShowDropdown] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,10 +39,12 @@ const UserDashboard = ({ history }) => {
 
   const navigate = useNavigate();
 
+  //Function to toggle the account menu
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
+  //Fetch the user details from the session
   useEffect(() => {
     axios
       .get("http://localhost:8082")
@@ -38,12 +57,14 @@ const UserDashboard = ({ history }) => {
             userID: res.data._id,
           });
         } else {
+          //Redirect to the login page if the user is not logged in
           navigate("/");
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
+  //Return the header
   return (
     <div className="dashboard">
       {/* Header */}
@@ -69,20 +90,25 @@ const UserDashboard = ({ history }) => {
         </div>
       </header>
 
-      {/* Account Modal */}
+      {/* Account Modal 
+        Modal styling must be done inline for some reason
+      */}
       <Modal
         isOpen={showDropdown}
         onRequestClose={toggleDropdown}
         contentLabel="Account Menu"
         style={{
           content: {
-            width: "500px", // adjust as needed
-            height: "600px", // adjust as needed
-            right: "0px", // positions the modal on the right
-            left: "auto", // overrides the default left positioning
+            width: "500px", 
+            height: "600px", 
+            right: "0px", 
+            left: "auto", 
           },
         }}
       >
+        {/* Contents of the Account Menu
+        Prettier code formatting makes this look weird
+        */}
         <h1>Account Menu</h1>
         <h4>Logged in as: {userDetails.name}</h4>
         <p style={{ fontSize: "9pt" }}>{userDetails.university}</p>
@@ -99,14 +125,14 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: "background-color 0.3s ease", // add this line
+            transition: "background-color 0.3s ease", 
           }}
           onMouseOver={(e) =>
             (e.currentTarget.style.backgroundColor = "#d4d4d4")
-          } // add this line
+          }
           onMouseOut={(e) =>
             (e.currentTarget.style.backgroundColor = "#f2eded")
-          } // add this line
+          }
         >
           Dashboard
         </a>
@@ -121,14 +147,14 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: "background-color 0.3s ease", // add this line
+            transition: "background-color 0.3s ease",
           }}
           onMouseOver={(e) =>
             (e.currentTarget.style.backgroundColor = "#d4d4d4")
-          } // add this line
+          }
           onMouseOut={(e) =>
             (e.currentTarget.style.backgroundColor = "#f2eded")
-          } // add this line
+          }
           
         >
           Settings
@@ -144,10 +170,10 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' // add this line
+            transition: 'background-color 0.3s ease'
           }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} // add this line
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} // add this line
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} 
           >
           Pickup Order
         </a>
@@ -162,10 +188,10 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' // add this line
+            transition: 'background-color 0.3s ease'
           }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} // add this line
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} // add this line
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
           >
           Cart
         </a>
@@ -180,10 +206,10 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' // add this line
+            transition: 'background-color 0.3s ease' 
           }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} // add this line
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} // add this line
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'}
           >
           Orders
         </a>
@@ -200,10 +226,10 @@ const UserDashboard = ({ history }) => {
             color: "black",
             textAlign: "center",
             borderRadius: "5px",
-            transition: 'background-color 0.3s ease' // add this line
+            transition: 'background-color 0.3s ease' 
           }} 
-          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} // add this line
-          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} // add this line
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#d4d4d4'} 
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f2eded'} 
           >
           Logout
         </a>
