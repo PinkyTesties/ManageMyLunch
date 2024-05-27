@@ -99,7 +99,7 @@ const SignUp_NEW = () => {
           setError(error.response.data.message);
         }
       } else if (error.request) {
-        setError("The request was made but no response was received");
+        setError("This email is already in use");
       } else {
         setError("An error occurred while setting up the request");
       }
@@ -180,7 +180,6 @@ const SignUp_NEW = () => {
       </main>
       <footer className="signup-footer">
         <p>Already have an account? <Link to="/login" className="signup-btn-link">Login</Link></p>
-        <button className="signup-btn">Sign up as driver</button>
       </footer>
     </div>
   );

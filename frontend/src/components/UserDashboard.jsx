@@ -164,7 +164,7 @@ const UserDashboard = ({ history }) => {
         {/**Admin will access SettingsPage, Normal user see SettingsPage_User.
          *  SettingsPage has same functions SettingsPage user, as well as additional admin settings */}
         <a
-          href={isAdmin ? "SettingsPage" : "SettingsPage_User"}
+          href={isAdmin ? "/SettingsPage" : "/SettingsPage_User"}
           style={{
             display: "block",
             padding: "10px",
@@ -186,7 +186,7 @@ const UserDashboard = ({ history }) => {
           Settings
         </a>
         <a
-          href="CompleteOrder"
+          href="/CompleteOrder"
           style={{
             display: "block",
             padding: "10px",
@@ -204,7 +204,7 @@ const UserDashboard = ({ history }) => {
           Pickup Order
         </a>
         <a
-          href="Cart"
+          href="/Cart"
           style={{
             display: "block",
             padding: "10px",
@@ -222,7 +222,7 @@ const UserDashboard = ({ history }) => {
           Cart
         </a>
         <a
-          href="OrderStatus"
+          href="/OrderStatus"
           style={{
             display: "block",
             padding: "10px",

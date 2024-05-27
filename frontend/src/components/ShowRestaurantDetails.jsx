@@ -136,7 +136,6 @@ function ShowRestaurantDetails(props) {
               <div className="empty-item">
               </div>
             </div>
-            <p>Account name {email}</p>
 
             <div className="rating-description">
               {/* Display the restaurant rating, description and link to view reviews */}
@@ -173,7 +172,6 @@ function ShowRestaurantDetails(props) {
               Create Menu Item
             </Link>
 
-           
               <Link
                 to={`/UpdateRestaurant/${restaurant._id}`}
                 className='btn btn-outline-info btn-lg btn-block'
@@ -194,7 +192,6 @@ function ShowRestaurantDetails(props) {
                  )}
         </div>
       </div>
-      <Footer />
       <Footer />
     </div>
   );
