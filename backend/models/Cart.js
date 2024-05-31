@@ -2,8 +2,15 @@
 
 /*
 This is the Cart database Model for Mongo.
-Where we store & access Cart account information:
-name, restaurant_id, cost, date_created, menuItems which is an array of strings of menu item ids
+Where we store & access Cart account information: email, cost, date_created, menuItems, restaurant_id. 
+
+The menuItems field is an array of objects, each object representing a menu item in the cart.
+- Array contains: _id, cost, name, ingredients, additional_information, menuItemImage
+Within that array is another array of objects, each object representing an ingredient in the menu item.
+- Array contains: name, quantity
+
+Tyler Costa 19075541
+
 */
 
 const mongoose = require('mongoose');
@@ -22,6 +29,7 @@ const CartSchema = new mongoose.Schema({
     default: Date.now
   },
 
+  // Array of objects, each object representing a menu item in the cart
   menuItems: {
     type: [
       {
@@ -40,6 +48,7 @@ const CartSchema = new mongoose.Schema({
           required: true
         },
         
+        // Array of objects, each object representing an ingredient in the menu item
         ingredients: [
           {
             name: {

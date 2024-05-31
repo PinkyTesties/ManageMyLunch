@@ -1,17 +1,19 @@
 // models/Code.js
-const mongoose = require('mongoose');
+/*
+This is the Code.js file
+
+This is the setup for the Code database model. It is used to store the four-digit code that is sent to the user's email for verification.
+
+Tyler Costa 19075541
+*/
+
+const mongoose = require("mongoose");
 
 const CodeSchema = new mongoose.Schema({
   code: {
     type: String,
     required: true,
-    validate: {
-      validator: function(v) {
-        return /\d{4}/.test(v);
-      },
-      message: props => `${props.value} is not a valid four-digit code!`
-    },
   },
 });
 
-module.exports = mongoose.model('Code', CodeSchema);
+module.exports = mongoose.model("Code", CodeSchema);
