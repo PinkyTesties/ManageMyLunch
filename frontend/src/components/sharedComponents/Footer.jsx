@@ -1,3 +1,9 @@
+/*
+Footer component for all pages
+
+Created by Vidhusan
+
+*/
 import React from 'react';
 import '../../style/Footer.css';
 

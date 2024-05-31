@@ -6,10 +6,12 @@
     font-family: Arial, sans-serif;
   }
   
+  /* Styles for the dashboard section */
   .editPage-dashboard-container {
     margin-bottom: 20px;
   }
   
+  /* Styles for the form container */
   .editPage-edit-order-container {
     width: 100%;
     max-width: 600px;
@@ -18,16 +20,19 @@
     border-radius: 10px;
   }
   
+  /* order title */
   .editPage-order-title {
     text-align: center;
     color: #343a40;
   }
   
+  /* order id */
   .editPage-order-id {
     margin-bottom: 20px;
     color: #6c757d;
   }
   
+  /* imtes container */
   .editPage-item-container {
     display: flex;
     justify-content: space-between;
@@ -38,10 +43,12 @@
     border-radius: 5px;
   }
   
+  /* item name */
   .editPage-item-name {
     margin-right: 10px;
   }
   
+  /* item quantity */
   .editPage-remove-btn {
     background-color: #dc3545;
     color: white;
@@ -51,6 +58,7 @@
     cursor: pointer;
   }
   
+  /* item quantity */
   .editPage-submit-btn, .cancel-btn {
     width: 100%;
     padding: 10px;
@@ -60,11 +68,13 @@
     cursor: pointer;
   }
   
+  /* Styles for the buttons */
   .editPage-submit-btn {
     background-color: #28a745;
     color: white;
   }
   
+  /* cancel button */
   .editPage-cancel-btn {
     background-color: #dc3545;
     color: white;

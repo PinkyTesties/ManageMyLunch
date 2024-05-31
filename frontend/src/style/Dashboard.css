@@ -6,6 +6,7 @@ body {
   margin: 0;
 }
 
+/* Dashboard */
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -60,7 +61,7 @@ body {
   background-color: #333;
   color: #fff;
 }
-
+/* Account button hover effect */
 .account-button:hover,
 .reports-button:hover,
 .order-button:hover,
@@ -89,6 +90,7 @@ body {
   z-index: 9999;
 }
 
+/* Account modal link */
 .account-modal a {
   display: block;
   color: #333;
@@ -96,6 +98,7 @@ body {
   padding: 5px 0;
 }
 
+/* Account modal link hover effect */
 .account-modal a:hover {
   background-color: #f0f0f0;
 }
@@ -130,7 +133,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  width: 80px; /* Adjust width as needed */
+  width: 80px; 
   text-align: center;
 }
 
@@ -140,8 +143,8 @@ body {
 }
 
 .filter-button img {
-  width: 40px; /* Adjust size as needed */
-  height: 40px; /* Adjust size as needed */
+  width: 40px; 
+  height: 40px; 
   border-radius: 5px;
   margin-bottom: 5px;
 }

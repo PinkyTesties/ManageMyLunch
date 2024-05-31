@@ -1,4 +1,15 @@
+/*
+This is the main file of frontend.
+It renders all the components and routes them to the correct page.
 
+Created when the frontend was created, modified by:
+Tyler Costa 19075541
+Vidhusan S
+Ranier D
+Xuanhao
+
+
+*/
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -12,7 +23,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 // Components imports
 //Basically every frontend page we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
-//test
 import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp_NEW"; 
 import Dashboard from "./components/Dashboard"; 
@@ -45,19 +55,17 @@ import EmailTests from "./components/EmailTests";
 import MapWithControls from "./components/MapWithControls";
 import DeliverOrder from "./components/DeliverOrder";
 import ButtonTest from "./components/buttonTest";
-//These are vidhu imports for testing
 import HomePage from "./components/HomePage";
-import SignUp2 from "./components/SignUp_NEW";
 import Login from "./components/Login";
 import Rewards from "./components/Rewards";
 import SettingsPage_User from "./components/SettingsPage_User";
-//hello
 
 // Routes
 const router = createBrowserRouter([
-  { path: "/oldLogin", element: <LoginPage /> },
+  { path: "/", element: <HomePage /> },
   { path: "/create-restaurant", element: <CreateRestaurant /> },
   { path: "/dashboard", element: <Dashboard /> },
+  { path: "/Login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/UpdatePassword", element: <UpdatePassword /> },
   { path: "/SettingsPage", element: <SettingsPage /> },
@@ -84,17 +92,15 @@ const router = createBrowserRouter([
   { path: "/CompleteOrder", element: <CompleteOrder />},
   { path: "/DriverReviewForm/:email", element: <DriverReviewForm />},
   { path: "/ViewDriverReviews/:email", element: <ViewDriverReviews />},
-  { path: "/EmailTests", element: <EmailTests />},
   { path: "/Rewards", element: <Rewards />},
-  { path: "/Map", element: <MapWithControls />},
   { path: "/DeliverOrder/:id", element: <DeliverOrder />},
-  { path: "/ButtonTest", element: <ButtonTest />},
   { path: "/SettingsPage_User", element: <SettingsPage_User />},
 
-  //These are vidhu imports for testing
-  { path: "/", element: <HomePage /> },
- // { path: "/SignUp2", element: <SignUp2 /> },
-  { path: "/Login", element: <Login /> },
+  //These are imports for testing pages
+  { path: "/ButtonTest", element: <ButtonTest />},
+  { path: "/EmailTests", element: <EmailTests />},
+  { path: "/Map", element: <MapWithControls />},
+
 
 ]);
 

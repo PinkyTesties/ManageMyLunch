@@ -1,5 +1,6 @@
 /* CSS for Drivers.jsx */
 
+
 .box {
     border: 1px solid black;
     padding: 10px;
@@ -7,6 +8,7 @@
     border-radius: 5px;
 }
 
+/* heading text */
 h1 {
     font-size: 2em;
     color: #333;
@@ -14,8 +16,9 @@ h1 {
     padding: 20px 0;
 }
 
+/* button styles */
 .driverButton {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -26,8 +29,10 @@ h1 {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+/* button hover state */
 .deleteDriverButton {
-    background-color: #d20000; /* Green */
+    background-color: #d20000; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -38,6 +43,8 @@ h1 {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+/* container for drivers */
 .driverContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

@@ -6,6 +6,7 @@ body {
   margin: 0;
 }
 
+/* UserDashboard content */
 .user-dashboard {
   display: flex;
   flex-direction: column;

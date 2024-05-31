@@ -7,13 +7,18 @@ They can either scan their qr code or manually type in their unique code.
 Created by Tyler Costa 19075541
 */
 
+//React imports
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { useNavigate } from "react-router-dom";
-import emailjs from "emailjs-com"; //EmailJS api for emailing
-import UserDashboard from "./UserDashboard"; // Import Header
-import "../style/CompleteOrder.css"; //Styles
-import Footer from "../components/sharedComponents/Footer"; //Import Footer
+//EmailJS api for emailing
+import emailjs from "emailjs-com"; 
+ // Import Header
+import UserDashboard from "./UserDashboard";
+ //Styles
+import "../style/CompleteOrder.css";
+//Import Footer
+import Footer from "../components/sharedComponents/Footer"; 
 
 const CompleteOrder = () => {
   //Variables
@@ -185,7 +190,8 @@ const CompleteOrder = () => {
   return (
     <div>
       <div className="dashboard-section">
-        <UserDashboard /> {/* Use UserDashboard */}
+        {/* Header */}
+        <UserDashboard /> 
       </div>
 
       <div className="main-container">

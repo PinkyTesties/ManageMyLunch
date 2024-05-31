@@ -1,3 +1,12 @@
+/*
+More global css
+
+Created by Ranier de gracia
+
+
+*/
+
+/* global css */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,18 +21,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/*
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
 
-a:hover {
-  color: #535bf2;
-}
-*/
-
+/* global css */
 html, body {
   height: 100%;
   margin: 0;
@@ -42,54 +41,11 @@ html, body {
   min-height: 100vh;
 }
 
+
 .main-content {
   flex: 1;
 }
-/*
-.btn-btn {
-  background-color: #808080;
-  margin: 5px;
-  border-radius: 12px;
-}
 
-.btn-btn a {
-  color: #000213;
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.btn-btn-link {
-  color: #000213;
-  text-decoration: none;
-}
-*/
-/*
-button {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  color: #000213;
-  background-color: #646cff;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #535bf2;
-}
-*/
-/*
-button:focus, button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-*/
 .cart-bottom {
   display: flex;
   justify-content: center;
@@ -145,34 +101,7 @@ button:focus, button:focus-visible {
   font-size: 20px;
   font-weight: bold;
 }
-/*
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
-.header-driver {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #b7b7b7;
-}
-
-header img {
-  height: 65px; 
-}
-
-.header-buttons {
-  display: block;
-  margin: 5px;
-}
-*/
 .item {
   text-align: center;
 }
@@ -188,20 +117,7 @@ header img {
   padding-top: 4em;
   padding-right: 8em;
 }
-/*
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-*/
+
 .MenuButtons {
   display: flex;
   justify-content: space-between;

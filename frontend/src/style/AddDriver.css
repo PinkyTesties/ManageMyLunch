@@ -1,3 +1,4 @@
+/* Styles for the container */
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -9,17 +10,19 @@
     background-color: #f9f9f9;
 }
 
+/* Styles for the form */
 .formContainer form {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 500px;
 }
-
+/* Styles for the form label*/
 .formContainer label {
     margin-bottom: 10px;
 }
 
+/* Styles for the form input */
 .formContainer input {
     margin-bottom: 20px;
     padding: 10px;
@@ -27,7 +30,7 @@
     border: 1px solid #ddd;
 }
 
-
+/* Styles for the form button */
 .driverButton {
     background-color: #4CAF50; /* Green */
     border: none;

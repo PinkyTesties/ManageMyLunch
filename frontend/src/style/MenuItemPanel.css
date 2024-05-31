@@ -7,6 +7,7 @@
     transition: transform 0.2s ease-in-out;
   }
   
+  /*restaurant image hover effect */
 .menucard-container img:hover {
     transform: scale(1.05);
   }
@@ -18,9 +19,12 @@
       height: auto;
     }
   }
+  /* title */
   .title {
     margin-top: 10px; /* Adjust this value to increase or decrease the space */
   }
+  
+  /* delete button */
   .deleteButton {
     background-color: red;
     color: white;
@@ -31,6 +35,7 @@
     transition: background-color 0.3s ease;
   }
   
+  /* delete button hover effect */
   .deleteButton:hover {
     background-color: darkred;
   }

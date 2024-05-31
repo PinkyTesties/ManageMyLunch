@@ -7,22 +7,26 @@
     background-color: #f9f9f9;
 }
 
+/* createReward h1 */
 .createReward h1 {
     text-align: center;
     color: #333;
 }
 
+/* createReward disclaimer */
 .createReward .disclaimer {
     font-size: 0.9em;
     color: #666;
     margin-bottom: 20px;
 }
 
+/* createReward label */
 .createReward label {
     display: block;
     margin-bottom: 5px;
 }
 
+/* createReward select */
 .createReward select, 
 .createReward input {
     display: block;

@@ -19,7 +19,6 @@ const SystemAdminSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    // Add other fields as necessary
 });
 
 const SystemAdmin = mongoose.model('SystemAdmin', SystemAdminSchema);

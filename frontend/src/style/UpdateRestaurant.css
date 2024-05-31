@@ -5,12 +5,14 @@
     align-items: center;
   }
   
+  /* dashboard link */
   .dashboard-link {
     margin: 20px 0;
     color: #f0ad4e;
     text-decoration: none;
   }
   
+  /* update restaurant content */
   .update-restaurant-content {
     width: 80%;
     display: flex;
@@ -18,27 +20,32 @@
     align-items: center;
   }
   
+  /* title */
   .title {
     font-size: 2em;
     text-align: center;
   }
   
+  /* subtitle */
   .subtitle {
     font-size: 1.2em;
     text-align: center;
     color: #6c757d;
   }
   
+  /* update form */
   .update-form {
     width: 100%;
     display: flex;
     flex-direction: column;
   }
   
+  /* form group */
   .form-group {
     margin-bottom: 20px;
   }
   
+  /* form label */
   .form-input {
     width: 100%;
     padding: 10px;
@@ -46,6 +53,7 @@
     border: 1px solid #ced4da;
   }
   
+  /* form submit button */
   .submit-button {
     width: 100%;
     padding: 10px;
@@ -56,6 +64,7 @@
     font-size: 1.2em;
   }
 
+/* dashboard button */
   .dashboard-button {
     margin: 20px 0;
     padding: 10px 20px;

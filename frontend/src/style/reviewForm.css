@@ -6,12 +6,14 @@
     font-family: Arial, sans-serif;
   }
   
+  /* form title */
   .form-title {
     text-align: center;
     color: #343a40;
     margin-bottom: 20px;
   }
   
+  /* form container */
   .review-form {
     width: 100%;
     max-width: 600px;
@@ -20,12 +22,14 @@
     border-radius: 10px;
   }
   
+  /* form label */
   .form-label {
     display: block;
     margin-bottom: 10px;
     color: #6c757d;
   }
   
+  /* form input */
   .form-input, .form-textarea {
     width: 100%;
     padding: 10px;
@@ -34,6 +38,7 @@
     margin-bottom: 20px;
   }
   
+  /* form submit button */
   .form-submit-btn {
     width: 100%;
     padding: 10px;

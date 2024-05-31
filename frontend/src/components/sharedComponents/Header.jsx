@@ -1,5 +1,11 @@
+
+/*
+Header component is a shared component that is used in all pages of the application.
+
+Created by Vidhusan
+
+*/
 import { Link } from 'react-router-dom';
-// Import HamburgerMenu removed
 
 import '../../style/Header.css';
 

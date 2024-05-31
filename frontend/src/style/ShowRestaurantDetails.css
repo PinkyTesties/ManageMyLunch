@@ -4,51 +4,64 @@
     border-radius: 5px;
     margin-bottom: 20px;
   }
+
+  /* container for the whole page */
   .wholePageContainer {
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
     background-color: #f8f9fa;
   }
+
+/* restaurant details */
   .restaurant-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
+  /* restaurant title section */
   .titleContainer {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
     background-color: rgb(234, 245, 229);
-    height: 150px; /* Specific height */
-    border-radius: 50px; /* Rounded edges */
+    height: 150px; 
+    border-radius: 50px; 
 
   }
+
+  /* button */
   .btn {
     margin: 5px;
   }
   
+  /* rating */
   .rating-description {
     margin-top: 10px;
   }
   
+  /* restaurant name */
   .restaurant-name {
     font-size: 2em;
     color: #343a40;
     margin: 20px 0;
   }
   
+  /* restaurant buttons */
   .action-buttons {
     display: flex;
     flex-direction: column;
   }
   
+  /* buttons */
   .btn-lg {
     padding: 10px 20px;
     margin-bottom: 10px;
   }
   
+  /* review link */
   .review-link {
     color: #007bff;
     text-decoration: none;

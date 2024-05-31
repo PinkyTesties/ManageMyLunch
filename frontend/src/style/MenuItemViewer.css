@@ -5,6 +5,7 @@ body {
     background-color: #f4f4f4;
   }
   
+  /* menu item viewer */ 
   .menu-item {
     display: flex;
     justify-content: space-between;
@@ -15,7 +16,8 @@ body {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
+  /* button */
   button {
     padding: 10px 20px;
     border: none;
@@ -26,14 +28,17 @@ body {
     transition: background-color 0.3s ease;
   }
   
+  /* button hover */
   button:hover {
     background-color: #0056b3;
   }
   
+  /* button active */
   button:active {
     background-color: #004085;
   }
   
+  /* text area */
   textarea {
     width: 100%;
     min-height: 100px;
@@ -42,6 +47,7 @@ body {
     border: 1px solid #ddd;
   }
   
+  /* add to cart animation */
   .animatedCartBtn {
     animation: fadeIn 1s ease-in-out;
   }
@@ -75,6 +81,8 @@ body {
       transform: rotate(0);
     }
   }
+
+  /* Styles for the main content area of the page */
   .menuContainer {
     display: flex;
     flex-direction: column;
@@ -88,6 +96,7 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 
+  /* increment ingredients  */
   .buttonUp {
     background-color: #4CAF50; /* Green */
     color: white;
@@ -102,10 +111,13 @@ body {
     cursor: pointer;
   }
   
+/* button hover */
   .buttonUp:hover {
     background-color: #45a049;
   }
   
+
+  /* decrement ingredients */
   .buttonDown {
     background-color: #f44336; /* Red */
     color: white;
@@ -120,6 +132,7 @@ body {
     cursor: pointer;
   }
   
+  /* button hover */
   .buttonDown:hover {
     background-color: #c43e30;
   }

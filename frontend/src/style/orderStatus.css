@@ -9,6 +9,7 @@
     background-color: #f5f5f5;
   }
   
+  /* buttons */
   .buttons {
     display: flex;
     justify-content: space-between;
@@ -16,6 +17,7 @@
     margin-bottom: 20px;
   }
   
+  /* status button */
   .statusButton {
     padding: 10px 20px;
     border: none;
@@ -26,10 +28,12 @@
     transition: background-color 0.3s ease;
   }
   
+  /* status button hover */
   .statusButton:hover {
     background-color: #0056b3;
   }
   
+  /* current orders view */
   .currentOrdersView {
     display: flex;
     flex-direction: column;
@@ -46,6 +50,7 @@
     width: 800px;
   }
 
+  /* review button */
   .reviewButton {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -60,10 +65,12 @@
     transition-duration: 0.4s;
   }
   
+  /* review button hover */
   .reviewButton:hover {
     background-color: #45a049;
   }
 
+  /* pickup button */
   .pickup-button {
     background-color: rgb(0, 216, 0);
     border: none;
@@ -71,7 +78,7 @@
 
   }
 
-
+/* pickup button hover */
 .pickup-button:hover {
     background-color: rgb(0, 180, 0);
 }

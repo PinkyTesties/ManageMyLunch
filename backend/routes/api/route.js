@@ -1,3 +1,6 @@
+// Initiate the Google Maps API client with the API key
+// Created by Xuanhao Wang
+
 const express = require('express');
 const router = express.Router();
 

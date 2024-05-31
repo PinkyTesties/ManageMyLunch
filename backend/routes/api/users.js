@@ -1,3 +1,11 @@
+/*
+This is users.js
+This is the api code for the users. It is used to create, get, update and delete users.
+It also has a route to verify the email of a user.
+
+// Created by Tyler Costa 19075541 and Vidhusan
+*/
+
 const express = require('express');
 const router = express.Router();
 

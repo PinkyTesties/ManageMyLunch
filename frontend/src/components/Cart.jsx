@@ -12,17 +12,21 @@ Created by Tyler Costa 19075541 and Vidhusan
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import emailjs from "emailjs-com"; //Connects to emailjs api so that Cart can send confirmation email
-import UserDashboard from "./UserDashboard"; // Header import
-import Footer from "../components/sharedComponents/Footer"; //Footer import
-import "../style/Cart.css"; // Make sure to create and import this CSS file
+//Connects to emailjs api so that Cart can send confirmation email
+import emailjs from "emailjs-com"; 
+// Header import
+import UserDashboard from "./UserDashboard"; 
+//Footer import
+import Footer from "../components/sharedComponents/Footer"; 
+ // Make sure to create and import this CSS file
 
+import "../style/Cart.css";
 const Cart = () => {
+    // Cart variables for the cart items, pricing and reward system
+
   const [cart, setCart] = useState({ menuItems: [] });
   const [userID, setUserID] = useState("");
-  // Cart variables for the cart items, pricing and reward system
-  const [message, setMessage] = useState(''); //this is the email message
-
+  const [message, setMessage] = useState(''); 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [university, setUniversity] = useState("");
@@ -82,26 +86,33 @@ const Cart = () => {
         if (reward) {
           if (reward.freeDelivery) {
             // If the reward is classed as freeDelivery, set the delivery fee to 0
-            setDeliveryFee(0); // Set delivery fee to 0
-            setSubtractAmount(0); // Prevents subtracting the discount amount from the total cost
+            setDeliveryFee(0); 
+            // Prevents subtracting the discount amount from the total cost
+            setSubtractAmount(0); 
           }
           if (reward.menuItemDiscount) {
             // If the reward is classed as a menuItemDiscount, subtract the dollarValue from the total cost
             let newTotalCost = totalCost - reward.dollarValue;
             newTotalCost = newTotalCost < 0 ? 0 : newTotalCost;
-            setTotalCost(newTotalCost); //Set new total cost
-            setSubtractAmount(reward.dollarValue); //set subtract amount
-            setDeliveryFee(deliveryFee); //Set delivery fee
+            //Set new total cost
+            setTotalCost(newTotalCost); 
+            //set subtract amount
+            setSubtractAmount(reward.dollarValue); 
+            //Set delivery fee
+            setDeliveryFee(deliveryFee); 
           }
           if (reward.deliveryDiscount) {
             //if the discount code is classed as a delivery discount, subtract the dollarValue from the delivery fee
             setDeliveryFee(deliveryFee - reward.dollarValue);
-            setSubtractAmount(0); // Do not subtract any amount from the total cost
+            // Do not subtract any amount from the total cost
+            setSubtractAmount(0); 
           }
-          setAppliedDiscountCode(reward.code); // Update the applied discount code
+          // Update the applied discount code
+          setAppliedDiscountCode(reward.code); 
         } else {
           console.log("Invalid or inactive discount code");
-          alert("Invalid or inactive discount code"); // Notify the user that the discount code is invalid
+          // Notify the user that the discount code is invalid
+          alert("Invalid or inactive discount code"); 
         }
       })
       .catch((error) => console.error(error));
@@ -197,7 +208,8 @@ const sendEmail = async () => {
   // Check user's emailAfterPurchase property
   const emailAfterPurchase = await fetchUserEmailPreference();
   if (!emailAfterPurchase) {
-    return; // If emailAfterPurchase is false, do nothing
+    // If emailAfterPurchase is false, do nothing
+    return; 
   }
 
   // Create a list of all items in the cart and their prices for email
@@ -315,6 +327,7 @@ const sendEmail = async () => {
   return (
     <div class="wholePage">
       <div>
+        {/*Header */}
         <UserDashboard />
       </div>
 
@@ -409,6 +422,7 @@ const sendEmail = async () => {
           </div>
         </div>
       </div>
+      {/**Footer */}
       <Footer />
     </div>
   );

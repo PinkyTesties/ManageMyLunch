@@ -1,4 +1,12 @@
 //drivers.js
+
+/*
+This is the api code for the drivers. It is used to create, get, update and delete drivers.
+
+It is based on Books.js from Logrocket's MERN stack tutorial: https://blog.logrocket.com/mern-stack-tutorial/
+
+Created by Tyler Costa 19075541
+*/
 const express = require('express');
 const router = express.Router();
 
@@ -41,7 +49,6 @@ router.get('/email/:email', (req, res) => {
     })
     .catch(err => res.status(500).json({ error: 'Error fetching driver by email' }));
 });
-
 
 // @route   POST api/drivers
 // @desc    Add/save driver
