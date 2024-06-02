@@ -10,6 +10,10 @@ Created by Vidhusan S
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+//URL imports
+import { targetURL } from './../urls';
+
 //Styles
 import '../style/Login.css';
 
@@ -26,7 +30,7 @@ const Login = () => {
         setError('');
 
         try {
-            const { data } = await axios.post('http://localhost:8082/api/login', { email, password });
+            const { data } = await axios.post(`${targetURL}/api/login`, { email, password });
             const { success, userExists } = data;
             if (success) {
                 navigate('/dashboard');

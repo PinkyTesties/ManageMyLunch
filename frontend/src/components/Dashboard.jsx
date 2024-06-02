@@ -19,6 +19,8 @@ import RestaurantPanel from "./RestaurantPanel";
 import UserDashboard from "./UserDashboard";
 //Styles
 import "../style/Dashboard.css";
+//URL imports
+import { targetURL } from './../urls';
 //Import Footer
 import Footer from "../components/sharedComponents/Footer";
 
@@ -38,7 +40,7 @@ const Dashboard = () => {
   //Fetching and setting of session variables
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${targetURL}/`)
       .then((res) => {
         if (res.data.valid) {
           setName(res.data.name);
@@ -47,7 +49,7 @@ const Dashboard = () => {
           setUniversity(res.data.university);
         } else {
           //If not logged in. Send back to homepage
-          navigate("/");
+          //navigate("/");
         }
       })
       .catch((err) => console.log(err));
@@ -58,7 +60,7 @@ const Dashboard = () => {
 
   //Fetching active rewards
   useEffect(() => {
-    fetch("http://localhost:8082/api/rewards/active")
+    fetch(`${targetURL}/api/rewards/active`)
       .then((response) => response.json())
       .then((data) => {
         const rewardsData = data.map((reward) => ({
@@ -79,7 +81,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (email) {
       axios
-        .get(`http://localhost:8082/api/users/email/${email}`)
+        .get(`${targetURL}/api/users/email/${email}`)
         .then((response) => {
           setUserID(response.data._id);
           console.log("User ID:", response.data._id);
@@ -92,7 +94,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (email) {
       const fetchUserAdminStatus = async () => {
-        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const response = await fetch(`${targetURL}/api/users/email/${email}`);
         const data = await response.json();
 
         console.log(data);
@@ -107,7 +109,7 @@ const Dashboard = () => {
   //Fetching user reward points using the user ID
   useEffect(() => {
     axios
-      .get(`http://localhost:8082/api/users/${userID}`)
+      .get(`${targetURL}/api/users/${userID}`)
       .then((response) => {
         setUserRewardPoints(response.data.rewardsPoints);
         console.log("User reward points:", response.data.rewardsPoints);
@@ -118,7 +120,7 @@ const Dashboard = () => {
   //Fetching restaurants from the backend
   useEffect(() => {
     axios
-      .get("http://localhost:8082/api/restaurants")
+      .get(`${targetURL}/api/restaurants`)
       .then((res) => setRestaurants(res.data))
       .catch((err) => console.log("Error from Dashboard"));
   }, []);

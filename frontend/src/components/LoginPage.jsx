@@ -1,4 +1,4 @@
-/*
+/* LoginPage.jsx
 This is the old login page before the new design was implemented. 
 The new design is more user friendly and has a better layout. 
 
@@ -12,7 +12,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from './componentAssets/logov1.png';
 import background from './componentAssets/background.jpg';
-
+//URL imports
+import { targetURL } from './../urls';
 // Set axios default configuration
 axios.defaults.withCredentials = true;
 
@@ -60,7 +61,7 @@ const LoginPage = () => {
 
     try {
       // Send login request
-      const { data } = await axios.post("http://localhost:8082/api/login", { email, password });
+      const { data } = await axios.post(`${targetURL}/api/login`, { email, password }, { withCredentials: true });
       const { success, message, userExists } = data;
       if (success) {
         handleSuccess(message);

@@ -19,7 +19,8 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "./componentAssets/logov1.png";
 //Styles
 import "../style/UserDashboard.css";
-
+//URL imports
+import { targetURL } from './../urls';
 //Modal
 Modal.setAppElement("#root");
 
@@ -52,7 +53,7 @@ const UserDashboard = ({ history }) => {
   //Fetch the user details from the session
   useEffect(() => {
     axios
-      .get("http://localhost:8082")
+      .get(`${targetURL}/`)
       .then((res) => {
         if (res.data.valid) {
           setUserDetails({
@@ -64,7 +65,7 @@ const UserDashboard = ({ history }) => {
           });
         } else {
           //Redirect to the login page if the user is not logged in
-          navigate("/");
+          //navigate("/");
         }
       })
       .catch((err) => console.log(err));
@@ -74,7 +75,7 @@ const UserDashboard = ({ history }) => {
     if (userDetails && userDetails.email) {
       const fetchUserAdminStatus = async () => {
         const email = userDetails.email;
-        const response = await fetch(`http://localhost:8082/api/users/email/${email}`);
+        const response = await fetch(`${targetURL}/api/users/email/${email}`);
         const data = await response.json();
 
         console.log(data);  // for debugging purposes

@@ -1,4 +1,6 @@
-//export const baseURL = 'http://localhost:8082';
-export const baseURL = 'https://managemylunch.onrender.com';
+//urls.js
+
+//export const targetURL = 'http://localhost:8082';
+export const targetURL = 'https://managemylunch.onrender.com';
 
 

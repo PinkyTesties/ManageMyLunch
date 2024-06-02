@@ -13,7 +13,8 @@ import { Link } from 'react-router-dom';
 //Styles
 import '../App.css';
 import '../style/RestaurantPanel.css';
-
+//URL imports
+import { targetURL } from './../urls';
 const RestaurantPanel = ({ restaurant }) => {
 
   //Render the restaurant panel, its very simple and only displays the restaurant's image, name, description, and rating
@@ -22,7 +23,7 @@ const RestaurantPanel = ({ restaurant }) => {
       <div className='item'>
       <Link to={`/ShowRestaurantDetails/${restaurant._id}`}>
       <img
-        src={`http://localhost:8082/restaurant_assets/${restaurant.RestaurantImage}`}
+        src={`${targetURL}/restaurant_assets/${restaurant.RestaurantImage}`}
         alt='Restaurants'
         height={200}
       />
