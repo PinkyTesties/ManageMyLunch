@@ -9,8 +9,10 @@ Created by Tyler Costa 19075541
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UserDashboard from "./UserDashboard"; // Header
-import Footer from "./sharedComponents/Footer"; //Footer
+//Header
+import UserDashboard from "./UserDashboard";
+//Footer
+import Footer from "./sharedComponents/Footer";
 
 const CreateRestaurant = (props) => {
   const navigate = useNavigate();

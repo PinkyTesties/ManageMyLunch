@@ -358,7 +358,8 @@ function Reports() {
                 {/**New users on a specific date */}
                 {page === 'NewUsers' && (
                     <div>
-                        <h4>Total users signed up to manage my lunch: {totalUsers}</h4>                        <br />
+                        <h4>Total users signed up to manage my lunch: {totalUsers}</h4>                      
+                          <br />
                         <div>
                             <label>Select a date:</label>
                             <DatePicker selected={selectedDate} onChange={handleDateChange} />

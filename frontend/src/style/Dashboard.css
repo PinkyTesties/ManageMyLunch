@@ -1,4 +1,11 @@
 /* Dashboard container */
+
+/*
+
+Ranier De Gracia 20121310 
+and 
+Vidhusan Surenthiran 19083603
+*/
 body {
   display: flex;
   flex-direction: column;

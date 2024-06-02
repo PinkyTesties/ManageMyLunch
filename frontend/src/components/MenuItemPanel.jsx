@@ -15,7 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 //Styles
 import '../App.css';
-import './buttonTeststyle.css';
+import '../style/addToCartButtonStyle.css';
 import '../style/MenuItemPanel.css';
 
 const MenuItemPanel = ({ menuItem }) => {

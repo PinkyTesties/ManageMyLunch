@@ -10,9 +10,13 @@ Created by Tyler Costa 19075541
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import UserDashboard from "./UserDashboard"; // Header import
-import "../style/AddDriver.css"; // CSS import for styling
-import Footer from "./sharedComponents/Footer"; //Footer import
+
+// Header import
+import UserDashboard from "./UserDashboard"; 
+// CSS import for styling
+import "../style/AddDriver.css"; 
+//Footer import
+import Footer from "./sharedComponents/Footer"; 
 
 const AddDriver = () => {
   const navigate = useNavigate();

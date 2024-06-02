@@ -74,6 +74,7 @@ const ViewDriverReviews = () => {
           <p>No reviews for {driverName}</p>
         </div>
       )}
+      {/* Footer */}
       <Footer />
     </div>
   );

@@ -1,3 +1,10 @@
+/*
+Css for the menu item editor
+
+Created by Ranier De Gracia
+
+*/
+
 .MenuItemEditor {
     display: flex;
     flex-direction: column;

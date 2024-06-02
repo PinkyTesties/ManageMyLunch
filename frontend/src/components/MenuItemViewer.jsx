@@ -19,7 +19,7 @@ import '../style/MenuItemViewer.css';
 // Footer
 import Footer from './sharedComponents/Footer';
 // Styles
-import './buttonTeststyle.css';
+import '../style/addToCartButtonStyle.css';
 
 const MenuItemViewer = () => {
   // Variables

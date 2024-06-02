@@ -44,7 +44,8 @@ const Drivers = () => {
         .delete(`http://localhost:8082/api/drivers/${id}`)
         .then((res) => {
           alert(res.data.msg);
-          fetchDrivers(); // Refresh the drivers list after deletion
+          // Refresh the drivers list after deletion
+          fetchDrivers(); 
         })
         .catch((err) => alert(err.response.data.error));
     }

@@ -4,8 +4,8 @@ It renders all the components and routes them to the correct page.
 
 Created when the frontend was created, modified by:
 Tyler Costa 19075541
-Vidhusan S
-Ranier D
+Vidhusan 
+Ranier 
 Xuanhao
 
 
@@ -21,19 +21,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 // Components imports
-//Basically every frontend page we create, needs to be put here and in the router function
+//Basically every frontend component we create, needs to be put here and in the router function
 import CreateRestaurant from "./components/CreateRestaurant";
-import LoginPage from "./components/LoginPage"; 
 import SignUp from "./components/SignUp_NEW"; 
 import Dashboard from "./components/Dashboard"; 
 import UpdatePassword from "./components/UpdatePassword"; 
 import SettingsPage from "./components/SettingsPage"; 
 import DeleteAccount_User from "./components/DeleteAccount_User"; 
-import DeleteRestaurants from "./components/DeleteRestaurants"; 
 import ShowRestaurantDetails from "./components/ShowRestaurantDetails"; 
 import UpdateRestaurant from "./components/UpdateRestaurant"; 
 import CreateMenuItem from "./components/CreateMenuItem"; 
-import DeleteMenuItem from "./components/DeleteMenuItem"; 
 import MenuItemViewer from "./components/MenuItemViewer";
 import MenuItemEditor from "./components/MenuItemEditor";
 import Cart from "./components/Cart";
@@ -43,7 +40,6 @@ import ViewRestaurantReviews from "./components/ViewRestaurantReviews";
 import EditOrder from "./components/EditOrder";
 import AddDriver from "./components/AddDriver";
 import Drivers from "./components/Drivers";
-import Users from "./components/Users";
 import Reports from "./components/Reports";
 import DriverLogin from "./components/DriverLogin";
 import DriverDashboard from "./components/DriverDashboard";
@@ -54,7 +50,6 @@ import ViewDriverReviews from "./components/ViewDriverReviews";
 import EmailTests from "./components/EmailTests";
 import MapWithControls from "./components/MapWithControls";
 import DeliverOrder from "./components/DeliverOrder";
-import ButtonTest from "./components/buttonTest";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
 import Rewards from "./components/Rewards";
@@ -70,11 +65,9 @@ const router = createBrowserRouter([
   { path: "/UpdatePassword", element: <UpdatePassword /> },
   { path: "/SettingsPage", element: <SettingsPage /> },
   { path: "/DeleteAccount_User", element: <DeleteAccount_User /> },
-  { path: "/delete-restaurant", element: <DeleteRestaurants /> },
   { path: "/ShowRestaurantDetails/:id", element: <ShowRestaurantDetails /> },
   { path: "/UpdateRestaurant/:id", element: <UpdateRestaurant /> },
   { path: "/CreateMenuItem/:id", element: <CreateMenuItem /> },
-  { path: "/DeleteMenuItem/", element: <DeleteMenuItem /> },
   { path: "/MenuItemViewer/:id", element: <MenuItemViewer /> },
   { path: "/MenuItemEditor/:id", element: <MenuItemEditor /> },
   { path: "/Cart/", element: <Cart /> },
@@ -84,7 +77,6 @@ const router = createBrowserRouter([
   { path: "/EditOrder/:id", element: <EditOrder /> },
   { path: "/AddDriver", element: <AddDriver /> },
   { path: "/Drivers", element: <Drivers />},
-  { path: "/Users", element: <Users />},
   { path: "/Reports", element: <Reports />},
   { path: "/DriverLogin", element: <DriverLogin />},
   { path: "/DriverDashboard", element: <DriverDashboard />},
@@ -97,7 +89,6 @@ const router = createBrowserRouter([
   { path: "/SettingsPage_User", element: <SettingsPage_User />},
 
   //These are imports for testing pages
-  { path: "/ButtonTest", element: <ButtonTest />},
   { path: "/EmailTests", element: <EmailTests />},
   { path: "/Map", element: <MapWithControls />},
 

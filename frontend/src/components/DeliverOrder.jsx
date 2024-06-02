@@ -3,7 +3,7 @@ DeliverOrder.jsx
 This page handles the delivery of an order from the drivers side. Once the driver has arrived at the delivery location,
 they can mark the order as delivered. This will update the order status in the database and add the delivery fee to the drivers wallet.
 
-Created by Xuanhao Wa
+Created by Xuanhao Wang
 
 */
 // React imports

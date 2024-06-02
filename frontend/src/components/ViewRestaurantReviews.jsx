@@ -50,13 +50,15 @@ const ViewRestaurantReviews = () => {
   }, [id]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // display loading message while fetching data
+    // display loading message while fetching data
+    return <div>Loading...</div>; 
   }
 
   return (
 
     <div>
-      <UserDashboard /> {/* Use UserDashboard */}
+      {/* Header */}
+      <UserDashboard /> 
       <h1>Reviews for Restaurant: {restaurant ? restaurant.restaurantName : 'Loading...'}</h1>
       <button className='restaurantButton' onClick={() => navigate(`/ShowRestaurantDetails/${restaurant ? restaurant._id : ''}`)}>Back to {restaurant.restaurantName}</button>
 

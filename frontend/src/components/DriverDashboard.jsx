@@ -78,7 +78,7 @@ const Dashboard = () => {
 
   //Fetch the driver's wallet balance
   useEffect(() => {
-    if (email) { // Only make the request if email is not an empty string
+    if (email) { 
       axios.get(`http://localhost:8082/api/drivers/email/${email}`)
         .then(res => {
           setUserID(res.data._id);
@@ -86,7 +86,8 @@ const Dashboard = () => {
         })
         .catch(err => console.log(err));
     }
-  }, [email]); // Add email as a dependency
+    //inlcuded email as dependeciy because sometimes useEffect is called too early before email is fetched
+  }, [email]); 
 
   //Fetch the orders
   useEffect(() => {

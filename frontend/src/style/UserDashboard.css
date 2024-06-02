@@ -1,3 +1,11 @@
+/*
+Header css 
+
+Vidhusan Surenthiran
+This is the css for the header of every page except for the login page, the login page has its own header - Tyler
+
+*/
+
 /* UserDashboard container */
 body {
   display: flex;
