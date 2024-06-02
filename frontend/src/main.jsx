@@ -52,6 +52,8 @@ import MapWithControls from "./components/MapWithControls";
 import DeliverOrder from "./components/DeliverOrder";
 import HomePage from "./components/HomePage";
 import Login from "./components/Login";
+import LoginPage from "./components/LoginPage"; 
+
 import Rewards from "./components/Rewards";
 import SettingsPage_User from "./components/SettingsPage_User";
 
@@ -87,6 +89,7 @@ const router = createBrowserRouter([
   { path: "/Rewards", element: <Rewards />},
   { path: "/DeliverOrder/:id", element: <DeliverOrder />},
   { path: "/SettingsPage_User", element: <SettingsPage_User />},
+  { path: "/oldLogin", element: <LoginPage /> },
 
   //These are imports for testing pages
   { path: "/EmailTests", element: <EmailTests />},

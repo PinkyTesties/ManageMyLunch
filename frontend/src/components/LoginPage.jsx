@@ -1,3 +1,12 @@
+/*
+This is the old login page before the new design was implemented. 
+The new design is more user friendly and has a better layout. 
+
+Note that this is using div classnames from the log rocket tutorial.
+
+Created by Vidhusan and Tyler Costa 19075541 
+*/
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
