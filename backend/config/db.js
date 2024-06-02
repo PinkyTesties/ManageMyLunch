@@ -4,10 +4,11 @@
 // Created By Tyler Costa
 
 const mongoose = require("mongoose");
-const db =
+require("dotenv").config();
+const db = process.env.MONGO_URL;
   
   //This is the connection string to the MongoDB database, it contains the username and password for the database
- "mongodb+srv://btj0392:yNgwDBoS5mouG4wC@cluster0.31u7ub6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// "mongodb+srv://btj0392:yNgwDBoS5mouG4wC@cluster0.31u7ub6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 
 

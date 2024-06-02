@@ -15,6 +15,7 @@ When adding routes, declare them at the top of the file and then use them in the
 const express = require("express");
 const connectDB = require("./config/db");
 const session = require("express-session"); 
+const MemoryStore = require('memorystore')(session);
 const cookieParser = require ('cookie-parser');
 const bodyParser = require("body-parser");
 require("dotenv").config();
@@ -58,6 +59,9 @@ app.use("/", authRoute);
 //Session information
 app.use(session({
       secret: "secret", 
+      store: new MemoryStore({
+        checkPeriod: 86400000 
+      }),
       resave: false,
       saveUninitialized: false, 
       cookie: {
