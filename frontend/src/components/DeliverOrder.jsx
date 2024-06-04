@@ -3,7 +3,7 @@ DeliverOrder.jsx
 This page handles the delivery of an order from the drivers side. Once the driver has arrived at the delivery location,
 they can mark the order as delivered. This will update the order status in the database and add the delivery fee to the drivers wallet.
 
-Created by Xuanhao Wang
+Created by Xuanhao Wang & Tyler Costa 19075541
 
 */
 // React imports
@@ -125,7 +125,7 @@ const DeliverOrder = () => {
         axios
             .get("http://localhost:8082")
             .then((res) => {
-                console.log(res.data); // Log the response data
+                console.log(res.data); 
                 if (res.data.valid) {
                     setName(res.data.name);
                     setEmail(res.data.email);
