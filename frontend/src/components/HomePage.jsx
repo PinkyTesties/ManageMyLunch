@@ -43,7 +43,7 @@ const HomePage = () => {
             <div className="info-box">
               <h2>Login</h2>
               <p>Login as a customer here</p>
-              <button onClick={() => navigate('/login')}className="cta-button">Sign Up to Drive</button>
+              <button onClick={() => navigate('/login')}className="cta-button">Login</button>
             </div>
             <div className="info-box">
               <h2>Driver Login</h2>
