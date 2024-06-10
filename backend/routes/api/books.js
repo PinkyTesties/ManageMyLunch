@@ -1,3 +1,15 @@
+/*
+This is the books api route for the backend.
+
+This is from the tutorial: https://blog.logrocket.com/mern-stack-tutorial/
+We will use this as a template for our own routes.
+
+Reference:
+Islam, N. (2023). MERN Stack Tutorial. LogRocket.
+https://blog.logrocket.com/mern-stack-tutorial/
+
+*/
+
 // routes/api/books.js
 
 const express = require('express');

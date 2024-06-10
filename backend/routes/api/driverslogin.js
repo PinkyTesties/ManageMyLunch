@@ -1,13 +1,20 @@
 //api/login.js
 
+/**
+THis is the api code for the login. It is used to login drivers.
+It is based on Books.js from Logrocket's MERN stack tutorial: https://blog.logrocket.com/mern-stack-tutorial/
+
+Created by Tyler Costa 19075541
+
+ */
 const express = require('express');
 const router = express.Router();
 
-// Load Driver model
+// Get Driver model
 const Driver = require('../../models/Drivers');
 
 // @route   POST api/login
-// @desc    Login friver
+// @desc    Login driver
 // @access  Public
 router.post('/', (req, res) => {
   const { email, password } = req.body;
@@ -22,7 +29,7 @@ router.post('/', (req, res) => {
       // Check if password matches
       if (driver.password === password) {
         // Password matches, send success response
-
+        //This sets teh session data
         req.session.name = driver.name;
         req.session.id = driver._id;
         req.session.email = driver.email;

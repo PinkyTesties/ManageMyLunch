@@ -4,6 +4,9 @@
 This is the Driver database Model for Mongo.
 Where we store & access driver account information:
 name, email, password, date_added, updated_date
+- Added wallet balance
+
+Tyler Costa 19075541
 
 */
 const mongoose = require('mongoose');

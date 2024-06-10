@@ -1,84 +1,93 @@
-/* Header.css */
+/* Header.css 
 
-.header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px 0; /* Increase padding for a more spacious look */
-}
+Vidhusan Surenthiran 
 
-.container {
+This header is only for the login page, not the rest of the website, 'User Dashboard' is global header - Tyler
+
+*/
+
+/* this class is used to style the header container */
+.header-container {
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    padding: 40px 40px 20px; 
+    margin: 0;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 120px; 
+    position: relative;
+    text-size-adjust: 100%;
+  }
+  
+  /* this class is used to style the header content */
+  .header-content {
+    display: flex; 
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px; /* Increase padding for more space on the sides */
-}
-
-.left-section,
-.right-section {
+    width: 100%;
+  }
+  
+  /* this class is used to style the left section of the header */
+  .header-left-section {
     display: flex;
     align-items: center;
-    gap: 20px; /* Add gap to create space between elements */
-}
-
-.title {
-    font-size: 2rem; /* Increase font size for more emphasis */
-    margin: 0;
-    margin-left: 10px;
-    color: #333333;
-    font-weight: 600; /* Make the title bolder */
-}
-
-.search-bar-container {
-    margin-right: 20px;
-}
-
-.search-bar {
-    width: 300px;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: border-color 0.3s ease; /* Add transition for a smooth effect */
-}
-
-.search-bar:focus {
-    border-color: #333333; 
-}
-
-.auth-buttons {
+    gap: 30px;
+  }
+  
+  .header-title {
+    font-weight: bold;
+    font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 33px;
+    color: #000; 
+  }
+  
+  .header-title span {
+    color: #1e293b; 
+  }
+  
+  /* this class is used to style the right section of the header */
+  .header-right-section {
     display: flex;
     align-items: center;
-    gap: 10px; 
-}
+    gap: 20px;
+  }
 
-.login,
-.signup {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    background-color: #ffcc29;
-    color: #333333;
-    font-size: 16px;
-    border: none;
+  
+  /* this class is used to style the login and signup buttons */
+  .header-login-button, .header-signup-button {
+    background-color: #fff;
+    border: 0 solid #e2e8f0;
+    border-radius: 0.5rem; 
+    box-sizing: border-box;
+    color: #1e293b; 
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease; 
-}
-
-.login:hover,
-.signup:hover {
-    background-color: #ffc107;
-    transform: scale(1.05); /* Increase size on hover */
-}
-.auth-button {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    background-color: #007bff;
-    color: #ffffff;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    display: inline-block;
+    font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.8rem 1.4rem; 
+    text-align: center;
+    text-decoration: none #0d172a solid;
+    text-decoration-thickness: auto;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .header-login-button:hover, .header-signup-button:hover {
+    background-color: #1e293b;
+    color: #fff;
+  }
+  
+  
+  @media (min-width: 768px) {
+    .header-login-button, .header-signup-button {
+      font-size: 1rem; 
+      padding: 0.9rem 1.8rem; 
+    }
+  }
+  

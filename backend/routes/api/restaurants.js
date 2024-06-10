@@ -1,5 +1,9 @@
 // routes/api/restaurants.js
+/*
+This is the api code for the restaurants. It is used to create, get, update and delete restaurants.
 
+Created by Tyler Costa 19075541
+*/
 const express = require('express');
 const multer = require('multer');
 
@@ -8,6 +12,7 @@ const router = express.Router();
 // Load restaurants model
 const Restaurant = require('../../models/Restaurants');
 
+// Set up storage for images that are uploaded
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './restaurant_assets');
@@ -18,10 +23,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// @route   GET api/restaurants/test
-// @desc    Tests restaurants route
-// @access  Public
-router.get('/test', (req, res) => res.send('restaurants route testing!'));
 
 // @route   GET api/restaurants
 // @desc    Get all restaurants

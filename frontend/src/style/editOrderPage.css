@@ -1,0 +1,87 @@
+/*
+CSS for editOrder page when a customer is editing their order before the 5 minute window has passed
+Using same styling as the completeOrder page
+Created by Tyler Costa 19075541
+*/
+
+.editPage-order-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styles for the dashboard section */
+  .editPage-dashboard-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the form container */
+  .editPage-edit-order-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* order title */
+  .editPage-order-title {
+    text-align: center;
+    color: #343a40;
+  }
+  
+  /* order id */
+  .editPage-order-id {
+    margin-bottom: 20px;
+    color: #6c757d;
+  }
+  
+  /* imtes container */
+  .editPage-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  /* item name */
+  .editPage-item-name {
+    margin-right: 10px;
+  }
+  
+  /* item quantity */
+  .editPage-remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* item quantity */
+  .editPage-submit-btn, .cancel-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the buttons */
+  .editPage-submit-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* cancel button */
+  .editPage-cancel-btn {
+    background-color: #dc3545;
+    color: white;
+  }

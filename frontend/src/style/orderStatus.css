@@ -1,0 +1,89 @@
+/*
+
+Ranier De Gracia 20121310
+*/
+
+.cart-container-orderStatus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
+  }
+  
+  /* buttons */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin-bottom: 20px;
+  }
+  
+  /* status button */
+  .statusButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* status button hover */
+  .statusButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* current orders view */
+  .currentOrdersView {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .currentOrdersView > div {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(11, 11, 11, 0.1);
+    background-color: white;
+    width: 800px;
+  }
+
+  /* review button */
+  .reviewButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
+  
+  /* review button hover */
+  .reviewButton:hover {
+    background-color: #45a049;
+  }
+
+  /* pickup button */
+  .pickup-button {
+    background-color: rgb(0, 216, 0);
+    border: none;
+    padding: 20px 32px; 
+
+  }
+
+/* pickup button hover */
+.pickup-button:hover {
+    background-color: rgb(0, 180, 0);
+}

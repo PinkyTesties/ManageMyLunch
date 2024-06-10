@@ -1,71 +1,69 @@
+/*
+Login.jsx
+This file is used to display the login page of the website. The user can login as a customer from this page.
+
+Created by Vidhusan S
+
+*/
+
+//React imports
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+//Styles
 import '../style/Login.css';
 
-// Set axios default configuration
-axios.defaults.withCredentials = true;
-
 const Login = () => {
+    //Variables
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    //Handle the form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         setError('');
 
         try {
             const { data } = await axios.post('http://localhost:8082/api/login', { email, password });
-            const { success, message, userExists } = data;
+            const { success, userExists } = data;
             if (success) {
                 navigate('/dashboard');
             } else {
-                if (!userExists) {
-                    setError("User doesn't exist. Please sign up.");
-                } else {
-                    setError("Incorrect password");
-                }
+                setError(userExists ? "Incorrect password" : "User doesn't exist. Please sign up.");
             }
         } catch (error) {
-            if (error.response && error.response.data) {
-                let errorMessage = error.response.data.message || error.response.data.error || "An error occurred. Please try again.";
-                setError(errorMessage);
-            } else {
-                setError("An error occurred. Please try again.");
-            }
+            setError(error.response && error.response.data ? error.response.data.message || error.response.data.error : "An error occurred. Please try again.");
         }
     };
 
+    //Render the login page content
     return (
-        <div className="login-container">
-            <div className="forms-container">
-                <div className="signin-signup">
-                    <form onSubmit={handleSubmit} className="form-container">
-                        <h2 className="title">Sign in</h2>
-                        <div className="form-group">
-                            <input 
-                                type="email" 
-                                placeholder="Email" 
-                                value={email} 
-                                onChange={(e) => setEmail(e.target.value)} 
+        <div className="loginPage">
+            <div className="formContainer">
+                <div className="loginFormContainer">
+                    <form onSubmit={handleSubmit} className="loginForm">
+                        <h2 className="formTitle">Sign in</h2>
+                        <div className="inputGroup">
+                            <input
+                                type="email"
+                                id = "email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div className="form-group">
-                            <input 
-                                type="password" 
-                                placeholder="Password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
+                        <div className="inputGroup">
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <button type="submit" className="btn solid">Login</button>
-                        <p className="social-text">Or Sign in with social platforms</p>
-                        <div className="social-media">
-                            {/* social media links here */}
-                        </div>
+                        <button type="submit" className="submitButton">Login</button>
+                        <p><a href="#" className="forgotPassword">Forgot Password?</a></p>
                     </form>
                 </div>
             </div>

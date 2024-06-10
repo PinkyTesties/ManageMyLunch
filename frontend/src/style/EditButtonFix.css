@@ -1,0 +1,14 @@
+/* This file contains the CSS for the Disabled button in orderStatus
+- Tyler Costa 19075541
+
+*/
+
+  .edit-button.disabled {
+    background-color: grey; 
+    color: white;
+   }
+  
+  .edit-button.disabled:hover {
+    background-color: grey; 
+    color: white; 
+  }

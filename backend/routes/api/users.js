@@ -1,3 +1,11 @@
+/*
+This is users.js
+This is the api code for the users. It is used to create, get, update and delete users.
+It also has a route to verify the email of a user.
+
+// Created by Tyler Costa 19075541 and Vidhusan
+*/
+
 const express = require('express');
 const router = express.Router();
 
@@ -90,6 +98,42 @@ router.put('/:id', (req, res) => {
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
     );
+});
+
+// @route   PUT api/users/email/:email
+// @desc    Update user by email
+// @access  Public
+router.put('/email/:email', (req, res) => {
+  User.findOneAndUpdate({ email: req.params.email }, req.body)
+    .then(user => res.json({ msg: 'Updated successfully' }))
+    .catch(err =>
+      res.status(400).json({ error: 'Unable to update the Database' })
+    );
+});
+
+// @route   PUT api/users/update-password
+// @desc    Update user password
+// @access  Public
+router.put('/update-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  // Find the user by email
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(400).json({ error: 'No user found with this email' });
+  }
+
+  // Update the user's password
+  user.password = newPassword;
+
+  // Save the updated user
+  try {
+    await user.save();
+    res.json({ msg: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error updating password' });
+  }
 });
 
 // @route   DELETE api/users/:id

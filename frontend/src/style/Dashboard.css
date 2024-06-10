@@ -1,0 +1,208 @@
+/* Dashboard container */
+
+/*
+
+Ranier De Gracia 20121310 
+and 
+Vidhusan Surenthiran 19083603
+*/
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Header */
+.dashboard-header {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+/* Title */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* User info */
+.user-info {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Menu buttons */
+.menu-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Account button */
+.account-button,
+.reports-button,
+.order-button,
+.cart-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+}
+/* Account button hover effect */
+.account-button:hover,
+.reports-button:hover,
+.order-button:hover,
+.cart-button:hover {
+  background-color: #666;
+}
+
+/* Button focus effect */
+.account-button:focus,
+.reports-button:focus,
+.order-button:focus,
+.cart-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Account modal */
+.account-modal {
+  position: absolute;
+  top: 50px;
+  right: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 9999;
+}
+
+/* Account modal link */
+.account-modal a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+/* Account modal link hover effect */
+.account-modal a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Restaurant list */
+.restaurant-list {
+  padding: 20px;
+  flex-grow: 1;
+  background-color: rgb(219, 231, 231);
+  
+}
+
+/* Filter container */
+.filter-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Filter button */
+.filter-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  width: 80px; 
+  text-align: center;
+}
+
+.filter-button.active,
+.filter-button:hover {
+  background-color: #666;
+}
+
+.filter-button img {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/* Restaurant cards */
+.restaurant-cards {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Rewards title */
+.rewards-title {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Restaurant row */
+.restaurant-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Add restaurant button */
+.add-restaurant-button,
+.remove-restaurant-button {
+  color: #fff;
+  text-decoration: none;
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 10px 5px;
+}
+
+/* Add restaurant button hover effect */
+.add-restaurant-button:hover,
+.remove-restaurant-button:hover {
+  background-color: #666;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+

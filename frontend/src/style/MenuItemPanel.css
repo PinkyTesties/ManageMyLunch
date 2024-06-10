@@ -1,0 +1,50 @@
+/*
+
+Menu item panel css, 
+styling for the menu item panel in the restaurant page
+
+Ranier De Gracia
+
+*/
+
+/* Styles for the restaurant image */
+.menucard-container img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /*restaurant image hover effect */
+.menucard-container img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Styles for responsive design */
+  @media (max-width: 768px) {
+    .menucard-container img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  /* title */
+  .title {
+    margin-top: 10px; /* Adjust this value to increase or decrease the space */
+  }
+  
+  /* delete button */
+  .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* delete button hover effect */
+  .deleteButton:hover {
+    background-color: darkred;
+  }

@@ -1,0 +1,51 @@
+/*
+AddDriver.css
+
+Created by: Tyler Costa 19075541
+
+*/
+/* Styles for the container */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Styles for the form */
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+/* Styles for the form label*/
+.formContainer label {
+    margin-bottom: 10px;
+}
+
+/* Styles for the form input */
+.formContainer input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Styles for the form button */
+.driverButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

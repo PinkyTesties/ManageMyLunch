@@ -1,37 +1,49 @@
+/*
+OrderStatus.jsx
+
+This page displays the users current and past orders
+Current orders:
+- The uesr can view the details and current status of their order (Pending, Accepted By Driver, Delivered)
+- The user can edit their order if the order is still pending
+- The user has 5 minutes to edit their order before the time elapses
+- The user can confirm the order pickup if the order has been delivered, redirecting to the CompleteOrder page
+
+Past orders:
+- The user can view the details of their past orders
+- The user can rate the restaurant and driver for each past order
+
+Created by Tyler Costa 19075541 and Ranier
+*/
+
+// React imports
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Modal from "react-modal";
-import "./EditButtonFix.css";
 import { Link } from "react-router-dom";
-import logo from "./componentAssets/logov1.png";
 import { useNavigate } from "react-router-dom";
-import { pushNotification } from './jsFiles/pushNotifications';
 
-import { differenceInSeconds } from 'date-fns'; // Import this function
-
-
-Modal.setAppElement("#root");
+//Styles
+import "../style/EditButtonFix.css";
+// Header
+import UserDashboard from "./UserDashboard";
+//Styles
+import '../style/orderStatus.css';
+// Footer
+import Footer from "./sharedComponents/Footer";
 
 function OrderStatus() {
+  // Variables
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [university, setUniversity] = useState("");
   const [userID, setUserID] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
   const [orders, setOrders] = useState([]);
   const [menuItems, setMenuItems] = useState({});
-  const [countdowns, setCountdowns] = useState({});
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [totalRemainingTimeInSeconds, setTotalRemainingTimeInSeconds] = useState(0);
-
-  //const uniqueMenuItemIds = [...new Set(menuItemIds)];
+  const [view, setView] = useState('current');
 
   const navigate = useNavigate();
-
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const prevTotalRemainingTimeInSeconds = useRef();
 
@@ -45,17 +57,7 @@ function OrderStatus() {
     }
   }, [totalRemainingTimeInSeconds]);
 
-  const customStyles = {
-    content: {
-      top: "0%",
-      right: "0%",
-      bottom: "auto",
-      left: "auto",
-      width: "20%",
-      height: "50%",
-    },
-  };
-
+  // Fetch user details from session
   useEffect(() => {
     axios
       .get("http://localhost:8082")
@@ -73,6 +75,7 @@ function OrderStatus() {
       .catch((err) => console.log(err));
   }, []);
 
+  // Fetch menu items for each order
   useEffect(() => {
     if (orders.length > 0) {
       const fetchMenuItems = async () => {
@@ -106,27 +109,17 @@ function OrderStatus() {
     }
   }, [orders]);
 
-  //This updates the date and time every second
-  // useEffect(() => {
-  //     const timer = setInterval(() => {
-  //         setIsButtonDisabled(true);
-
-  //         setCurrentTime(new Date());
-  //     }, 1000); // Update every second
-
-  //     // Cleanup function to clear the interval when the component unmounts
-  //     return () => clearInterval(timer);
-  // }, []);
-
+  // Update the current time every second
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000); // Update every second
+    }, 1000); 
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(timer);
   }, []);
 
+  // Fetch orders from the API using the user's email
   const fetchOrders = (email) => {
     axios
       .get(`http://localhost:8082/api/completedCarts/${email}`)
@@ -142,16 +135,19 @@ function OrderStatus() {
       });
   };
 
+  // Fetch orders every second, can be updated to fetch less frequently for performance
   useEffect(() => {
-    const intervalId = setInterval(() => fetchOrders(email), 1000); // Fetch every second
+    const intervalId = setInterval(() => fetchOrders(email), 1000); 
 
     // Clear interval on component unmount
     return () => clearInterval(intervalId);
-  }, [email]); // Depend on email prop
+  }, [email]); 
 
+  // Render the page
   return (
-    <>
+    <div>
       <div>
+<<<<<<< HEAD
         <header className="header">
           <img src={logo} alt="Logo" height={100} />
           <h1>Manage My Lunch Dashboard</h1>
@@ -188,14 +184,39 @@ function OrderStatus() {
           <a href="OrderStatus">Orders</a><br></br>
           <a href="/">Logout</a><br></br>
         </Modal>
+=======
+        {/**User dashboard */}
+        <UserDashboard />
 
-        <h1>Order Confirmation</h1>
-        <p>Thank you for your order!</p>
-        <p>
-          Your order has been placed successfully and is now being processed.
-        </p>
-        <p>We will send you an email confirmation shortly.</p>
+        <div className="cart-container-orderStatus">
+          <div className="buttons">
+            {/** Buttons to switch between page views */}
+            <button className="statusButton" onClick={() => setView('current')}>Current Orders</button>
+            <button className="statusButton" onClick={() => setView('past')}>Past Orders</button>
+          </div>
 
+          {/**Display current orders */}
+          {view === 'current' ? (
+            <div className="currentOrdersView">
+            {/**Only displays orders that are delivered, accepted by driver, pending */}
+              {orders
+                .filter(
+                  (order) =>
+                    
+                    order.orderStatus === "Delivered" ||
+                    order.orderStatus == "Accepted By Driver" ||
+                    order.orderStatus === "Pending"
+                )
+                .map((order, index) => {
+>>>>>>> origin/main
+
+                  // Convert the order date_created to Date object
+                  const orderDate = new Date(order.date_created);
+                  const year = orderDate.getFullYear();
+                  const month = orderDate.getMonth();
+                  const day = orderDate.getDate();
+
+<<<<<<< HEAD
         <p>{/*Your order ID is: { }*/}</p>
         <h3>Current orders</h3>
         <div className="current-orders">
@@ -271,25 +292,147 @@ function OrderStatus() {
                   }
                   {order.delivery_date.split("T")[0] === new Date().toISOString().split("T")[0] &&
                     <p>Delivery Date: {order.delivery_date.split("T")[0]} (Today)</p>
+=======
+                  // Convert time_created to 24-hour format
+                  const [time, modifier] = order.time_created.split(" ");
+                  let [hours, minutes, seconds] = time.split(":");
+                  if (modifier === "PM" && hours !== "12") {
+                    hours = Number(hours) + 12;
+                  } else if (modifier === "AM" && hours === "12") {
+                    hours = "00";
+>>>>>>> origin/main
                   }
 
-                  <p>
-                    Order Contents:{" "}
-                    {order.menuItems
-                      .map((id) => menuItems[id] || id)
-                      .join(", ")}
-                  </p>
+                  //Convert hours to string
+                  hours = hours.toString();
 
-                  {order.additionalInfo !== "" ? (
-                    <p>Additional Info: {order.additionalInfo}</p>
-                  ) : (
-                    <p>No additional information</p>
-                  )}
-                  <p>Status: {order.orderStatus}</p>
+                  // Format the time to HH:MM:SS
+                  const time24 = `${hours.padStart(2, "0")}:${minutes}:${seconds}`;
 
+                  // Create the orderTime Date object
+                  const orderTime = new Date(
+                    year,
+                    month,
+                    day,
+                    ...time24.split(":")
+                  );
 
-                  {/*<p>Driver contact: {order.driver_email}</p>*/}
+                  // Calculate the total remaining time in seconds
+                  const totalRemainingTimeInSeconds = Math.max(
+                    0,
+                    5 * 60 - (currentTime - orderTime) / 1000
+                  );
 
+                  // Calculate the remaining minutes and seconds
+                  const remainingMinutes = Math.floor(
+                    totalRemainingTimeInSeconds / 60
+                  );
+                  const remainingSeconds = Math.floor(
+                    totalRemainingTimeInSeconds % 60
+                  );
+
+                  // Return the order status container with the order details
+                  return (
+                    <div className="completed-order-container-orderStatus"
+                      key={index}
+
+                    >
+                      <h1>Order From {order.restaurant_name}</h1>
+
+                      <h3>Cost: ${order.cost.toFixed(2)}</h3>
+                      <p>Thank you for your order!</p>
+                      <br></br>
+                      <p>{order.email}</p>
+                      <p>
+                        Menu Items:{" "}
+                        {order.menuItems
+                          .map((id) => menuItems[id] || id)
+                          .join(", ")}
+                      </p>
+                      <p>Additional Info: {order.additionalInfo}</p>
+                      <p>Status: {order.orderStatus}</p>
+                      <p>Order code: {order.code}</p>
+                      <p>Driver contact: {order.driver_email}</p>
+
+                      <p></p>
+                      {/**On;y display the editable button if remaining time is greater than > 0 */}
+                      {totalRemainingTimeInSeconds > 0 ? (
+                        <Link to={`/EditOrder/${order._id}`}>
+                          <button className="edit-button">Edit Order</button>
+                        </Link>
+                      ) : (
+
+                        <button disabled className="edit-button disabled">
+                          Edit Order
+                        </button>
+                      )}
+                      {/**Display the remaining time if the order is still pending, 
+                       * else display the time elapsed message
+                       */}
+                      {totalRemainingTimeInSeconds > 0
+                        ? ` Time Remaining: ${remainingMinutes} minutes ${remainingSeconds} seconds`
+                        : " Edit Time has elapsed"}
+                      {
+                
+                        order.orderStatus === "Delivered" && (
+                          
+                          <button className='pickup-button' onClick={() => navigate(`/CompleteOrder`)}>
+                            Confirm Order Pickup
+                          </button>
+                        )
+                      }
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+
+            <div className="currentOrdersView">
+            {/**Display title container */}
+
+              <div className="completed-order-container-orderStatus">
+                <h3>Your previous orders</h3>
+
+              </div>
+              
+
+            {/**Display past orders */}
+
+                {orders
+                  .filter((order) => order.orderStatus === "Completed")
+                  .map((order, index) => (
+                    <div className="completed-order-container-orderStatus">
+                    <div
+                      key={index}
+
+                    >
+                      <h2>{order.restaurant_name}</h2>
+                      <h2>Cost: ${order.cost.toFixed(2)}</h2>
+
+                      <p>Email: {order.email}</p>
+                      <p>
+                        Menu Items:{" "}
+                        {order.menuItems.map((id) => menuItems[id] || id).join(", ")}
+                      </p>
+                      <p>Additional Info: {order.additionalInfo}</p>
+                      <p>Status: {order.orderStatus}</p>
+
+                      {/** Buttons to review the restauant or driver */}
+                      <button className='reviewButton' onClick={() => navigate(`/ReviewForm/${order.restaurant_id}`)}>
+                        Rate this Restaurant
+                      </button>
+                      <button className='reviewButton' onClick={() => navigate(`/DriverReviewForm/${order.driver_email}`)}>
+                        Rate your Driver
+                      </button>
+                    </div>
+            </div>
+
+                  ))}
+              </div>
+
+          )}
+
+<<<<<<< HEAD
                   <p></p>
                   {totalRemainingTimeInSeconds > 0 ? (
                     <Link to={`/EditOrder/${order._id}`}>
@@ -311,48 +454,15 @@ function OrderStatus() {
                 </div>
               );
             })}   
+=======
+>>>>>>> origin/main
         </div>
       </div>
 
-      <div>
-        <h3>Order history</h3>
-        {orders
-          .filter((order) => order.orderStatus === "Completed")
-          .map((order, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid black",
-                padding: "10px",
-                margin: "10px",
-                width: "300px",
-                background: "#fff",
-              }}
-            >
-              <h2>Restaurant Name: {order.restaurant_name}</h2>
-              <h2>Cost: ${order.cost.toFixed(2)}</h2>
-              <p>Email: {order.email}</p>
-              <p>
-                Menu Items:{" "}
-                {order.menuItems.map((id) => menuItems[id] || id).join(", ")}
-              </p>
-              <p>Additional Info: {order.additionalInfo}</p>
-              <p>Status: {order.orderStatus}</p>
-              <button>
-                <Link to={`/ReviewForm/${order.restaurant_id}`}>
-                  Rate this Restaurant
-                </Link>
-              </button>
-              <button>
-                <Link to={`/DriverReviewForm/${order.driver_email}`}>
-                  Rate your Driver
-                </Link>
+      {/**Footer */}
+      <Footer />
 
-              </button>
-            </div>
-          ))}
-      </div>
-    </>
+    </div>
   );
 }
 

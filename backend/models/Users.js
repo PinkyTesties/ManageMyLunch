@@ -2,8 +2,12 @@
 
 /*
 This is the User database Model for Mongo.
-Where we store & access user account information:
-firstname, lastname, email, password, date_added, university, updated_date
+Where we store & access all user account information:
+firstname, lastname, email, password, date_added, university, updated_date, verified, 
+rewardsPoints, emailAfterPurchase, emailAfterDriverAcceptance, emailAfterDriverCollection, 
+emailAfterDriverDelivery, emailAfterOrderComplete, isAdmin
+
+Created by: Tyler Costa 19075541
 
 */
 const mongoose = require('mongoose');
@@ -41,6 +45,31 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  emailAfterPurchase: {
+    type: Boolean,
+    default: true
+  },
+  emailAfterDriverAcceptance: {
+    type: Boolean,
+    default: true
+  },
+  emailAfterDriverCollection: { 
+    type: Boolean,
+    default: true
+  },
+emailAfterDriverDelivery: { 
+  type: Boolean,
+  default: true
+},
+emailAfterOrderComplete: { 
+  type: Boolean,
+  default: true
+},
+isAdmin: {
+  type: Boolean,
+  default: false
+},
+
 
 });
 

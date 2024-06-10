@@ -1,13 +1,18 @@
 // routes/api/MenuItems.js
 
+/*
+This is the api code for the menu items. It is used to create, get, update and delete menu items.
+
+*/
 const express = require('express');
 const multer = require('multer');
 
 const router = express.Router();
 
-// Load MenuItem model
+// store MenuItem model
 const MenuItems = require('../../models/MenuItem');
 
+// Set up storage for images
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './menuItem_assets');
@@ -49,16 +54,6 @@ router.get('/:id', (req, res) => {
 });
 
 // @route   POST api/menuItems
-// @desc    Add/save menuItem
-// @access  Public
-// router.post('/', (req, res) => {
-//   MenuItems.create(req.body)
-//     .then(menuItem => res.json({ msg: 'MenuItem added successfully' }))
-//     .catch(err => res.status(400).json({ error: 'Unable to add this menuItem' }));
-// });
-
-
-// @route   POST api/menuItems
 // @desc    Add/save menuItems
 // @access  Public
 router.post('/', upload.single('image'), (req, res) => {
@@ -76,6 +71,7 @@ router.post('/', upload.single('image'), (req, res) => {
     .then(menuItem => res.json({ msg: 'Menu item added successfully' }))
     .catch(err => res.status(400).json({ error: 'Unable to add this menu item' }));
 });
+
 // @route   PUT api/menuItems/:id
 // @desc    Update menuItems by id
 // @access  Public

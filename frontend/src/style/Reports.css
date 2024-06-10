@@ -1,0 +1,153 @@
+/*
+Vidhusan Surenthiran
+
+*/
+
+/* Define global variables for colors and font size */
+:root {
+  --primary-color: #343a40;
+  --secondary-color: #495057;
+  --background-color: #f8f9fa;
+  --white-color: #fff;
+  --light-gray: #ddd;
+  --border-color: #ced4da;
+  --font-size: 1.1em;
+}
+
+/* Set global styles for the body */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Define layout for the report container */
+.report {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Define styles for the report content */
+.report-content {
+  flex: 1;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--white-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Define styles for the report title */
+.report h2 {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Define styles for the horizontal rule in the report */
+.report hr {
+  border: 0;
+  height: 1px;
+  background: var(--light-gray);
+  margin: 20px 0;
+}
+
+/* Define layout for the menu buttons */
+.MenuButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Define styles for the menu buttons */
+.MenuButtons button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: var(--font-size);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Define hover effect for the menu buttons */
+.MenuButtons button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Define styles for labels and headings */
+label,
+h5,
+h4 {
+  font-size: var(--font-size);
+  color: var(--secondary-color);
+}
+
+/* Define margin for headings */
+h5,
+h4 {
+  margin-bottom: 10px;
+}
+
+/* Define styles for form inputs */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+/* Define styles for the receipt and user containers */
+.receipt-container,
+.user-container {
+  border: 1px solid var(--light-gray);
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 4px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-container {
+  border: 1px solid var(--light-gray);
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 4px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deleteUserContainer{
+  border: 1px solid var(--light-gray);
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 4px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Define styles for paragraphs in the receipt and user containers */
+.receipt-container p,
+.user-container p {
+  margin: 5px 0;
+  color: var(--primary-color);
+}
+
+/* Define responsive styles for the menu buttons */
+@media (max-width: 768px) {
+  .MenuButtons {
+    flex-direction: column;
+  }
+}

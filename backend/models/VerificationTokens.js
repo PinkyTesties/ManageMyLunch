@@ -1,4 +1,12 @@
+/* 
+VerificationTokens.js
 
+This is the Verification Token database Model for Mongo.
+Its used for storing the verification token and owner of the token.
+
+Created by Vidhusan 
+
+*/
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 // This is the schema for the verification token

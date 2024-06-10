@@ -1,0 +1,145 @@
+/*
+syling of page where you view each menu item
+
+Ranier De Gracia
+
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* menu item viewer */ 
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* button */
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* button hover */
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* button active */
+  button:active {
+    background-color: #004085;
+  }
+  
+  /* text area */
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  /* add to cart animation */
+  .animatedCartBtn {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .rotateIn {
+    animation: rotateIn 1s ease-in-out;
+  }
+  
+  .fadeIn {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes rotateIn {
+    from {
+      transform: rotate(-180deg);
+    }
+    to {
+      transform: rotate(0);
+    }
+  }
+
+  /* Styles for the main content area of the page */
+  .menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* increment ingredients  */
+  .buttonUp {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+/* button hover */
+  .buttonUp:hover {
+    background-color: #45a049;
+  }
+  
+
+  /* decrement ingredients */
+  .buttonDown {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  /* button hover */
+  .buttonDown:hover {
+    background-color: #c43e30;
+  }

@@ -1,5 +1,13 @@
 // models/Resturants.js
 
+/*
+This is the Restaurant database Model for Mongo.
+Where we store & access user account information:
+restaurantName, cuisine, address, latitude, longitude, rating, description, RestaurantImage
+
+Tyler Costa 19075541
+
+*/
 const mongoose = require('mongoose');
 
 const RestaurantSchema = new mongoose.Schema({

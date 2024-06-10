@@ -1,14 +1,21 @@
 //systemAdmin.js
+/*
+This is the route that handles the system admin functions.
+It is used to update the delivery fee and service fee.
 
+Created by Tyler Costa 19075541
+*/
 const express = require('express');
 const router = express.Router();
-const SystemAdmin = require('../../models/SystemAdmin'); // Path to your model file
+const SystemAdmin = require('../../models/SystemAdmin'); 
 
+// @route   POST api/systemAdmin/updateDeliveryFee
+// @desc    Update the delivery fee
+// @access  Public
 router.post('/updateDeliveryFee', async (req, res) => {
     const newFee = req.body.fee;
 
     try {
-        // Find the SystemAdmin document and update it
         const admin = await SystemAdmin.findOneAndUpdate({}, { deliveryFee: newFee }, { new: true, upsert: true });
 
         res.status(200).send({ message: 'Delivery fee updated successfully' });
@@ -18,11 +25,14 @@ router.post('/updateDeliveryFee', async (req, res) => {
     }
 });
 
+// @route   POST api/systemAdmin/updateServiceFee
+// @desc    Update the service fee
+// @access  Public
 router.post('/updateServiceFee', async (req, res) => {
     const newFee = req.body.fee;
 
     try {
-        // Find the SystemAdmin document and update it
+        //literally identical to the delivery fee update
         const admin = await SystemAdmin.findOneAndUpdate({}, { serviceFee: newFee }, { new: true, upsert: true });
 
         res.status(200).send({ message: 'Service fee updated successfully' });
@@ -32,17 +42,13 @@ router.post('/updateServiceFee', async (req, res) => {
     }
 });
 
+// @route   GET api/systemAdmin/getDeliveryFee
+// @desc    Get the delivery fee
+// @access  Public
 router.get('/getDeliveryFee', async (req, res) => {
     try {
-        // Find the SystemAdmin document
         const admin = await SystemAdmin.findOne();
 
-        // If no SystemAdmin document exists, return an error
-        if (!admin) {
-            return res.status(404).send({ message: 'No SystemAdmin document found' });
-        }
-
-        // Send the deliveryFee as the response
         res.send({ fee: admin.deliveryFee });
     } catch (error) {
         console.error(error);
@@ -50,17 +56,13 @@ router.get('/getDeliveryFee', async (req, res) => {
     }
 });
 
+// @route   GET api/systemAdmin/getServiceFee
+// @desc    Get the service fee
+// @access  Public
 router.get('/getServiceFee', async (req, res) => {
     try {
-        // Find the SystemAdmin document
         const admin = await SystemAdmin.findOne();
 
-        // If no SystemAdmin document exists, return an error
-        if (!admin) {
-            return res.status(404).send({ message: 'No SystemAdmin document found' });
-        }
-
-        // Send the serviceFee as the response
         res.send({ fee: admin.serviceFee });
     } catch (error) {
         console.error(error);

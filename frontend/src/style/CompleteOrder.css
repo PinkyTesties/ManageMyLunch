@@ -1,0 +1,63 @@
+/*style for the complete order page*/
+
+/*
+
+Ranier De Gracia 20121310
+*/
+/* .main-container { */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styles for the main heading of the page */
+  .dashboard-section {
+    margin-bottom: 20px;
+  }
+  
+  /* Styles for the form container */
+  .complete_order {
+    width: 80%;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Styles for the form */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Styles for the buttons */
+  .search-button, .complete-button {
+    padding: 10px 20px;
+    background-color: #006aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Styles for the hover state of the buttons */
+  .search-button:hover, .complete-button:hover {
+    background-color: #0055cc;
+  }
+  
+  /* Styles for the order details */
+  .code-display, .message-display {
+    margin: 10px 0;
+  }
+  
+  /* Styles for the order details */
+  .order-details {
+    background-color: #00ff1e2b;
+    padding: 10px;
+    border-radius: 5px;
+  }

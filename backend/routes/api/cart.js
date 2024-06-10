@@ -1,7 +1,14 @@
+/*
+This is cart.js
+This is the api code for the cart. It is used to create, get, update and delete carts.
+
+Created by Tyler Costa 19075541
+*/
+
 const express = require('express');
 const router = express.Router();
 
-const Cart = require('../../models/Cart'); // adjust the path as necessary
+const Cart = require('../../models/Cart'); 
 
 // Create a new cart
 router.post('/', async (req, res) => {
@@ -58,14 +65,14 @@ router.post('/add', async (req, res) => {
     // If a cart was found, add the new item to the menuItems array and update the cost
     cart.menuItems.push(menuItem);
     cart.cost += menuItem.cost * quantity;
-    cart.restaurant_id = restaurant_id; // add this line
+    cart.restaurant_id = restaurant_id; 
   } else {
     // If no cart was found, create a new one
     cart = new Cart({
       email: email,
       menuItems: [menuItem],
       cost: menuItem.cost * quantity,
-      restaurant_id: restaurant_id // add this line
+      restaurant_id: restaurant_id 
     });
   }
 

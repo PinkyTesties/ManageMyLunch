@@ -1,20 +1,118 @@
-.home {
-    font-family: Arial, sans-serif;
-  }
-  
-  .home-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .home-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  
-  .restaurant-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
+/*
+Vidhusan Surenthiran
+
+Sets the default styles for the entire page */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Main container for the page, set to take up at least the full height of the viewport */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Flex container that grows to take up any remaining space in the .page-container */
+.content-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles the hero section of the page */
+.hero-section {
+  color: #333;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Styles the main heading in the hero section */
+.hero-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+/* Styles the paragraph text in the hero section */
+.hero-section p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Styles a button in the hero section */
+.hero-button {
+  background-color: #646cff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+/* Styles the hover state of the button in the hero section */
+.hero-button:hover {
+  background-color: #535bf2;
+}
+
+/* Styles the main content area of the page */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-bottom: 100px; /* Adjust this value as needed */
+}
+
+/* Styles individual info boxes within the content */
+.info-box {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Styles the hover state of the info boxes */
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles the headings in the info boxes */
+.info-box h2 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+/* Styles the paragraph text in the info boxes */
+.info-box p {
+  margin-bottom: 20px;
+}
+
+/* Styles a call-to-action button */
+.cta-button {
+  background-color: #646cff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+/* Styles the hover state of the call-to-action button */
+.cta-button:hover {
+  background-color: #535bf2;
+}

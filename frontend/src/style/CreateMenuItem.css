@@ -1,0 +1,31 @@
+/*
+
+Ranier De Gracia 20121310
+*/
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the form container */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Styles for the page organisation */
+  .mainContentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    overflow: auto;
+  }

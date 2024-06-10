@@ -1,4 +1,14 @@
 // models/University.js
+
+/*
+This is the university database Model for Mongo.
+Where we store university information:
+name, address, coordinates
+
+Tyler Costa 19075541
+
+
+*/
 const mongoose = require('mongoose');
 
 const UniversitySchema = new mongoose.Schema({

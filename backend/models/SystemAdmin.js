@@ -1,4 +1,13 @@
 //SystemAdmin.js
+
+/*
+This is the System Admin database Model for Mongo.
+Where we store system information:
+deliveryFee, serviceFee
+
+Tyler Costa 19075541
+
+*/
 const mongoose = require('mongoose');
 
 const SystemAdminSchema = new mongoose.Schema({
@@ -10,7 +19,6 @@ const SystemAdminSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    // Add other fields as necessary
 });
 
 const SystemAdmin = mongoose.model('SystemAdmin', SystemAdminSchema);

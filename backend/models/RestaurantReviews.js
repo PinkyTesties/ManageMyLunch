@@ -1,9 +1,11 @@
-//Users.js
+//RestaurantReviews.js
 
 /*
 This is the Restaurant Review database Model for Mongo.
 Where we store & access user account information:
-name, star, email, password, date_added, university, updated_date
+name, star, email, password, date_added, university, updated_date, restaurant_id
+
+Tyler Costa 19075541
 
 */
 const mongoose = require('mongoose');

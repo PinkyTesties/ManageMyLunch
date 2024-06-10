@@ -1,18 +1,38 @@
+/*
+  This component is used to create a new menu item. The user can input the name, cost, description, ingredients,
+   additional information, and image of the menu item. 
+   The user can also add multiple ingredients to the menu item. 
+   
+   The user can then submit the form to create the menu item. 
+  The image name is stored as a string in the menuItem object. The image itself is sent to the backend locally 
+
+  Created by Tyler Costa 19075541
+*/
+//React imports
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 <<<<<<< HEAD:frontend/manage_my_lunch/src/components/CreateMenuItem.jsx
 import logo from './componentAssets/logov1.png';
 =======
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 
 >>>>>>> b944fe787571675b27498ea2457756757baa57af:frontend/src/components/CreateMenuItem.jsx
+=======
+import UserDashboard from './UserDashboard'; //Import header
+>>>>>>> origin/main
 import axios from 'axios';
+import Footer from './sharedComponents/Footer'; //Import Footer
+import '../style/CreateMenuItem.css'; //styles
 
 const CreateMenuItem = () => {
+
+  
   const params = useParams();
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
+  //Creates a menuItem object, similar to menutItem.js model
   const [menuItem, setMenuItem] = useState({
     name: '',
     cost: '',
@@ -24,7 +44,7 @@ const CreateMenuItem = () => {
     additional_information: ''
   });
 
-
+  //Handles input changes
   const onChange = (e) => {
     if (e.target.name === 'image') {
       setImage(e.target.files[0]);
@@ -34,6 +54,7 @@ const CreateMenuItem = () => {
     }
   };
 
+  //Handle ingredient change
   const onIngredientChange = index => e => {
     const newIngredients = menuItem.ingredients.map((ingredient, i) => {
       if (i !== index) return ingredient;
@@ -41,12 +62,17 @@ const CreateMenuItem = () => {
       return { ...ingredient, [e.target.name]: value };
     });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
     setMenuItem(prevState => ({
       ...prevState,
       ingredients: newIngredients
     }));
   };
 
+  //Add the ingredient
   const addIngredient = () => {
     setMenuItem(prevState => ({
       ...prevState,
@@ -54,6 +80,7 @@ const CreateMenuItem = () => {
     }));
   };
 
+<<<<<<< HEAD
   // const onSubmit = (e) => {
   //   e.preventDefault();
 
@@ -79,20 +106,25 @@ const CreateMenuItem = () => {
   //     .then((res) => console.log(res.data))
   //     .catch((err) => console.error(err));
   // };
+=======
+  //Submit the form, image and menuItem object.
+>>>>>>> origin/main
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    // Create a new FormData object
+    const formData = new FormData(); 
     formData.append('name', menuItem.name);
     formData.append('cost', menuItem.cost);
     formData.append('date_added', menuItem.date_added);
     formData.append('item_desc', menuItem.item_desc);
     formData.append('restaurant_id', menuItem.restaurant_id);
-    formData.append('ingredients', JSON.stringify(menuItem.ingredients)); // Convert array to JSON string
+    formData.append('ingredients', JSON.stringify(menuItem.ingredients));
     formData.append('additional_information', menuItem.additional_information);
     formData.append('image', image);
 
     axios
+    //Input the form data into the backend
       .post("http://localhost:8082/api/menuItems", formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -108,9 +140,10 @@ const CreateMenuItem = () => {
       });
   };
 
-
+//Display the page content 
   return (
     <div>
+<<<<<<< HEAD
       <header>
         <img src={logo} alt='Logo' height={100} />
         <h1>Create New Menu Item</h1>
@@ -192,6 +225,82 @@ const CreateMenuItem = () => {
           </div>
           </div>
           );
+=======
+      <UserDashboard />
+        <div className="container">
+          <br></br>
+        <h3>Create New Menu Item</h3>
+
+      <div className='mainContentContainer'>
+
+      {/**Form content aking for name, cost, desc, ID(auto populated), ingredients, additional information, image */}
+      <form onSubmit={onSubmit}>
+        <div className="form-group">
+          <label>Name: </label>
+          <input type="text" required className="form-control" name="name" value={menuItem.name} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <label>Cost: </label>
+          <input type="text" className="form-control" name="cost" value={menuItem.cost} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <label>Description: </label>
+          <input type="text" className="form-control" name="item_desc" value={menuItem.item_desc} onChange={onChange} />
+        </div>
+        <div className="form-group">
+          <label>Restaurant ID: </label>
+          <input type="text" required className="form-control" name="restaurant_id" value={menuItem.restaurant_id} onChange={onChange} />
+        </div>
+
+        <div className="form-group">
+          {/* User can add and view more ingredients here */}
+          <label>Ingredients: </label>
+          {menuItem.ingredients.map((ingredient, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                value={ingredient.name}
+                onChange={onIngredientChange(index)}
+              />
+              <input
+                type="number"
+                className="form-control"
+                name="quantity"
+                value={ingredient.quantity}
+                onChange={onIngredientChange(index)}
+              />
+            </div>
+          ))}
+          <button type="button" onClick={addIngredient}>Add Another Ingredient</button>
+        </div>
+        <div className="form-group">
+          <label>Additional Information: </label>
+          <input type="text" className="form-control" name="additional_information" value={menuItem.additional_information} onChange={onChange} />
+        </div>
+        <br></br>
+        <div className="form-group">
+          <label htmlFor="image">Image:</label>
+          <input
+            type="file"
+            name="image"
+            className="form-control"
+            onChange={onChange}
+          />
+        </div>
+
+        <br></br>
+        <div className="form-group">
+          <input type="submit" value="Create Menu Item" className="btn btn-primary" />
+        </div>
+      </form>
+      </div>
+      </div>
+      <Footer />
+    </div>
+  );
+>>>>>>> origin/main
 };
 
           export default CreateMenuItem;

@@ -1,0 +1,185 @@
+/*
+Css for both settings pages
+
+Tyler Costa 19075541
+
+*/
+
+/* settingsPage.css */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+/* global.css */
+.pageContainer {
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* heading*/
+.pageContainer h1 {
+    margin-bottom: 20px;
+}
+
+/* buttonMenu.css */
+.buttonMenu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 5px; /* Reduced from 10px to 5px */
+    padding: 10px;
+}
+
+/* buttons */
+.buttonMenu button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* button hover state */
+.buttonMenu button:hover {
+    background-color: #0056b3;
+}
+
+/* service fee box */
+.serviceFeeBox {
+    display: flex;
+
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    margin: 10px 0;
+    border: 2px solid #cd1212;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+/* service fee box label */
+.serviceFeeBox label {
+    margin-bottom: 10px;
+}
+
+/* service fee box input */
+.serviceFeeBox input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* blue buttons */
+.serviceFeeBox button,
+.universityBox button,
+.addUniversity button{
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* button hover state - blue */
+.serviceFeeBox button:hover,
+.universityBox button:hover,
+.addUniversity button:hover{
+    background-color: #0056b3;
+}
+
+/* university box */
+.universityBox {
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* add university container*/
+.addUniversity {
+    border: 1px solid #000;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* existing rewards */
+.existingRewards {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* existing rewards label */
+.existingRewards label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* existing rewards select */
+.existingRewards select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* existing rewards button */
+.reward-box-rewardPage {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* existing rewards h2 */
+.reward-box-rewardPage h2 {
+    margin: 0 0 10px 0;
+}
+
+/* existing rewards p */
+.reward-box-rewardPage p {
+    margin: 0 0 10px 0;
+}
+
+/* existing rewards label */
+.reward-box-rewardPage select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* existing rewards button */
+.reward-box-rewardPage button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
